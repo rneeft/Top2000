@@ -36,7 +36,6 @@ steps:
   - download: current
     displayName: Download Database Files
     artifact: StaticApi
-    enabled: false
 
   - task: AzureFileCopy@2
     displayName: 'Publish Site'
