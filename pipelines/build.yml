@@ -1,0 +1,52 @@
+steps:
+
+  - task: NuGetToolInstaller@0
+    displayName: 'Use NuGet 5.3.0'
+    inputs:
+      versionSpec: 5.3.0
+
+  - task: NuGetCommand@2
+    displayName: 'Nuget restore'
+    inputs:
+      command: 'restore'
+      restoreSolution: '**/*.sln'
+      feedsToUse: 'select'
+
+  - task: VSBuild@1
+    displayName: 'Build solution'
+    inputs:
+      solution: '**\*.sln'
+      platform: 'Any CPU'
+      configuration: 'Release'
+
+  - task: VSTest@2
+    displayName: 'Test - Unittests'
+    inputs:
+      testSelector: 'testAssemblies'
+      testAssemblyVer2: |
+        **\*Unittests.dll
+        !**\*TestAdapter.dll
+        !**\obj\**
+      searchFolder: '$(System.DefaultWorkingDirectory)'
+
+  - task: DotNetCoreCLI@2
+    displayName: 'Run static Api Generator'
+    inputs:
+      command: 'run'
+      projects: 'src/data/Data.StaticApiGenerator/Data.StaticApiGenerator.csproj'
+      arguments: '/PublishOnly:location=$(Build.ArtifactStagingDirectory)\StaticApi\'
+
+  - publish: '$(Build.ArtifactStagingDirectory)\StaticApi'
+    displayName: 'Publishing StaticApi'
+    artifact: StaticApi
+
+  - task: CopyFiles@2
+    displayName: 'Copy Azure Resources'
+    inputs:
+      SourceFolder: pipelines\
+      Contents: '*.json'
+      TargetFolder: '$(Build.ArtifactStagingDirectory)\Azure'
+
+  - publish: '$(Build.ArtifactStagingDirectory)\Azure'
+    displayName: 'Publishing Azure Resources'
+    artifact: Azure

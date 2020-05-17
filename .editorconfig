@@ -1,0 +1,27 @@
+# To learn more about .editorconfig see https://aka.ms/editorconfigdocs
+root = true
+# All files
+[*]
+indent_style = space
+indent_size = 4
+
+# Xml files
+[*.xml]
+indent_size = 2
+
+# YML and YAML files
+[*.{yml,yaml}]
+indent_style = space
+indent_size = 2
+
+[*.props]
+indent_size = 2
+
+[*.json]
+indent_size = 2
+
+[*.cs]
+dotnet_diagnostic.CA1062.severity = none
+dotnet_diagnostic.CA1303.severity = none
+dotnet_diagnostic.CA2007.severity = none
+dotnet_diagnostic.CA1801.severity = none

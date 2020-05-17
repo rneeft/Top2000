@@ -1,0 +1,29 @@
+name: Top 2000 App $(fullVersion) build - 
+
+variables:
+- template: version.yml
+- name: product
+  value: 'TOP2000'
+
+trigger: 
+  - master
+  
+stages:
+- stage: Build
+  jobs:
+  - job: Build
+    pool:
+      name: At Home
+    steps:
+    - template: build.yml
+
+- stage: DevRelease
+  variables:
+      stage: 'DEV'
+      hostName: 'www-dev.top2000.app'
+  jobs:
+  - job: DevRelease
+    pool:
+      name: At Home
+    steps:
+    - template: release.yml
