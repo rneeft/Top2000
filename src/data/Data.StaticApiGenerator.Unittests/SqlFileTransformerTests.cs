@@ -21,7 +21,7 @@ namespace Chroomsoft.Top2000.Data.StaticApiGenerator.Unittests
         [TestMethod]
         public void AllVersionContainsTheListOfAllTheNextVersions()
         {
-            dataMock.Setup(x => x.GetAllSqlFiles()).Returns(new List<string>
+            dataMock.Setup(x => x.GetAllSqlFiles()).Returns(new HashSet<string>
             {
                 "1-FirstVersion.sql",
                 "2-SecondVersion.sql",

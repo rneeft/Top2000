@@ -1,5 +1,4 @@
-﻿using Chroomsoft.Top2000.Data;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using SQLite;
@@ -10,7 +9,6 @@ using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using WindowsApp.DatabaseService;
 using Xamarin.Essentials;
 
 namespace WindowsApp
@@ -53,9 +51,9 @@ namespace WindowsApp
         public static void ConfigureServices(HostBuilderContext ctx, IServiceCollection services)
         {
             services.AddSingleton<MainPage>();
-            services.AddTransient<ITop2000AssemblyData, Top2000Data>()
-                .AddTransient<ICreateAndUpgradeDatabase, CreateAndUpgradeDatabase>();
-
+            // services.AddTransient<ITop2000AssemblyData, Top2000Data>()
+            //.AddTransient<ICreateAndUpgradeDatabase, CreateAndUpgradeDatabase>();
+            ;
             services.AddHttpClient("api", c =>
             {
                 c.BaseAddress = new Uri("https://www-dev.top2000.app");

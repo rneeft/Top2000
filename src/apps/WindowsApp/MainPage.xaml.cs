@@ -1,7 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using System.IO;
+﻿using System.IO;
+using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
-using WindowsApp.DatabaseService;
 
 namespace WindowsApp
 {
@@ -14,8 +13,10 @@ namespace WindowsApp
 
         async private void Button_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            var databaseGen = App.ServiceProvider.GetService<ICreateAndUpgradeDatabase>();
-            await databaseGen.GenerateOrUpdateAsync();
+            // var databaseGen = App.ServiceProvider.GetService<ICreateAndUpgradeDatabase>();
+            //await databaseGen.GenerateOrUpdateAsync();
+
+            await Task.Delay(0);
         }
 
         private void LoadClick(object sender, Windows.UI.Xaml.RoutedEventArgs e)
