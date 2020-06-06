@@ -17,6 +17,18 @@ namespace Chroomsoft.Top2000.Data.ClientDatabase
 
         public string Contents { get; }
 
+        public static bool operator ==(SqlScript left, SqlScript right) => left.Equals(right);
+
+        public static bool operator !=(SqlScript left, SqlScript right) => !(left == right);
+
+        public static bool operator <(SqlScript left, SqlScript right) => left.CompareTo(right) < 0;
+
+        public static bool operator <=(SqlScript left, SqlScript right) => left.CompareTo(right) <= 0;
+
+        public static bool operator >(SqlScript left, SqlScript right) => left.CompareTo(right) > 0;
+
+        public static bool operator >=(SqlScript left, SqlScript right) => left.CompareTo(right) >= 0;
+
         public string[] SqlSections()
         {
             return Contents
@@ -29,6 +41,19 @@ namespace Chroomsoft.Top2000.Data.ClientDatabase
         {
             return string.Compare(ScriptName, other.ScriptName, StringComparison.InvariantCultureIgnoreCase);
         }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is SqlScript script)
+            {
+                return script.ScriptName == this.ScriptName &&
+                    script.Contents == this.Contents;
+            }
+
+            return false;
+        }
+
+        public override int GetHashCode() => ScriptName.GetHashCode();
 
         private static bool HasContent(string x) => !string.IsNullOrWhiteSpace(x);
     }
