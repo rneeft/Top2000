@@ -2,32 +2,6 @@
 
 namespace Chroomsoft.Top2000.Data.ClientDatabase
 {
-    //public class Top2000AssemblyDataSource : ISource
-    //{
-    //    private readonly ITop2000AssemblyData top2000Data;
-
-    //    public Top2000AssemblyDataSource(ITop2000AssemblyData top2000Data)
-    //    {
-    //        this.top2000Data = top2000Data;
-    //    }
-
-    //    private ImmutableSortedSet<string> ExecutableScripts(IImmutableSet<string> journals);
-
-    //    private ImmutableSortedSet<string> GetScriptsToExecute(ISet<string> journals)
-    //    {
-    //        //return top2000Data
-    //        //    .GetAllSqlFiles()
-    //        //    .Except(journals);
-    //    }
-    //}
-
-    //public class OnlineDataSource : ISource
-    //{
-    //    public OnlineDataSource(IHttpClientFactory httpClientFactory)
-    //    {
-    //    }
-    //}
-
     //public class CreateAndUpgradeDatabase : IUpdateClientDatabase
     //{
     //    private readonly ITop2000AssemblyData top2000Data;

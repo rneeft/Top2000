@@ -10,11 +10,6 @@ namespace Chroomsoft.Top2000.Data.ClientDatabase
         Task RunAsync(ISource source);
     }
 
-    public interface ISource
-    {
-        Task<ImmutableSortedSet<SqlScript>> ExecutableScriptsAsync(IImmutableSet<string> journals);
-    }
-
     public class UpdateDatabase : IUpdateClientDatabase
     {
         private readonly SQLiteAsyncConnection connection;
@@ -27,10 +22,16 @@ namespace Chroomsoft.Top2000.Data.ClientDatabase
         public async Task RunAsync(ISource source)
         {
             var journals = await AllJournalsAsync();
-            var executableScripts = await source.ExecutableScriptsAsync(journals);
+            var executableScripts = (await source.ExecutableScriptsAsync())
+                .Except(journals)
+                .OrderBy(x => x)
+                .ToList();
 
-            foreach (var script in executableScripts)
+            foreach (var scriptName in executableScripts)
+            {
+                var script = await source.ScriptContentsAsync(scriptName);
                 await ExecuteScriptAsync(script);
+            }
         }
 
         private Task ExecuteScriptAsync(SqlScript script)
