@@ -1,19 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Chroomsoft.Top2000.Data;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using SQLite;
+using System;
 using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using WindowsApp.DatabaseService;
+using Xamarin.Essentials;
 
 namespace WindowsApp
 {
@@ -29,7 +27,50 @@ namespace WindowsApp
         public App()
         {
             this.InitializeComponent();
+
+            Init((x, c) => { });
+
             this.Suspending += OnSuspending;
+        }
+
+        public static IServiceProvider ServiceProvider { get; set; }
+
+        public static void Init(Action<HostBuilderContext, IServiceCollection> nativeConfigureServices)
+        {
+            var host = new AppHostBuilder()
+                .CreateDefaultAppHostBuilder()
+                .ConfigureServices((c, x) =>
+                {
+                    nativeConfigureServices.Invoke(c, x);
+                    ConfigureServices(c, x);
+                })
+                .ConfigureLogging(ConfigureLogging)
+                .Build();
+
+            ServiceProvider = host.Services;
+        }
+
+        public static void ConfigureServices(HostBuilderContext ctx, IServiceCollection services)
+        {
+            services.AddSingleton<MainPage>();
+            services.AddTransient<ITop2000AssemblyData, Top2000Data>()
+                .AddTransient<ICreateAndUpgradeDatabase, CreateAndUpgradeDatabase>();
+
+            services.AddHttpClient("api", c =>
+            {
+                c.BaseAddress = new Uri("https://www-dev.top2000.app");
+            });
+
+            services.AddSingleton<SQLiteAsyncConnection>(f =>
+            {
+                var databasePath = Path.Combine(FileSystem.AppDataDirectory, "top2000data.db");
+                return new SQLiteAsyncConnection(databasePath, SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.Create | SQLiteOpenFlags.SharedCache);
+            });
+        }
+
+        public static void ConfigureLogging(ILoggingBuilder builder)
+        {
+            builder.AddConsole(o => o.DisableColors = true);
         }
 
         /// <summary>
@@ -78,7 +119,7 @@ namespace WindowsApp
         /// </summary>
         /// <param name="sender">The Frame which failed navigation</param>
         /// <param name="e">Details about the navigation failure</param>
-        void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
+        private void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
         {
             throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
         }
