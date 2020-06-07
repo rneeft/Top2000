@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 
 namespace Chroomsoft.Top2000.Data.StaticApiGenerator
 {
@@ -8,14 +9,14 @@ namespace Chroomsoft.Top2000.Data.StaticApiGenerator
     {
         private List<VersionFile> upgrades;
 
-        public VersionFile(int version, string fileName)
+        public VersionFile(string fileName)
         {
-            this.Version = version;
+            this.Version = fileName.Split('-').First();
             this.FileName = fileName;
             this.upgrades = new List<VersionFile>();
         }
 
-        public int Version { get; set; }
+        public string Version { get; set; }
 
         public string FileName { get; set; }
 

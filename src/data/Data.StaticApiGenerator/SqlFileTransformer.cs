@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 
 namespace Chroomsoft.Top2000.Data.StaticApiGenerator
@@ -22,7 +21,7 @@ namespace Chroomsoft.Top2000.Data.StaticApiGenerator
         {
             var allVersions = top2000Data
                 .GetAllSqlFiles()
-                .Select(TransformToVersionFile)
+                .Select(x => new VersionFile(x))
                 .ToList();
 
             var allVersionsCopy = allVersions.ToList();
@@ -35,14 +34,6 @@ namespace Chroomsoft.Top2000.Data.StaticApiGenerator
             }
 
             return allVersions;
-        }
-
-        private VersionFile TransformToVersionFile(string fileName)
-        {
-            var split = fileName.Split('-');
-            var index = int.Parse(split[0], CultureInfo.InvariantCulture.NumberFormat);
-
-            return new VersionFile(index, fileName);
         }
     }
 }
