@@ -15,8 +15,8 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Data\Data.csproj" />
-  </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\Data.SQLScripts\Data.SQLScripts.csproj" />
+    </ItemGroup>
 
 </Project>

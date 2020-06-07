@@ -185,12 +185,6 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\data\Data\Data.csproj">
-      <Project>{b56f10a8-5184-4b88-ab65-f9cc9b1d67f0}</Project>
-      <Name>Data</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="appsettings.json" />
   </ItemGroup>
   <ItemGroup>

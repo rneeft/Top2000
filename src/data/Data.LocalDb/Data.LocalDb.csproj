@@ -12,7 +12,7 @@
     <PackageReference Include="dbup-sqlserver" Version="4.3.1" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Data\Data.csproj" />
-  </ItemGroup> 
+    <ItemGroup>
+        <ProjectReference Include="..\Data.SQLScripts\Data.SQLScripts.csproj" />
+    </ItemGroup>
 </Project>

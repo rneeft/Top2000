@@ -35,6 +35,19 @@ namespace Data.Unittests
         }
 
         [TestMethod]
+        public void AllSqlFileCanBeStreamed()
+        {
+            var filesAsStream = sut.GetAllSqlFiles()
+                .Select(sut.GetScriptStream);
+
+            foreach (var item in filesAsStream)
+            {
+                Assert.IsNotNull(item);
+                item.Dispose();
+            }
+        }
+
+        [TestMethod]
         public void FileNamesDoNotContainSpaces()
         {
             var fileNames = sut.GetAllSqlFiles().ToList();

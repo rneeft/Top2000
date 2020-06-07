@@ -26,11 +26,10 @@ namespace Chroomsoft.Top2000.Data.ClientDatabase.Tests
             factory = new Mock<IHttpClientFactory>();
             sut = new OnlineDataSource(factory.Object);
             messageMock = new Mock<HttpMessageHandler>();
-            //source.e
         }
 
         [TestMethod]
-        public async Task WithoutJournalsThisOnlineSourceShouldNotBeUsedThusNoExecuableScriptAreReturned()
+        public async Task Without_journals_this_online_source_should_not_be_used_thus_no_execuable_script_are_returned()
         {
             var noJournals = ImmutableSortedSet<string>.Empty;
 
@@ -40,7 +39,7 @@ namespace Chroomsoft.Top2000.Data.ClientDatabase.Tests
         }
 
         [TestMethod]
-        public async Task UponErrorExecuabelScriptsIsEmpty()
+        public async Task Upon_error_execuabel_scripts_is_empty()
         {
             var journals = Create.ImmutableSortedSetFrom("001-Script.sql");
 
@@ -53,7 +52,7 @@ namespace Chroomsoft.Top2000.Data.ClientDatabase.Tests
         }
 
         [TestMethod]
-        public async Task TheLastJournalIsUsedToCallTop2000Api()
+        public async Task The_last_journal_is_used_to_call_Top2000_api()
         {
             var journals = Create.ImmutableSortedSetFrom("001-Script.sql", "002-Script.sql");
             var upgrades = new[] { "003-Script3.sql" };
@@ -78,12 +77,7 @@ namespace Chroomsoft.Top2000.Data.ClientDatabase.Tests
         }
 
         [TestMethod]
-        public void WhenScriptCannotBeFoundScript()
-        {
-        }
-
-        [TestMethod]
-        public async Task ScriptIsRetrievedFromDataEndpoint()
+        public async Task Script_is_retrieved_from_data_endpoint()
         {
             using var response = new HttpResponseMessage { StatusCode = HttpStatusCode.OK, Content = new StringContent("CREATE TABLE table(Id INT NOT NULL);") };
             using var httpClient = SetupMocksWithResponse(response);

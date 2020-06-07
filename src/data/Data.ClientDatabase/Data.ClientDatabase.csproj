@@ -15,8 +15,7 @@
     <PackageReference Include="System.Text.Json" Version="4.7.2" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Data\Data.csproj" />
-  </ItemGroup>
-
+    <ItemGroup>
+        <ProjectReference Include="..\Data.SQLScripts\Data.SQLScripts.csproj" />
+    </ItemGroup>
 </Project>
