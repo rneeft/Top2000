@@ -190,6 +190,16 @@
   <ItemGroup>
     <Folder Include="TracksOfYear\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\data\Data.ClientDatabase\Data.ClientDatabase.csproj">
+      <Project>{AC263E16-2ACF-4377-A6A6-9D34F6240FA3}</Project>
+      <Name>Data.ClientDatabase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\data\Data.SQLScripts\Data.SQLScripts.csproj">
+      <Project>{9CA84A58-FD3C-4ED5-8438-3F41F9AE3214}</Project>
+      <Name>Data.SQLScripts</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

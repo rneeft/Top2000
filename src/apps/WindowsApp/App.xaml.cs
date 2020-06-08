@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Chroomsoft.Top2000.Data;
+using Chroomsoft.Top2000.Data.ClientDatabase;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using SQLite;
@@ -50,20 +52,28 @@ namespace WindowsApp
 
         public static void ConfigureServices(HostBuilderContext ctx, IServiceCollection services)
         {
-            services.AddSingleton<MainPage>();
-            // services.AddTransient<ITop2000AssemblyData, Top2000Data>()
-            //.AddTransient<ICreateAndUpgradeDatabase, CreateAndUpgradeDatabase>();
-            ;
-            services.AddHttpClient("api", c =>
+            ConfigureClientDatabase(services)
+                .AddTransient<MainPage>();
+        }
+
+        public static IServiceCollection ConfigureClientDatabase(IServiceCollection services)
+        {
+            services.AddHttpClient("top2000", c =>
             {
                 c.BaseAddress = new Uri("https://www-dev.top2000.app");
             });
 
-            services.AddSingleton<SQLiteAsyncConnection>(f =>
-            {
-                var databasePath = Path.Combine(FileSystem.AppDataDirectory, "top2000data.db");
-                return new SQLiteAsyncConnection(databasePath, SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.Create | SQLiteOpenFlags.SharedCache);
-            });
+            return services
+                .AddTransient<OnlineDataSource>()
+                .AddTransient<Top2000AssemblyDataSource>()
+                .AddTransient<IUpdateClientDatabase, UpdateDatabase>()
+                .AddTransient<ITop2000AssemblyData, Top2000Data>()
+                .AddTransient<SQLiteAsyncConnection>(f =>
+                {
+                    var databasePath = Path.Combine(FileSystem.AppDataDirectory, "top2000data.db");
+
+                    return new SQLiteAsyncConnection(databasePath, SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.Create | SQLiteOpenFlags.SharedCache);
+                });
         }
 
         public static void ConfigureLogging(ILoggingBuilder builder)

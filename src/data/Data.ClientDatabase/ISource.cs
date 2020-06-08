@@ -9,19 +9,4 @@ namespace Chroomsoft.Top2000.Data.ClientDatabase
 
         Task<SqlScript> ScriptContentsAsync(string scriptName);
     }
-
-    //public class OnlineDataSource : ISource
-    //{
-    //    private readonly IHttpClientFactory httpClientFactory;
-
-    //    public OnlineDataSource(IHttpClientFactory httpClientFactory)
-    //    {
-    //        this.httpClientFactory = httpClientFactory;
-    //    }
-
-    //    public Task<ImmutableSortedSet<SqlScript>> ExecutableScriptsAsync(IImmutableSet<string> journals)
-    //    {
-    //        throw new System.NotImplementedException();
-    //    }
-    //}
 }

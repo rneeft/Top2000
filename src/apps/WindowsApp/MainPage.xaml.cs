@@ -1,5 +1,6 @@
-﻿using System.IO;
-using System.Threading.Tasks;
+﻿using Chroomsoft.Top2000.Data.ClientDatabase;
+using Microsoft.Extensions.DependencyInjection;
+using System.IO;
 using Windows.UI.Xaml.Controls;
 
 namespace WindowsApp
@@ -13,10 +14,10 @@ namespace WindowsApp
 
         async private void Button_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            // var databaseGen = App.ServiceProvider.GetService<ICreateAndUpgradeDatabase>();
-            //await databaseGen.GenerateOrUpdateAsync();
+            var databaseGen = App.ServiceProvider.GetService<IUpdateClientDatabase>();
+            var top2000 = App.ServiceProvider.GetService<Top2000AssemblyDataSource>();
 
-            await Task.Delay(0);
+            await databaseGen.RunAsync(top2000);
         }
 
         private void LoadClick(object sender, Windows.UI.Xaml.RoutedEventArgs e)
