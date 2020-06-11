@@ -17,18 +17,19 @@ When the application starts
 Then the client database is created with the scripts from the top2000 data assembly
 
 Scenario: Client database is updated upon startup when new scripts are shipped
-Given an installed application without the last SQL scripts
+Given an installed application without the last 1 SQL scripts
 When the application starts
 Then the client database is created with the scripts from the top2000 data assembly
 
 Scenario: Client database is updated upon startup when new scripts are shipped on the Top2000 website.
-Given an installed application without the last SQL scripts
+Given an installed application without the last 1 SQL scripts
 When the application starts without the last SQL scripts
 Then the application checks online for updates
-And the client database is updated from the app
-#
-#Scenario: Client database is updated when new scripts are shipped on the Top2000 website.
-#Given new scripts on the top2000.app site
-#And the app is started
-#When I check for updates
-#Then the client database is updated
+And the client database is updated
+
+Scenario: Client database is updated when new scripts are shipped in the assembly and the Top2000 website.
+Given an installed application without the last 2 SQL scripts
+When the application starts without the last SQL scripts
+Then the application updates the second-to-last script from the assembly
+And the application checks online for updates
+And the client database is updated

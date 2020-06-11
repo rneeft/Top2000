@@ -1,7 +1,4 @@
 [*.cs]
-dotnet_diagnostic.CA1031.severity = none
-dotnet_diagnostic.CA1307.severity = none
-
-# CA1707: Identifiers should not contain underscores
-# I want to use underscores in unit test names
-dotnet_diagnostic.CA1707.severity = none
+# some test methods does not reference any data out side
+# the method scope but I don't want to make the static
+dotnet_diagnostic.CA1822.severity = none

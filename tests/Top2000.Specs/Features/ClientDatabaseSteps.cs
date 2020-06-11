@@ -14,16 +14,18 @@ namespace Chroomsoft.Top2000.Specs.Features
     public class Top2000AssemblyDataSourceSpecDecorator : ISource
     {
         private readonly Top2000AssemblyDataSource component;
+        private readonly int skip;
 
-        public Top2000AssemblyDataSourceSpecDecorator(Top2000AssemblyDataSource component)
+        public Top2000AssemblyDataSourceSpecDecorator(Top2000AssemblyDataSource component, int skip)
         {
             this.component = component;
+            this.skip = skip;
         }
 
         public async Task<ImmutableSortedSet<string>> ExecutableScriptsAsync(ImmutableSortedSet<string> journals)
         {
             return (await component.ExecutableScriptsAsync(journals))
-                .SkipLast(2)
+                .SkipLast(skip)
                 .ToImmutableSortedSet();
         }
 
@@ -43,6 +45,12 @@ namespace Chroomsoft.Top2000.Specs.Features
                 File.Delete(App.DatabasePath);
         }
 
+        [AfterScenario]
+        public void CloseDatabaseConnections()
+        {
+            SQLite.SQLiteAsyncConnection.ResetPool();
+        }
+
         [Given(@"A new install of the application")]
         public void GivenANewInstallOfTheApplication()
         {
@@ -57,12 +65,12 @@ namespace Chroomsoft.Top2000.Specs.Features
             await update.RunAsync(assemblySource);
         }
 
-        [Given(@"an installed application without the last SQL scripts")]
-        public async Task GivenAnInstalledApplicationWithoutTheLastSQLScripts()
+        [Given(@"an installed application without the last (.*) SQL scripts")]
+        public async Task GivenAnInstalledApplicationWithoutTheLastSQLScripts(int skipLast)
         {
             var assemblySource = App.ServiceProvider.GetService<Top2000AssemblyDataSource>();
             var update = App.ServiceProvider.GetService<IUpdateClientDatabase>();
-            var specSourceDecorator = new Top2000AssemblyDataSourceSpecDecorator(assemblySource);
+            var specSourceDecorator = new Top2000AssemblyDataSourceSpecDecorator(assemblySource, skipLast);
 
             await update.RunAsync(specSourceDecorator);
         }
@@ -99,8 +107,18 @@ namespace Chroomsoft.Top2000.Specs.Features
             await update.RunAsync(onlineSource);
         }
 
-        [Then(@"the client database is updated from the app")]
-        public async Task ThenTheClientDatabaseIsUpdatedFromTheApp()
+        [Then(@"the application updates the second-to-last script from the assembly")]
+        public async Task ThenTheApplicationUpdatesTheSecond_To_LastScriptFromTheAssembly()
+        {
+            var assemblySource = App.ServiceProvider.GetService<Top2000AssemblyDataSource>();
+            var update = App.ServiceProvider.GetService<IUpdateClientDatabase>();
+            var specSourceDecorator = new Top2000AssemblyDataSourceSpecDecorator(assemblySource, 1);
+
+            await update.RunAsync(specSourceDecorator);
+        }
+
+        [Then(@"the client database is updated")]
+        public async Task ThenTheClientDatabaseIsUpdated()
         {
             // since the data on the website must be the same as on the Assembly
             // we can assert here

@@ -82,7 +82,7 @@ namespace Chroomsoft.Top2000.Specs
             });
 
             services
-                .AddSingleton<ITop2000AssemblyData, Top2000Data>()
+                .AddTransient<ITop2000AssemblyData, Top2000Data>()
                 .AddTransient<OnlineDataSource>()
                 .AddTransient<Top2000AssemblyDataSource>()
                 .AddTransient<IUpdateClientDatabase, UpdateDatabase>()
