@@ -1,8 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <IsPackable>false</IsPackable>
+      <Nullable>disable</Nullable>
+      <IsPackable>false</IsPackable>
+      <AssemblyName>Chroomsoft.Top2000.Data.StaticApiGenerator.Unittests</AssemblyName>
+      <RootNamespace>Chroomsoft.Top2000.Data.StaticApiGenerator.Unittests</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -15,8 +18,8 @@
     </PackageReference>
   </ItemGroup>
 
-    <ItemGroup>
-        <ProjectReference Include="..\Data.SQLScripts\Data.SQLScripts.csproj" />
-    </ItemGroup>
+  <ItemGroup>
+      <ProjectReference Include="..\..\..\src\Data\data.StaticApiGenerator\Data.StaticApiGenerator.csproj" />
+  </ItemGroup>
 
 </Project>
