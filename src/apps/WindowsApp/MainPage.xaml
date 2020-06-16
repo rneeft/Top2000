@@ -8,6 +8,12 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <StackPanel Margin="10">
-        <Button Content="Install database" Click="Button_Click" />
+        <StackPanel Orientation="Horizontal">
+            <Button Content="Install database" Click="Button_Click" />
+            <TextBox x:Name="path" Margin="20,0" Width="200" />
+            <Button Content="Load" Click="LoadClick" />
+            <Button Content="Save" Click="SaveClick" Margin="10,0,0,0" />
+        </StackPanel>
+        <TextBox x:Name="contents" Height="654" />
     </StackPanel>
 </Page>

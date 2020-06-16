@@ -1,4 +1,4 @@
-﻿INSERT INTO [Position] ([TrackID] ,[Year] ,[Position]) VALUES
+INSERT INTO [Position] ([TrackID] ,[Year] ,[Position]) VALUES
  (397, 2018, 1)
 ,(1231, 2018, 2)
 ,(2358, 2018, 3)

@@ -1,8 +1,10 @@
-﻿using System;
+﻿using MoreLinq;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Chroomsoft.Top2000.Data
@@ -15,7 +17,7 @@ namespace Chroomsoft.Top2000.Data
 
         Stream GetScriptStream(string fileName);
 
-        IReadOnlyCollection<string> GetAllSqlFiles();
+        ISet<string> GetAllSqlFiles();
     }
 
     public class Top2000Data : ITop2000AssemblyData
@@ -33,7 +35,7 @@ namespace Chroomsoft.Top2000.Data
         public Task<string> GetScriptContentAsync(string fileName)
         {
             using var stream = DataAssembly.GetManifestResourceStream(prefix + fileName) ?? throw new FileNotFoundException($"Unable to find {fileName} in {DataAssembly.GetName()}");
-            using var reader = new StreamReader(stream);
+            using var reader = new StreamReader(stream, Encoding.UTF8);
 
             return reader.ReadToEndAsync();
         }
@@ -44,13 +46,13 @@ namespace Chroomsoft.Top2000.Data
                 ?? throw new FileNotFoundException($"Unable to find {fileName} in {DataAssembly.GetName()}");
         }
 
-        public IReadOnlyCollection<string> GetAllSqlFiles()
+        public ISet<string> GetAllSqlFiles()
         {
             return DataAssembly
                 .GetManifestResourceNames()
                 .Where(IsSqlFile)
                 .Select(StripPrefixFromFileName)
-                .ToList();
+                .ToHashSet();
         }
 
         private string StripPrefixFromFileName(string file) => file.Replace(prefix, string.Empty);

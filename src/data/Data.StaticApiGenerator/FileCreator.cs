@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -57,8 +56,8 @@ namespace Chroomsoft.Top2000.Data.StaticApiGenerator
             {
                 logger.LogInformation("Saving version {version} to disk", version.Version);
 
-                var path = Path.Combine(location, "api", "versions", version.Version.ToString(CultureInfo.InvariantCulture.NumberFormat));
-                var json = JsonConvert.SerializeObject(version.Upgrades.Select(x => "data/" + x.FileName));
+                var path = Path.Combine(location, "api", "versions", version.Version);
+                var json = JsonConvert.SerializeObject(version.Upgrades.Select(x => x.FileName));
 
                 if (!Directory.Exists(path))
                     Directory.CreateDirectory(path);

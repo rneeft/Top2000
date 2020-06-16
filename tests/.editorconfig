@@ -1,0 +1,4 @@
+[*.cs]
+# some test methods does not reference any data out side
+# the method scope but I don't want to make the static
+dotnet_diagnostic.CA1822.severity = none
