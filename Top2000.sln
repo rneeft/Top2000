@@ -21,7 +21,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "pipelines", "pipelines", "{
 		pipelines\azure-pipelines.yml = pipelines\azure-pipelines.yml
 		pipelines\azuredeploy.json = pipelines\azuredeploy.json
 		pipelines\azuredeploy.parameters.json = pipelines\azuredeploy.parameters.json
+		pipelines\build.yml = pipelines\build.yml
 		pipelines\Deploy-AzureResourceGroup.ps1 = pipelines\Deploy-AzureResourceGroup.ps1
+		pipelines\release.yml = pipelines\release.yml
+		pipelines\version.yml = pipelines\version.yml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "apps", "apps", "{CAF58F84-2057-44BB-AAA0-D1919125A96C}"
