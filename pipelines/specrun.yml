@@ -1,4 +1,6 @@
 steps:
+  - checkout: none
+
   - download: current
     displayName: Download Sepcification binaries
     artifact: Specification
@@ -7,5 +9,8 @@ steps:
     displayName: 'Test - Specifications'
     inputs:
       testSelector: 'testAssemblies'
-      testAssemblyVer2: Chroomsoft.Top2000.Specs.dll
+      testAssemblyVer2: |
+        **\*Specs.dll
+        !**\*TestAdapter.dll
+        !**\obj\**
       searchFolder: '$(System.DefaultWorkingDirectory)'

@@ -32,7 +32,6 @@ stages:
           steps:
           - template: release.yml
 
-
 - stage: RunSpecsOnDev
   displayName:  Running Specifications
   dependsOn: DevRelease
