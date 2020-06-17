@@ -1,6 +1,7 @@
 ﻿using Chroomsoft.Top2000.Data.ClientDatabase;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SQLite;
 using System;
 using System.IO;
@@ -40,12 +41,12 @@ namespace Chroomsoft.Top2000.Specs.Features
             await update.RunAsync(assemblySource);
         }
 
-        [Then(@"except for the last year, the position table contains 2000 tracks for each year ranging from 1 to 2000")]
-        public async Task ThenThePositionTableContainsTracksForEachYearRangingFromTo()
+        [Then(@"except for the last edition, the listing table contains 2000 tracks for each edition ranging from 1 to 2000")]
+        public async Task ThenThePositionTableContainsTracksForEachEditionRangingFromTo()
         {
             var sql = App.ServiceProvider.GetService<SQLiteAsyncConnection>();
-            var lists = (await sql.Table<PositionTable>().ToListAsync())
-                .GroupBy(x => x.Year)
+            var lists = (await sql.Table<Listing>().ToListAsync())
+                .GroupBy(x => x.Edition)
                 .OrderBy(x => x.Key)
                 .ToList();
 
@@ -58,62 +59,51 @@ namespace Chroomsoft.Top2000.Specs.Features
             }
         }
 
-        [Then(@"except for the last year, the playlist table contains 2000 tracks for each year after 2016")]
-        public async Task ThenThePlaylistTableContainsTracksForEachYearAfterRangingFromTo()
-        {
-            var sql = App.ServiceProvider.GetService<SQLiteAsyncConnection>();
-            var lists = (await sql.Table<PlayTime>().ToListAsync())
-                .GroupBy(x => x.Year)
-                .OrderBy(x => x.Key)
-                .ToList();
-
-            for (int i = 0; i < lists.Count - 2; i++)
-            {
-                lists[i].Count().Should().Be(2000);
-            }
-        }
-
-        [Then(@"the positions table contains 10 or 2000 for the last year ranging from 1 to 10/2000")]
+        [Then(@"the listing table contains 10 or 2000 for the last edition ranging from 1 to 10/2000")]
         public async Task ThenThePositionsTableContainsOrForTheLastYearRangingFromTo()
         {
             var sql = App.ServiceProvider.GetService<SQLiteAsyncConnection>();
-            var list = (await sql.Table<PlayTime>().ToListAsync())
-                .GroupBy(x => x.Year)
+            var list = (await sql.Table<Listing>().ToListAsync())
+                .GroupBy(x => x.Edition)
                 .OrderBy(x => x.Key)
                 .Last();
 
             list.Count().Should().BeOneOf(10, 2000);
         }
 
-        [Then(@"the playlist table contains 10 or 2000 tracks for the last year")]
-        public void ThenThePlaylistTableContainsOrTracksForTheLastYearRangingFromTo()
+        [Then(@"for each track in the listing table the PlayDateAndTime is the same to the previous track or has incremented by one hour")]
+        public async Task ThenForEachTrackInTheListingTableThePlayDateAndTimeIsTheSameToThePreviousTrackOrHasIncrementedByOneHour()
         {
-            // when picking up listing as entity this will be filled
+            var sql = App.ServiceProvider.GetService<SQLiteAsyncConnection>();
+            var listings = (await sql.Table<Listing>().Where(x => x.Edition > 2015).ToListAsync())
+                .GroupBy(x => x.Edition)
+                .OrderBy(x => x.Key)
+                .ToList();
+
+            foreach (var listing in listings)
+            {
+                var previous = listing.First();
+
+                foreach (var track in listing)
+                {
+                    var differenceInHours = previous.PlayDateAndTime - track.PlayDateAndTime;
+
+                    Assert.IsTrue(differenceInHours.Value.TotalMinutes == 0 || differenceInHours.Value.TotalMinutes == 60,
+                        $"For edition {listing.Key} the positions {previous.Position} and {track.Position} the PlayDateAndTime is incorrect"
+                        );
+                }
+            }
         }
 
-        [Then(@"for each track in the playlist table the playtime is the same to the previous track or has incremented by one hour")]
-        public void ThenForEachTrackInThePlaylistTableThePlaytimeIsTheSameToThePreviousTrackOrHasIncrementByOneHour()
-        {
-            // when picking up listing as entity this will be filled
-        }
-
-        private class PlayTime
+        private class Listing
         {
             public int TrackId { get; set; }
 
-            public int Year { get; set; }
-
-            public DateTimeOffset DateAndTime { get; set; }
-        }
-
-        [Table("Position")]
-        private class PositionTable
-        {
-            public int TrackId { get; set; }
-
-            public int Year { get; set; }
+            public int Edition { get; set; }
 
             public int Position { get; set; }
+
+            public DateTimeOffset? PlayDateAndTime { get; set; }
         }
     }
 }

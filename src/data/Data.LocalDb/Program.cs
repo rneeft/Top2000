@@ -7,7 +7,7 @@ namespace Chroomsoft.Top2000.Data.LocalDb
     {
         private static int Main()
         {
-            var connectionString = @"Server=(localdb)\mssqllocaldb;Database=Top2000;";
+            var connectionString = @"Server=(localdb)\mssqllocaldb;Database=Top2000Dev5;";
 
             EnsureDatabase.For
                 .SqlDatabase(connectionString);
@@ -15,6 +15,7 @@ namespace Chroomsoft.Top2000.Data.LocalDb
             var upgrader = DeployChanges.To
                                 .SqlDatabase(connectionString)
                                 .WithScriptEmbeddedInDataLibrary()
+                                .WithTransactionPerScript()
                                 .LogToConsole()
                                 .Build();
 
