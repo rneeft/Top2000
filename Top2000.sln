@@ -39,7 +39,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data.ClientDatabase", "src\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data.SQLScripts", "src\data\Data.SQLScripts\Data.SQLScripts.csproj", "{9CA84A58-FD3C-4ED5-8438-3F41F9AE3214}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data.ClientDatabase.Tests", "tests\data\Data.ClientDatabase.Tests\Data.ClientDatabase.Tests.csproj", "{508D380F-D52B-4C7E-AB6D-B632E3E52062}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data.ClientDatabase.Unittests", "tests\data\Data.ClientDatabase.Tests\Data.ClientDatabase.Unittests.csproj", "{508D380F-D52B-4C7E-AB6D-B632E3E52062}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data.SQLScripts.Unittests", "tests\data\Data.SQLScripts.Unittests\Data.SQLScripts.Unittests.csproj", "{58F6CD3E-267B-49C3-A1BC-4C55E6DA4B88}"
 EndProject
