@@ -23,12 +23,12 @@ stages:
       hostName: 'www-dev.top2000.app'
   jobs:
   - deployment: DevRelease
+    pool:
+      name: At Home
     environment: Dev-Stage
     strategy: 
       runOnce:
         deploy:
-          pool:
-            name: At Home
           steps:
           - template: release.yml
 
