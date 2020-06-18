@@ -1,26 +1,26 @@
 CREATE TABLE Track
 (
-    Id int NOT NULL,
-    Title nvarchar(100) NOT NULL,
-    Artist nvarchar(100) NOT NULL,
-    Year int NOT NULL,
+    Id INT NOT NULL,
+    Title NVARCHAR(100) NOT NULL,
+    Artist NVARCHAR(100) NOT NULL,
+    RecordedYear INT NOT NULL,
     PRIMARY KEY (Id)
 );
 
-CREATE TABLE PlayTime
+CREATE TABLE Edition
 (
-    TrackId int NOT NULL,
     Year int NOT NULL,
-    DateAndTime datetimeoffset NOT NULL,
-    PRIMARY KEY (TrackId, Year),
-    FOREIGN KEY (TrackId) REFERENCES Track (Id)
+    StartDateAndTime DATETIMEOFFSET NOT NULL,
+    EndDateAndTime DATETIMEOFFSET NOT NULL,
+    PRIMARY KEY (Year)
 );
 
-CREATE TABLE Position
+CREATE TABLE Listing
 (
     TrackId int NOT NULL,
-    Year int NOT NULL,
+    Edition int NOT NULL,
     Position int NOT NULL,
-    PRIMARY KEY (TrackId, Year),
-    FOREIGN KEY (TrackId) REFERENCES Track (Id)
-);
+    PlayDateAndTime DATETIMEOFFSET NULL,
+    PRIMARY KEY (TrackId, Edition),
+    FOREIGN KEY (Edition) REFERENCES Edition(Year)
+)

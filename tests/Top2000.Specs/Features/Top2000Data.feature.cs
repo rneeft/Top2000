@@ -76,13 +76,13 @@ namespace Chroomsoft.Top2000.Specs.Features
 #line hidden
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("All years, except for the last year, contains 2000 positions starting with 1 and " +
-            "ending with 2000", SourceLine=6)]
-        public virtual void AllYearsExceptForTheLastYearContains2000PositionsStartingWith1AndEndingWith2000()
+        [TechTalk.SpecRun.ScenarioAttribute("All editions, except for the last, contains 2000 positions starting with 1 and en" +
+            "ding with 2000", SourceLine=6)]
+        public virtual void AllEditionsExceptForTheLastContains2000PositionsStartingWith1AndEndingWith2000()
         {
             string[] tagsOfScenario = ((string[])(null));
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("All years, except for the last year, contains 2000 positions starting with 1 and " +
-                    "ending with 2000", null, ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("All editions, except for the last, contains 2000 positions starting with 1 and en" +
+                    "ding with 2000", null, ((string[])(null)));
 #line 7
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -113,23 +113,19 @@ testRunner.Given("all data scripts", ((string)(null)), ((TechTalk.SpecFlow.Table
 testRunner.When("the client database is created", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 10
-testRunner.Then("except for the last year, the position table contains 2000 tracks for each year r" +
-                        "anging from 1 to 2000", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-#line 11
-testRunner.And("except for the last year, the playlist table contains 2000 tracks for each year a" +
-                        "fter 2016", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Then("except for the last edition, the listing table contains 2000 tracks for each edit" +
+                        "ion ranging from 1 to 2000", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("The last year can either have 10 or 2000 tracks", SourceLine=12)]
-        public virtual void TheLastYearCanEitherHave10Or2000Tracks()
+        [TechTalk.SpecRun.ScenarioAttribute("The last edition can either have 10 or 2000 tracks", SourceLine=11)]
+        public virtual void TheLastEditionCanEitherHave10Or2000Tracks()
         {
             string[] tagsOfScenario = ((string[])(null));
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("The last year can either have 10 or 2000 tracks", null, ((string[])(null)));
-#line 13
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("The last edition can either have 10 or 2000 tracks", null, ((string[])(null)));
+#line 12
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -152,31 +148,28 @@ this.ScenarioInitialize(scenarioInfo);
 #line 3
 this.FeatureBackground();
 #line hidden
-#line 14
+#line 13
 testRunner.Given("all data scripts", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 15
+#line 14
 testRunner.When("the client database is created", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 16
-testRunner.Then("the positions table contains 10 or 2000 for the last year ranging from 1 to 10/20" +
-                        "00", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-#line 17
-testRunner.And("the playlist table contains 10 or 2000 tracks for the last year", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 15
+testRunner.Then("the listing table contains 10 or 2000 for the last edition ranging from 1 to 10/2" +
+                        "000", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
         [TechTalk.SpecRun.ScenarioAttribute("The playtime of each track is either the same to the last track of increment by o" +
-            "ne hour", SourceLine=18)]
+            "ne hour", SourceLine=16)]
         public virtual void ThePlaytimeOfEachTrackIsEitherTheSameToTheLastTrackOfIncrementByOneHour()
         {
             string[] tagsOfScenario = ((string[])(null));
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("The playtime of each track is either the same to the last track of increment by o" +
                     "ne hour", null, ((string[])(null)));
-#line 19
+#line 17
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -199,15 +192,15 @@ this.ScenarioInitialize(scenarioInfo);
 #line 3
 this.FeatureBackground();
 #line hidden
-#line 20
+#line 18
 testRunner.Given("all data scripts", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 21
+#line 19
 testRunner.When("the client database is created", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 22
-testRunner.Then("for each track in the playlist table the playtime is the same to the previous tra" +
-                        "ck or has incremented by one hour", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 20
+testRunner.Then("for each track in the listing table the PlayDateAndTime is the same to the previo" +
+                        "us track or has incremented by one hour", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

@@ -108,7 +108,7 @@ namespace Chroomsoft.Top2000.Specs.Features
         }
 
         [Then(@"the application updates the second-to-last script from the assembly")]
-        public async Task ThenTheApplicationUpdatesTheSecond_To_LastScriptFromTheAssembly()
+        public async Task ThenTheApplicationUpdatesTheSecondToLastScriptFromTheAssembly()
         {
             var assemblySource = App.ServiceProvider.GetService<Top2000AssemblyDataSource>();
             var update = App.ServiceProvider.GetService<IUpdateClientDatabase>();

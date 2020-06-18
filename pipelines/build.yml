@@ -50,3 +50,7 @@ steps:
   - publish: '$(Build.ArtifactStagingDirectory)\Azure'
     displayName: 'Publishing Azure Resources'
     artifact: Azure
+  
+  - publish: 'tests/Top2000.Specs/bin/Release/netcoreapp3.1/'
+    displayName: Publishing Specification binaries
+    artifact: Specification

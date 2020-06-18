@@ -1,0 +1,13 @@
+name: Top 2000 App Pull Request $(fullVersion) build - 
+
+variables:
+- template: version.yml
+- name: product
+  value: 'TOP2000'
+
+jobs:
+- job: Build
+  pool:
+    name: At Home
+  steps:
+  - template: build.yml

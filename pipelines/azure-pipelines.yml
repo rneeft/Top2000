@@ -22,8 +22,23 @@ stages:
       stage: 'DEV'
       hostName: 'www-dev.top2000.app'
   jobs:
-  - job: DevRelease
+  - deployment: DevRelease
     pool:
       name: At Home
-    steps:
-    - template: release.yml
+    environment: Dev-Stage
+    strategy: 
+      runOnce:
+        deploy:
+          steps:
+          - template: release.yml
+
+- stage: RunSpecsOnDev
+  displayName:  Running Specifications
+  dependsOn: DevRelease
+  jobs:
+    - job: DevRelease
+      pool:
+        name: At Home
+      steps:
+      - template: specrun.yml
+

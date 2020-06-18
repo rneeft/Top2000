@@ -2,7 +2,6 @@
 using Chroomsoft.Top2000.Data.ClientDatabase;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SQLite;
 using System;
@@ -23,62 +22,18 @@ namespace Chroomsoft.Top2000.Specs
         [BeforeTestRun]
         public static void BeforeTestRun()
         {
-            //TheProcess = Process.Start(@"dotnet run 'S:\github\Top2000\src\data\Data.StaticApiGenerator\Data.StaticApiGenerator.csproj'");
-
-            //// var location = Path.Combine("wwwroot");
-
-            // //await Task.WhenAll
-            // //(
-            // //    fileCreator.CreateApiFileAsync(location),
-            // //    fileCreator.CreateDataFilesAsync(location)
-            // //);
-
             var hostBuilder = new HostBuilder()
                 .ConfigureServices(ConfigureServices)
-            //    .ConfigureLogging(ConfigureLogging)
                 .Build();
 
             ServiceProvider = hostBuilder.Services;
-
-            // var fileCreator = ServiceProvider.GetService<IFileCreator>();
-            // var currentDirectory = Directory.GetCurrentDirectory();
-            // var location = Path.Combine(currentDirectory, "wwwroot");
-            // fileCreator.CreateApiFileAsync(location).Wait();
-            // fileCreator.CreateDataFilesAsync(location).Wait();
-            // hostBuilder.StartAsync().Wait();
-            // //Task.Run(() => hostBuilder.Run(), cancelSource.Token);
-            // //
-            // //hostBuilder.StartAsync(cancelSource.Token).GetAwaiter().GetResult();
-            // //    hostBuilder.Run();
-            // //      new Thread(new ThreadStart(() => { hostBuilder.Run(); })).Start();
-
-            // ServiceProvider.GetService<ILogger<SpecsTest>>().LogInformation("BeforeTestRun setup completed");
-        }
-
-        private static void ConfigureLogging(ILoggingBuilder loggingBuilder)
-        {
-            //Log.Logger = new LoggerConfiguration()
-            //.MinimumLevel.Information()
-            //.MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
-            //.WriteTo.Seq("http://localhost:5341")
-            //.CreateLogger();
-
-            //loggingBuilder.AddSerilog();
-
-            //loggingBuilder.AddConfiguration(new LoggerConfiguration());
-
-            //loggingBuilder
-            //    .ClearProviders()
-            //    .WriteTo
-            //    .AddConsole(console => { console.DisableColors = true; })
-            //    ;
         }
 
         private static void ConfigureServices(IServiceCollection services)
         {
             services.AddHttpClient("top2000", c =>
             {
-                c.BaseAddress = new Uri("https://www-dev.top2000.app");
+                c.BaseAddress = new Uri("https://chrtop2000sadevwe.z6.web.core.windows.net/");
             });
 
             services

@@ -1,0 +1,16 @@
+steps:
+  - checkout: none
+
+  - download: current
+    displayName: Download Sepcification binaries
+    artifact: Specification
+  
+  - task: VSTest@2
+    displayName: 'Test - Specifications'
+    inputs:
+      testSelector: 'testAssemblies'
+      testAssemblyVer2: |
+        **\*Specs.dll
+        !**\*TestAdapter.dll
+        !**\obj\**
+      searchFolder: '$(System.DefaultWorkingDirectory)'
