@@ -1,5 +1,10 @@
 name: Top 2000 App Pull Request $(fullVersion) build - 
 
+trigger: none
+
+pr:
+- master
+
 variables:
 - template: version.yml
 - name: product

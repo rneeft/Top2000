@@ -7,6 +7,8 @@ variables:
 
 trigger: 
   - main
+
+pr: none
   
 stages:
 - stage: Build
