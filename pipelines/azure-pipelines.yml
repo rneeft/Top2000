@@ -6,7 +6,7 @@ variables:
   value: 'TOP2000'
 
 trigger: 
-  - master
+  - main
   
 stages:
 - stage: Build
@@ -41,4 +41,3 @@ stages:
         name: At Home
       steps:
       - template: specrun.yml
-
