@@ -1,11 +1,13 @@
 ﻿using Chroomsoft.Top2000.Data;
 using Chroomsoft.Top2000.Data.ClientDatabase;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using SQLite;
 using System;
 using System.IO;
+using System.Reflection;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
@@ -54,6 +56,8 @@ namespace WindowsApp
         {
             ConfigureClientDatabase(services)
                 .AddTransient<MainPage>();
+
+            services.AddMediatR(Assembly.GetExecutingAssembly());
         }
 
         public static IServiceCollection ConfigureClientDatabase(IServiceCollection services)
@@ -62,6 +66,11 @@ namespace WindowsApp
             {
                 c.BaseAddress = new Uri("https://www-dev.top2000.app");
             });
+
+            var databasePath = Path.Combine(FileSystem.AppDataDirectory, "top2000data.db");
+
+            if (File.Exists(databasePath))
+                File.Delete(databasePath);
 
             return services
                 .AddTransient<OnlineDataSource>()

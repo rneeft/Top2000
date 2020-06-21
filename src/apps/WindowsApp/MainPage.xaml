@@ -14,6 +14,6 @@
             <Button Content="Load" Click="LoadClick" />
             <Button Content="Save" Click="SaveClick" Margin="10,0,0,0" />
         </StackPanel>
-        <TextBox x:Name="contents" Height="654" />
+        <TextBox x:Name="contents" Height="654" AcceptsReturn="True" TextWrapping="Wrap" />
     </StackPanel>
 </Page>

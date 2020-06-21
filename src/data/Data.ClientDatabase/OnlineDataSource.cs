@@ -25,7 +25,7 @@ namespace Chroomsoft.Top2000.Data.ClientDatabase
                 .Last()
                 .Split('-')[0];
 
-            var content = await TryGetAsyncForUpgrades(latestVersion);
+            var content = await TryGetAsyncForUpgrades(latestVersion).ConfigureAwait(false);
 
             if (content is null)
                 return ImmutableSortedSet<string>.Empty;
@@ -38,11 +38,11 @@ namespace Chroomsoft.Top2000.Data.ClientDatabase
         {
             var httpClient = httpClientFactory.CreateClient("top2000");
             var requestUri = $"data/{scriptName}";
-            var response = await httpClient.GetAsync(requestUri);
+            var response = await httpClient.GetAsync(requestUri).ConfigureAwait(false);
 
             response.EnsureSuccessStatusCode();
 
-            var contents = await response.Content.ReadAsStringAsync();
+            var contents = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
             return new SqlScript(scriptName, contents);
         }
@@ -53,11 +53,11 @@ namespace Chroomsoft.Top2000.Data.ClientDatabase
             {
                 var httpClient = httpClientFactory.CreateClient("top2000");
                 var requestUri = $"api/versions/{latestVersion}/upgrades";
-                var response = await httpClient.GetAsync(requestUri);
+                var response = await httpClient.GetAsync(requestUri).ConfigureAwait(false);
 
                 response.EnsureSuccessStatusCode();
 
-                return await response.Content.ReadAsStringAsync();
+                return await response.Content.ReadAsStringAsync().ConfigureAwait(false);
             }
             catch (HttpRequestException)
             {

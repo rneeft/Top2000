@@ -25,7 +25,7 @@ namespace Chroomsoft.Top2000.Data.LocalDb
 
         private async Task<SqlScript> BuildSqlScriptAsync(string fileName)
         {
-            var contents = await top2000AssemblyData.GetScriptContentAsync(fileName);
+            var contents = await top2000AssemblyData.GetScriptContentAsync(fileName).ConfigureAwait(false);
             return new SqlScript(fileName, contents);
         }
     }

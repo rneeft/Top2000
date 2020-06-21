@@ -36,7 +36,7 @@ namespace Chroomsoft.Top2000.Data.StaticApiGenerator
             {
                 logger.LogInformation("Saving {file} to disk", file);
 
-                var contents = await top2000Data.GetScriptContentAsync(file);
+                var contents = await top2000Data.GetScriptContentAsync(file).ConfigureAwait(false);
                 var path = Path.Combine(location, "data");
 
                 if (!Directory.Exists(path))
@@ -44,7 +44,7 @@ namespace Chroomsoft.Top2000.Data.StaticApiGenerator
 
                 var fileName = Path.Combine(path, file);
 
-                await File.WriteAllTextAsync(fileName, contents);
+                await File.WriteAllTextAsync(fileName, contents).ConfigureAwait(false);
             }
         }
 
@@ -64,7 +64,7 @@ namespace Chroomsoft.Top2000.Data.StaticApiGenerator
 
                 var fileName = Path.Combine(path, "upgrades");
 
-                await File.WriteAllTextAsync(fileName, json);
+                await File.WriteAllTextAsync(fileName, json).ConfigureAwait(false);
             }
         }
     }

@@ -24,7 +24,7 @@ namespace Chroomsoft.Top2000.Data.ClientDatabase
 
         public async Task<SqlScript> ScriptContentsAsync(string scriptName)
         {
-            var contents = await top2000Data.GetScriptContentAsync(scriptName);
+            var contents = await top2000Data.GetScriptContentAsync(scriptName).ConfigureAwait(false);
             return new SqlScript(scriptName, contents);
         }
     }

@@ -24,7 +24,7 @@ namespace Chroomsoft.Top2000.Data.StaticApiGenerator
             (
                 fileCreator.CreateApiFileAsync(location),
                 fileCreator.CreateDataFilesAsync(location)
-            );
+            ).ConfigureAwait(false);
 
             var host = new WebHostBuilder()
                    .UseKestrel()
@@ -40,7 +40,7 @@ namespace Chroomsoft.Top2000.Data.StaticApiGenerator
                    .UseUrls("https://localhost:2000")
                    .Build();
 
-            await host.RunAsync();
+            await host.RunAsync().ConfigureAwait(false);
         }
     }
 }
