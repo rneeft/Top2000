@@ -40,18 +40,18 @@ namespace ConsoleApp
         [SubCommand]
         public ListCommand List { get; set; } = null!;
 
-        [DefaultMethod]
-        public async Task All()
-        {
-            //var editions = await mediator.Send(new AllEditionsRequest());
+        //[DefaultMethod]
+        //public async Task All()
+        //{
+        //    //var editions = await mediator.Send(new AllEditionsRequest());
 
-            //foreach (var edition in editions)
-            //{
-            //    Console.WriteLine(edition.Year);
-            //}
+        //    //foreach (var edition in editions)
+        //    //{
+        //    //    Console.WriteLine(edition.Year);
+        //    //}
 
-            throw new NotImplementedException();
-        }
+        //    throw new NotImplementedException();
+        //}
     }
 
     [Command(Name = "List")]
