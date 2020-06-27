@@ -1,5 +1,5 @@
 INSERT INTO [Edition] ([Year], [StartUtcDateAndTime], [EndUtcDateAndTime]) VALUES
-(2003, '2003-12-25T11:00:00', '2003-12-31T10:59:59');
+(2003, '2003-12-25T23:00:00', '2003-12-31T22:59:59');
 
 INSERT INTO Track ([Id] ,[Title] ,[Artist],[RecordedYear]) VALUES 
   (5,'(Get your kicks on) Route 66','The Rolling Stones',1964)

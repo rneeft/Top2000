@@ -1,5 +1,5 @@
 INSERT INTO [Edition] ([Year], [StartUtcDateAndTime], [EndUtcDateAndTime]) VALUES
-(2017, '2017-12-25T08:00:00', '2017-12-31T10:59:59');
+(2017, '2017-12-25T08:00:00', '2017-12-31T22:59:59');
 
 INSERT INTO Track ([Id] ,[Title] ,[Artist],[RecordedYear]) VALUES 
   (4270,'Don''t Let Me Down','The Beatles',1967)

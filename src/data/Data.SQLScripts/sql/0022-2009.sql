@@ -1,5 +1,5 @@
 INSERT INTO [Edition] ([Year], [StartUtcDateAndTime], [EndUtcDateAndTime]) VALUES
-(2009, '2009-12-25T11:00:00', '2009-12-31T10:59:59');
+(2009, '2009-12-25T23:00:00', '2009-12-31T22:59:59');
 
 INSERT INTO Track ([Id] ,[Title] ,[Artist],[RecordedYear]) VALUES 
   (4,'(Forever) Live and die','Orchestral Manoeuvres In The Dark',1986)

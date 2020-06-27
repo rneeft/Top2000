@@ -1,5 +1,5 @@
 INSERT INTO [Edition] ([Year], [StartUtcDateAndTime], [EndUtcDateAndTime]) VALUES
-(1999, '1999-12-25T11:00:00', '1999-12-31T10:59:59');
+(1999, '1999-12-25T23:00:00', '1999-12-31T22:59:59');
 
 INSERT INTO Track ([Id] ,[Title] ,[Artist],[RecordedYear]) VALUES 
   (1,'(Everything I Do) I Do It For You','Bryan Adams',1991)

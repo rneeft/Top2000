@@ -1,5 +1,5 @@
 INSERT INTO [Edition] ([Year], [StartUtcDateAndTime], [EndUtcDateAndTime]) VALUES
-(2006, '2006-12-25T11:00:00', '2006-12-31T10:59:59');
+(2006, '2006-12-25T23:00:00', '2006-12-31T22:59:59');
 
 INSERT INTO Track ([Id] ,[Title] ,[Artist],[RecordedYear]) VALUES 
   (36,'5 Uur','Ramses Shaffy',1966)
