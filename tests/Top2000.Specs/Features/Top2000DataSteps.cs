@@ -86,11 +86,13 @@ namespace Chroomsoft.Top2000.Specs.Features
 
                 foreach (var track in listing)
                 {
-                    var differenceInHours = previous.PlayDateAndTime - track.PlayDateAndTime;
+                    var differenceInHours = previous.PlayUtcDateAndTime - track.PlayUtcDateAndTime;
 
                     Assert.IsTrue(differenceInHours.Value.TotalMinutes == 0 || differenceInHours.Value.TotalMinutes == 60,
-                        $"For edition {listing.Key} the positions {previous.Position} and {track.Position} the PlayDateAndTime is incorrect"
+                        $"For edition {listing.Key} the positions {previous.Position} and {track.Position} the PlayDateAndTime is incorrect, it is {differenceInHours.Value.TotalMinutes} and should be either 0 or 60"
                         );
+
+                    previous = track;
                 }
             }
         }
@@ -103,7 +105,7 @@ namespace Chroomsoft.Top2000.Specs.Features
 
             public int Position { get; set; }
 
-            public DateTimeOffset? PlayDateAndTime { get; set; }
+            public DateTime? PlayUtcDateAndTime { get; set; }
         }
     }
 }

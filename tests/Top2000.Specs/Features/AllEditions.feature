@@ -1,6 +1,6 @@
 ﻿Feature: All Editions
 
-Scenario: In 1999 the first edition of the Top2000 was hold
+Scenario: The first edition of the Top2000 was in 1999
 Given All data scripts
 When the feature is executed
 Then the latest year is 1999
