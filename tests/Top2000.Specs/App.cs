@@ -1,5 +1,7 @@
 ﻿using Chroomsoft.Top2000.Data;
 using Chroomsoft.Top2000.Data.ClientDatabase;
+using Chroomsoft.Top2000.Features.AllEditions;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -37,6 +39,7 @@ namespace Chroomsoft.Top2000.Specs
             });
 
             services
+                .AddMediatR(typeof(AllEditionsRequest).Assembly)
                 .AddTransient<ITop2000AssemblyData, Top2000Data>()
                 .AddTransient<OnlineDataSource>()
                 .AddTransient<Top2000AssemblyDataSource>()
@@ -44,7 +47,9 @@ namespace Chroomsoft.Top2000.Specs
                 .AddTransient<ITop2000AssemblyData, Top2000Data>()
                 .AddTransient<SQLiteAsyncConnection>(f =>
                 {
-                    return new SQLiteAsyncConnection(DatabasePath, SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.Create | SQLiteOpenFlags.SharedCache);
+                    var x = new SQLiteAsyncConnection(DatabasePath, SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.Create | SQLiteOpenFlags.SharedCache, storeDateTimeAsTicks: false);
+
+                    return x;
                 });
             ;
         }

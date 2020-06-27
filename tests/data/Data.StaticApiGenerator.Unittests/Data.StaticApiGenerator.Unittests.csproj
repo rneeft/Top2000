@@ -2,7 +2,6 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-      <Nullable>disable</Nullable>
       <IsPackable>false</IsPackable>
       <AssemblyName>Chroomsoft.Top2000.Data.StaticApiGenerator.Unittests</AssemblyName>
       <RootNamespace>Chroomsoft.Top2000.Data.StaticApiGenerator.Unittests</RootNamespace>

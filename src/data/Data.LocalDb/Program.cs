@@ -7,7 +7,7 @@ namespace Chroomsoft.Top2000.Data.LocalDb
     {
         private static int Main()
         {
-            var connectionString = @"Server=(localdb)\mssqllocaldb;Database=Top2000Dev5;";
+            var connectionString = @"Server=(localdb)\mssqllocaldb;Database=Top2000Dev7;";
 
             EnsureDatabase.For
                 .SqlDatabase(connectionString);

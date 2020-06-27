@@ -7,8 +7,8 @@ using Microsoft.Extensions.DependencyInjection;
 using SQLite;
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
@@ -24,21 +24,17 @@ namespace ConsoleApp
         }
 
         [SubCommand]
-        public EditionsCommand Editions { get; set; }
+        public EditionsCommand Editions { get; set; } = null!;
     }
 
     [Command(Name = "Editions")]
     public class EditionsCommand
     {
         private readonly IMediator mediator;
-        private readonly IUpdateClientDatabase updateClientDatabase;
-        private readonly Top2000AssemblyDataSource assemblyDataSource;
 
-        public EditionsCommand(IMediator mediator, IUpdateClientDatabase updateClientDatabase, Top2000AssemblyDataSource assemblyDataSource)
+        public EditionsCommand(IMediator mediator)
         {
             this.mediator = mediator;
-            this.updateClientDatabase = updateClientDatabase;
-            this.assemblyDataSource = assemblyDataSource;
         }
 
         [SubCommand]
@@ -47,66 +43,90 @@ namespace ConsoleApp
         [DefaultMethod]
         public async Task All()
         {
-            var editions = await mediator.Send(new AllEditionsRequest());
+            //var editions = await mediator.Send(new AllEditionsRequest());
 
-            foreach (var edition in editions)
-            {
-                Console.WriteLine(edition.Year);
-            }
+            //foreach (var edition in editions)
+            //{
+            //    Console.WriteLine(edition.Year);
+            //}
+
+            throw new NotImplementedException();
         }
     }
 
     [Command(Name = "List")]
     public class ListCommand
     {
-        [DefaultMethod]
-        public void List(int year)
+        private readonly IMediator mediator;
+
+        public ListCommand(IMediator mediator)
         {
-            if (year < 0 || year > 2019)
-                Console.WriteLine("Wrong year");
-            else
+            this.mediator = mediator;
+        }
+
+        [DefaultMethod]
+        public async Task List(int year)
+        {
+            var tracks = (await mediator.Send(new AllListingsOfEditionRequest(year)).ConfigureAwait(false))
+                .OrderBy(x => x.Position)
+                .ToList();
+
+            foreach (var track in tracks)
             {
-                Console.WriteLine("Bohemian Rhapsody");
-                Console.WriteLine("Hotel California");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("{0,4}", track.Position);
+                Console.Write(" ");
+                Console.WriteLine(track.Title);
+
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine($"     {track.Artist}");
+
+                Console.ResetColor();
             }
         }
     }
 
-    public class AllEditionsRequest : IRequest<ImmutableSortedSet<Edition>>
+    public class AllListingsOfEditionRequest : IRequest<List<TrackListing>>
     {
+        public AllListingsOfEditionRequest(int year)
+        {
+            Year = year;
+        }
+
+        public int Year { get; }
     }
 
-    public class AllEditionsRequestHandler : IRequestHandler<AllEditionsRequest, ImmutableSortedSet<Edition>>
+    public class AllListingsOfEditionRequestHandler : IRequestHandler<AllListingsOfEditionRequest, List<TrackListing>>
     {
         private readonly SQLiteAsyncConnection connection;
 
-        public AllEditionsRequestHandler(SQLiteAsyncConnection connection)
+        public AllListingsOfEditionRequestHandler(SQLiteAsyncConnection connection)
         {
             this.connection = connection;
         }
 
-        public async Task<ImmutableSortedSet<Edition>> Handle(AllEditionsRequest request, CancellationToken cancellationToken)
+        public async Task<List<TrackListing>> Handle(AllListingsOfEditionRequest request, CancellationToken cancellationToken)
         {
-            return (await connection.Table<Edition>().ToListAsync().ConfigureAwait(false))
-                .ToImmutableSortedSet(new EditionComparer());
+            var sql =
+                "SELECT Listing.TrackId, Position, PlayDateAndTime, Title, Artist " +
+                "FROM Listing JOIN Track ON TrackId = Id " +
+                $"WHERE Edition = ?";
+
+            return (await connection.QueryAsync<TrackListing>(sql, request.Year));
         }
     }
 
-    public class EditionComparer : IComparer<Edition>
+    public class TrackListing
     {
-        public int Compare(Edition x, Edition y)
-        {
-            return x.Year.CompareTo(y.Year);
-        }
-    }
+        public int TrackId { get; set; }
 
-    public class Edition
-    {
-        public int Year { get; set; }
+        public int Position { get; set; }
 
-        public DateTimeOffset StartDateAndTime { get; set; }
+        public DateTimeOffset PlayDateAndTime { get; set; }
 
-        public DateTimeOffset EndDateAndTime { get; set; }
+        public string Title { get; set; } = string.Empty;
+
+        public string Artist { get; set; } = string.Empty;
     }
 
     internal class Program
@@ -133,9 +153,6 @@ namespace ConsoleApp
 
             var databasePath = Path.Combine(Directory.GetCurrentDirectory(), "top2000data.db");
 
-            if (File.Exists(databasePath))
-                File.Delete(databasePath);
-
             return services
                 .AddTransient<OnlineDataSource>()
                 .AddTransient<Top2000AssemblyDataSource>()
@@ -147,14 +164,23 @@ namespace ConsoleApp
                 });
         }
 
-        private static Task<int> Main(string[] args)
+        private async static Task<int> Main(string[] args)
         {
             var appRunner = new AppRunner<App>();
-            // await db creation.
+            var serviceProvider = ConfigureServices(appRunner);
 
-            return appRunner
-                .UseMicrosoftDependencyInjection(ConfigureServices(appRunner))
-                .RunAsync(args);
+            var databasePath = Path.Combine(Directory.GetCurrentDirectory(), "top2000data.db");
+
+            if (!File.Exists(databasePath))
+            {
+                var updater = serviceProvider.GetService<IUpdateClientDatabase>();
+                var localSource = serviceProvider.GetService<Top2000AssemblyDataSource>();
+                await updater.RunAsync(localSource).ConfigureAwait(false);
+            }
+
+            return await appRunner
+                .UseMicrosoftDependencyInjection(serviceProvider)
+                .RunAsync(args).ConfigureAwait(false);
             ;
         }
     }
