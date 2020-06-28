@@ -1,5 +1,5 @@
 INSERT INTO [Edition] ([Year], [StartUtcDateAndTime], [EndUtcDateAndTime]) VALUES
-(2011, '2011-12-25T23:00:00', '2011-12-31T22:59:59');
+(2011, '2011-12-25T11:00:00', '2011-12-31T22:59:59');
 
 INSERT INTO Track ([Id] ,[Title] ,[Artist],[RecordedYear]) VALUES 
   (98,'Afscheid','Glennis Grace',2011)

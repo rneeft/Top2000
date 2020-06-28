@@ -1,7 +1,6 @@
 ﻿using Chroomsoft.Top2000.Data.ClientDatabase;
 using Chroomsoft.Top2000.Features.AllEditions;
 using FluentAssertions;
-using FluentAssertions.Execution;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -9,6 +8,7 @@ using System.Collections.Immutable;
 using System.Linq;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
+using TechTalk.SpecFlow.Assist;
 
 namespace Chroomsoft.Top2000.Specs.Features
 {
@@ -47,21 +47,6 @@ namespace Chroomsoft.Top2000.Specs.Features
             }
         }
 
-        [Then(@"For each edition the start and end datetime matching that editions year")]
-        public void ThenForEachEditionTheStartAndEndDatetimeMatchingThatEditionsYear()
-        {
-            using (new AssertionScope())
-            {
-                foreach (var edition in editions)
-                {
-                    edition.EndDateAndTime.Year.Should().NotBe(edition.Year);
-
-                    //edition.StartDateAndTime.Year.Should().Be(edition.Year);
-                    //edition.EndDateAndTime.Year.Should().Be(edition.Year);
-                }
-            }
-        }
-
         [Then(@"the latest year is (.*)")]
         public void ThenTheLatestYearIs(int year)
         {
@@ -77,9 +62,29 @@ namespace Chroomsoft.Top2000.Specs.Features
 
             foreach (var edition in editions)
             {
-                TimeZoneInfo.Local.GetUtcOffset(edition.StartDateAndTime).Should().Be(offset);
-                TimeZoneInfo.Local.GetUtcOffset(edition.EndDateAndTime).Should().Be(offset);
+                TimeZoneInfo.Local.GetUtcOffset(edition.LocalStartDateAndTime).Should().Be(offset);
+                TimeZoneInfo.Local.GetUtcOffset(edition.LocalEndDateAndTime).Should().Be(offset);
             }
+        }
+
+        [Then(@"the UTC Statdate is as follow:")]
+        public void ThenTheUTCStatdateIsAsFollow(Table table)
+        {
+            var items = table.CreateSet<YearTimeCombo>();
+
+            foreach (var item in items)
+            {
+                var edition = editions.Single(x => x.Year == item.Year);
+
+                edition.LocalStartDateAndTime.ToUniversalTime().Should().Be(item.UTCStartdate);
+            }
+        }
+
+        private class YearTimeCombo
+        {
+            public int Year { get; set; }
+
+            public DateTime UTCStartdate { get; set; }
         }
     }
 }

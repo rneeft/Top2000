@@ -70,11 +70,11 @@ namespace Chroomsoft.Top2000.Specs.Features
             testRunner.CollectScenarioErrors();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("In 1999 the first edition of the Top2000 was hold", SourceLine=2)]
-        public virtual void In1999TheFirstEditionOfTheTop2000WasHold()
+        [TechTalk.SpecRun.ScenarioAttribute("The first edition of the Top2000 was in 1999", SourceLine=2)]
+        public virtual void TheFirstEditionOfTheTop2000WasIn1999()
         {
             string[] tagsOfScenario = ((string[])(null));
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("In 1999 the first edition of the Top2000 was hold", null, ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("The first edition of the Top2000 was in 1999", null, ((string[])(null)));
 #line 3
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -146,11 +146,11 @@ testRunner.Then("a sorted set is returned started with the highest year", ((stri
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("An Edition contains the year start and end date of the Top2000 for that year", SourceLine=12)]
-        public virtual void AnEditionContainsTheYearStartAndEndDateOfTheTop2000ForThatYear()
+        [TechTalk.SpecRun.ScenarioAttribute("An Edition contains the datetime in local time", SourceLine=12)]
+        public virtual void AnEditionContainsTheDatetimeInLocalTime()
         {
             string[] tagsOfScenario = ((string[])(null));
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("An Edition contains the year start and end date of the Top2000 for that year", null, ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("An Edition contains the datetime in local time", null, ((string[])(null)));
 #line 13
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -178,17 +178,17 @@ testRunner.Given("All data scripts", ((string)(null)), ((TechTalk.SpecFlow.Table
 testRunner.When("the feature is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 16
-testRunner.Then("For each edition the start and end datetime matching that editions year", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("the Start- and EndDateTime is in local time", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("An Edition contains the datetime in local time", SourceLine=17)]
-        public virtual void AnEditionContainsTheDatetimeInLocalTime()
+        [TechTalk.SpecRun.ScenarioAttribute("The first editions started at the start of boxing day (CET)", SourceLine=17)]
+        public virtual void TheFirstEditionsStartedAtTheStartOfBoxingDayCET()
         {
             string[] tagsOfScenario = ((string[])(null));
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("An Edition contains the datetime in local time", null, ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("The first editions started at the start of boxing day (CET)", null, ((string[])(null)));
 #line 18
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -215,8 +215,194 @@ testRunner.Given("All data scripts", ((string)(null)), ((TechTalk.SpecFlow.Table
 #line 20
 testRunner.When("the feature is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
+                TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Year",
+                            "UTC Startdate"});
+                table1.AddRow(new string[] {
+                            "1999",
+                            "1999-12-25T23:00:00"});
+                table1.AddRow(new string[] {
+                            "2001",
+                            "2001-12-25T23:00:00"});
+                table1.AddRow(new string[] {
+                            "2002",
+                            "2002-12-25T23:00:00"});
+                table1.AddRow(new string[] {
+                            "2003",
+                            "2003-12-25T23:00:00"});
+                table1.AddRow(new string[] {
+                            "2004",
+                            "2004-12-25T23:00:00"});
+                table1.AddRow(new string[] {
+                            "2005",
+                            "2005-12-25T23:00:00"});
+                table1.AddRow(new string[] {
+                            "2006",
+                            "2006-12-25T23:00:00"});
+                table1.AddRow(new string[] {
+                            "2007",
+                            "2007-12-25T23:00:00"});
+                table1.AddRow(new string[] {
+                            "2008",
+                            "2008-12-25T23:00:00"});
 #line 21
-testRunner.Then("the Start- and EndDateTime is in local time", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("the UTC Statdate is as follow:", ((string)(null)), table1, "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [TechTalk.SpecRun.ScenarioAttribute("As from 2009 the Top2000 starts at first christmas day at noon (CET)", SourceLine=32)]
+        public virtual void AsFrom2009TheTop2000StartsAtFirstChristmasDayAtNoonCET()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("As from 2009 the Top2000 starts at first christmas day at noon (CET)", null, ((string[])(null)));
+#line 33
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 34
+testRunner.Given("All data scripts", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 35
+testRunner.When("the feature is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+                TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Year",
+                            "UTC Startdate"});
+                table2.AddRow(new string[] {
+                            "2009",
+                            "2009-12-25T11:00:00"});
+                table2.AddRow(new string[] {
+                            "2010",
+                            "2010-12-25T11:00:00"});
+                table2.AddRow(new string[] {
+                            "2011",
+                            "2011-12-25T11:00:00"});
+                table2.AddRow(new string[] {
+                            "2012",
+                            "2012-12-25T11:00:00"});
+                table2.AddRow(new string[] {
+                            "2013",
+                            "2013-12-25T11:00:00"});
+                table2.AddRow(new string[] {
+                            "2014",
+                            "2014-12-25T11:00:00"});
+#line 36
+testRunner.Then("the UTC Statdate is as follow:", ((string)(null)), table2, "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [TechTalk.SpecRun.ScenarioAttribute("As from 2015 the Top2000 starts three hours earlier", SourceLine=44)]
+        public virtual void AsFrom2015TheTop2000StartsThreeHoursEarlier()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("As from 2015 the Top2000 starts three hours earlier", null, ((string[])(null)));
+#line 45
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 46
+testRunner.Given("All data scripts", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 47
+testRunner.When("the feature is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+                TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Year",
+                            "UTC Startdate"});
+                table3.AddRow(new string[] {
+                            "2015",
+                            "2015-12-25T08:00:00"});
+                table3.AddRow(new string[] {
+                            "2016",
+                            "2016-12-25T08:00:00"});
+                table3.AddRow(new string[] {
+                            "2017",
+                            "2017-12-25T08:00:00"});
+                table3.AddRow(new string[] {
+                            "2018",
+                            "2018-12-25T08:00:00"});
+#line 48
+testRunner.Then("the UTC Statdate is as follow:", ((string)(null)), table3, "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [TechTalk.SpecRun.ScenarioAttribute("In 2019 the Top2000 start at 08:00", SourceLine=54)]
+        public virtual void In2019TheTop2000StartAt0800()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("In 2019 the Top2000 start at 08:00", null, ((string[])(null)));
+#line 55
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 56
+testRunner.Given("All data scripts", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 57
+testRunner.When("the feature is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+                TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Year",
+                            "UTC Startdate"});
+                table4.AddRow(new string[] {
+                            "2019",
+                            "2019-12-25T07:00:00"});
+#line 58
+testRunner.Then("the UTC Statdate is as follow:", ((string)(null)), table4, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

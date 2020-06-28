@@ -40,16 +40,14 @@ namespace Chroomsoft.Top2000.Features.AllEditions
     {
         public int Year { get; set; }
 
-        //public DateTimeOffset Start => new DateTimeOffset(STAThreadAttribute)
+        public DateTime LocalStartDateAndTime => DateTime.SpecifyKind(Start, DateTimeKind.Utc).ToLocalTime();
 
-        [Column(nameof(StartDateAndTime))]
+        public DateTime LocalEndDateAndTime => DateTime.SpecifyKind(End, DateTimeKind.Utc).ToLocalTime();
+
+        [Column("StartUtcDateAndTime")]
         public DateTime Start { get; set; }
 
-        [Column(nameof(EndDateAndTime))]
+        [Column("EndUtcDateAndTime")]
         public DateTime End { get; set; }
-
-        public DateTime StartDateAndTime => DateTime.SpecifyKind(Start, DateTimeKind.Utc).ToLocalTime();
-
-        public DateTimeOffset EndDateAndTime => DateTime.SpecifyKind(End, DateTimeKind.Utc).ToLocalTime();
     }
 }

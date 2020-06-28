@@ -1,5 +1,5 @@
 INSERT INTO [Edition] ([Year], [StartUtcDateAndTime], [EndUtcDateAndTime]) VALUES
-(2012, '2012-12-25T23:00:00', '2012-12-31T22:59:59');
+(2012, '2012-12-25T11:00:00', '2012-12-31T22:59:59');
 
 INSERT INTO Track ([Id] ,[Title] ,[Artist],[RecordedYear]) VALUES
   (38,'50 Ways to Say Goodbye','Train',2012)
