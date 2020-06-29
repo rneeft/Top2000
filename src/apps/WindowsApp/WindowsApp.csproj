@@ -197,9 +197,7 @@
   <ItemGroup>
     <EmbeddedResource Include="appsettings.json" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="TracksOfYear\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\..\data\Data.ClientDatabase\Data.ClientDatabase.csproj">
       <Project>{AC263E16-2ACF-4377-A6A6-9D34F6240FA3}</Project>

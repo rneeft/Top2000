@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="AllListingsOfEdition\" />
+    <Folder Include="TrackInformation\" />
   </ItemGroup>
 
 </Project>

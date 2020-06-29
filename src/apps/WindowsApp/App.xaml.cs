@@ -1,10 +1,8 @@
-﻿using Chroomsoft.Top2000.Data;
-using Chroomsoft.Top2000.Data.ClientDatabase;
+﻿using Chroomsoft.Top2000.Data.ClientDatabase;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using SQLite;
 using System;
 using System.IO;
 using System.Reflection;
@@ -54,35 +52,13 @@ namespace WindowsApp
 
         public static void ConfigureServices(HostBuilderContext ctx, IServiceCollection services)
         {
-            ConfigureClientDatabase(services)
+            services
+                .AddClientDatabase(new DirectoryInfo(FileSystem.AppDataDirectory))
                 .AddTransient<MainPage>();
 
+            //  ConfigureClientDatabase(services)
+
             services.AddMediatR(Assembly.GetExecutingAssembly());
-        }
-
-        public static IServiceCollection ConfigureClientDatabase(IServiceCollection services)
-        {
-            services.AddHttpClient("top2000", c =>
-            {
-                c.BaseAddress = new Uri("https://www-dev.top2000.app");
-            });
-
-            var databasePath = Path.Combine(FileSystem.AppDataDirectory, "top2000data.db");
-
-            if (File.Exists(databasePath))
-                File.Delete(databasePath);
-
-            return services
-                .AddTransient<OnlineDataSource>()
-                .AddTransient<Top2000AssemblyDataSource>()
-                .AddTransient<IUpdateClientDatabase, UpdateDatabase>()
-                .AddTransient<ITop2000AssemblyData, Top2000Data>()
-                .AddTransient<SQLiteAsyncConnection>(f =>
-                {
-                    var databasePath = Path.Combine(FileSystem.AppDataDirectory, "top2000data.db");
-
-                    return new SQLiteAsyncConnection(databasePath, SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.Create | SQLiteOpenFlags.SharedCache);
-                });
         }
 
         public static void ConfigureLogging(ILoggingBuilder builder)
