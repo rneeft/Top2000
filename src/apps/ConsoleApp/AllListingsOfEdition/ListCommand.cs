@@ -1,4 +1,4 @@
-﻿using Chroomsoft.Top2000.Features.AllListingsOfEdition;
+﻿using Chroomsoft.Top2000.Features;
 using CommandDotNet;
 using MediatR;
 using System;

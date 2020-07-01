@@ -17,8 +17,4 @@
     <ProjectReference Include="..\..\src\Features\Features.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="TrackInformation\" />
-  </ItemGroup>
-
 </Project>

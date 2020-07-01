@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Chroomsoft.Top2000.Features.AllListingsOfEdition
+namespace Chroomsoft.Top2000.Features
 {
     public class TrackListingComparer : IEqualityComparer<TrackListing>
     {

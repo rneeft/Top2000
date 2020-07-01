@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Chroomsoft.Top2000.Features.AllEditions
+namespace Chroomsoft.Top2000.Features
 {
     public class Edition
     {

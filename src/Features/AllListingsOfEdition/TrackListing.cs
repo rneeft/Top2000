@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Chroomsoft.Top2000.Features.AllListingsOfEdition
+namespace Chroomsoft.Top2000.Features
 {
     public class TrackListing
     {
