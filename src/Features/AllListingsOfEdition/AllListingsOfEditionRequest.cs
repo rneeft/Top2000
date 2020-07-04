@@ -4,7 +4,7 @@ using System.Collections.Immutable;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Chroomsoft.Top2000.Features
+namespace Chroomsoft.Top2000.Features.AllListingsOfEdition
 {
     public class AllListingsOfEditionRequest : IRequest<ImmutableHashSet<TrackListing>>
     {
@@ -32,7 +32,7 @@ namespace Chroomsoft.Top2000.Features
                       "FROM Listing JOIN Track ON TrackId = Id " +
                       $"WHERE Edition = ?";
 
-            return (await connection.QueryAsync<TrackListing>(sql, request.Year))
+            return (await connection.QueryAsync<TrackListing>(sql, request.Year).ConfigureAwait(false))
                 .ToImmutableHashSet(new TrackListingComparer());
         }
     }

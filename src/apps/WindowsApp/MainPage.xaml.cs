@@ -20,21 +20,20 @@ namespace WindowsApp
             var databaseGen = App.ServiceProvider.GetService<IUpdateClientDatabase>();
             var top2000 = App.ServiceProvider.GetService<Top2000AssemblyDataSource>();
 
-            await databaseGen.RunAsync(top2000);
+            await databaseGen.RunAsync(top2000).ConfigureAwait(false);
 
             var mediator = App.ServiceProvider.GetService<IMediator>();
-            var allEditions = await mediator.Send(new AllEditionsRequest());//.ConfigureAwait(false);
-
-            contents.Text = "";
-
-            foreach (var edition in allEditions)
-            {
-                contents.Text += edition.Year + Environment.NewLine;
-            }
+            var allEditions = await mediator.Send(new AllEditionsRequest()).ConfigureAwait(false);
 
             await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal,
             () =>
             {
+                contents.Text = "";
+
+                foreach (var edition in allEditions)
+                {
+                    contents.Text += edition.Year + Environment.NewLine;
+                }
             });
         }
 

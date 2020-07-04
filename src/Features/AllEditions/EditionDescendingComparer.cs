@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Chroomsoft.Top2000.Features
+namespace Chroomsoft.Top2000.Features.AllEditions
 {
     public class EditionDescendingComparer : Comparer<Edition>
     {

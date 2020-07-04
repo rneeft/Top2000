@@ -20,6 +20,8 @@ namespace WindowsApp
     /// </summary>
     sealed partial class App : Application
     {
+        private static IServiceProvider? serviceProvider;
+
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -33,7 +35,17 @@ namespace WindowsApp
             this.Suspending += OnSuspending;
         }
 
-        public static IServiceProvider ServiceProvider { get; set; }
+        public static IServiceProvider ServiceProvider
+        {
+            get
+            {
+                return serviceProvider ?? throw new InvalidOperationException("Application isn't booted yet");
+            }
+            set
+            {
+                serviceProvider = value;
+            }
+        }
 
         public static void Init(Action<HostBuilderContext, IServiceCollection> nativeConfigureServices)
         {
@@ -42,7 +54,7 @@ namespace WindowsApp
                 .ConfigureServices((c, x) =>
                 {
                     nativeConfigureServices.Invoke(c, x);
-                    ConfigureServices(c, x);
+                    ConfigureServices(x);
                 })
                 .ConfigureLogging(ConfigureLogging)
                 .Build();
@@ -50,13 +62,11 @@ namespace WindowsApp
             ServiceProvider = host.Services;
         }
 
-        public static void ConfigureServices(HostBuilderContext ctx, IServiceCollection services)
+        public static void ConfigureServices(IServiceCollection services)
         {
             services
                 .AddClientDatabase(new DirectoryInfo(FileSystem.AppDataDirectory))
                 .AddTransient<MainPage>();
-
-            //  ConfigureClientDatabase(services)
 
             services.AddMediatR(Assembly.GetExecutingAssembly());
         }

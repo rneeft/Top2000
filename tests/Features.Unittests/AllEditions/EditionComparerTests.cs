@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Features.Unittests.AllEditions
 {
     [TestClass]
-    public class EditionComparerTests
+    public class EditionDescendingComparerTests
     {
         [TestMethod]
         public void Editions_with_same_year_compare_as_zero()

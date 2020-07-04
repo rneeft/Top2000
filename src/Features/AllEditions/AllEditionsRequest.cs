@@ -4,7 +4,7 @@ using System.Collections.Immutable;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Chroomsoft.Top2000.Features
+namespace Chroomsoft.Top2000.Features.AllEditions
 {
     public class AllEditionsRequest : IRequest<ImmutableSortedSet<Edition>>
     {

@@ -5,14 +5,12 @@ Background: Every track can be opened to view additional information.
 Scenario: Track information contains the static data from a track
 Given all data scripts
 When the track information feature is executed for TrackId 1780
-Then the title is 'L''Été Indien'
-And the artist is 'Joe Dassin'
-And the year is 1975
+Then the title is "L'Été Indien" from 'Joe Dassin' which is recorded in the year 1975
 
 Scenario: Tracks that are recorded after the first edition are listed as Not available
 Given all data scripts
 When the track information feature is executed for TrackId 1267
-Then the title is 'Hurt' from 'Johnny Cash' which is recorded in the year 2003
+Then the title is "Hurt" from 'Johnny Cash' which is recorded in the year 2003
 And the following years are listed as 'NotAvailable'
 | Edition |
 | 2002    |
@@ -23,7 +21,7 @@ And the following years are listed as 'NotAvailable'
 Scenario: Track that were recorded but did not made it on the list are listed as NotListed
 Given all data scripts
 When the track information feature is executed for TrackId 1267
-Then the title is 'Hurt' from 'Johnny Cash' which is recorded in the year 2003
+Then the title is "Hurt" from 'Johnny Cash' which is recorded in the year 2003
 And the following years are listed as 'NotListed'
 | Edition |
 | 2003    |
@@ -36,17 +34,17 @@ And the following years are listed as 'NotListed'
 Scenario: The first time a track is listed the status of the listing is New
 Given all data scripts
 When the track information feature is executed for TrackId 1267
-Then the title is 'Hurt' from 'Johnny Cash' which is recorded in the year 2003
+Then the title is "Hurt" from 'Johnny Cash' which is recorded in the year 2003
 And the listing 2009 is listed as 'New'
 
 Scenario: Tracks that are listed again but was not in the previous edition the status is listed as Back
 When the track information feature is executed for TrackId 2560
-Then the title is 'Sad But True' from 'Metallica' which is recorded in the year 1993
+Then the title is "Sad But True" from 'Metallica' which is recorded in the year 1993
 And the listing 2011 is listed as 'Back'
 
 Scenario: Tracks that are higher on the list than previous edition are listed are Increased and a offset is indicating the delta
 When the track information feature is executed for TrackId 1664
-Then the title is 'Killer Queen' from 'Queen' which is recorded in the year 1974
+Then the title is "Killer Queen" from 'Queen' which is recorded in the year 1974
 And the following years are listed as 'Increased'
 | Edition | Offset |
 | 2000    | 33     |
@@ -58,8 +56,8 @@ And the following years are listed as 'Increased'
 
 Scenario: Tracks that are lower on the list than previous edition are listed are Decreased and a offset is indicating the delta
 When the track information feature is executed for TrackId 1664
-Then the title is 'Killer Queen' from 'Queen' which is recorded in the year 1974
-And the following years are listed as 'Increased'
+Then the title is "Killer Queen" from 'Queen' which is recorded in the year 1974
+And the following years are listed as 'Decreased'
 | Edition | Offset |
 | 2001    | 27     |
 | 2003    | 1      |
@@ -78,7 +76,7 @@ And the following years are listed as 'Increased'
 
 Scenario: Tracks that haven't change position since the previous edition are listed as Unchanged
 When the track information feature is executed for TrackId 2218
-Then the title is 'Nothing else matters' from 'Metallica' which is recorded in the year 1992
+Then the title is "Nothing Else Matters" from 'Metallica' which is recorded in the year 1992
 And the following years are listed as 'Unchanged'
 | Edition | Offset |
 | 2017    | 0      |
@@ -86,26 +84,26 @@ And the following years are listed as 'Unchanged'
 
 Scenario: 'Since release' is the statistic that shows how many times the tracks could have been listed
 When the track information feature is executed for TrackId 3966
-Then the title is 'Hello' from 'Adele' which is recorded in the year 2015
+Then the title is "Hello" from 'Adele' which is recorded in the year 2015
 And it could have been on the Top2000 for 5 times
 And it it listed for 5 times
 
 Scenario: Record high shows the highest listing for the track
 When the track information feature is executed for TrackId 1496
-Then the title is 'Imagine' from 'John Lennon' which is recorded in the year 1971
+Then the title is "Imagine" from 'John Lennon' which is recorded in the year 1971
 And the record high is number 1 on 2015
 
 Scenario: Record low shows the lowest listing for the track
 When the track information feature is executed for TrackId 1496
-Then the title is 'Imagine' from 'John Lennon' which is recorded in the year 1971
-And the record low is number 31 in 2009
+Then the title is "Imagine" from 'John Lennon' which is recorded in the year 1971
+And the record low is number 41 in 2009
 
 Scenario: Last postion shows the position of latest edition where the track was listed
 When the track information feature is executed for TrackId 1496
-Then the title is 'Imagine' from 'John Lennon' which is recorded in the year 1971
+Then the title is "Imagine" from 'John Lennon' which is recorded in the year 1971
 And the Lastest position is number 29 in 2019
 
 Scenario: First position shows the position of the first edition where the track was listed
 When the track information feature is executed for TrackId 1496
-Then the title is 'Imagine' from 'John Lennon' which is recorded in the year 1971
+Then the title is "Imagine" from 'John Lennon' which is recorded in the year 1971
 And the first position is number 7 in 1999

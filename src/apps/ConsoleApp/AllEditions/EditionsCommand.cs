@@ -1,4 +1,4 @@
-﻿using Chroomsoft.Top2000.Features;
+﻿using Chroomsoft.Top2000.Features.AllEditions;
 using CommandDotNet;
 using ConsoleApp;
 using MediatR;
@@ -23,8 +23,7 @@ namespace Chroomsoft.Top2000.Apps.ConsoleApp.AllEditions
         [DefaultMethod]
         public async Task All()
         {
-            var editions = await mediator.Send(new AllEditionsRequest());
-
+            var editions = await mediator.Send(new AllEditionsRequest()).ConfigureAwait(false);
             foreach (var edition in editions)
             {
                 Console.WriteLine(edition.Year);

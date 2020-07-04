@@ -23,7 +23,7 @@ namespace Chroomsoft.Top2000.Data.ClientDatabase
                 {
                     var databasePath = Path.Combine(appDataDirectory.FullName, clientDatabaseName);
 
-                    return new SQLiteAsyncConnection(databasePath, SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.Create | SQLiteOpenFlags.SharedCache);
+                    return new SQLiteAsyncConnection(databasePath, SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.Create | SQLiteOpenFlags.SharedCache, storeDateTimeAsTicks: false);
                 });
         }
     }

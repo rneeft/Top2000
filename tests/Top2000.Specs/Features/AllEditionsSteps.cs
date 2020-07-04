@@ -1,5 +1,5 @@
 ﻿using Chroomsoft.Top2000.Data.ClientDatabase;
-using Chroomsoft.Top2000.Features;
+using Chroomsoft.Top2000.Features.AllEditions;
 using FluentAssertions;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;

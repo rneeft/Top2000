@@ -1,4 +1,4 @@
-﻿using Chroomsoft.Top2000.Features;
+﻿using Chroomsoft.Top2000.Features.AllEditions;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
