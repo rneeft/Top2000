@@ -54,3 +54,6 @@ steps:
   - publish: 'tests/Top2000.Specs/bin/Release/netcoreapp3.1/'
     displayName: Publishing Specification binaries
     artifact: Specification
+
+  - task: WhiteSource Bolt@20
+    displayName: 'WhiteSource Bolt'
