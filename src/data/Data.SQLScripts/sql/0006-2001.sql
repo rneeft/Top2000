@@ -1,5 +1,5 @@
-INSERT INTO [Edition] ([Year], [StartDateAndTime], [EndDateAndTime]) VALUES
-(2001, '2001-12-26T00:00:00+01:00', '2001-12-31T23:59:59+01:00');
+INSERT INTO [Edition] ([Year], [StartUtcDateAndTime], [EndUtcDateAndTime]) VALUES
+(2001, '2001-12-25T23:00:00', '2001-12-31T22:59:59');
 
 INSERT INTO Track ([Id] ,[Title] ,[Artist],[RecordedYear]) VALUES
   (68,'A Piece Of The Action','The Babys',1978)

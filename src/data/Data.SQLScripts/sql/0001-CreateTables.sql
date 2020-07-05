@@ -10,8 +10,8 @@ CREATE TABLE Track
 CREATE TABLE Edition
 (
     Year int NOT NULL,
-    StartDateAndTime DATETIMEOFFSET NOT NULL,
-    EndDateAndTime DATETIMEOFFSET NOT NULL,
+    StartUtcDateAndTime DATETIME NOT NULL,
+    EndUtcDateAndTime DATETIME NOT NULL,
     PRIMARY KEY (Year)
 );
 
@@ -20,7 +20,7 @@ CREATE TABLE Listing
     TrackId int NOT NULL,
     Edition int NOT NULL,
     Position int NOT NULL,
-    PlayDateAndTime DATETIMEOFFSET NULL,
+    PlayUtcDateAndTime DATETIME NULL,
     PRIMARY KEY (TrackId, Edition),
     FOREIGN KEY (Edition) REFERENCES Edition(Year)
 )

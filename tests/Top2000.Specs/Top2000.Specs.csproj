@@ -19,8 +19,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.5" />
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.1.4" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.1.5" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.6.1" />
     <PackageReference Include="MSTest.TestAdapter" Version="2.1.2" />
     <PackageReference Include="MSTest.TestFramework" Version="2.1.2" />
@@ -35,6 +36,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\data\Data.ClientDatabase\Data.ClientDatabase.csproj" />
+    <ProjectReference Include="..\..\src\Features\Features.csproj" />
   </ItemGroup>
 
 </Project>

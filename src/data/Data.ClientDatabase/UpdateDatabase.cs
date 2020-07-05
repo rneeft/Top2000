@@ -21,13 +21,13 @@ namespace Chroomsoft.Top2000.Data.ClientDatabase
 
         public async Task RunAsync(ISource source)
         {
-            var journals = await AllJournalsAsync();
-            var executableScripts = await source.ExecutableScriptsAsync(journals);
+            var journals = await AllJournalsAsync().ConfigureAwait(false);
+            var executableScripts = await source.ExecutableScriptsAsync(journals).ConfigureAwait(false);
 
             foreach (var scriptName in executableScripts)
             {
-                var script = await source.ScriptContentsAsync(scriptName);
-                await ExecuteScriptAsync(script);
+                var script = await source.ScriptContentsAsync(scriptName).ConfigureAwait(false);
+                await ExecuteScriptAsync(script).ConfigureAwait(false);
             }
         }
 
@@ -46,8 +46,8 @@ namespace Chroomsoft.Top2000.Data.ClientDatabase
 
         private async Task<ImmutableSortedSet<string>> AllJournalsAsync()
         {
-            await connection.CreateTableAsync<Journal>();
-            return (await connection.Table<Journal>().ToListAsync())
+            await connection.CreateTableAsync<Journal>().ConfigureAwait(false);
+            return (await connection.Table<Journal>().ToListAsync().ConfigureAwait(false))
                 .Select(x => x.ScriptName)
                 .ToImmutableSortedSet();
         }

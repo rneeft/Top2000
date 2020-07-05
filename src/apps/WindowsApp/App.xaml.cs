@@ -1,11 +1,11 @@
-﻿using Chroomsoft.Top2000.Data;
-using Chroomsoft.Top2000.Data.ClientDatabase;
+﻿using Chroomsoft.Top2000.Data.ClientDatabase;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using SQLite;
 using System;
 using System.IO;
+using System.Reflection;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
@@ -20,6 +20,8 @@ namespace WindowsApp
     /// </summary>
     sealed partial class App : Application
     {
+        private static IServiceProvider? serviceProvider;
+
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -33,7 +35,17 @@ namespace WindowsApp
             this.Suspending += OnSuspending;
         }
 
-        public static IServiceProvider ServiceProvider { get; set; }
+        public static IServiceProvider ServiceProvider
+        {
+            get
+            {
+                return serviceProvider ?? throw new InvalidOperationException("Application isn't booted yet");
+            }
+            set
+            {
+                serviceProvider = value;
+            }
+        }
 
         public static void Init(Action<HostBuilderContext, IServiceCollection> nativeConfigureServices)
         {
@@ -42,7 +54,7 @@ namespace WindowsApp
                 .ConfigureServices((c, x) =>
                 {
                     nativeConfigureServices.Invoke(c, x);
-                    ConfigureServices(c, x);
+                    ConfigureServices(x);
                 })
                 .ConfigureLogging(ConfigureLogging)
                 .Build();
@@ -50,30 +62,13 @@ namespace WindowsApp
             ServiceProvider = host.Services;
         }
 
-        public static void ConfigureServices(HostBuilderContext ctx, IServiceCollection services)
+        public static void ConfigureServices(IServiceCollection services)
         {
-            ConfigureClientDatabase(services)
+            services
+                .AddClientDatabase(new DirectoryInfo(FileSystem.AppDataDirectory))
                 .AddTransient<MainPage>();
-        }
 
-        public static IServiceCollection ConfigureClientDatabase(IServiceCollection services)
-        {
-            services.AddHttpClient("top2000", c =>
-            {
-                c.BaseAddress = new Uri("https://www-dev.top2000.app");
-            });
-
-            return services
-                .AddTransient<OnlineDataSource>()
-                .AddTransient<Top2000AssemblyDataSource>()
-                .AddTransient<IUpdateClientDatabase, UpdateDatabase>()
-                .AddTransient<ITop2000AssemblyData, Top2000Data>()
-                .AddTransient<SQLiteAsyncConnection>(f =>
-                {
-                    var databasePath = Path.Combine(FileSystem.AppDataDirectory, "top2000data.db");
-
-                    return new SQLiteAsyncConnection(databasePath, SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.Create | SQLiteOpenFlags.SharedCache);
-                });
+            services.AddMediatR(Assembly.GetExecutingAssembly());
         }
 
         public static void ConfigureLogging(ILoggingBuilder builder)

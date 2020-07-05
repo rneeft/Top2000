@@ -1,5 +1,5 @@
-INSERT INTO [Edition] ([Year], [StartDateAndTime], [EndDateAndTime]) VALUES
-(2007, '2007-12-26T00:00:00+01:00', '2007-12-31T23:59:59+01:00');
+INSERT INTO [Edition] ([Year], [StartUtcDateAndTime], [EndUtcDateAndTime]) VALUES
+(2007, '2007-12-25T23:00:00', '2007-12-31T22:59:59');
 
 INSERT INTO Track ([Id] ,[Title] ,[Artist],[RecordedYear]) VALUES
   (18,'(You want to) Make A Memory','Bon Jovi',2007)

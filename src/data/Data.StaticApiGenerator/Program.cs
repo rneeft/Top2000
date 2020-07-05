@@ -34,7 +34,7 @@ namespace Chroomsoft.Top2000.Data.StaticApiGenerator
 
             using ServiceProvider serviceProvider = services.BuildServiceProvider();
             var application = serviceProvider.GetService<IRunApplication>();
-            await application.RunAsync();
+            await application.RunAsync().ConfigureAwait(false);
         }
     }
 
@@ -62,7 +62,7 @@ namespace Chroomsoft.Top2000.Data.StaticApiGenerator
             (
                 fileCreator.CreateApiFileAsync(location),
                 fileCreator.CreateDataFilesAsync(location)
-            );
+            ).ConfigureAwait(false);
         }
     }
 }
