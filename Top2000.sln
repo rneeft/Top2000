@@ -19,6 +19,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "pipelines", "pipelines", "{E502F3BA-2F12-4DD6-B48C-0840C3DD4829}"
 	ProjectSection(SolutionItems) = preProject
 		pipelines\azure-pipelines.yml = pipelines\azure-pipelines.yml
+		pipelines\azure-pr-pipelines.yml = pipelines\azure-pr-pipelines.yml
 		pipelines\azuredeploy.json = pipelines\azuredeploy.json
 		pipelines\azuredeploy.parameters.json = pipelines\azuredeploy.parameters.json
 		pipelines\build.yml = pipelines\build.yml
@@ -55,9 +56,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{C9FAD732
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp", "src\apps\ConsoleApp\ConsoleApp.csproj", "{4C571D7E-9909-485C-9025-F925944293A6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Features", "src\Features\Features.csproj", "{B76E202F-8911-4945-A48B-F5680554AC5F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Features", "src\Features\Features.csproj", "{B76E202F-8911-4945-A48B-F5680554AC5F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Features.Unittests", "tests\Features.Unittests\Features.Unittests.csproj", "{1238090B-1198-4002-BFF5-B8C8A304A1A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Features.Unittests", "tests\Features.Unittests\Features.Unittests.csproj", "{1238090B-1198-4002-BFF5-B8C8A304A1A1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
