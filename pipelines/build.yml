@@ -1,5 +1,14 @@
 steps:
 
+  - task: SonarCloudPrepare@1
+    inputs:
+      SonarCloud: 'SonarCloud'
+      organization: 'chroomsoft'
+      scannerMode: 'MSBuild'
+      projectKey: '$(sonar.sonarKey)'
+      projectName: 'Top2000'
+      projectVersion: '$(fullVersion)'
+
   - task: NuGetToolInstaller@0
     displayName: 'Use NuGet 5.3.0'
     inputs:
@@ -54,6 +63,12 @@ steps:
   - publish: 'tests/Top2000.Specs/bin/Release/netcoreapp3.1/'
     displayName: Publishing Specification binaries
     artifact: Specification
+
+  - task: SonarCloudAnalyze@1
+
+  - task: SonarCloudPublish@1
+    inputs:
+      pollingTimeoutSec: '300'
 
   - task: WhiteSource Bolt@20
     displayName: 'WhiteSource Bolt'
