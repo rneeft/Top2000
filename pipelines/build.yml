@@ -8,6 +8,7 @@ steps:
       projectKey: 'Top2000'
       projectName: 'Top2000'
       projectVersion: '$(fullVersion)'
+      extraProperties: 'sonar.exclusions=**/*.sql'
 
   - task: NuGetToolInstaller@0
     displayName: 'Use NuGet 5.3.0'
