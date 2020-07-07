@@ -29,12 +29,11 @@ steps:
       platform: 'Any CPU'
       configuration: 'Release'
 
-  - task: SonarCloudAnalyze@1
-
   - task: VSTest@2
     displayName: 'Test - Unittests'
     inputs:
       testSelector: 'testAssemblies'
+      codeCoverageEnabled: true
       testAssemblyVer2: |
         **\*Unittests.dll
         !**\*TestAdapter.dll
@@ -66,6 +65,8 @@ steps:
   - publish: 'tests/Top2000.Specs/bin/Release/netcoreapp3.1/'
     displayName: Publishing Specification binaries
     artifact: Specification
+
+  - task: SonarCloudAnalyze@1
 
   - task: SonarCloudPublish@1
     inputs:
