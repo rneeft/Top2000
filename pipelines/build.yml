@@ -5,7 +5,7 @@ steps:
       SonarCloud: 'SonarCloud'
       organization: 'chroomsoft'
       scannerMode: 'MSBuild'
-      projectKey: '$(sonar.sonarKey)'
+      projectKey: 'Top2000'
       projectName: 'Top2000'
       projectVersion: '$(fullVersion)'
 
