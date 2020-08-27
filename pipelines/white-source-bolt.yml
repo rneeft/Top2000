@@ -1,0 +1,15 @@
+name: Top 2000 App WhiteSource Bolt Check -
+
+trigger: none 
+pr: none
+
+schedules:
+- cron: "0 0 * * *"
+  displayName: Daily midnight build
+
+pool:
+  name: At Home
+
+steps:
+- task: WhiteSource Bolt@20
+  displayName: 'WhiteSource Bolt'
