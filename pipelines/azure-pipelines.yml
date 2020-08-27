@@ -34,12 +34,10 @@ stages:
           steps:
           - template: release.yml
 
-- stage: RunSpecsOnDev
-  displayName:  Running Specifications
-  dependsOn: DevRelease
-  jobs:
-    - job: DevRelease
-      pool:
-        name: At Home
-      steps:
-      - template: specrun.yml
+  - job: DevSpecifications
+    dependsOn: DevRelease
+    pool:
+      name: At Home
+    steps:
+    - checkout: none
+    - template: specrun.yml

@@ -26,6 +26,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "pipelines", "pipelines", "{
 		pipelines\Deploy-AzureResourceGroup.ps1 = pipelines\Deploy-AzureResourceGroup.ps1
 		pipelines\release.yml = pipelines\release.yml
 		pipelines\version.yml = pipelines\version.yml
+		pipelines\white-source-bolt.yml = pipelines\white-source-bolt.yml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "apps", "apps", "{CAF58F84-2057-44BB-AAA0-D1919125A96C}"
