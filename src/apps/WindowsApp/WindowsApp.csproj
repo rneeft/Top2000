@@ -122,7 +122,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Features\AllEditions.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -152,6 +151,10 @@
     <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Top2000Theme.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -198,7 +201,9 @@
   <ItemGroup>
     <EmbeddedResource Include="appsettings.json" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Features\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\data\Data.ClientDatabase\Data.ClientDatabase.csproj">
       <Project>{AC263E16-2ACF-4377-A6A6-9D34F6240FA3}</Project>
@@ -207,6 +212,10 @@
     <ProjectReference Include="..\..\data\Data.SQLScripts\Data.SQLScripts.csproj">
       <Project>{9CA84A58-FD3C-4ED5-8438-3F41F9AE3214}</Project>
       <Name>Data.SQLScripts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Features\Features.csproj">
+      <Project>{B76E202F-8911-4945-A48B-F5680554AC5F}</Project>
+      <Name>Features</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

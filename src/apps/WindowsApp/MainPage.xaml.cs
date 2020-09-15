@@ -1,10 +1,10 @@
 ﻿using Chroomsoft.Top2000.Data.ClientDatabase;
+using Chroomsoft.Top2000.Features.AllEditions;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.IO;
 using Windows.UI.Xaml.Controls;
-using WindowsApp.Features;
 
 namespace WindowsApp
 {
