@@ -1,0 +1,50 @@
+﻿<Page
+    x:Class="Chroomsoft.Top2000.WindowsApp.Navigation.NavigationRootPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Chroomsoft.Top2000.WindowsApp.Navigation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:winui="using:Microsoft.UI.Xaml.Controls"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+        <Border x:Name="AppTitleBar"
+          Grid.Column="1"
+          IsHitTestVisible="True"
+          VerticalAlignment="Top"
+          Background="Transparent"
+          Height="{Binding ElementName=NavigationViewControl, Path=CompactPaneLength}"
+          Canvas.ZIndex="1">
+            <TextBlock x:Name="AppTitle"
+                 Text="{x:Bind GetAppTitleFromSystem()}"
+                 VerticalAlignment="Center"
+                 Style="{StaticResource CaptionTextBlockStyle}" />
+        </Border>
+
+        <winui:NavigationView
+            x:Name="NavigationViewControl"
+            Canvas.ZIndex="0"
+            PaneDisplayMode="Left"
+            IsTitleBarAutoPaddingEnabled="False"
+            AlwaysShowHeader="False"
+            PaneOpening="NavigationViewControl_PaneOpened"
+            PaneClosing="NavigationViewControl_PaneClosing"
+            DisplayModeChanged="NavigationViewControl_DisplayModeChanged"
+            ItemInvoked="OnNavigationViewItemInvoked"
+            >
+            <winui:NavigationView.MenuItems>
+                <winui:NavigationViewItem Icon="ShowResults" >%Year Overview%</winui:NavigationViewItem>
+                <winui:NavigationViewItem>
+                    <winui:NavigationViewItem.Icon>
+                        <FontIcon Glyph="&#xEC92;" />
+                    </winui:NavigationViewItem.Icon> %View By Date%
+                </winui:NavigationViewItem>
+            </winui:NavigationView.MenuItems>
+
+            <Frame x:Name="rootFrame" Navigated="OnRootFrameNavigated" />
+        </winui:NavigationView>
+    </Grid>
+</Page>
