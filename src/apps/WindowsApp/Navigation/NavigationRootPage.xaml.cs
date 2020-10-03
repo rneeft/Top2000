@@ -100,7 +100,6 @@ namespace Chroomsoft.Top2000.WindowsApp.Navigation
                 AppTitleBar.Margin = new Thickness(sender.CompactPaneLength, currMargin.Top, currMargin.Right, currMargin.Bottom);
             }
             UpdateAppTitleMargin(sender);
-            UpdateHeaderMargin(sender);
         }
 
         private void UpdateAppTitleMargin(Microsoft.UI.Xaml.Controls.NavigationView sender)
@@ -135,21 +134,6 @@ namespace Chroomsoft.Top2000.WindowsApp.Navigation
                     AppTitle.Margin = new Thickness(largeLeftIndent, currMargin.Top, currMargin.Right, currMargin.Bottom);
                 }
             }
-        }
-
-        private void UpdateHeaderMargin(Microsoft.UI.Xaml.Controls.NavigationView sender)
-        {
-            //if (PageHeader != null)
-            //{
-            //    if (sender.DisplayMode == Microsoft.UI.Xaml.Controls.NavigationViewDisplayMode.Minimal)
-            //    {
-            //        Current.PageHeader.HeaderPadding = (Thickness)App.Current.Resources["PageHeaderMinimalPadding"];
-            //    }
-            //    else
-            //    {
-            //        Current.PageHeader.HeaderPadding = (Thickness)App.Current.Resources["PageHeaderDefaultPadding"];
-            //    }
-            //}
         }
 
         private void OnNavigationViewItemInvoked(winui.NavigationView sender, winui.NavigationViewItemInvokedEventArgs args)

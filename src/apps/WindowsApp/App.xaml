@@ -1,8 +1,7 @@
 ﻿<Application
-    x:Class="WindowsApp.App"
+    x:Class="Chroomsoft.Top2000.WindowsApp.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:WindowsApp">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Application.Resources>
         <ResourceDictionary>

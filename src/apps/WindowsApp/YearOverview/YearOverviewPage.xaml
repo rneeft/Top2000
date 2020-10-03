@@ -4,10 +4,19 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Chroomsoft.Top2000.WindowsApp.YearOverview"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:winui="using:Microsoft.UI.Xaml.Controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ae="using:Chroomsoft.Top2000.Features.AllEditions"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid Background="Azure">
+    <Grid Background="Azure" Margin="50">
+        <ComboBox ItemsSource="{x:Bind ViewModel.Editions}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate x:DataType="ae:Edition">
+                    <TextBlock Text="{x:Bind Year}" />
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
     </Grid>
 </Page>

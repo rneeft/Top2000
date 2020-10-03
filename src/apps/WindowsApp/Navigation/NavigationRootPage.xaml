@@ -5,6 +5,7 @@
     xmlns:local="using:Chroomsoft.Top2000.WindowsApp.Navigation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:res="using:Chroomsoft.Top2000.WindowsApp.Common.Globalisation"
     xmlns:winui="using:Microsoft.UI.Xaml.Controls"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -15,7 +16,7 @@
           Grid.Column="1"
           IsHitTestVisible="True"
           VerticalAlignment="Top"
-          Background="Transparent"
+          Background="Red"
           Height="{Binding ElementName=NavigationViewControl, Path=CompactPaneLength}"
           Canvas.ZIndex="1">
             <TextBlock x:Name="AppTitle"
@@ -23,7 +24,6 @@
                  VerticalAlignment="Center"
                  Style="{StaticResource CaptionTextBlockStyle}" />
         </Border>
-
         <winui:NavigationView
             x:Name="NavigationViewControl"
             Canvas.ZIndex="0"
@@ -33,14 +33,14 @@
             PaneOpening="NavigationViewControl_PaneOpened"
             PaneClosing="NavigationViewControl_PaneClosing"
             DisplayModeChanged="NavigationViewControl_DisplayModeChanged"
-            ItemInvoked="OnNavigationViewItemInvoked"
-            >
+            ItemInvoked="OnNavigationViewItemInvoked">
+
             <winui:NavigationView.MenuItems>
-                <winui:NavigationViewItem Icon="ShowResults" >%Year Overview%</winui:NavigationViewItem>
-                <winui:NavigationViewItem>
+                <winui:NavigationViewItem x:Uid="YearsOverview" Icon="ShowResults" >%Year Overview%</winui:NavigationViewItem>
+                <winui:NavigationViewItem  Content="%View By Date%">
                     <winui:NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xEC92;" />
-                    </winui:NavigationViewItem.Icon> %View By Date%
+                    </winui:NavigationViewItem.Icon>
                 </winui:NavigationViewItem>
             </winui:NavigationView.MenuItems>
 

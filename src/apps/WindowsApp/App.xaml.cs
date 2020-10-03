@@ -19,7 +19,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using Xamarin.Essentials;
 
-namespace WindowsApp
+namespace Chroomsoft.Top2000.WindowsApp
 {
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
@@ -52,15 +52,16 @@ namespace WindowsApp
             }
         }
 
+        public static T GetService<T>() => ServiceProvider.GetService<T>();
+
         public static void InitialiseDependencyInjectionFramework()
         {
-            var host = new AppHostBuilder()
+            ServiceProvider = new AppHostBuilder()
                .CreateDefaultAppHostBuilder()
                .ConfigureServices(ConfigureServices)
                .ConfigureLogging(ConfigureLogging)
-               .Build();
-
-            ServiceProvider = host.Services;
+               .Build()
+               .Services;
         }
 
         public static void ConfigureServices(HostBuilderContext context, IServiceCollection services)
@@ -68,6 +69,9 @@ namespace WindowsApp
             services
                 .AddClientDatabase(new DirectoryInfo(FileSystem.AppDataDirectory))
                 .AddMediatR(typeof(AllEditionsRequest).Assembly)
+                .AddSingleton<NavigationRootPage>()
+                .AddSingleton<YearOverviewPage>()
+                .AddTransient<YearOverviewViewModel>()
                 ;
         }
 
@@ -96,7 +100,7 @@ namespace WindowsApp
 
             CoreApplication.GetCurrentView().TitleBar.ExtendViewIntoTitleBar = true;
 
-            await EnsureWindow(args).ConfigureAwait(false);
+            await EnsureWindow(args);
         }
 
         private static void FixSqLiteIssue()
@@ -113,6 +117,14 @@ namespace WindowsApp
                 );
         }
 
+        private static async Task EnsureDatabaseIsCreatedAsync()
+        {
+            var databaseGen = App.ServiceProvider.GetService<IUpdateClientDatabase>();
+            var top2000 = App.ServiceProvider.GetService<Top2000AssemblyDataSource>();
+
+            await databaseGen.RunAsync(top2000);
+        }
+
         private void DebugSettings_BindingFailed(object sender, BindingFailedEventArgs e)
         {
             Debugger.Break();
@@ -121,6 +133,7 @@ namespace WindowsApp
         private async Task EnsureWindow(IActivatedEventArgs args)
         {
             InitialiseDependencyInjectionFramework();
+            await EnsureDatabaseIsCreatedAsync();
 
             var rootFrame = GetRootFrame();
             Type targetPageType = typeof(YearOverviewPage);
@@ -156,7 +169,7 @@ namespace WindowsApp
             Frame rootFrame;
             if (!(Window.Current.Content is NavigationRootPage rootPage))
             {
-                rootPage = new NavigationRootPage();
+                rootPage = serviceProvider.GetRequiredService<NavigationRootPage>();
                 rootFrame = (Frame)rootPage.FindName("rootFrame");
                 if (rootFrame == null)
                 {
