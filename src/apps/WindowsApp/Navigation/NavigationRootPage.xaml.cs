@@ -88,6 +88,29 @@ namespace Chroomsoft.Top2000.WindowsApp.Navigation
             UpdateAppTitleMargin(sender);
         }
 
+        //private void UpdateHeaderMargin(Microsoft.UI.Xaml.Controls.NavigationView sender)
+        //{
+        //    if (PageHeader != null)
+        //    {
+        //        if (sender.DisplayMode == Microsoft.UI.Xaml.Controls.NavigationViewDisplayMode.Minimal)
+        //        {
+        //            Current.PageHeader.HeaderPadding = (Thickness)App.Current.Resources["PageHeaderMinimalPadding"];
+        //        }
+        //        else
+        //        {
+        //            Current.PageHeader.HeaderPadding = (Thickness)App.Current.Resources["PageHeaderDefaultPadding"];
+        //        }
+        //    }
+        //}
+
+        //public PageHeader PageHeader
+        //{
+        //    get
+        //    {
+        //        return UIHelper.GetDescendantsOfType<PageHeader>(NavigationViewControl).FirstOrDefault();
+        //    }
+        //}
+
         private void NavigationViewControl_DisplayModeChanged(winui.NavigationView sender, winui.NavigationViewDisplayModeChangedEventArgs args)
         {
             Thickness currMargin = AppTitleBar.Margin;

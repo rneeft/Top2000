@@ -4,19 +4,72 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Chroomsoft.Top2000.WindowsApp.YearOverview"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:winui="using:Microsoft.UI.Xaml.Controls"
+    xmlns:t2kcontrols="using:Chroomsoft.Top2000.WindowsApp.Common.Controls"
+    xmlns:controls="using:Chroomsoft.Top2000.WindowsApp.Controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ae="using:Chroomsoft.Top2000.Features.AllEditions"
+    xmlns:tr="using:Chroomsoft.Top2000.Features.AllListingsOfEdition"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.Resources>
+        <local:Test x:Key="TestConverter" />
 
-    <Grid Background="Azure" Margin="50">
-        <ComboBox ItemsSource="{x:Bind ViewModel.Editions}">
-            <ComboBox.ItemTemplate>
-                <DataTemplate x:DataType="ae:Edition">
-                    <TextBlock Text="{x:Bind Year}" />
+        <CollectionViewSource x:Key="TracksViewSource"
+                              Source="{x:Bind viewModel.Tracks}"
+                              IsSourceGrouped="True" />
+    </Page.Resources>
+    <Grid>
+        <controls:MasterDetailsGroupedView
+        MasterPaneWidth="400" Grid.Row="1"
+        ItemsSource="{Binding Source={StaticResource TracksViewSource}}">
+
+            <controls:MasterDetailsGroupedView.ItemTemplate>
+                <DataTemplate x:DataType="tr:TrackListing">
+                    <Grid Margin="0,0,0,5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="70" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{x:Bind Position}" Width="70" Style="{StaticResource SubtitleTextBlockStyle}" />
+                        <StackPanel Grid.Column="1">
+                            <TextBlock Text="{x:Bind Title}" TextWrapping="WrapWholeWords"  Style="{StaticResource SubtitleTextBlockStyle}" />
+                            <TextBlock Text="{x:Bind Artist}" Opacity=".5" Style="{StaticResource BodyTextBlockStyle}" />
+                        </StackPanel>
+                    </Grid>
                 </DataTemplate>
-            </ComboBox.ItemTemplate>
-        </ComboBox>
+            </controls:MasterDetailsGroupedView.ItemTemplate>
+
+            <controls:MasterDetailsGroupedView.GroupedItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Group.Key}"
+                           Foreground="{ThemeResource SystemAccentColor}"
+                           FontSize="17" />
+                </DataTemplate>
+            </controls:MasterDetailsGroupedView.GroupedItemTemplate>
+
+            <controls:MasterDetailsGroupedView.MasterHeader>
+                <Grid Margin="0,56,0,0">
+                    <ComboBox x:Name="Editions"
+                              HorizontalAlignment="Stretch" SelectedIndex="0" ItemsSource="{x:Bind ViewModel.Editions}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate x:DataType="ae:Edition">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Text="{x:Bind Year}" Style="{StaticResource SubtitleTextBlockStyle}" />
+                                    <StackPanel  Grid.Row="1" Orientation="Horizontal" Visibility="{Binding IsDropDownOpen, ElementName=Editions, Converter={StaticResource TestConverter}}">
+                                        <TextBlock Text="{x:Bind local:Converters.ToShortLocalTime(StartUtcDateAndTime)}" Opacity=".25" />
+                                        <TextBlock Text="-" Margin="5,0" Opacity=".25" />
+                                        <TextBlock Text="{x:Bind local:Converters.ToShortLocalTime(EndUtcDateAndTime)}" Opacity=".25" />
+                                    </StackPanel>
+                                </Grid>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </Grid>
+            </controls:MasterDetailsGroupedView.MasterHeader>
+        </controls:MasterDetailsGroupedView>
     </Grid>
 </Page>

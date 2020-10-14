@@ -16,7 +16,7 @@
           Grid.Column="1"
           IsHitTestVisible="True"
           VerticalAlignment="Top"
-          Background="Red"
+          Background="Transparent"
           Height="{Binding ElementName=NavigationViewControl, Path=CompactPaneLength}"
           Canvas.ZIndex="1">
             <TextBlock x:Name="AppTitle"
