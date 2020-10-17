@@ -2,6 +2,7 @@
 using Chroomsoft.Top2000.Features.AllEditions;
 using Chroomsoft.Top2000.WindowsApp.Common;
 using Chroomsoft.Top2000.WindowsApp.Navigation;
+using Chroomsoft.Top2000.WindowsApp.TrackInformation;
 using Chroomsoft.Top2000.WindowsApp.YearOverview;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
@@ -71,6 +72,7 @@ namespace Chroomsoft.Top2000.WindowsApp
                 .AddMediatR(typeof(AllEditionsRequest).Assembly)
                 .AddSingleton<NavigationRootPage>()
                 .AddSingleton<YearOverviewPage>()
+                .AddSingleton<TrackInformationViewModel>()
                 .AddTransient<YearOverviewViewModel>()
                 ;
         }
