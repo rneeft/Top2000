@@ -1,6 +1,8 @@
 ﻿using Chroomsoft.Top2000.Data.ClientDatabase;
 using Chroomsoft.Top2000.Features.AllEditions;
 using Chroomsoft.Top2000.WindowsApp.Common;
+using Chroomsoft.Top2000.WindowsApp.ListingDate;
+using Chroomsoft.Top2000.WindowsApp.ListingPosition;
 using Chroomsoft.Top2000.WindowsApp.Navigation;
 using Chroomsoft.Top2000.WindowsApp.TrackInformation;
 using Chroomsoft.Top2000.WindowsApp.YearOverview;
@@ -74,6 +76,8 @@ namespace Chroomsoft.Top2000.WindowsApp
                 .AddSingleton<YearOverviewPage>()
                 .AddSingleton<TrackInformationViewModel>()
                 .AddTransient<YearOverviewViewModel>()
+                .AddTransient<ListingPositionViewModel>()
+                .AddTransient<ListingDateViewModel>()
                 ;
         }
 

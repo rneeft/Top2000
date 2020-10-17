@@ -146,8 +146,17 @@
       <DependentUpon>MasterDetailsGroupedView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Common\Converters.cs" />
+    <Compile Include="Common\ObservableGroupedList.cs" />
+    <Compile Include="Common\ObservableList.cs" />
     <Compile Include="Common\SuspensionManager.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="ListingDate\ListingDatePage.xaml.cs">
+      <DependentUpon>ListingDatePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ListingPosition\ListingPositionPage.xaml.cs">
+      <DependentUpon>ListingPositionPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ListingPosition\ListingPositionViewModel.cs" />
     <Compile Include="Navigation\NavigationOrientationHelper.cs" />
     <Compile Include="Navigation\NavigationRootPage.xaml.cs">
       <DependentUpon>NavigationRootPage.xaml</DependentUpon>
@@ -188,6 +197,14 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="Common\Controls\MasterDetailsGroupedView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ListingDate\ListingDatePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ListingPosition\ListingPositionPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
