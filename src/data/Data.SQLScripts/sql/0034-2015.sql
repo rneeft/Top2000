@@ -1,5 +1,5 @@
-INSERT INTO [Edition] ([Year], [StartUtcDateAndTime], [EndUtcDateAndTime]) VALUES
-(2015, '2015-12-25T08:00:00', '2015-12-31T22:59:59');
+INSERT INTO [Edition] ([Year], [StartUtcDateAndTime], [EndUtcDateAndTime], [HasPlayDateAndTime]) VALUES
+(2015, '2015-12-25T08:00:00', '2015-12-31T23:00:00', 0);
 
 INSERT INTO Track ([Id] ,[Title] ,[Artist],[RecordedYear]) VALUES
   (3908,'About A Girl','Nirvana',1994)

@@ -1,5 +1,5 @@
-﻿INSERT INTO [Edition] ([Year], [StartUtcDateAndTime], [EndUtcDateAndTime]) VALUES
-(2019, '2019-12-25T07:00:00', '2019-12-31T22:59:59');
+﻿INSERT INTO [Edition] ([Year], [StartUtcDateAndTime], [EndUtcDateAndTime], [HasPlayDateAndTime]) VALUES
+(2019, '2019-12-25T07:00:00', '2019-12-31T23:00:00', 1);
 
 INSERT INTO Track ([Id] ,[Title] ,[Artist],[RecordedYear]) VALUES 
  (4444,'Roller Coaster','Danny Vera',2019)
