@@ -1,4 +1,6 @@
-﻿using Chroomsoft.Top2000.Features.AllEditions;
+﻿using Chroomsoft.Top2000.Features.AllListingsOfEdition;
+using Chroomsoft.Top2000.WindowsApp.YearOverview;
+using System.Linq;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
@@ -13,14 +15,40 @@ namespace Chroomsoft.Top2000.WindowsApp.ListingPosition
 
         public ListingPositionViewModel ViewModel { get; set; }
 
+        public NavigationData NavigationData { get; set; }
+
+        public void TrackListingChange()
+        {
+            if (Listing.SelectedItem != null)
+                NavigationData.OnSelectedListing((TrackListing)Listing.SelectedItem);
+        }
+
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
 
-            var edition = (Edition)e.Parameter;
+            NavigationData = (NavigationData)e.Parameter;
 
             ViewModel = App.GetService<ListingPositionViewModel>();
-            await ViewModel.LoadListingForEdition(edition);
+            await ViewModel.LoadListingForEdition(NavigationData.SelectedEdition);
+
+            if (NavigationData.SelectedTrackListing != null)
+            {
+                var listing = ViewModel.Listings
+                    .SelectMany(x => x)
+                    .SingleOrDefault(x => x.TrackId == NavigationData.SelectedTrackListing.TrackId);
+
+                if (listing != null)
+                {
+                    Listing.SelectedIndex = listing.Position - 1;
+                    BringSelectedItemInView();
+                }
+            }
+        }
+
+        private void BringSelectedItemInView()
+        {
+            Listing.ScrollIntoView(Listing.SelectedItem, ScrollIntoViewAlignment.);
         }
     }
 }

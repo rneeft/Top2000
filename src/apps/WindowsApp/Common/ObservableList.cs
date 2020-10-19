@@ -5,11 +5,11 @@ using System.Linq;
 
 namespace Chroomsoft.Top2000.WindowsApp.Common
 {
-    public class ObservableList<TItem> : Collection<TItem>, INotifyCollectionChanged
+    public class ObservableList<TItem> : ObservableCollection<TItem>, INotifyCollectionChanged
     {
         private static readonly NotifyCollectionChangedEventArgs EventArgs = new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset);
 
-        public event NotifyCollectionChangedEventHandler CollectionChanged;
+        // public event NotifyCollectionChangedEventHandler CollectionChanged;
 
         public void AddRange(IEnumerable<TItem> items)
         {
@@ -17,7 +17,7 @@ namespace Chroomsoft.Top2000.WindowsApp.Common
 
             items.ToList().ForEach(Add);
 
-            CollectionChanged?.Invoke(this, EventArgs);
+            //   CollectionChanged?.Invoke(this, EventArgs);
         }
     }
 }

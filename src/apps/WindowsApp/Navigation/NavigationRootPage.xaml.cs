@@ -56,11 +56,6 @@ namespace Chroomsoft.Top2000.WindowsApp.Navigation
             get { return NavigationViewControl; }
         }
 
-        public string GetAppTitleFromSystem()
-        {
-            return Windows.ApplicationModel.Package.Current.DisplayName;
-        }
-
         private void OnPaneDisplayModeChanged(DependencyObject sender, DependencyProperty dp)
         {
             if (sender is winui.NavigationView navigationView)
@@ -76,6 +71,7 @@ namespace Chroomsoft.Top2000.WindowsApp.Navigation
 
         private void OnRootFrameNavigated(object sender, NavigationEventArgs e)
         {
+            var c = e.Content;
         }
 
         private void NavigationViewControl_PaneOpened(winui.NavigationView sender, object args)
@@ -206,6 +202,11 @@ namespace Chroomsoft.Top2000.WindowsApp.Navigation
                 //    }
                 //}
             }
+        }
+
+        private void rootFrame_Navigating(object sender, NavigatingCancelEventArgs e)
+        {
+            
         }
     }
 }

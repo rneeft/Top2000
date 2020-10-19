@@ -5,11 +5,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Chroomsoft.Top2000.WindowsApp.YearOverview"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:controls="using:Chroomsoft.Top2000.WindowsApp.Controls"
-    xmlns:trackInfo="using:Chroomsoft.Top2000.Features.TrackInformation"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ae="using:Chroomsoft.Top2000.Features.AllEditions"
-    xmlns:tr="using:Chroomsoft.Top2000.Features.AllListingsOfEdition"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Page.Resources>
@@ -35,7 +32,7 @@
                 </Grid.RowDefinitions>
 
                 <StackPanel Margin="0,41,0,0">
-                    <ComboBox x:Name="Editions" Margin="20,0"
+                    <ComboBox x:Name="Editions" Margin="10,0"
                       HorizontalAlignment="Stretch"
                       SelectedItem="{x:Bind ViewModel.SelectedEdition, Mode=TwoWay}"
                       ItemsSource="{x:Bind ViewModel.Editions}"
@@ -58,18 +55,22 @@
                         </ComboBox.ItemTemplate>
                     </ComboBox>
                     <Pivot x:Name="GroupByPivot" SelectionChanged="{x:Bind NavigateToListing}">
-                        <PivotItem x:Name="PositionPivot" Header="Position">
-                        </PivotItem>
-                        <PivotItem x:Name="DatePivot" Header="Date">
-                        </PivotItem>
+                        <PivotItem x:Uid="PositionPivot" x:Name="PositionPivot" Header="%Position%" />
+                        <PivotItem x:Uid="DatePivot" x:Name="DatePivot" Header="%Date%" />
                     </Pivot>
                 </StackPanel>
 
-                <Frame x:Name="ListFrame" Grid.Row="1">
-                </Frame>
+                <Frame x:Name="ListFrame" Grid.Row="1" />
             </Grid>
         </Border>
-
-        <Frame x:Name="DetailsGrid" Grid.Column="1" />
+        <!--<Frame x:Name="DetailsGrid" Grid.Column="1" />-->
+        <StackPanel Grid.Column="1">
+            <TextBlock Grid.Column="1" Text="{x:Bind ViewModel.Title, Mode=OneWay}"
+                   Height="30"
+                 FontSize="30" />
+            <TextBlock Text="{x:Bind ViewModel.SelectedTrackListing.Title, Mode=OneWay}"
+      Height="30"
+                 FontSize="30" />
+        </StackPanel>
     </Grid>
 </Page>

@@ -1,9 +1,11 @@
 ﻿using Chroomsoft.Top2000.Features.AllEditions;
+using Chroomsoft.Top2000.Features.AllListingsOfEdition;
 using Chroomsoft.Top2000.Features.TrackInformation;
 using Chroomsoft.Top2000.WindowsApp.Common;
 using Chroomsoft.Top2000.WindowsApp.ListingDate;
 using Chroomsoft.Top2000.WindowsApp.ListingPosition;
 using MediatR;
+using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -67,7 +69,18 @@ namespace Chroomsoft.Top2000.WindowsApp.YearOverview
                 ? typeof(ListingPositionPage)
                 : typeof(ListingDatePage);
 
-            ListFrame.Navigate(type, viewModel.SelectedEdition, new SuppressNavigationTransitionInfo());
+            var navigationParam = new NavigationData
+            {
+                SelectedEdition = ViewModel.SelectedEdition,
+                SelectedTrackListing = ViewModel.SelectedTrackListing,
+                OnSelectedListing = (listing) =>
+                {
+                    ViewModel.SelectedTrackListing = listing;
+                    ViewModel.Title = listing.Title;
+                }
+            };
+
+            ListFrame.Navigate(type, navigationParam, new SuppressNavigationTransitionInfo());
         }
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
@@ -79,6 +92,19 @@ namespace Chroomsoft.Top2000.WindowsApp.YearOverview
             ViewModel ??= App.GetService<YearOverviewViewModel>();
             await ViewModel.LoadAllEditionsAsync();
         }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+        }
+    }
+
+    public class NavigationData
+    {
+        public Edition SelectedEdition { get; set; }
+
+        public TrackListing? SelectedTrackListing { get; set; }
+
+        public Action<TrackListing> OnSelectedListing { get; set; }
     }
 
     public class YearOverviewViewModel : ObservableBase
@@ -98,9 +124,21 @@ namespace Chroomsoft.Top2000.WindowsApp.YearOverview
             set { SetPropertyValue(value); }
         }
 
+        public TrackListing SelectedTrackListing
+        {
+            get { return GetPropertyValue<TrackListing>(); }
+            set { SetPropertyValue(value); }
+        }
+
         public TrackDetails TrackDetails
         {
             get { return GetPropertyValue<TrackDetails>(); }
+            set { SetPropertyValue(value); }
+        }
+
+        public string Title
+        {
+            get { return GetPropertyValue<string>(); }
             set { SetPropertyValue(value); }
         }
 

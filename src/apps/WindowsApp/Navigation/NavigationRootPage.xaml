@@ -5,7 +5,6 @@
     xmlns:local="using:Chroomsoft.Top2000.WindowsApp.Navigation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:res="using:Chroomsoft.Top2000.WindowsApp.Common.Globalisation"
     xmlns:winui="using:Microsoft.UI.Xaml.Controls"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -13,14 +12,14 @@
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
         <Border x:Name="AppTitleBar"
-          Grid.Column="1"
           IsHitTestVisible="True"
           VerticalAlignment="Top"
           Background="Transparent"
+                Margin="25,0"
           Height="{Binding ElementName=NavigationViewControl, Path=CompactPaneLength}"
           Canvas.ZIndex="1">
             <TextBlock x:Name="AppTitle"
-                 Text="{x:Bind GetAppTitleFromSystem()}"
+                 Text="TOP 2000"
                  VerticalAlignment="Center"
                  Style="{StaticResource CaptionTextBlockStyle}" />
         </Border>
@@ -44,7 +43,7 @@
                 </winui:NavigationViewItem>
             </winui:NavigationView.MenuItems>
 
-            <Frame x:Name="rootFrame" Navigated="OnRootFrameNavigated" />
+            <Frame x:Name="rootFrame" Navigated="OnRootFrameNavigated" Navigating="rootFrame_Navigating" />
         </winui:NavigationView>
     </Grid>
 </Page>

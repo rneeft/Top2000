@@ -1,11 +1,8 @@
-﻿using Chroomsoft.Top2000.Features.AllEditions;
-using Chroomsoft.Top2000.Features.AllListingsOfEdition;
-using Chroomsoft.Top2000.WindowsApp.Common;
-using MediatR;
+﻿using Chroomsoft.Top2000.Features.AllListingsOfEdition;
+using Chroomsoft.Top2000.WindowsApp.YearOverview;
 using System;
-using System.Globalization;
 using System.Linq;
-using System.Threading.Tasks;
+using Windows.Foundation;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
@@ -20,49 +17,75 @@ namespace Chroomsoft.Top2000.WindowsApp.ListingDate
 
         public ListingDateViewModel ViewModel { get; set; }
 
+        public NavigationData NavigationData { get; set; }
+
+        public void OnSelectionChanged()
+        {
+            if (Listing.SelectedItem != null)
+                NavigationData.OnSelectedListing((TrackListing)Listing.SelectedItem);
+        }
+
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
 
             ViewModel = App.GetService<ListingDateViewModel>();
 
-            var edition = (Edition)e.Parameter;
-            await ViewModel.LoadListingForEdition(edition);
+            NavigationData = (NavigationData)e.Parameter;
+            await ViewModel.LoadListingForEdition(NavigationData.SelectedEdition);
+
+            if (NavigationData.SelectedTrackListing != null)
+            {
+                var listings = ViewModel.Listings
+                    .SelectMany(x => x);
+
+                var listing = listings
+                    .SingleOrDefault(x => x.TrackId == NavigationData.SelectedTrackListing.TrackId);
+
+                if (listing != null)
+                {
+                    /* Since the list is ordered by position desc
+                     * the 'first' (with Index = 0) item in the list
+                     * is position 2000, to come to the correct index
+                     * we need to substract 2000 from the selected item's position
+                     */
+
+                    var totalCount = listings.Count();
+                    var index = totalCount - listing.Position;
+
+                    if (Listing.Items.Count >= index)
+                    {
+                        Listing.SelectedIndex = index;
+                        BringSelectedItemInView();
+                    }
+                }
+            }
         }
-    }
 
-    public class ListingDateViewModel : ObservableBase
-    {
-        private static IFormatProvider formatProvider = DateTimeFormatInfo.InvariantInfo;
-        private readonly IMediator mediator;
-
-        public ListingDateViewModel(IMediator mediator)
+        private void BringSelectedItemInView()
         {
-            this.mediator = mediator;
+            var selectedTime = ViewModel.SelectedListing.LocalPlayDateAndTime;
+            var item = ViewModel.Listings.First(x => x.Key.Equals(selectedTime));
+
+            Listing.ScrollIntoView(item, ScrollIntoViewAlignment.Leading);
         }
 
-        public ObservableGroupedList<string, TrackListing> Listings { get; } = new ObservableGroupedList<string, TrackListing>();
-
-        public TrackListing SelectedListing
+        private void SemanticZoom_ViewChangeStarted(object sender, SemanticZoomViewChangedEventArgs e)
         {
-            get { return GetPropertyValue<TrackListing>(); }
-            set { SetPropertyValue(value); }
-        }
+            if (e.SourceItem.Item is TrackListing track)
+            {
+                Dates.ScrollIntoView(track.LocalPlayDateAndTime, ScrollIntoViewAlignment.Leading);
+            }
 
-        public static string Date(TrackListing listing)
-        {
-            var hour = listing.LocalPlayDateAndTime.Hour + 1;
-            var date = listing.LocalPlayDateAndTime.ToString("dddd dd MMM H", formatProvider);
-
-            return $"{date}:00 - {hour}:00";
-        }
-
-        public async Task LoadListingForEdition(Edition edition)
-        {
-            var tracks = await mediator.Send(new AllListingsOfEditionRequest(edition.Year));
-            var x = tracks.OrderByDescending(y => y.Position).GroupBy(Date);
-
-            Listings.AddRange(x);
+            if (e.SourceItem.Item is DateTime selectedTime)
+            {
+                var item = ViewModel.Listings.First(x => x.Key.Equals(selectedTime));
+                e.DestinationItem = new SemanticZoomLocation
+                {
+                    Bounds = new Rect(0, 0, 1, 1),
+                    Item = item
+                };
+            }
         }
     }
 }

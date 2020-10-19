@@ -7,6 +7,6 @@ namespace Chroomsoft.Top2000.WindowsApp.YearOverview
     {
         private static IFormatProvider formatProvider = DateTimeFormatInfo.InvariantInfo;
 
-        public static string ToShortLocalTime(DateTime dateTime) => dateTime.ToLocalTime().ToString("d MMM HH:mm", formatProvider);
+        public static string ToShortLocalTime(DateTime dateTime) => dateTime.ToLocalTime().ToString("dd MMM yyyy HH:mm", formatProvider);
     }
 }

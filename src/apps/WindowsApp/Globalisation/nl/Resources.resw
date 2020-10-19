@@ -139,6 +139,9 @@
   <data name="DarkTheme.Content" xml:space="preserve">
     <value>Donker</value>
   </data>
+  <data name="DatePivot.Header" xml:space="preserve">
+    <value>Datum</value>
+  </data>
   <data name="DevelopedBy.Text" xml:space="preserve">
     <value>Ontwikkeld door</value>
   </data>
@@ -174,6 +177,9 @@
   </data>
   <data name="OrVisitFacebook.Text" xml:space="preserve">
     <value>of bezoek ons op Facebook op</value>
+  </data>
+  <data name="PositionPivot.Header" xml:space="preserve">
+    <value>Positie</value>
   </data>
   <data name="RecordHigh.Text" xml:space="preserve">
     <value>Hoogste</value>

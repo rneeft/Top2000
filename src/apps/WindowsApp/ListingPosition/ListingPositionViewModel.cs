@@ -9,11 +9,13 @@ namespace Chroomsoft.Top2000.WindowsApp.ListingPosition
 {
     public class ListingPositionViewModel : ObservableBase
     {
+        public readonly Globals globals;
         private readonly IMediator mediator;
 
-        public ListingPositionViewModel(IMediator mediator)
+        public ListingPositionViewModel(IMediator mediator, Globals globals)
         {
             this.mediator = mediator;
+            this.globals = globals;
         }
 
         public ObservableGroupedList<string, TrackListing> Listings { get; } = new ObservableGroupedList<string, TrackListing>();
@@ -41,8 +43,21 @@ namespace Chroomsoft.Top2000.WindowsApp.ListingPosition
         {
             var tracks = await mediator.Send(new AllListingsOfEditionRequest(edition.Year));
             var x = tracks.GroupBy(Position);
-
             Listings.AddRange(x);
+
+            SelectedListing = null;
+
+            //  TrySelectingGlobalListing();
         }
+
+        //public void TrySelectingGlobalListing()
+        //{
+        //    if (globals.SelectedListing != null)
+        //    {
+        //        SelectedListing = Listings
+        //            .SelectMany(x => x)
+        //            .SingleOrDefault(x => x.TrackId == globals.SelectedListing.TrackId);
+        //    }
+        //}
     }
 }
