@@ -1,9 +1,9 @@
 ﻿using Chroomsoft.Top2000.Features.AllEditions;
 using Chroomsoft.Top2000.Features.AllListingsOfEdition;
-using Chroomsoft.Top2000.Features.TrackInformation;
 using Chroomsoft.Top2000.WindowsApp.Common;
 using Chroomsoft.Top2000.WindowsApp.ListingDate;
 using Chroomsoft.Top2000.WindowsApp.ListingPosition;
+using Chroomsoft.Top2000.WindowsApp.TrackInformation;
 using MediatR;
 using System;
 using System.ComponentModel;
@@ -73,11 +73,7 @@ namespace Chroomsoft.Top2000.WindowsApp.YearOverview
             {
                 SelectedEdition = ViewModel.SelectedEdition,
                 SelectedTrackListing = ViewModel.SelectedTrackListing,
-                OnSelectedListing = (listing) =>
-                {
-                    ViewModel.SelectedTrackListing = listing;
-                    ViewModel.Title = listing.Title;
-                }
+                OnSelectedListing = ShowTrackDetils
             };
 
             ListFrame.Navigate(type, navigationParam, new SuppressNavigationTransitionInfo());
@@ -93,8 +89,10 @@ namespace Chroomsoft.Top2000.WindowsApp.YearOverview
             await ViewModel.LoadAllEditionsAsync();
         }
 
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void ShowTrackDetils(TrackListing listing)
         {
+            ViewModel.SelectedTrackListing = listing;
+            DetailsGrid.Navigate(typeof(TrackInformationPage), listing, new SuppressNavigationTransitionInfo());
         }
     }
 
@@ -127,18 +125,6 @@ namespace Chroomsoft.Top2000.WindowsApp.YearOverview
         public TrackListing SelectedTrackListing
         {
             get { return GetPropertyValue<TrackListing>(); }
-            set { SetPropertyValue(value); }
-        }
-
-        public TrackDetails TrackDetails
-        {
-            get { return GetPropertyValue<TrackDetails>(); }
-            set { SetPropertyValue(value); }
-        }
-
-        public string Title
-        {
-            get { return GetPropertyValue<string>(); }
             set { SetPropertyValue(value); }
         }
 

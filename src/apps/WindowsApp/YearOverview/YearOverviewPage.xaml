@@ -27,7 +27,7 @@
                 </Grid.ColumnDefinitions>
 
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="130" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
@@ -63,14 +63,6 @@
                 <Frame x:Name="ListFrame" Grid.Row="1" />
             </Grid>
         </Border>
-        <!--<Frame x:Name="DetailsGrid" Grid.Column="1" />-->
-        <StackPanel Grid.Column="1">
-            <TextBlock Grid.Column="1" Text="{x:Bind ViewModel.Title, Mode=OneWay}"
-                   Height="30"
-                 FontSize="30" />
-            <TextBlock Text="{x:Bind ViewModel.SelectedTrackListing.Title, Mode=OneWay}"
-      Height="30"
-                 FontSize="30" />
-        </StackPanel>
+        <Frame x:Name="DetailsGrid" Grid.Column="1" Margin="0,41,0,0" />
     </Grid>
 </Page>

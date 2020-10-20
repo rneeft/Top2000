@@ -4,6 +4,7 @@ using Chroomsoft.Top2000.WindowsApp.Common;
 using Chroomsoft.Top2000.WindowsApp.ListingDate;
 using Chroomsoft.Top2000.WindowsApp.ListingPosition;
 using Chroomsoft.Top2000.WindowsApp.Navigation;
+using Chroomsoft.Top2000.WindowsApp.TrackInformation;
 using Chroomsoft.Top2000.WindowsApp.YearOverview;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
@@ -76,6 +77,7 @@ namespace Chroomsoft.Top2000.WindowsApp
                 .AddTransient<YearOverviewViewModel>()
                 .AddTransient<ListingPositionViewModel>()
                 .AddTransient<ListingDateViewModel>()
+                .AddTransient<TrackInformationViewModel>()
                 .AddSingleton<Globals>();
             ;
         }

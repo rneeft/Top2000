@@ -48,7 +48,7 @@ namespace Chroomsoft.Top2000.WindowsApp.ListingPosition
 
         private void BringSelectedItemInView()
         {
-            Listing.ScrollIntoView(Listing.SelectedItem, ScrollIntoViewAlignment.);
+            Listing.ScrollIntoView(Listing.SelectedItem, ScrollIntoViewAlignment.Default);
         }
     }
 }

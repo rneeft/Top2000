@@ -171,6 +171,12 @@
     <Compile Include="Navigation\ViewModelLocator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AppHostBuilder.cs" />
+    <Compile Include="TrackInformation\AppearanceIndicator.xaml.cs">
+      <DependentUpon>AppearanceIndicator.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TrackInformation\TrackInformationPage.xaml.cs">
+      <DependentUpon>TrackInformationPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="YearOverview\Converters.cs" />
     <Compile Include="YearOverview\Test.cs" />
     <Compile Include="YearOverview\YearOverviewPage.xaml.cs">
@@ -214,6 +220,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Common\Assets\Top2000Theme.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TrackInformation\AppearanceIndicator.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TrackInformation\TrackInformationPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
