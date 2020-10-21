@@ -84,9 +84,6 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <Style x:Key="YearTextBlockStyle" TargetType="TextBlock" BasedOn="{StaticResource ArtistTextBlockStyle}">
-            <Setter Property="Margin" Value="5,0,0,0" />
-        </Style>
         <Style x:Key="RoundedHoverButtonTextStyle" TargetType="TextBlock">
             <Setter Property="FontFamily" Value="Segoe MDL2 Assets" />
             <Setter Property="Margin" Value="-1,0,0,0" />
@@ -106,12 +103,10 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <StackPanel>
-            <TextBlock Text="{x:Bind ViewModel.TrackDetails.Title}"  Margin="10,0" Style="{StaticResource SubheaderTextBlockStyle}" />
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{x:Bind ViewModel.TrackDetails.Artist}" Margin="10,0" Style="{StaticResource ArtistTextBlockStyle}" />
-                <TextBlock Text="{x:Bind sys:String.Format('({0})', ViewModel.TrackDetails.RecordedYear)}" Style="{StaticResource YearTextBlockStyle}" />
-            </StackPanel>
+        <StackPanel Margin="10,0">
+            <TextBlock Text="{x:Bind ViewModel.Title, Mode=OneWay}"  Style="{StaticResource SubheaderTextBlockStyle}" />
+            <TextBlock Text="{x:Bind sys:String.Format(x:Null, '{0} ({1})', ViewModel.Artist, ViewModel.RecordedYear), Mode=OneWay}" 
+                       Foreground="{StaticResource SystemAccentColor}" Style="{StaticResource TitleTextBlockStyle}" />
         </StackPanel>
 
         <StackPanel Grid.Row="1">
@@ -145,7 +140,7 @@
                     <ScrollViewer x:Name="PositionScrollViewer" Grid.Column="1"
                           HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Hidden"
                           VerticalScrollBarVisibility="Hidden" VerticalScrollMode="Disabled">
-                        <ListView SelectionMode="None"  ItemsSource="{x:Bind ViewModel.TrackDetails.Listings}">
+                        <ListView SelectionMode="None"  ItemsSource="{x:Bind ViewModel.Listings}">
                             <ListView.ItemTemplate>
                                 <DataTemplate x:DataType="features:ListingInformation">
                                     <Grid Margin="-11,0,0,0" Width="60">
@@ -179,6 +174,10 @@
                                 </DataTemplate>
                             </ListView.ItemTemplate>
 
+                            <ListView.ItemContainerTransitions>
+                                <TransitionCollection />
+                            </ListView.ItemContainerTransitions>
+
                             <ListView.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <ItemsWrapGrid Orientation="Vertical" MaximumRowsOrColumns="1" />
@@ -187,17 +186,95 @@
                         </ListView>
                     </ScrollViewer>
                 </Grid>
-                <controls:WrapPanel Orientation="Horizontal" Margin="29,30,12,0">
+                <controls:WrapPanel Orientation="Horizontal" Margin="10,30,12,0">
 
-                    <local:AppearanceIndicator x:Uid="SinceRelease" Title="%Since 1997%"
-                                           Value="{x:Bind ViewModel.TrackDetails.Appearances}"
-                                           MaxValue="{x:Bind ViewModel.TrackDetails.AppearancesPossible}"
-                                           Margin="0,0,20,0" />
+                    <Grid Margin="0,0,20,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
 
-                    <local:AppearanceIndicator x:Uid="InTop2000" Title="%In Top 2000%"
-                                           Value="{x:Bind ViewModel.TrackDetails.Appearances}"
-                                           MaxValue="{x:Bind ViewModel.TrackDetails.Listings.Count}" />
+                        <TextBlock Text="%Since 1997%" x:Uid="SinceRelease"
+                                   HorizontalAlignment="Center"
+                                   Style="{StaticResource BaseTextBlockStyle}" />
+
+                        <controls:RadialProgressBar
+                                                    Grid.Row="1"
+                                                    Foreground="{StaticResource SystemAccentColor}"
+                                                    Width="100" Height="100" Margin="0,10,0,0"
+                                                    VerticalAlignment="Stretch"
+                                                    HorizontalAlignment="Center"
+                                                    Thickness="10"
+                                                    Minimum="0"
+                                                    Maximum="{x:Bind ViewModel.AppearancesPossible, Mode=OneWay}"
+                                                    Value="{x:Bind ViewModel.Appearances, Mode=OneWay}" />
+
+                        <TextBlock Style="{StaticResource TitleTextBlockStyle}" HorizontalAlignment="Center" VerticalAlignment="Center"  Grid.Row="1"
+                            Text="{x:Bind sys:String.Format(x:Null, '{0}/{1}', ViewModel.Appearances,ViewModel.AppearancesPossible), Mode=OneWay}" />
+                    </Grid>
+
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="%In top 2000%" x:Uid="InTop2000" HorizontalAlignment="Center" Style="{StaticResource BaseTextBlockStyle}" />
+
+                        <controls:RadialProgressBar
+                              Grid.Row="1"
+                              Foreground="{StaticResource SystemAccentColor}"
+                              Width="100" Height="100" Margin="0,10,0,0"
+                              VerticalAlignment="Stretch"
+                              HorizontalAlignment="Center"
+                              Thickness="10"
+                              Minimum="0"
+                              Value="{x:Bind ViewModel.Appearances, Mode=OneWay}"
+                              Maximum="{x:Bind ViewModel.Listings.Count, Mode=OneWay}" />
+
+                        <TextBlock Style="{StaticResource TitleTextBlockStyle}" HorizontalAlignment="Center" VerticalAlignment="Center"  Grid.Row="1"
+      Text="{x:Bind sys:String.Format(x:Null, '{0}/{1}', ViewModel.Appearances, ViewModel.Listings.Count), Mode=OneWay}" />
+                    </Grid>
                 </controls:WrapPanel>
+                <controls:WrapPanel HorizontalAlignment="Left" Margin="12,50,12,0">
+
+                    <StackPanel Margin="0,0,20,30">
+                        <TextBlock x:Uid="RecordHigh" Style="{StaticResource BaseTextBlockStyle}" Opacity=".75" />
+                        <StackPanel Orientation="Horizontal"  Margin="0,5,0,0">
+                            <TextBlock Text="{x:Bind ViewModel.Highest.Position, Mode=OneWay}"  Style="{StaticResource HeaderTextBlockStyle}" VerticalAlignment="Bottom" TextLineBounds="Tight" />
+                            <TextBlock Text="{x:Bind sys:String.Format('({0})', ViewModel.Highest.Edition), Mode=OneWay}"
+                                       Opacity=".75" TextLineBounds="TrimToBaseline" VerticalAlignment="Bottom" />
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel Margin="0,0,20,30">
+                        <TextBlock x:Uid="RecordLow" Style="{StaticResource BaseTextBlockStyle}" Opacity=".75" />
+                        <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                            <TextBlock Text="{x:Bind ViewModel.Lowest.Position, Mode=OneWay}"  Style="{StaticResource HeaderTextBlockStyle}" VerticalAlignment="Bottom" TextLineBounds="Tight" />
+                            <TextBlock Text="{x:Bind sys:String.Format('({0})', ViewModel.Lowest.Edition), Mode=OneWay}"
+                                       Opacity=".75" TextLineBounds="TrimToBaseline" VerticalAlignment="Bottom" />
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel Margin="0,0,20,0">
+                        <TextBlock x:Uid="LastPosition" Style="{StaticResource BaseTextBlockStyle}" Opacity=".75" />
+                        <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                            <TextBlock Text="{x:Bind ViewModel.Latest.Position, Mode=OneWay}"  Style="{StaticResource HeaderTextBlockStyle}" VerticalAlignment="Bottom" TextLineBounds="Tight" />
+                            <TextBlock Text="{x:Bind sys:String.Format('({0})', ViewModel.Latest.Edition), Mode=OneWay}"
+                                       Opacity=".75" TextLineBounds="TrimToBaseline" VerticalAlignment="Bottom" />
+                        </StackPanel>
+                    </StackPanel>
+                </controls:WrapPanel>
+
+                <StackPanel  Margin="10,40,20,30" Visibility="{x:Bind ViewModel.IsLatestListed, Mode=OneWay}">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock x:Uid="LatestPlayTime" Style="{StaticResource BaseTextBlockStyle}" Opacity=".75" />
+                        <TextBlock Text="{x:Bind sys:String.Format('({0})',ViewModel.Latest.Edition), Mode=OneWay}" Style="{StaticResource BaseTextBlockStyle}" Opacity=".75" />
+                    </StackPanel>
+                    <TextBlock Text="{x:Bind local:Converter.MakeDateTimeString(ViewModel.Latest.LocalUtcDateAndTime), Mode=OneWay}"
+                               HorizontalAlignment="Left" 
+                               Style="{StaticResource TitleTextBlockStyle}" VerticalAlignment="Bottom" />
+                </StackPanel>
             </StackPanel>
         </ScrollViewer>
     </Grid>

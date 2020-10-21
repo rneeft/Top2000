@@ -2,6 +2,10 @@
 using Chroomsoft.Top2000.Features.TrackInformation;
 using Chroomsoft.Top2000.WindowsApp.Common;
 using MediatR;
+using MoreLinq;
+using System;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using Windows.UI;
 using Windows.UI.Xaml;
@@ -59,6 +63,27 @@ namespace Chroomsoft.Top2000.WindowsApp.TrackInformation
         {
             return value is null ? "-" : value.ToString();
         }
+
+        public static string MakeDateTimeString(DateTime? value)
+        {
+            if (value is null) return string.Empty;
+
+            var hour = value.Value.Hour;
+            var untilHour = hour + 1;
+            if (untilHour > 24)
+                untilHour = 0;
+
+            var date = value.Value.ToString("dddd d MMMM yyyy");
+
+            return $"{date} {hour}:00 - {untilHour}:00";
+        }
+
+        public static Visibility HideWhenNotListed(ListingStatus status)
+        {
+            return status == ListingStatus.NotListed
+                ? Visibility.Collapsed
+                : Visibility.Visible;
+        }
     }
 
     public sealed partial class TrackInformationPage : Page
@@ -76,6 +101,11 @@ namespace Chroomsoft.Top2000.WindowsApp.TrackInformation
 
         public void OnRightClick()
         {
+        }
+
+        public async Task LoadNewTrackAsync(TrackListing listing)
+        {
+            await ViewModel.LoadTrackDetails(listing);
         }
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)
@@ -98,15 +128,86 @@ namespace Chroomsoft.Top2000.WindowsApp.TrackInformation
             this.mediator = mediator;
         }
 
-        public TrackDetails TrackDetails
+        public string Title
         {
-            get { return GetPropertyValue<TrackDetails>(); }
+            get { return GetPropertyValue<string>(); }
+            set { SetPropertyValue(value); }
+        }
+
+        public string Artist
+        {
+            get { return GetPropertyValue<string>(); }
+            set { SetPropertyValue(value); }
+        }
+
+        public int RecordedYear
+        {
+            get { return GetPropertyValue<int>(); }
+            set { SetPropertyValue(value); }
+        }
+
+        public ObservableCollection<ListingInformation> Listings { get; } = new ObservableCollection<ListingInformation>();
+
+        public ListingInformation Highest
+        {
+            get { return GetPropertyValue<ListingInformation>(); }
+            set { SetPropertyValue(value); }
+        }
+
+        public ListingInformation Lowest
+        {
+            get { return GetPropertyValue<ListingInformation>(); }
+            set { SetPropertyValue(value); }
+        }
+
+        public ListingInformation Latest
+        {
+            get { return GetPropertyValue<ListingInformation>(); }
+            set { SetPropertyValue(value); }
+        }
+
+        public ListingInformation First
+        {
+            get { return GetPropertyValue<ListingInformation>(); }
+            set { SetPropertyValue(value); }
+        }
+
+        public int Appearances
+        {
+            get { return GetPropertyValue<int>(); }
+            set { SetPropertyValue(value); }
+        }
+
+        public bool IsLatestListed
+        {
+            get { return GetPropertyValue<bool>(); }
+            set { SetPropertyValue(value); }
+        }
+
+        public int AppearancesPossible
+        {
+            get { return GetPropertyValue<int>(); }
             set { SetPropertyValue(value); }
         }
 
         public async Task LoadTrackDetails(TrackListing trackListing)
         {
-            TrackDetails = await mediator.Send(new TrackInformationRequest(trackListing.TrackId));
+            var track = await mediator.Send(new TrackInformationRequest(trackListing.TrackId));
+            Title = track.Title;
+            Artist = track.Artist;
+            RecordedYear = track.RecordedYear;
+            Highest = track.Highest;
+            Lowest = track.Lowest;
+            Latest = track.Latest;
+            First = track.First;
+            Appearances = track.Appearances;
+            AppearancesPossible = track.AppearancesPossible;
+            IsLatestListed = track.Listings.First().Status != ListingStatus.NotListed;
+            Listings.Clear();
+            foreach (var item in track.Listings)
+            {
+                Listings.Add(item);
+            }
         }
     }
 }

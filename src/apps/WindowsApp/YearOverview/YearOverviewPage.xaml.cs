@@ -23,6 +23,8 @@ namespace Chroomsoft.Top2000.WindowsApp.YearOverview
 
         private PivotItem datePivot;
 
+        private TrackInformationPage trackInformationPage;
+
         public YearOverviewPage()
         {
             this.InitializeComponent();
@@ -73,7 +75,7 @@ namespace Chroomsoft.Top2000.WindowsApp.YearOverview
             {
                 SelectedEdition = ViewModel.SelectedEdition,
                 SelectedTrackListing = ViewModel.SelectedTrackListing,
-                OnSelectedListing = ShowTrackDetils
+                OnSelectedListingAync = ShowTrackDetilsAsync
             };
 
             ListFrame.Navigate(type, navigationParam, new SuppressNavigationTransitionInfo());
@@ -89,11 +91,32 @@ namespace Chroomsoft.Top2000.WindowsApp.YearOverview
             await ViewModel.LoadAllEditionsAsync();
         }
 
-        private void ShowTrackDetils(TrackListing listing)
+        private async Task ShowTrackDetilsAsync(TrackListing listing)
         {
             ViewModel.SelectedTrackListing = listing;
-            DetailsGrid.Navigate(typeof(TrackInformationPage), listing, new SuppressNavigationTransitionInfo());
+
+            if (trackInformationPage is null)
+            {
+                DetailsGrid.Navigate(typeof(TrackInformationPage), listing, new SuppressNavigationTransitionInfo());
+            }
+            else
+            {
+                await trackInformationPage.LoadNewTrackAsync(listing);
+            }
         }
+
+        private void OnDetailsPageNavigated(object sender, NavigationEventArgs e)
+        {
+            if (e.Content is TrackInformationPage page)
+            {
+                trackInformationPage = page;
+            }
+        }
+    }
+
+    public class DetailNavigationData
+    {
+        public TrackListing SelectedListing { get; set; }
     }
 
     public class NavigationData
@@ -102,7 +125,7 @@ namespace Chroomsoft.Top2000.WindowsApp.YearOverview
 
         public TrackListing? SelectedTrackListing { get; set; }
 
-        public Action<TrackListing> OnSelectedListing { get; set; }
+        public Func<TrackListing, Task> OnSelectedListingAync { get; set; }
     }
 
     public class YearOverviewViewModel : ObservableBase

@@ -156,14 +156,14 @@
   <data name="GroupBy.Text" xml:space="preserve">
     <value>Group by</value>
   </data>
-  <data name="InTop2000.Title" xml:space="preserve">
+  <data name="InTop2000.Text" xml:space="preserve">
     <value>In Top 2000</value>
   </data>
   <data name="LastPosition.Text" xml:space="preserve">
     <value>Last Position</value>
   </data>
   <data name="LatestPlayTime.Text" xml:space="preserve">
-    <value>Latest Top 2000 (List 2018)</value>
+    <value>Latest Top 2000</value>
   </data>
   <data name="LightTheme.Content" xml:space="preserve">
     <value>Light</value>
@@ -210,7 +210,7 @@
   <data name="ShowSelectedTrack.Text" xml:space="preserve">
     <value>Show selected Track</value>
   </data>
-  <data name="SinceRelease.Title" xml:space="preserve">
+  <data name="SinceRelease.Text" xml:space="preserve">
     <value>Since Release</value>
   </data>
   <data name="SortBy.Text" xml:space="preserve">

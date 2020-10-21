@@ -1,6 +1,7 @@
 ﻿using Chroomsoft.Top2000.Features.AllListingsOfEdition;
 using Chroomsoft.Top2000.WindowsApp.YearOverview;
 using System.Linq;
+using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
@@ -17,10 +18,10 @@ namespace Chroomsoft.Top2000.WindowsApp.ListingPosition
 
         public NavigationData NavigationData { get; set; }
 
-        public void TrackListingChange()
+        public async Task TrackListingChange()
         {
             if (Listing.SelectedItem != null)
-                NavigationData.OnSelectedListing((TrackListing)Listing.SelectedItem);
+                await NavigationData.OnSelectedListingAync((TrackListing)Listing.SelectedItem);
         }
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)

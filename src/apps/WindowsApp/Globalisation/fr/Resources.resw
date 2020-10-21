@@ -156,14 +156,14 @@
   <data name="GroupBy.Text" xml:space="preserve">
     <value>Grouper par</value>
   </data>
-  <data name="InTop2000.Title" xml:space="preserve">
+  <data name="InTop2000.Text" xml:space="preserve">
     <value>Dans le Top 2000</value>
   </data>
   <data name="LastPosition.Text" xml:space="preserve">
     <value>Dernière position</value>
   </data>
   <data name="LatestPlayTime.Text" xml:space="preserve">
-    <value>Toute dernière Top 2000 (liste 2018)</value>
+    <value>Toute dernière Top 2000</value>
   </data>
   <data name="LightTheme.Content" xml:space="preserve">
     <value>Lumineux</value>
@@ -210,7 +210,7 @@
   <data name="ShowSelectedTrack.Text" xml:space="preserve">
     <value>Afficher la chanson sélectionnée</value>
   </data>
-  <data name="SinceRelease.Title" xml:space="preserve">
+  <data name="SinceRelease.Text" xml:space="preserve">
     <value>Depuis la sortie</value>
   </data>
   <data name="SortBy.Text" xml:space="preserve">

@@ -2,6 +2,7 @@
 using Chroomsoft.Top2000.WindowsApp.YearOverview;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -19,10 +20,10 @@ namespace Chroomsoft.Top2000.WindowsApp.ListingDate
 
         public NavigationData NavigationData { get; set; }
 
-        public void OnSelectionChanged()
+        public async Task OnSelectionChanged()
         {
             if (Listing.SelectedItem != null)
-                NavigationData.OnSelectedListing((TrackListing)Listing.SelectedItem);
+               await NavigationData.OnSelectedListingAync((TrackListing)Listing.SelectedItem);
         }
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)

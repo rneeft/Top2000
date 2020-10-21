@@ -10,6 +10,15 @@ namespace Chroomsoft.Top2000.Features.TrackInformation
 
         public DateTime? PlayUtcDateAndTime { get; set; }
 
+        public DateTime? LocalUtcDateAndTime
+        {
+            get
+            {
+                if (PlayUtcDateAndTime is null) return null;
+                return DateTime.SpecifyKind((DateTime)PlayUtcDateAndTime, DateTimeKind.Utc).ToLocalTime();
+            }
+        }
+
         public int? Offset { get; set; }
 
         public ListingStatus Status { get; set; }

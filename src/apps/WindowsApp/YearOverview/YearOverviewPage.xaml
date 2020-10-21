@@ -63,6 +63,6 @@
                 <Frame x:Name="ListFrame" Grid.Row="1" />
             </Grid>
         </Border>
-        <Frame x:Name="DetailsGrid" Grid.Column="1" Margin="0,41,0,0" />
+        <Frame x:Name="DetailsGrid" Grid.Column="1" Margin="0,41,0,0" Navigated="OnDetailsPageNavigated" />
     </Grid>
 </Page>
