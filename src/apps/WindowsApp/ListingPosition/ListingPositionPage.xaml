@@ -14,6 +14,8 @@
         <CollectionViewSource x:Key="TracksViewSource"
                               Source="{x:Bind ViewModel.Listings}"
                               IsSourceGrouped="True" />
+
+
     </Page.Resources>
 
     <SemanticZoom Grid.Row="1" IsTabStop="False">
@@ -26,16 +28,18 @@
 
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="feature:TrackListing">
-                        <Grid Margin="0,2,0,3">
+                        <Grid Margin="0,2,0,5">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="65" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
                             <TextBlock Text="{x:Bind Position}" Style="{StaticResource SubtitleTextBlockStyle}" />
-                            <StackPanel Grid.Column="1">
-                                <TextBlock Text="{x:Bind Title}"  TextWrapping="WrapWholeWords"  Style="{StaticResource SubtitleTextBlockStyle}" />
-                                <TextBlock Text="{x:Bind Artist}"  Opacity=".5" Style="{StaticResource BodyTextBlockStyle}" />
-                            </StackPanel>
+                            <TextBlock Text="{x:Bind Title}" Grid.Column="1"  TextWrapping="WrapWholeWords"  Style="{StaticResource SubtitleTextBlockStyle}" />
+                            <TextBlock Text="{x:Bind Artist}" Grid.Column="1" Grid.Row="1" Opacity=".5" Style="{StaticResource BodyTextBlockStyle}" />
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
@@ -44,16 +48,9 @@
                     <GroupStyle>
                         <GroupStyle.HeaderTemplate>
                             <DataTemplate>
-                                <Grid Background="Transparent"
-                                      Padding="10,-1,0,0"
-                                      Height="40"
-                                      HorizontalAlignment="Stretch"
-                                      VerticalAlignment="Stretch">
-                                    <TextBlock TextLineBounds="Tight"
-                                               Text="{Binding Key}"
-                                               VerticalAlignment="Center"
-                                               Foreground="{ThemeResource SystemAccentColor}"
-                                               Style="{StaticResource SubtitleTextBlockStyle}" />
+                                <Grid Style="{StaticResource PositionHeaderTemplateGridStyle}">
+                                    <TextBlock Style="{StaticResource PositionHeaderTeamplateTextStyle}"
+                                               Text="{Binding Key}" />
                                 </Grid>
                             </DataTemplate>
                         </GroupStyle.HeaderTemplate>

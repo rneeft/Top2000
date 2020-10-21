@@ -39,11 +39,13 @@
                                 <ColumnDefinition Width="65" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
                             <TextBlock Text="{x:Bind Position}" Style="{StaticResource SubtitleTextBlockStyle}" />
-                            <StackPanel Grid.Column="1">
-                                <TextBlock Text="{x:Bind Title}"  TextWrapping="WrapWholeWords"  Style="{StaticResource SubtitleTextBlockStyle}" />
-                                <TextBlock Text="{x:Bind Artist}"  Opacity=".5" Style="{StaticResource BodyTextBlockStyle}" />
-                            </StackPanel>
+                            <TextBlock Text="{x:Bind Title}" Grid.Column="1"  TextWrapping="WrapWholeWords"  Style="{StaticResource SubtitleTextBlockStyle}" />
+                            <TextBlock Text="{x:Bind Artist}" Grid.Column="1" Grid.Row="1" Opacity=".5" Style="{StaticResource BodyTextBlockStyle}" />
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
@@ -52,17 +54,12 @@
                     <GroupStyle>
                         <GroupStyle.HeaderTemplate>
                             <DataTemplate>
-                                <Grid Background="Transparent"
-                                      Padding="10,-1,0,0"
-                                      Height="40"
-                                      HorizontalAlignment="Stretch"
-                                      VerticalAlignment="Stretch">
-                                    <TextBlock TextLineBounds="Tight"
-                                                  Text="{Binding Key, Converter={StaticResource DateTimeKeyToString}}"
-                                                  VerticalAlignment="Center"
-                                                  Foreground="{ThemeResource SystemAccentColor}"
-                                                  Style="{StaticResource SubtitleTextBlockStyle}" />
-                                </Grid>
+                                <DataTemplate>
+                                    <Grid Style="{StaticResource PositionHeaderTemplateGridStyle}">
+                                        <TextBlock Style="{StaticResource PositionHeaderTeamplateTextStyle}"
+                                               Text="{Binding Key,Converter={StaticResource DateTimeKeyToString}}" />
+                                    </Grid>
+                                </DataTemplate>
                             </DataTemplate>
                         </GroupStyle.HeaderTemplate>
                     </GroupStyle>
@@ -75,7 +72,6 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding Converter={StaticResource DateTimeToTimeOnlyString}}"
-
                                 FontSize="17" />
                     </DataTemplate>
                 </ListView.ItemTemplate>
