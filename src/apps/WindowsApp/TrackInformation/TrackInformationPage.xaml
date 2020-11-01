@@ -95,18 +95,30 @@
         <Style x:Key="RightRoundedHoverButtonTextStyle" TargetType="TextBlock" BasedOn="{StaticResource RoundedHoverButtonTextStyle}">
             <Setter Property="Text" Value="&#xE017;" />
         </Style>
+        <Style TargetType="controls:RadialProgressBar">
+            <Setter Property="Width" Value="100" />
+            <Setter Property="Height" Value="100" />
+            <Setter Property="VerticalAlignment" Value="Stretch" />
+            <Setter Property="Margin" Value="0,10,0,0" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="Thickness" Value="10" />
+            <Setter Property="Minimum" Value="0" />
+            <Setter Property="Foreground" Value="{StaticResource SystemAccentColor}" />
+        </Style>
     </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="89" />
+            <RowDefinition Height="94" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <StackPanel Margin="10,0">
             <TextBlock Text="{x:Bind ViewModel.Title, Mode=OneWay}"  Style="{StaticResource SubheaderTextBlockStyle}" />
-            <TextBlock Text="{x:Bind sys:String.Format(x:Null, '{0} ({1})', ViewModel.Artist, ViewModel.RecordedYear), Mode=OneWay}" 
-                       Foreground="{StaticResource SystemAccentColor}" Style="{StaticResource TitleTextBlockStyle}" />
+            
+            <TextBlock Text="{x:Bind sys:String.Format(x:Null, '{0} ({1})', ViewModel.Artist, ViewModel.RecordedYear), Mode=OneWay}"
+                       Foreground="{StaticResource SystemAccentColor}" Style="{StaticResource TitleTextBlockStyle}" Margin="0,6,0,0" />
         </StackPanel>
 
         <StackPanel Grid.Row="1">
@@ -128,19 +140,19 @@
                     </Grid.ColumnDefinitions>
 
                     <Button Style="{StaticResource RoundedHoverButtonStyle}" x:Name="GoLeftButton" Grid.Column="0"
-                    IsEnabled="False">
+                    IsEnabled="False" Click="{x:Bind GoLeft}">
                         <TextBlock Style="{StaticResource LeftRoundedHoverButtonTextStyle}" />
                     </Button>
 
                     <Button Style="{StaticResource RoundedHoverButtonStyle}" x:Name="GoRightButton" Grid.Column="3"
-                    Click="{x:Bind OnRightClick}">
+                    Click="{x:Bind GoRight}">
                         <TextBlock  Style="{StaticResource RightRoundedHoverButtonTextStyle}" />
                     </Button>
 
                     <ScrollViewer x:Name="PositionScrollViewer" Grid.Column="1"
                           HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Hidden"
                           VerticalScrollBarVisibility="Hidden" VerticalScrollMode="Disabled">
-                        <ListView SelectionMode="None"  ItemsSource="{x:Bind ViewModel.Listings}">
+                        <ListView x:Name="TrackPositions" SelectionMode="None"  ItemsSource="{x:Bind ViewModel.Listings}">
                             <ListView.ItemTemplate>
                                 <DataTemplate x:DataType="features:ListingInformation">
                                     <Grid Margin="-11,0,0,0" Width="60">
@@ -198,16 +210,9 @@
                                    HorizontalAlignment="Center"
                                    Style="{StaticResource BaseTextBlockStyle}" />
 
-                        <controls:RadialProgressBar
-                                                    Grid.Row="1"
-                                                    Foreground="{StaticResource SystemAccentColor}"
-                                                    Width="100" Height="100" Margin="0,10,0,0"
-                                                    VerticalAlignment="Stretch"
-                                                    HorizontalAlignment="Center"
-                                                    Thickness="10"
-                                                    Minimum="0"
-                                                    Maximum="{x:Bind ViewModel.AppearancesPossible, Mode=OneWay}"
-                                                    Value="{x:Bind ViewModel.Appearances, Mode=OneWay}" />
+                        <controls:RadialProgressBar Grid.Row="1"
+                            Maximum="{x:Bind ViewModel.AppearancesPossible, Mode=OneWay}"
+                            Value="{x:Bind ViewModel.Appearances, Mode=OneWay}" />
 
                         <TextBlock Style="{StaticResource TitleTextBlockStyle}" HorizontalAlignment="Center" VerticalAlignment="Center"  Grid.Row="1"
                             Text="{x:Bind sys:String.Format(x:Null, '{0}/{1}', ViewModel.Appearances,ViewModel.AppearancesPossible), Mode=OneWay}" />
@@ -221,14 +226,7 @@
 
                         <TextBlock Text="%In top 2000%" x:Uid="InTop2000" HorizontalAlignment="Center" Style="{StaticResource BaseTextBlockStyle}" />
 
-                        <controls:RadialProgressBar
-                              Grid.Row="1"
-                              Foreground="{StaticResource SystemAccentColor}"
-                              Width="100" Height="100" Margin="0,10,0,0"
-                              VerticalAlignment="Stretch"
-                              HorizontalAlignment="Center"
-                              Thickness="10"
-                              Minimum="0"
+                        <controls:RadialProgressBar Grid.Row="1"
                               Value="{x:Bind ViewModel.Appearances, Mode=OneWay}"
                               Maximum="{x:Bind ViewModel.Listings.Count, Mode=OneWay}" />
 
@@ -266,16 +264,22 @@
                     </StackPanel>
                 </controls:WrapPanel>
 
-                <StackPanel  Margin="10,40,20,30" Visibility="{x:Bind ViewModel.IsLatestListed, Mode=OneWay}">
+                <StackPanel  Margin="10,20,20,30" Visibility="{x:Bind ViewModel.IsLatestListed, Mode=OneWay}">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock x:Uid="LatestPlayTime" Style="{StaticResource BaseTextBlockStyle}" Opacity=".75" />
                         <TextBlock Text="{x:Bind sys:String.Format('({0})',ViewModel.Latest.Edition), Mode=OneWay}" Style="{StaticResource BaseTextBlockStyle}" Opacity=".75" />
                     </StackPanel>
                     <TextBlock Text="{x:Bind local:Converter.MakeDateTimeString(ViewModel.Latest.LocalUtcDateAndTime), Mode=OneWay}"
-                               HorizontalAlignment="Left" 
+                               HorizontalAlignment="Left"
                                Style="{StaticResource TitleTextBlockStyle}" VerticalAlignment="Bottom" />
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>
+
+        <CommandBar Grid.Row="3">
+            <CommandBar.PrimaryCommands>
+                <AppBarButton x:Name="OpenYoutube" Label="%Youtube%" x:Uid="Youtube" Icon="Video" Click="{x:Bind OpenOnYoutube}" />
+            </CommandBar.PrimaryCommands>
+        </CommandBar>
     </Grid>
 </Page>

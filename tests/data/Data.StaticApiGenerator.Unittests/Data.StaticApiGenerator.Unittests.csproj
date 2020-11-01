@@ -21,4 +21,8 @@
       <ProjectReference Include="..\..\..\src\Data\data.StaticApiGenerator\Data.StaticApiGenerator.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Update="Moq" Version="4.14.7" />
+  </ItemGroup>
+
 </Project>

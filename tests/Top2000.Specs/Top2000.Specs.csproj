@@ -19,9 +19,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.8" />
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.1.8" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.9" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.1.9" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.1" />
     <PackageReference Include="MSTest.TestAdapter" Version="2.1.2" />
     <PackageReference Include="MSTest.TestFramework" Version="2.1.2" />
@@ -29,14 +29,18 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="SpecFlow" Version="3.4.8" />
-    <PackageReference Include="SpecFlow.Tools.MsBuild.Generation" Version="3.4.8" />
+    <PackageReference Include="SpecFlow" Version="3.4.31" />
+    <PackageReference Include="SpecFlow.Tools.MsBuild.Generation" Version="3.4.31" />
     <PackageReference Include="SpecRun.SpecFlow" Version="3.4.19" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\data\Data.ClientDatabase\Data.ClientDatabase.csproj" />
     <ProjectReference Include="..\..\src\Features\Features.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Update="Moq" Version="4.14.7" />
   </ItemGroup>
 
 </Project>

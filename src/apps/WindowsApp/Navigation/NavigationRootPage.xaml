@@ -15,7 +15,7 @@
           IsHitTestVisible="True"
           VerticalAlignment="Top"
           Background="Transparent"
-                Margin="25,0"
+                Margin="50,0,0,0"
           Height="{Binding ElementName=NavigationViewControl, Path=CompactPaneLength}"
           Canvas.ZIndex="1">
             <TextBlock x:Name="AppTitle"
@@ -26,19 +26,14 @@
         <winui:NavigationView
             x:Name="NavigationViewControl"
             Canvas.ZIndex="0"
-            PaneDisplayMode="Left"
+            PaneDisplayMode="LeftCompact"
             IsTitleBarAutoPaddingEnabled="False"
             AlwaysShowHeader="False"
-            PaneOpening="NavigationViewControl_PaneOpened"
-            PaneClosing="NavigationViewControl_PaneClosing"
-            DisplayModeChanged="NavigationViewControl_DisplayModeChanged"
-            ItemInvoked="OnNavigationViewItemInvoked"
-            >
+            ItemInvoked="OnNavigationViewItemInvoked">
 
             <winui:NavigationView.AutoSuggestBox>
                 <AutoSuggestBox QueryIcon="Find" AutomationProperties.Name="Search" />
             </winui:NavigationView.AutoSuggestBox>
-
 
             <winui:NavigationView.MenuItems>
                 <winui:NavigationViewItem x:Uid="YearsOverview" Icon="ShowResults" >%Year Overview%</winui:NavigationViewItem>
