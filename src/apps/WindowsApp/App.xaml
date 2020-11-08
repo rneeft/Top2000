@@ -8,7 +8,6 @@
             <ResourceDictionary.MergedDictionaries>
                 <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
                 <ResourceDictionary Source="Common/Assets/Top2000Theme.xaml" />
-                <ResourceDictionary Source="Common/Controls/MasterDetailsGroupedView" />
             </ResourceDictionary.MergedDictionaries>
 
             <Thickness x:Key="PageHeaderDefaultPadding">12,28,12,0</Thickness>

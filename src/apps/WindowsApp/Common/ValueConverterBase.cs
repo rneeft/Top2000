@@ -13,7 +13,7 @@ namespace Chroomsoft.Top2000.WindowsApp.Common
 
     public abstract class ValueConverterBase<TIn, TOut, TParam> : IValueConverter
     {
-        protected string Language { get; private set; }
+        protected string Language { get; private set; } = "nl";
 
         protected Type TargetType { get; private set; }
 

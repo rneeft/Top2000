@@ -151,6 +151,8 @@
     <Compile Include="Common\ValueConverterBase.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="ListingDate\DateTimeKeyToString.cs" />
+    <Compile Include="ListingDate\DateTimeToDateOnlyString.cs" />
+    <Compile Include="ListingDate\DateTimeToTimeOnlyString.cs" />
     <Compile Include="ListingDate\View.xaml.cs">
       <DependentUpon>View.xaml</DependentUpon>
     </Compile>
