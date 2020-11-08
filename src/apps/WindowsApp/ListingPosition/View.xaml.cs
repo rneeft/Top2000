@@ -7,14 +7,14 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Chroomsoft.Top2000.WindowsApp.ListingPosition
 {
-    public sealed partial class ListingPositionPage : Page
+    public sealed partial class View : Page
     {
-        public ListingPositionPage()
+        public View()
         {
             this.InitializeComponent();
         }
 
-        public ListingPositionViewModel ViewModel { get; set; }
+        public ViewModel ViewModel { get; set; }
 
         public NavigationData NavigationData { get; set; }
 
@@ -30,7 +30,7 @@ namespace Chroomsoft.Top2000.WindowsApp.ListingPosition
 
             NavigationData = (NavigationData)e.Parameter;
 
-            ViewModel = App.GetService<ListingPositionViewModel>();
+            ViewModel = App.GetService<ViewModel>();
             await ViewModel.LoadListingForEdition(NavigationData.SelectedEdition);
 
             if (NavigationData.SelectedTrackListing != null)

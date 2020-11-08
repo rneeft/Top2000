@@ -142,11 +142,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Common\ObservableBase.cs" />
-    <Compile Include="Common\Controls\MasterDetailsGroupedView.xaml.cs">
-      <DependentUpon>MasterDetailsGroupedView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Common\Converters.cs" />
-    <Compile Include="Common\Globals.cs" />
     <Compile Include="Common\NotifiesOnAttribute.cs" />
     <Compile Include="Common\ObservableGroupedList.cs" />
     <Compile Include="Common\ObservableList.cs" />
@@ -155,31 +151,32 @@
     <Compile Include="Common\ValueConverterBase.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="ListingDate\DateTimeKeyToString.cs" />
-    <Compile Include="ListingDate\ListingDatePage.xaml.cs">
-      <DependentUpon>ListingDatePage.xaml</DependentUpon>
+    <Compile Include="ListingDate\View.xaml.cs">
+      <DependentUpon>View.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ListingDate\ListingDateViewModel.cs" />
-    <Compile Include="ListingPosition\ListingPositionPage.xaml.cs">
-      <DependentUpon>ListingPositionPage.xaml</DependentUpon>
+    <Compile Include="ListingDate\ViewModel.cs" />
+    <Compile Include="ListingPosition\View.xaml.cs">
+      <DependentUpon>View.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ListingPosition\ListingPositionViewModel.cs" />
+    <Compile Include="ListingPosition\ViewModel.cs" />
     <Compile Include="Navigation\NavigationOrientationHelper.cs" />
     <Compile Include="Navigation\NavigationRootPage.xaml.cs">
       <DependentUpon>NavigationRootPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Navigation\RootFrameNavigationHelper.cs" />
-    <Compile Include="Navigation\ViewModelLocator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AppHostBuilder.cs" />
     <Compile Include="TrackInformation\Converter.cs" />
-    <Compile Include="TrackInformation\TrackInformationPage.xaml.cs">
-      <DependentUpon>TrackInformationPage.xaml</DependentUpon>
+    <Compile Include="TrackInformation\View.xaml.cs">
+      <DependentUpon>View.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TrackInformation\TrackInformationViewModel.cs" />
+    <Compile Include="TrackInformation\ViewModel.cs" />
     <Compile Include="YearOverview\Converters.cs" />
+    <Compile Include="YearOverview\NavigationData.cs" />
     <Compile Include="YearOverview\Test.cs" />
-    <Compile Include="YearOverview\YearOverviewPage.xaml.cs">
-      <DependentUpon>YearOverviewPage.xaml</DependentUpon>
+    <Compile Include="YearOverview\ViewModel.cs" />
+    <Compile Include="YearOverview\View.xaml.cs">
+      <DependentUpon>View.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -202,15 +199,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Common\Controls\MasterDetailsGroupedView.xaml">
+    <Page Include="ListingDate\View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ListingDate\ListingDatePage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ListingPosition\ListingPositionPage.xaml">
+    <Page Include="ListingPosition\View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -222,11 +215,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="TrackInformation\TrackInformationPage.xaml">
+    <Page Include="TrackInformation\View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="YearOverview\YearOverviewPage.xaml">
+    <Page Include="YearOverview\View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

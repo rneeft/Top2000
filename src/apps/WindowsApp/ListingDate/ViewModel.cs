@@ -8,20 +8,20 @@ using System.Threading.Tasks;
 
 namespace Chroomsoft.Top2000.WindowsApp.ListingDate
 {
-    public class ListingDateViewModel : ObservableBase
+    public class ViewModel : ObservableBase
     {
-        public readonly Globals globals;
         private readonly IMediator mediator;
 
-        public ListingDateViewModel(IMediator mediator, Globals globals)
+        public ViewModel(IMediator mediator)
         {
             this.mediator = mediator;
-            this.globals = globals;
+            this.Listings = new ObservableGroupedList<DateTime, TrackListing>();
+            this.Dates = new ObservableGroupedList<DateTime, DateTime>();
         }
 
-        public ObservableGroupedList<DateTime, TrackListing> Listings { get; } = new ObservableGroupedList<DateTime, TrackListing>();
+        public ObservableGroupedList<DateTime, TrackListing> Listings { get; }
 
-        public ObservableGroupedList<DateTime, DateTime> Dates { get; } = new ObservableGroupedList<DateTime, DateTime>();
+        public ObservableGroupedList<DateTime, DateTime> Dates { get; }
 
         public TrackListing SelectedListing
         {
@@ -29,10 +29,7 @@ namespace Chroomsoft.Top2000.WindowsApp.ListingDate
             set { SetPropertyValue(value); }
         }
 
-        public static DateTime LocalPlayDateAndTime(TrackListing listing)
-        {
-            return listing.LocalPlayDateAndTime;
-        }
+        public static DateTime LocalPlayDateAndTime(TrackListing listing) => listing.LocalPlayDateAndTime;
 
         public async Task LoadListingForEdition(Edition edition)
         {
@@ -49,9 +46,6 @@ namespace Chroomsoft.Top2000.WindowsApp.ListingDate
             Dates.AddRange(dates);
         }
 
-        private DateTime LocalPlayDate(DateTime arg)
-        {
-            return arg.Date;
-        }
+        private DateTime LocalPlayDate(DateTime arg) => arg.Date;
     }
 }

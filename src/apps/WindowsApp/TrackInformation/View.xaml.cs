@@ -7,14 +7,14 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Chroomsoft.Top2000.WindowsApp.TrackInformation
 {
-    public sealed partial class TrackInformationPage : Page
+    public sealed partial class View : Page
     {
-        public TrackInformationPage()
+        public View()
         {
             this.InitializeComponent();
         }
 
-        public TrackInformationViewModel ViewModel { get; set; }
+        public ViewModel ViewModel { get; set; }
 
         public void GoLeft() => ChangeView(-1);
 
@@ -31,7 +31,7 @@ namespace Chroomsoft.Top2000.WindowsApp.TrackInformation
 
             var selectedTrackListing = (TrackListing)e.Parameter;
 
-            ViewModel = App.GetService<TrackInformationViewModel>();
+            ViewModel = App.GetService<ViewModel>();
             await ViewModel.LoadTrackDetails(selectedTrackListing);
         }
 

@@ -5,19 +5,20 @@ using System.Linq;
 
 namespace Chroomsoft.Top2000.WindowsApp.Common
 {
-    public class ObservableList<TItem> : ObservableCollection<TItem>, INotifyCollectionChanged
+    public class ObservableList<TItem> : Collection<TItem>, INotifyCollectionChanged
     {
-        private static readonly NotifyCollectionChangedEventArgs EventArgs = new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset);
+        public event NotifyCollectionChangedEventHandler CollectionChanged;
 
-        // public event NotifyCollectionChangedEventHandler CollectionChanged;
-
+        /// <summary>
+        /// Removed all the items in the list, add the list of items and notify the observers.
+        /// </summary>
+        /// <param name="items">Items to add</param>
         public void AddRange(IEnumerable<TItem> items)
         {
             this.Clear();
-
             items.ToList().ForEach(Add);
 
-            //   CollectionChanged?.Invoke(this, EventArgs);
+            CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
         }
     }
 }

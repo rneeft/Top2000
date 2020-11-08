@@ -1,11 +1,9 @@
-﻿using Chroomsoft.Top2000.Data.ClientDatabase;
+﻿#nullable enable
+
+using Chroomsoft.Top2000.Data.ClientDatabase;
 using Chroomsoft.Top2000.Features.AllEditions;
 using Chroomsoft.Top2000.WindowsApp.Common;
-using Chroomsoft.Top2000.WindowsApp.ListingDate;
-using Chroomsoft.Top2000.WindowsApp.ListingPosition;
 using Chroomsoft.Top2000.WindowsApp.Navigation;
-using Chroomsoft.Top2000.WindowsApp.TrackInformation;
-using Chroomsoft.Top2000.WindowsApp.YearOverview;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -17,6 +15,7 @@ using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Core;
+using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -73,12 +72,11 @@ namespace Chroomsoft.Top2000.WindowsApp
                 .AddClientDatabase(new DirectoryInfo(FileSystem.AppDataDirectory))
                 .AddMediatR(typeof(AllEditionsRequest).Assembly)
                 .AddSingleton<NavigationRootPage>()
-                .AddSingleton<YearOverviewPage>()
-                .AddTransient<YearOverviewViewModel>()
-                .AddTransient<ListingPositionViewModel>()
-                .AddTransient<ListingDateViewModel>()
-                .AddTransient<TrackInformationViewModel>()
-                .AddSingleton<Globals>();
+                .AddSingleton<YearOverview.View>()
+                .AddTransient<YearOverview.ViewModel>()
+                .AddTransient<ListingDate.ViewModel>()
+                .AddTransient<ListingPosition.ViewModel>()
+                .AddTransient<TrackInformation.ViewModel>()
             ;
         }
 
@@ -95,11 +93,11 @@ namespace Chroomsoft.Top2000.WindowsApp
         protected override async void OnLaunched(LaunchActivatedEventArgs args)
         {
 #if DEBUG
-            if (System.Diagnostics.Debugger.IsAttached)
+            if (Debugger.IsAttached)
             {
                 // this.DebugSettings.EnableFrameRateCounter = true;
             }
-            if (System.Diagnostics.Debugger.IsAttached)
+            if (Debugger.IsAttached)
             {
                 this.DebugSettings.BindingFailed += DebugSettings_BindingFailed;
             }
@@ -113,23 +111,16 @@ namespace Chroomsoft.Top2000.WindowsApp
         private static void FixSqLiteIssue()
         {
             SQLitePCL.Batteries.Init();
-            var rc = SQLitePCL.raw.sqlite3_win32_set_directory(
-            1, // data
-            Windows.Storage.ApplicationData.Current.LocalFolder.Path
-            );
-
-            rc = SQLitePCL.raw.sqlite3_win32_set_directory(
-                2, // temp
-                Windows.Storage.ApplicationData.Current.TemporaryFolder.Path
-                );
+            SQLitePCL.raw.sqlite3_win32_set_directory(1, ApplicationData.Current.LocalFolder.Path);
+            SQLitePCL.raw.sqlite3_win32_set_directory(2, ApplicationData.Current.TemporaryFolder.Path);
         }
 
-        private static async Task EnsureDatabaseIsCreatedAsync()
+        private static Task EnsureDatabaseIsCreatedAsync()
         {
-            var databaseGen = App.ServiceProvider.GetService<IUpdateClientDatabase>();
-            var top2000 = App.ServiceProvider.GetService<Top2000AssemblyDataSource>();
+            var databaseGen = GetService<IUpdateClientDatabase>();
+            var top2000 = GetService<Top2000AssemblyDataSource>();
 
-            await databaseGen.RunAsync(top2000);
+            return databaseGen.RunAsync(top2000);
         }
 
         private void DebugSettings_BindingFailed(object sender, BindingFailedEventArgs e)
@@ -143,7 +134,6 @@ namespace Chroomsoft.Top2000.WindowsApp
             await EnsureDatabaseIsCreatedAsync();
 
             var rootFrame = GetRootFrame();
-            Type targetPageType = typeof(YearOverviewPage);
 
             var targetPageArguments = string.Empty;
 
@@ -164,7 +154,7 @@ namespace Chroomsoft.Top2000.WindowsApp
                 targetPageArguments = ((LaunchActivatedEventArgs)args).Arguments;
             }
 
-            rootFrame.Navigate(targetPageType, targetPageArguments);
+            rootFrame.Navigate(typeof(YearOverview.View), targetPageArguments);
             ((Microsoft.UI.Xaml.Controls.NavigationViewItem)(((NavigationRootPage)(Window.Current.Content)).NavigationView.MenuItems[0])).IsSelected = true;
 
             // Ensure the current window is active

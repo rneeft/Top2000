@@ -7,18 +7,17 @@ using System.Threading.Tasks;
 
 namespace Chroomsoft.Top2000.WindowsApp.ListingPosition
 {
-    public class ListingPositionViewModel : ObservableBase
+    public class ViewModel : ObservableBase
     {
-        public readonly Globals globals;
         private readonly IMediator mediator;
 
-        public ListingPositionViewModel(IMediator mediator, Globals globals)
+        public ViewModel(IMediator mediator)
         {
             this.mediator = mediator;
-            this.globals = globals;
+            this.Listings = new ObservableGroupedList<string, TrackListing>();
         }
 
-        public ObservableGroupedList<string, TrackListing> Listings { get; } = new ObservableGroupedList<string, TrackListing>();
+        public ObservableGroupedList<string, TrackListing> Listings { get; }
 
         public TrackListing SelectedListing
         {
@@ -46,18 +45,6 @@ namespace Chroomsoft.Top2000.WindowsApp.ListingPosition
             Listings.AddRange(x);
 
             SelectedListing = null;
-
-            //  TrySelectingGlobalListing();
         }
-
-        //public void TrySelectingGlobalListing()
-        //{
-        //    if (globals.SelectedListing != null)
-        //    {
-        //        SelectedListing = Listings
-        //            .SelectMany(x => x)
-        //            .SingleOrDefault(x => x.TrackId == globals.SelectedListing.TrackId);
-        //    }
-        //}
     }
 }

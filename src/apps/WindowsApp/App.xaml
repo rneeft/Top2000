@@ -167,10 +167,6 @@
                 <Setter Property="ItemContainerTransitions">
                     <Setter.Value>
                         <TransitionCollection />
-
-                        <!--<ContentThemeTransition />
-                            <ReorderThemeTransition />
-                            <EntranceThemeTransition IsStaggeringEnabled="False" />-->
                     </Setter.Value>
                 </Setter>
                 <Setter Property="ItemsPanel">

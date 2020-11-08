@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="Chroomsoft.Top2000.WindowsApp.ListingDate.ListingDatePage"
+    x:Class="Chroomsoft.Top2000.WindowsApp.ListingDate.View"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Chroomsoft.Top2000.WindowsApp.ListingDate"
@@ -54,12 +54,10 @@
                     <GroupStyle>
                         <GroupStyle.HeaderTemplate>
                             <DataTemplate>
-                                <DataTemplate>
-                                    <Grid Style="{StaticResource PositionHeaderTemplateGridStyle}">
-                                        <TextBlock Style="{StaticResource PositionHeaderTeamplateTextStyle}"
+                                <Grid Style="{StaticResource PositionHeaderTemplateGridStyle}">
+                                    <TextBlock Style="{StaticResource PositionHeaderTeamplateTextStyle}"
                                                Text="{Binding Key,Converter={StaticResource DateTimeKeyToString}}" />
-                                    </Grid>
-                                </DataTemplate>
+                                </Grid>
                             </DataTemplate>
                         </GroupStyle.HeaderTemplate>
                     </GroupStyle>
@@ -98,7 +96,7 @@
 
                 <ListView.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <ItemsWrapGrid  Orientation="Horizontal" MaximumRowsOrColumns="3" ItemWidth="120" />
+                        <ItemsWrapGrid Orientation="Horizontal" MaximumRowsOrColumns="3" ItemWidth="120" />
                     </ItemsPanelTemplate>
                 </ListView.ItemsPanel>
             </ListView>

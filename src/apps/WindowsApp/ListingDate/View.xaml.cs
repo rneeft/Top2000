@@ -9,28 +9,28 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Chroomsoft.Top2000.WindowsApp.ListingDate
 {
-    public sealed partial class ListingDatePage : Page
+    public sealed partial class View : Page
     {
-        public ListingDatePage()
+        public View()
         {
             this.InitializeComponent();
         }
 
-        public ListingDateViewModel ViewModel { get; set; }
+        public ViewModel ViewModel { get; set; }
 
         public NavigationData NavigationData { get; set; }
 
         public async Task OnSelectionChanged()
         {
             if (Listing.SelectedItem != null)
-               await NavigationData.OnSelectedListingAync((TrackListing)Listing.SelectedItem);
+                await NavigationData.OnSelectedListingAync((TrackListing)Listing.SelectedItem);
         }
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
 
-            ViewModel = App.GetService<ListingDateViewModel>();
+            ViewModel = App.GetService<ViewModel>();
 
             NavigationData = (NavigationData)e.Parameter;
             await ViewModel.LoadListingForEdition(NavigationData.SelectedEdition);

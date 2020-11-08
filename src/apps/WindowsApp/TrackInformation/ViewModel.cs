@@ -3,19 +3,19 @@ using Chroomsoft.Top2000.Features.TrackInformation;
 using Chroomsoft.Top2000.WindowsApp.Common;
 using MediatR;
 using MoreLinq;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Chroomsoft.Top2000.WindowsApp.TrackInformation
 {
-    public class TrackInformationViewModel : ObservableBase
+    public class ViewModel : ObservableBase
     {
         private readonly IMediator mediator;
 
-        public TrackInformationViewModel(IMediator mediator)
+        public ViewModel(IMediator mediator)
         {
             this.mediator = mediator;
+            this.Listings = new ObservableList<ListingInformation>();
         }
 
         public string Title
@@ -36,7 +36,7 @@ namespace Chroomsoft.Top2000.WindowsApp.TrackInformation
             set { SetPropertyValue(value); }
         }
 
-        public ObservableCollection<ListingInformation> Listings { get; } = new ObservableCollection<ListingInformation>();
+        public ObservableList<ListingInformation> Listings { get; }
 
         public ListingInformation Highest
         {
@@ -83,6 +83,7 @@ namespace Chroomsoft.Top2000.WindowsApp.TrackInformation
         public async Task LoadTrackDetails(TrackListing trackListing)
         {
             var track = await mediator.Send(new TrackInformationRequest(trackListing.TrackId));
+
             Title = track.Title;
             Artist = track.Artist;
             RecordedYear = track.RecordedYear;
@@ -94,10 +95,7 @@ namespace Chroomsoft.Top2000.WindowsApp.TrackInformation
             AppearancesPossible = track.AppearancesPossible;
             IsLatestListed = track.Listings.First().Status != ListingStatus.NotListed;
             Listings.Clear();
-            foreach (var item in track.Listings)
-            {
-                Listings.Add(item);
-            }
+            Listings.AddRange(track.Listings);
         }
     }
 }
