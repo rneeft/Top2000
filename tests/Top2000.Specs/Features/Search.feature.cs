@@ -108,15 +108,15 @@ testRunner.When("searching for Coaster", ((string)(null)), ((TechTalk.SpecFlow.T
                             "Artist",
                             "Recorded Year"});
                 table5.AddRow(new string[] {
-                            "3567",
-                            "Yakety yak",
-                            "Coasters",
-                            "1958"});
-                table5.AddRow(new string[] {
                             "4444",
                             "Roller Coaster",
                             "Danny Vera",
                             "2019"});
+                table5.AddRow(new string[] {
+                            "3567",
+                            "Yakety yak",
+                            "Coasters",
+                            "1958"});
 #line 6
 testRunner.Then("the following tracks are found:", ((string)(null)), table5, "Then ");
 #line hidden
@@ -156,20 +156,30 @@ testRunner.Given("All data scripts", ((string)(null)), ((TechTalk.SpecFlow.Table
 #line 13
 testRunner.When("searching for Soleil", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
+                TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Id",
+                            "Title",
+                            "Artist",
+                            "Recorded Year"});
+                table6.AddRow(new string[] {
+                            "119",
+                            "Alegria",
+                            "Cirque du Soleil",
+                            "1997"});
 #line 14
-testRunner.Then("only the track Alegria by Cirque du Soleil recorded in 1997 is found", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("the following tracks are found:", ((string)(null)), table6, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Track can be searched by their full RecordedYear", SourceLine=15)]
+        [TechTalk.SpecRun.ScenarioAttribute("Track can be searched by their full RecordedYear", SourceLine=17)]
         public virtual void TrackCanBeSearchedByTheirFullRecordedYear()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Track can be searched by their full RecordedYear", null, tagsOfScenario, argumentsOfScenario);
-#line 16
+#line 18
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -189,26 +199,36 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 17
+#line 19
 testRunner.Given("All data scripts", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 18
+#line 20
 testRunner.When("searching for 1954", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 19
-testRunner.Then("only the track White Christmas by Bing Crosby recorded in 1954 is found", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+                TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Id",
+                            "Title",
+                            "Artist",
+                            "Recorded Year"});
+                table7.AddRow(new string[] {
+                            "3468",
+                            "White Christmas",
+                            "Bing Crosby",
+                            "1954"});
+#line 21
+testRunner.Then("the following tracks are found:", ((string)(null)), table7, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Searching track by their RecordedYear are only found by searching the full year", SourceLine=20)]
+        [TechTalk.SpecRun.ScenarioAttribute("Searching track by their RecordedYear are only found by searching the full year", SourceLine=24)]
         public virtual void SearchingTrackByTheirRecordedYearAreOnlyFoundBySearchingTheFullYear()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Searching track by their RecordedYear are only found by searching the full year", null, tagsOfScenario, argumentsOfScenario);
-#line 21
+#line 25
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -228,13 +248,13 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 22
+#line 26
 testRunner.Given("All data scripts", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 23
+#line 27
 testRunner.When("searching for 54", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 24
+#line 28
 testRunner.Then("the track White Christmas is not found", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }

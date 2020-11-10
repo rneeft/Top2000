@@ -1,9 +1,8 @@
 ﻿using Chroomsoft.Top2000.Features.Searching;
 using FluentAssertions;
-using FluentAssertions.Execution;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
-using System.Collections.Immutable;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
@@ -14,13 +13,15 @@ namespace Chroomsoft.Top2000.Specs.Features
     [Binding]
     public class SearchSteps
     {
-        private ImmutableHashSet<Track> result;
+        private ReadOnlyCollection<IGrouping<string, Track>> result;
+        private IGroup grouping = new GroupByNothing();
+        private ISort sorting = new SortByTitle();
 
         [When(@"searching for (.*)")]
         public async Task WhenSearchingFor(string queryString)
         {
             var mediator = App.ServiceProvider.GetService<IMediator>();
-            var request = new SearchTrackRequest(queryString);
+            var request = new SearchTrackRequest(queryString, sorting, grouping);
 
             result = await mediator.Send(request);
         }
@@ -29,27 +30,20 @@ namespace Chroomsoft.Top2000.Specs.Features
         public void ThenTracksAreFoundWithTheFollowingDetails(Table table)
         {
             var expected = table.CreateSet<Track>();
-            result.ToList().Should().BeEquivalentTo(expected);
-        }
+            var actual = result.SelectMany(x => x)
+                .ToList();
 
-        [Then(@"only the track (.*) by (.*) recorded in (.*) is found")]
-        public void ThenOnlyOneTrackIsFound(string title, string artist, int recordedYear)
-        {
-            result.Count.Should().Be(1);
-            var track = result.Single();
-
-            using (new AssertionScope())
-            {
-                track.Title.Should().Be(title);
-                track.Artist.Should().Be(artist);
-                track.RecordedYear.Should().Be(recordedYear);
-            }
+            actual.Should().BeEquivalentTo(expected);
         }
 
         [Then(@"the track (.*) is not found")]
         public void ThenTrackIsNotFound(string title)
         {
-            result.Where(x => x.Title == title).Should().BeEmpty();
+            var actual = result
+                .SelectMany(x => x)
+                .Where(x => x.Title == title);
+
+            actual.Should().BeEmpty();
         }
     }
 }

@@ -36,25 +36,11 @@ namespace Chroomsoft.Top2000.WindowsApp.Searching
         IEnumerable<IGrouping<string, Track>> Group(IEnumerable<Track> tracks);
     }
 
-    public interface ISort
-    {
-        string Strategy { get; }
-
-        IOrderedEnumerable<Track> Sort(IEnumerable<Track> tracks);
-    }
-
-    public class SortByArtist : ISort
-    {
-        public string Strategy => AppResources.Artist;
-
-        public IOrderedEnumerable<Track> Sort(IEnumerable<Track> tracks) => tracks.OrderBy(x => x.Artist);
-    }
-
     public class ViewModel : ObservableBase
     {
         private readonly IMediator mediator;
 
-        public ViewModel(IMediator mediator)
+        public ViewModel(IMediator mediator, IGroup[] groupOptions, ISort[] sortOptions)
         {
             this.mediator = mediator;
         }

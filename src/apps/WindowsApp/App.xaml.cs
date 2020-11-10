@@ -1,10 +1,9 @@
 ﻿#nullable enable
 
 using Chroomsoft.Top2000.Data.ClientDatabase;
-using Chroomsoft.Top2000.Features.AllEditions;
+using Chroomsoft.Top2000.Features;
 using Chroomsoft.Top2000.WindowsApp.Common;
 using Chroomsoft.Top2000.WindowsApp.Navigation;
-using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -70,7 +69,7 @@ namespace Chroomsoft.Top2000.WindowsApp
         {
             services
                 .AddClientDatabase(new DirectoryInfo(FileSystem.AppDataDirectory))
-                .AddMediatR(typeof(AllEditionsRequest).Assembly)
+                .AddFeatures()
                 .AddSingleton<NavigationRootPage>()
                 .AddSingleton<YearOverview.View>()
                 .AddTransient<YearOverview.ViewModel>()
@@ -167,7 +166,7 @@ namespace Chroomsoft.Top2000.WindowsApp
             Frame rootFrame;
             if (!(Window.Current.Content is NavigationRootPage rootPage))
             {
-                rootPage = serviceProvider.GetRequiredService<NavigationRootPage>();
+                rootPage = ServiceProvider.GetRequiredService<NavigationRootPage>();
                 rootFrame = (Frame)rootPage.FindName("rootFrame");
                 if (rootFrame == null)
                 {
