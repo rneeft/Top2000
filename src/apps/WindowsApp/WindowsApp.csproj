@@ -168,6 +168,9 @@
     <Compile Include="Navigation\RootFrameNavigationHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AppHostBuilder.cs" />
+    <Compile Include="Searching\View.xaml.cs">
+      <DependentUpon>View.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TrackInformation\Converter.cs" />
     <Compile Include="TrackInformation\View.xaml.cs">
       <DependentUpon>View.xaml</DependentUpon>
@@ -214,6 +217,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Common\Assets\Top2000Theme.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Searching\View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

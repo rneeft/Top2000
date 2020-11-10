@@ -77,6 +77,7 @@ namespace Chroomsoft.Top2000.WindowsApp
                 .AddTransient<ListingDate.ViewModel>()
                 .AddTransient<ListingPosition.ViewModel>()
                 .AddTransient<TrackInformation.ViewModel>()
+                .AddTransient<Searching.ViewModel>()
             ;
         }
 

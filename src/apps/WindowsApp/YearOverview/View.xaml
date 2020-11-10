@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="Chroomsoft.Top2000.WindowsApp.YearOverview.View"
+    x:Class="Chroomsoft.Top2000.WindowsApp.YearOverview.YearOverviewPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:sys="using:System"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
