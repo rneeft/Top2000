@@ -11,9 +11,9 @@ steps:
       extraProperties: 'sonar.exclusions=**/*.sql'
 
   - task: NuGetToolInstaller@0
-    displayName: 'Use NuGet 5.3.0'
+    displayName: 'Use NuGet 5.8.0'
     inputs:
-      versionSpec: 5.3.0
+      versionSpec: 5.8.0
 
   - task: NuGetCommand@2
     displayName: 'Nuget restore'
