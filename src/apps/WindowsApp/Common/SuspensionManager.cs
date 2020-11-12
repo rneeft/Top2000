@@ -20,6 +20,14 @@ namespace Chroomsoft.Top2000.WindowsApp.Common
             : base("SuspensionManager failed", e)
         {
         }
+
+        public SuspensionManagerException(string message) : base(message)
+        {
+        }
+
+        public SuspensionManagerException(string message, Exception innerException) : base(message, innerException)
+        {
+        }
     }
 
     /// <summary>
@@ -36,10 +44,10 @@ namespace Chroomsoft.Top2000.WindowsApp.Common
         private static Dictionary<string, object> _sessionState = new Dictionary<string, object>();
         private static List<Type> _knownTypes = new List<Type>();
 
-        private static DependencyProperty FrameSessionStateKeyProperty =
+        private static readonly DependencyProperty FrameSessionStateKeyProperty =
                     DependencyProperty.RegisterAttached("_FrameSessionStateKey", typeof(string), typeof(SuspensionManager), null);
 
-        private static DependencyProperty FrameSessionStateProperty =
+        private static readonly DependencyProperty FrameSessionStateProperty =
                     DependencyProperty.RegisterAttached("_FrameSessionState", typeof(Dictionary<string, object>), typeof(SuspensionManager), null);
 
         private static List<WeakReference<Frame>> _registeredFrames = new List<WeakReference<Frame>>();
@@ -92,11 +100,9 @@ namespace Chroomsoft.Top2000.WindowsApp.Common
                 serializer.WriteObject(sessionData, _sessionState);
                 // Get an output stream for the SessionState file and write the state asynchronously
                 StorageFile file = await ApplicationData.Current.LocalFolder.CreateFileAsync(sessionStateFilename, CreationCollisionOption.ReplaceExisting);
-                using (Stream fileStream = await file.OpenStreamForWriteAsync())
-                {
-                    sessionData.Seek(0, SeekOrigin.Begin);
-                    await sessionData.CopyToAsync(fileStream);
-                }
+                using Stream fileStream = await file.OpenStreamForWriteAsync();
+                sessionData.Seek(0, SeekOrigin.Begin);
+                await sessionData.CopyToAsync(fileStream);
             }
             catch (Exception e)
             {

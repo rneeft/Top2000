@@ -192,7 +192,7 @@
   <data name="ResultsFound.Text" xml:space="preserve">
     <value>results found</value>
   </data>
-  <data name="Search.Text" xml:space="preserve">
+  <data name="Search.Content" xml:space="preserve">
     <value>Search</value>
   </data>
   <data name="SearchTop2000.PlaceholderText" xml:space="preserve">

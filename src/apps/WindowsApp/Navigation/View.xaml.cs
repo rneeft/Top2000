@@ -1,4 +1,11 @@
-﻿using System.Diagnostics;
+﻿#nullable enable
+
+using Chroomsoft.Top2000.Features.Searching;
+using Chroomsoft.Top2000.WindowsApp.Common;
+using MediatR;
+using System.Diagnostics;
+using System.Linq;
+using System.Threading.Tasks;
 using Windows.ApplicationModel.Core;
 using Windows.UI;
 using Windows.UI.ViewManagement;
@@ -10,14 +17,15 @@ using winui = Microsoft.UI.Xaml.Controls;
 
 namespace Chroomsoft.Top2000.WindowsApp.Navigation
 {
-    public sealed partial class NavigationRootPage : Page
+    public sealed partial class View : Page
     {
-        public static NavigationRootPage Current;
+        public static View Current;
         public static Frame RootFrame = null;
         private RootFrameNavigationHelper _navHelper;
 
-        public NavigationRootPage()
+        public View()
         {
+            ViewModel = App.GetService<ViewModel>();
             this.InitializeComponent();
 
             // Workaround for VisualState issue that should be fixed
@@ -55,6 +63,8 @@ namespace Chroomsoft.Top2000.WindowsApp.Navigation
         {
             get { return NavigationViewControl; }
         }
+
+        public ViewModel ViewModel { get; }
 
         private void UpdateAppTitle(CoreApplicationViewTitleBar coreTitleBar)
         {
@@ -200,6 +210,59 @@ namespace Chroomsoft.Top2000.WindowsApp.Navigation
 
         private void rootFrame_Navigating(object sender, NavigatingCancelEventArgs e)
         {
+        }
+
+        private void OnSearchQuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
+        {
+            Frame.Navigate(typeof(Searching.View), new SearchNavigationData
+            {
+                QueryText = ViewModel.SeachText,
+                TrackId = ViewModel.SelectedSuggestion?.Id
+            });
+        }
+
+        private void OnSearchSuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
+        {
+            ViewModel.SelectedSuggestion = (Track)args.SelectedItem;
+        }
+    }
+
+    public class SearchNavigationData
+    {
+        public string QueryText { get; set; } = string.Empty;
+
+        public int? TrackId { get; set; }
+    }
+
+    public class ViewModel : ObservableBase
+    {
+        private readonly IMediator mediator;
+
+        public ViewModel(IMediator mediator)
+        {
+            this.mediator = mediator;
+            this.Suggestions = new ObservableList<Track>();
+        }
+
+        public ObservableList<Track> Suggestions { get; }
+
+        public Track? SelectedSuggestion
+        {
+            get { return GetPropertyValue<Track?>(); }
+            set { SetPropertyValue(value); }
+        }
+
+        public string SeachText
+        {
+            get { return GetPropertyValue<string>(); }
+            set { SetPropertyValue(value); }
+        }
+
+        public async Task SearchAsync()
+        {
+            var request = new SearchTrackRequest(SeachText, new SortByTitle(), new GroupByNothing());
+            var result = await mediator.Send(request);
+            Suggestions.AddRange(result.SelectMany(x => x));
         }
     }
 }

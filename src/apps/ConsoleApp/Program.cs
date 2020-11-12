@@ -33,8 +33,8 @@ namespace ConsoleApp
 
             if (!File.Exists(databasePath))
             {
-                var updater = serviceProvider.GetService<IUpdateClientDatabase>();
-                var localSource = serviceProvider.GetService<Top2000AssemblyDataSource>();
+                var updater = serviceProvider.GetRequiredService<IUpdateClientDatabase>();
+                var localSource = serviceProvider.GetRequiredService<Top2000AssemblyDataSource>();
                 await updater.RunAsync(localSource).ConfigureAwait(false);
             }
 

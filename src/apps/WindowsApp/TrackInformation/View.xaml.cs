@@ -11,6 +11,7 @@ namespace Chroomsoft.Top2000.WindowsApp.TrackInformation
     {
         public View()
         {
+            ViewModel = App.GetService<ViewModel>();
             this.InitializeComponent();
         }
 
@@ -31,7 +32,6 @@ namespace Chroomsoft.Top2000.WindowsApp.TrackInformation
 
             var selectedTrackListing = (TrackListing)e.Parameter;
 
-            ViewModel = App.GetService<ViewModel>();
             await ViewModel.LoadTrackDetails(selectedTrackListing);
         }
 

@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Chroomsoft.Top2000.WindowsApp.Searching"
+    xmlns:features="using:Chroomsoft.Top2000.Features.Searching"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:winui="using:Microsoft.UI.Xaml.Controls"
@@ -45,20 +46,23 @@
                         </Grid.RowDefinitions>
 
                         <ComboBox HorizontalAlignment="Stretch" Grid.Row="1"
-                                  SelectedIndex="{Binding Path=Grouping, Converter={StaticResource GroupByConverter}, Mode=TwoWay}">
-                            <ComboBoxItem>
-                                <TextBlock x:Uid="None" Text="%None%" />
-                            </ComboBoxItem>
-                            <ComboBoxItem>
-                                <TextBlock x:Uid="Artist" Text="%Artist%" />
-                            </ComboBoxItem>
+                                  ItemsSource="{x:Bind ViewModel.GroupByOptions}"
+                                  SelectedItem="{x:Bind ViewModel.GroupBy}">
                             <ComboBox.Header>
                                 <TextBlock x:Uid="GroupBy" Text="%Group by%" Style="{StaticResource CaptionTextBlockStyle}" />
                             </ComboBox.Header>
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate x:DataType="local:GroupViewModel">
+                                    <TextBlock Text="{x:Bind Name}" />
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
                         </ComboBox>
 
+                        <TextBlock x:Uid="None" Text="%None%" Visibility="Collapsed" />
+                        <TextBlock x:Uid="Artist" Text="%Artist%" Visibility="Collapsed" />
+
                         <ComboBox HorizontalAlignment="Stretch" Grid.Column="1"
-                          KeyTipHorizontalOffset="1000" Grid.Row="1"  SelectedIndex="{Binding Path=Sorting, Converter={StaticResource SortByIntConverter}, Mode=TwoWay}" Margin="10,0,0,0">
+                          KeyTipHorizontalOffset="1000" Grid.Row="1" Margin="10,0,0,0">
                             <ComboBoxItem>
                                 <TextBlock x:Uid="Year" Text="%Year%" />
                             </ComboBoxItem>
@@ -73,7 +77,6 @@
                             </ComboBox.Header>
                         </ComboBox>
                     </Grid>
-
                 </StackPanel>
             </Grid>
         </Border>

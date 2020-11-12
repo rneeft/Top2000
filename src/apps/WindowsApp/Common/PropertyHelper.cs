@@ -40,14 +40,14 @@ namespace Chroomsoft.Top2000.WindowsApp.Common
             if (propertyBackingDictionary.TryGetValue(propertyName, out object value))
                 return (T)value;
 
-            return default(T);
+            return default;
         }
 
         public bool SetPropertyValue<T>(T newValue, [CallerMemberName] string propertyName = null)
         {
             var set = SetPropertyValueSilent(newValue, propertyName);
             if (set)
-                RaisePropertyChanged(propertyName);
+                InvokePropertyChangedEvent(propertyName);
 
             return set;
         }
@@ -62,7 +62,7 @@ namespace Chroomsoft.Top2000.WindowsApp.Common
             return true;
         }
 
-        protected void RaisePropertyChanged([CallerMemberName] string propertyName = null)
+        protected void InvokePropertyChangedEvent([CallerMemberName] string propertyName = null)
         {
             if (propertyName == null) throw new ArgumentNullException(nameof(propertyName));
 
@@ -70,7 +70,7 @@ namespace Chroomsoft.Top2000.WindowsApp.Common
             {
                 notifyOfPropertyChange(propertyName);
                 foreach (var dependentPropertyName in DependentLookup[propertyName])
-                    RaisePropertyChanged(dependentPropertyName);
+                    InvokePropertyChangedEvent(dependentPropertyName);
             }
         }
     }

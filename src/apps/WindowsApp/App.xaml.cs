@@ -3,7 +3,6 @@
 using Chroomsoft.Top2000.Data.ClientDatabase;
 using Chroomsoft.Top2000.Features;
 using Chroomsoft.Top2000.WindowsApp.Common;
-using Chroomsoft.Top2000.WindowsApp.Navigation;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -53,7 +52,7 @@ namespace Chroomsoft.Top2000.WindowsApp
             }
         }
 
-        public static T GetService<T>() => ServiceProvider.GetService<T>();
+        public static T GetService<T>() where T : notnull => ServiceProvider.GetRequiredService<T>();
 
         public static void InitialiseDependencyInjectionFramework()
         {
@@ -70,8 +69,9 @@ namespace Chroomsoft.Top2000.WindowsApp
             services
                 .AddClientDatabase(new DirectoryInfo(FileSystem.AppDataDirectory))
                 .AddFeatures()
-                .AddSingleton<NavigationRootPage>()
-                .AddSingleton<YearOverview.View>()
+                .AddTransient<Navigation.View>()
+                .AddTransient<Navigation.ViewModel>()
+                .AddTransient<YearOverview.View>()
                 .AddTransient<YearOverview.ViewModel>()
                 .AddTransient<ListingDate.ViewModel>()
                 .AddTransient<ListingPosition.ViewModel>()
@@ -155,7 +155,7 @@ namespace Chroomsoft.Top2000.WindowsApp
             }
 
             rootFrame.Navigate(typeof(YearOverview.View), targetPageArguments);
-            ((Microsoft.UI.Xaml.Controls.NavigationViewItem)(((NavigationRootPage)(Window.Current.Content)).NavigationView.MenuItems[0])).IsSelected = true;
+            ((Microsoft.UI.Xaml.Controls.NavigationViewItem)(((Navigation.View)(Window.Current.Content)).NavigationView.MenuItems[0])).IsSelected = true;
 
             // Ensure the current window is active
             Window.Current.Activate();
@@ -164,9 +164,9 @@ namespace Chroomsoft.Top2000.WindowsApp
         private Frame GetRootFrame()
         {
             Frame rootFrame;
-            if (!(Window.Current.Content is NavigationRootPage rootPage))
+            if (!(Window.Current.Content is Navigation.View rootPage))
             {
-                rootPage = ServiceProvider.GetRequiredService<NavigationRootPage>();
+                rootPage = ServiceProvider.GetRequiredService<Navigation.View>();
                 rootFrame = (Frame)rootPage.FindName("rootFrame");
                 if (rootFrame == null)
                 {

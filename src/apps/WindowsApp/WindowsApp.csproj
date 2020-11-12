@@ -162,12 +162,13 @@
     </Compile>
     <Compile Include="ListingPosition\ViewModel.cs" />
     <Compile Include="Navigation\NavigationOrientationHelper.cs" />
-    <Compile Include="Navigation\NavigationRootPage.xaml.cs">
-      <DependentUpon>NavigationRootPage.xaml</DependentUpon>
+    <Compile Include="Navigation\View.xaml.cs">
+      <DependentUpon>View.xaml</DependentUpon>
     </Compile>
     <Compile Include="Navigation\RootFrameNavigationHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AppHostBuilder.cs" />
+    <Compile Include="Searching\GroupViewModel.cs" />
     <Compile Include="Searching\View.xaml.cs">
       <DependentUpon>View.xaml</DependentUpon>
     </Compile>
@@ -212,7 +213,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Navigation\NavigationRootPage.xaml">
+    <Page Include="Navigation\View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
