@@ -1,5 +1,4 @@
-﻿using Chroomsoft.Top2000.Features.AllListingsOfEdition;
-using Chroomsoft.Top2000.Features.TrackInformation;
+﻿using Chroomsoft.Top2000.Features.TrackInformation;
 using Chroomsoft.Top2000.WindowsApp.Common;
 using MediatR;
 using MoreLinq;
@@ -80,9 +79,9 @@ namespace Chroomsoft.Top2000.WindowsApp.TrackInformation
             set { SetPropertyValue(value); }
         }
 
-        public async Task LoadTrackDetails(TrackListing trackListing)
+        public async Task LoadTrackDetails(int trackId)
         {
-            var track = await mediator.Send(new TrackInformationRequest(trackListing.TrackId));
+            var track = await mediator.Send(new TrackInformationRequest(trackId));
 
             Title = track.Title;
             Artist = track.Artist;

@@ -2,8 +2,6 @@
     x:Class="Chroomsoft.Top2000.WindowsApp.Navigation.View"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Chroomsoft.Top2000.WindowsApp.Navigation"
-    xmlns:search="using:Chroomsoft.Top2000.Features.Searching"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:winui="using:Microsoft.UI.Xaml.Controls"
@@ -32,27 +30,9 @@
             AlwaysShowHeader="False"
             ItemInvoked="OnNavigationViewItemInvoked">
 
-            <winui:NavigationView.AutoSuggestBox>
-                <AutoSuggestBox x:Name="Search" QueryIcon="Find" AutomationProperties.Name="Search"
-                                ItemsSource="{x:Bind ViewModel.Suggestions}"
-                                Text="{x:Bind ViewModel.SeachText, Mode=TwoWay}"
-                                TextChanged="{x:Bind ViewModel.SearchAsync}"
-                                QuerySubmitted="OnSearchQuerySubmitted"
-                                SuggestionChosen="OnSearchSuggestionChosen">
-                    <AutoSuggestBox.ItemTemplate>
-                        <DataTemplate x:DataType="search:Track">
-                            <StackPanel>
-                                <TextBlock Text="{x:Bind Title}" />
-                                <TextBlock Text="{x:Bind Artist}" Opacity="0.5" />
-                            </StackPanel>
-                        </DataTemplate>
-                    </AutoSuggestBox.ItemTemplate>
-                </AutoSuggestBox>
-            </winui:NavigationView.AutoSuggestBox>
-
             <winui:NavigationView.MenuItems>
-                <winui:NavigationViewItem x:Uid="YearsOverview" Icon="ShowResults" >%Year Overview%</winui:NavigationViewItem>
-                <winui:NavigationViewItem x:Uid="Search" Icon="Find">%Search%</winui:NavigationViewItem>
+                <winui:NavigationViewItem x:Name="OverviewItem" x:Uid="YearsOverview" Icon="ShowResults" Content="%Year Overview%" Tag="Overview" />
+                <winui:NavigationViewItem x:Name="SearchItem" x:Uid="Search" Icon="Find" Content="%Search%" Tag="Search" />
             </winui:NavigationView.MenuItems>
             <Frame x:Name="rootFrame" Navigated="OnRootFrameNavigated" Navigating="rootFrame_Navigating" />
         </winui:NavigationView>

@@ -1,11 +1,8 @@
 ﻿#nullable enable
 
-using Chroomsoft.Top2000.Features.Searching;
 using Chroomsoft.Top2000.WindowsApp.Common;
 using MediatR;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using Windows.ApplicationModel.Core;
 using Windows.UI;
 using Windows.UI.ViewManagement;
@@ -177,7 +174,18 @@ namespace Chroomsoft.Top2000.WindowsApp.Navigation
             }
             else
             {
-                //var invokedItem = args.InvokedItemContainer;
+                var invokedItem = args.InvokedItemContainer;
+
+                if (invokedItem == OverviewItem)
+                {
+                    rootFrame.Navigate(typeof(YearOverview.View));
+                }
+
+                if (invokedItem == SearchItem)
+                {
+                    rootFrame.Navigate(typeof(Searching.View));
+                }
+
                 //if (invokedItem == _allControlsMenuItem)
                 //{
                 //    if (rootFrame.CurrentSourcePageType != typeof(AllControlsPage))
@@ -211,27 +219,6 @@ namespace Chroomsoft.Top2000.WindowsApp.Navigation
         private void rootFrame_Navigating(object sender, NavigatingCancelEventArgs e)
         {
         }
-
-        private void OnSearchQuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
-        {
-            Frame.Navigate(typeof(Searching.View), new SearchNavigationData
-            {
-                QueryText = ViewModel.SeachText,
-                TrackId = ViewModel.SelectedSuggestion?.Id
-            });
-        }
-
-        private void OnSearchSuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
-        {
-            ViewModel.SelectedSuggestion = (Track)args.SelectedItem;
-        }
-    }
-
-    public class SearchNavigationData
-    {
-        public string QueryText { get; set; } = string.Empty;
-
-        public int? TrackId { get; set; }
     }
 
     public class ViewModel : ObservableBase
@@ -241,28 +228,6 @@ namespace Chroomsoft.Top2000.WindowsApp.Navigation
         public ViewModel(IMediator mediator)
         {
             this.mediator = mediator;
-            this.Suggestions = new ObservableList<Track>();
-        }
-
-        public ObservableList<Track> Suggestions { get; }
-
-        public Track? SelectedSuggestion
-        {
-            get { return GetPropertyValue<Track?>(); }
-            set { SetPropertyValue(value); }
-        }
-
-        public string SeachText
-        {
-            get { return GetPropertyValue<string>(); }
-            set { SetPropertyValue(value); }
-        }
-
-        public async Task SearchAsync()
-        {
-            var request = new SearchTrackRequest(SeachText, new SortByTitle(), new GroupByNothing());
-            var result = await mediator.Send(request);
-            Suggestions.AddRange(result.SelectMany(x => x));
         }
     }
 }

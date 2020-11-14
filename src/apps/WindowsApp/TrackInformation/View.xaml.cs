@@ -1,5 +1,4 @@
-﻿using Chroomsoft.Top2000.Features.AllListingsOfEdition;
-using System;
+﻿using System;
 using System.Threading.Tasks;
 using Windows.System;
 using Windows.UI.Xaml.Controls;
@@ -21,18 +20,18 @@ namespace Chroomsoft.Top2000.WindowsApp.TrackInformation
 
         public void GoRight() => ChangeView(1);
 
-        public async Task LoadNewTrackAsync(TrackListing listing)
+        public async Task LoadNewTrackAsync(int trackId)
         {
-            await ViewModel.LoadTrackDetails(listing);
+            await ViewModel.LoadTrackDetails(trackId);
         }
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
 
-            var selectedTrackListing = (TrackListing)e.Parameter;
+            var trackId = (int)e.Parameter;
 
-            await ViewModel.LoadTrackDetails(selectedTrackListing);
+            await ViewModel.LoadTrackDetails(trackId);
         }
 
         private void ChangeView(int x)

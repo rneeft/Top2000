@@ -1,13 +1,20 @@
-﻿using Chroomsoft.Top2000.Features.Searching;
+﻿#nullable enable
+
+using Chroomsoft.Top2000.Features.Searching;
 using Chroomsoft.Top2000.WindowsApp.Common;
 using MediatR;
+using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 
 namespace Chroomsoft.Top2000.WindowsApp.Searching
 {
-    public sealed partial class View : Page, IGroupNameProvider, ISortNameProvider
+    public sealed partial class View : Page, ISortGroupNameProvider
     {
         public View()
         {
@@ -17,40 +24,87 @@ namespace Chroomsoft.Top2000.WindowsApp.Searching
 
         public ViewModel ViewModel { get; }
 
-        public string GroupByName(IGroup group)
+        public string GetNameForGroup(IGroup group)
         {
-            throw new System.NotImplementedException();
+            return GetNameForGroupOrSortBy(group)
+                ?? throw new NotImplementedException($"Group '{group.GetType()}' was not defined yet.");
         }
 
-        public string SortByName(ISort sort)
+        public string GetNameForSort(ISort sort)
         {
-            throw new System.NotImplementedException();
+            return GetNameForGroupOrSortBy(sort)
+                ?? throw new NotImplementedException($"Display text for sort option '{sort.GetType()}' was not defined.");
+        }
+
+        public async Task OpenTrackDetailsAsync()
+        {
+            if (ViewModel.SelectedTrack is null) return;
+
+            if (DetailsGrid.Content is TrackInformation.View view)
+            {
+                await view.LoadNewTrackAsync(ViewModel.SelectedTrack.Id);
+            }
+            else
+            {
+                DetailsGrid.Navigate(typeof(TrackInformation.View), ViewModel.SelectedTrack.Id, new SuppressNavigationTransitionInfo());
+            }
+        }
+
+        public Visibility ShowWhenGrouped(GroupViewModel group)
+        {
+            return group.Value is GroupByNothing
+                ? Visibility.Collapsed
+                : Visibility.Visible;
+        }
+
+        public Visibility HideWhenGrouped(GroupViewModel group)
+        {
+            return group.Value is GroupByNothing
+                            ? Visibility.Visible
+                            : Visibility.Collapsed;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
+            ViewModel.OnLoad(this);
+        }
+
+        private string? GetNameForGroupOrSortBy(object item)
+        {
+            switch (item)
+            {
+                case GroupByNothing _: return None.Text;
+                case SortByArtist _:
+                case GroupByArtist _: return Artist.Text;
+                case SortByRecordedYear _:
+                case GroupByRecordedYear _: return Year.Text;
+                case SortByTitle _: return Title.Text;
+                default:
+                    return null;
+            }
         }
 
         private void OnDetailsPageNavigated(object sender, NavigationEventArgs e)
         {
-            ViewModel.OnLoad(this, this);
         }
     }
 
     public class ViewModel : ObservableBase
     {
         private readonly IMediator mediator;
-        private readonly IGroup[] groupOptions;
-        private readonly ISort[] sortOptions;
+        private readonly IEnumerable<IGroup> groupOptions;
+        private readonly IEnumerable<ISort> sortOptions;
 
-        public ViewModel(IMediator mediator, IGroup[] groupOptions, ISort[] sortOptions)
+        public ViewModel(IMediator mediator, IEnumerable<IGroup> groupOptions, IEnumerable<ISort> sortOptions)
         {
             this.mediator = mediator;
             this.groupOptions = groupOptions;
             this.sortOptions = sortOptions;
             this.GroupByOptions = new ObservableList<GroupViewModel>();
             this.SortByOptions = new ObservableList<SortViewModel>();
+            this.Results = new ObservableGroupedList<string, Track>();
+            this.ResultsFlat = new ObservableList<Track>();
         }
 
         public string QueryText
@@ -71,43 +125,61 @@ namespace Chroomsoft.Top2000.WindowsApp.Searching
             set { SetPropertyValue(value); }
         }
 
+        public bool IsGrouped
+        {
+            get { return GetPropertyValue<bool>(); }
+            set { SetPropertyValue(value); }
+        }
+
+        public Track? SelectedTrack
+        {
+            get { return GetPropertyValue<Track?>(); }
+            set { SetPropertyValue(value); }
+        }
+
+        public string ResultsCount
+        {
+            get { return GetPropertyValue<string>(); }
+            set { SetPropertyValue(value); }
+        }
+
         public ObservableList<GroupViewModel> GroupByOptions { get; }
 
         public ObservableList<SortViewModel> SortByOptions { get; }
 
-        public void OnLoad(IGroupNameProvider groupNameProvider, ISortNameProvider sortNameProvider)
+        public ObservableGroupedList<string, Track> Results { get; }
+
+        public ObservableList<Track> ResultsFlat { get; }
+
+        public void OnLoad(ISortGroupNameProvider nameProvider)
         {
-            var groupVms = groupOptions.Select(x => new GroupViewModel
-            {
-                Group = x,
-                Name = groupNameProvider.GroupByName(x)
-            });
-
-            var sortVms = sortOptions.Select(x => new SortViewModel
-            {
-                Sort = x,
-                Name = sortNameProvider.SortByName(x)
-            });
-
-            GroupByOptions.AddRange(groupVms);
-            SortByOptions.AddRange(sortVms);
+            GroupByOptions.AddRange(groupOptions.Select(x => new GroupViewModel(x, nameProvider.GetNameForGroup(x))));
+            SortByOptions.AddRange(sortOptions.Select(x => new SortViewModel(x, nameProvider.GetNameForSort(x))));
+            GroupBy = GroupByOptions.First();
+            SortBy = SortByOptions.First();
         }
-    }
 
-    public interface IGroupNameProvider
-    {
-        string GroupByName(IGroup group);
-    }
+        public async Task ExceuteSearchAsync()
+        {
+            var request = new SearchTrackRequest(QueryText, SortBy.Value, GroupBy.Value);
+            var result = await mediator.Send(request);
 
-    public interface ISortNameProvider
-    {
-        string SortByName(ISort sort);
-    }
+            Results.AddRange(result);
+            ResultsFlat.AddRange(Results.SelectMany(x => x));
 
-    public class SortViewModel
-    {
-        public ISort Sort { get; set; }
+            ResultsCount = ResultsFlat.Count > 99 ? "100+" : "" + ResultsFlat.Count;
+        }
 
-        public string Name { get; set; } = "TILT";
+        public void ReSortGroup()
+        {
+            var resultFlat = Results.SelectMany(x => x).ToList();
+            var sorted = SortBy.Value.Sort(resultFlat);
+            ResultsFlat.AddRange(sorted);
+
+            var groupedAndSorted = GroupBy.Value.Group(sorted);
+            Results.AddRange(groupedAndSorted);
+
+            IsGrouped = !(GroupBy.Value is GroupByNothing);
+        }
     }
 }

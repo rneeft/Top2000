@@ -79,11 +79,11 @@ namespace Chroomsoft.Top2000.WindowsApp.YearOverview
 
             if (trackInformationPage is null)
             {
-                DetailsGrid.Navigate(typeof(TrackInformation.View), listing, new SuppressNavigationTransitionInfo());
+                DetailsGrid.Navigate(typeof(TrackInformation.View), listing.TrackId, new SuppressNavigationTransitionInfo());
             }
             else
             {
-                await trackInformationPage.LoadNewTrackAsync(listing);
+                await trackInformationPage.LoadNewTrackAsync(listing.TrackId);
             }
         }
 

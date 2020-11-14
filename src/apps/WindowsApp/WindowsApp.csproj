@@ -169,6 +169,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AppHostBuilder.cs" />
     <Compile Include="Searching\GroupViewModel.cs" />
+    <Compile Include="Searching\ISortGroupNameProvider.cs" />
+    <Compile Include="Searching\SortViewModel.cs" />
     <Compile Include="Searching\View.xaml.cs">
       <DependentUpon>View.xaml</DependentUpon>
     </Compile>
