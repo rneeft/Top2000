@@ -26,3 +26,8 @@ Scenario: Searching track by their RecordedYear are only found by searching the 
 Given All data scripts
 When searching for 54
 Then the track White Christmas is not found
+
+Scenario: Searching will have a result cap of 100
+Given All data scripts
+When searching for a
+Then the results contain 100 items

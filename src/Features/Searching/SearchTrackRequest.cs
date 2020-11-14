@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using SQLite;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
@@ -42,7 +41,8 @@ namespace Chroomsoft.Top2000.Features.Searching
             {
                 var sql = "SELECT Id, Title, Artist, RecordedYear " +
                     "FROM Track " +
-                    "WHERE RecordedYear = ?";
+                    "WHERE RecordedYear = ?" +
+                    "LIMIT 100";
 
                 results = await connection.QueryAsync<Track>(sql, year).ConfigureAwait(false);
             }
@@ -50,7 +50,8 @@ namespace Chroomsoft.Top2000.Features.Searching
             {
                 var sql = "SELECT Id, Title, Artist, RecordedYear " +
                     "FROM Track " +
-                    "WHERE (Title LIKE ?) OR (Artist LIKE ?)";
+                    "WHERE (Title LIKE ?) OR (Artist LIKE ?)" +
+                    "LIMIT 100";
 
                 results = await connection.QueryAsync<Track>(sql, $"%{request.QueryString}%", $"%{request.QueryString}%").ConfigureAwait(false);
             }

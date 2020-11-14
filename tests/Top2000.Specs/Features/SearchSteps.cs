@@ -45,5 +45,15 @@ namespace Chroomsoft.Top2000.Specs.Features
 
             actual.Should().BeEmpty();
         }
+
+        [Then(@"the results contain (.*) items")]
+        public void ThenTheResultsContainItems(int count)
+        {
+            var actual = result
+                .SelectMany(x => x);
+
+            actual.Should().NotBeEmpty()
+                .And.HaveCount(count);
+        }
     }
 }
