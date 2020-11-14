@@ -185,34 +185,6 @@ namespace Chroomsoft.Top2000.WindowsApp.Navigation
                 {
                     rootFrame.Navigate(typeof(Searching.View));
                 }
-
-                //if (invokedItem == _allControlsMenuItem)
-                //{
-                //    if (rootFrame.CurrentSourcePageType != typeof(AllControlsPage))
-                //    {
-                //        rootFrame.Navigate(typeof(AllControlsPage));
-                //    }
-                //}
-                //else if (invokedItem == _newControlsMenuItem)
-                //{
-                //    if (rootFrame.CurrentSourcePageType != typeof(NewControlsPage))
-                //    {
-                //        rootFrame.Navigate(typeof(NewControlsPage));
-                //    }
-                //}
-                //else
-                //{
-                //    if (invokedItem.DataContext is ControlInfoDataGroup)
-                //    {
-                //        var itemId = ((ControlInfoDataGroup)invokedItem.DataContext).UniqueId;
-                //        rootFrame.Navigate(typeof(SectionPage), itemId);
-                //    }
-                //    else if (invokedItem.DataContext is ControlInfoDataItem)
-                //    {
-                //        var item = (ControlInfoDataItem)invokedItem.DataContext;
-                //        rootFrame.Navigate(typeof(ItemPage), item.UniqueId);
-                //    }
-                //}
             }
         }
 
