@@ -10,12 +10,12 @@ namespace Chroomsoft.Top2000.Features
         {
             return services
                 .AddMediatR(typeof(ConfigureServices).Assembly)
-                .AddSingleton<SortByArtist>()
-                .AddSingleton<SortByTitle>()
-                .AddSingleton<SortByRecordedYear>()
-                .AddSingleton<GroupByArtist>()
-                .AddSingleton<GroupByNothing>()
-                .AddSingleton<GroupByRecordedYear>()
+                .AddSingleton<ISort, SortByTitle>()
+                .AddSingleton<ISort, SortByArtist>()
+                .AddSingleton<ISort, SortByRecordedYear>()
+                .AddSingleton<IGroup, GroupByNothing>()
+                .AddSingleton<IGroup, GroupByArtist>()
+                .AddSingleton<IGroup, GroupByRecordedYear>()
                 ;
         }
     }

@@ -18,7 +18,7 @@
 
     </Page.Resources>
 
-    <SemanticZoom Grid.Row="1" IsTabStop="False">
+    <SemanticZoom IsTabStop="False">
         <SemanticZoom.ZoomedInView>
             <ListView x:Name="Listing"
                 Style="{StaticResource ListViewStyle1}"

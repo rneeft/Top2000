@@ -4,8 +4,14 @@ namespace Chroomsoft.Top2000.WindowsApp.Searching
 {
     public class GroupViewModel
     {
-        public IGroup Group { get; set; }
+        public GroupViewModel(IGroup value, string name)
+        {
+            this.Value = value;
+            this.Name = name;
+        }
 
-        public string Name { get; set; } = "TILT";
+        public IGroup Value { get; }
+
+        public string Name { get; }
     }
 }

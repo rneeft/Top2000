@@ -190,7 +190,7 @@
     <value>Aucun résultat trouvé</value>
   </data>
   <data name="ResultsFound.Text" xml:space="preserve">
-    <value>résultats trouvés</value>
+    <value>Résultats trouvés: </value>
   </data>
   <data name="Search.Content" xml:space="preserve">
     <value>Recherche</value>

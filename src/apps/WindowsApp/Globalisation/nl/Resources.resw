@@ -191,7 +191,7 @@
     <value>Geen resultaten gevonden</value>
   </data>
   <data name="ResultsFound.Text" xml:space="preserve">
-    <value>resultaten gevonden</value>
+    <value>Resultaten gevonden:</value>
   </data>
   <data name="Search.Content" xml:space="preserve">
     <value>Zoeken</value>

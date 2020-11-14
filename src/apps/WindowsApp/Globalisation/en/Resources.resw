@@ -190,7 +190,7 @@
     <value>No results found</value>
   </data>
   <data name="ResultsFound.Text" xml:space="preserve">
-    <value>results found</value>
+    <value>Results found:</value>
   </data>
   <data name="Search.Content" xml:space="preserve">
     <value>Search</value>
