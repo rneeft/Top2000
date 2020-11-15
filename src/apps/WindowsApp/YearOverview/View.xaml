@@ -13,13 +13,11 @@
         <local:Test x:Key="TestConverter" />
     </Page.Resources>
 
-    <SplitView OpenPaneLength="400" DisplayMode="Inline" IsPaneOpen="True">
-        <SplitView.Pane>
-            <Grid x:Name="ListPanel" Margin="0,41,0,0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="400" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
+    <Grid>
+
+        <Grid x:Name="List" Background="{ThemeResource ListBackgroundColour}">
+
+            <Grid Margin="0,41,0,0">
 
                 <Grid.RowDefinitions>
                     <RowDefinition Height="100" />
@@ -32,7 +30,7 @@
                               VerticalAlignment="Center"
                       SelectedItem="{x:Bind ViewModel.SelectedEdition, Mode=TwoWay}"
                       ItemsSource="{x:Bind ViewModel.Editions}"
-                      SelectionChanged="{x:Bind OnEditionChanged}" >
+                      SelectionChanged="{x:Bind OnEditionChanged}">
                         <ComboBox.ItemTemplate>
                             <DataTemplate x:DataType="ae:Edition">
                                 <Grid>
@@ -58,9 +56,22 @@
 
                 <Frame x:Name="ListFrame" Grid.Row="1" />
             </Grid>
-        </SplitView.Pane>
-        <SplitView.Content>
-            <Frame x:Name="DetailsFrame"  Margin="0,40,0,0" />
-        </SplitView.Content>
-    </SplitView>
+        </Grid>
+
+        <Frame x:Name="DetailsFrame"  Margin="0,40,0,0" />
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="Default">
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="700" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="DetailsFrame.Margin" Value="400,40,0,0" />
+                        <Setter Target="List.Width" Value="400" />
+                        <Setter Target="List.HorizontalAlignment" Value="Left" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+    </Grid>
 </Page>

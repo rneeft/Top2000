@@ -48,7 +48,7 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="ListViewHeaderItem">
-                            <Border BorderBrush="#E6E6E6" BorderThickness="0,1" Margin="0,0,0,-4">
+                            <Border BorderBrush="{ThemeResource LineColour}" BorderThickness="0,1" Margin="0,0,0,-4">
                                 <ContentPresenter x:Name="ContentPresenter"
                                               Content="{TemplateBinding Content}"
 

@@ -132,6 +132,9 @@
   <data name="AutomaticallyScroll.Text" xml:space="preserve">
     <value>Automatically scroll to the playing hour</value>
   </data>
+  <data name="Close.Label" xml:space="preserve">
+    <value>Close</value>
+  </data>
   <data name="Copyright.Text" xml:space="preserve">
     <value>Copyright (c) Chroomsoft. All rights reserved.</value>
   </data>
@@ -152,6 +155,9 @@
   </data>
   <data name="Feedback.Content" xml:space="preserve">
     <value>Feedback</value>
+  </data>
+  <data name="FirstPosition.Text" xml:space="preserve">
+    <value>First Position</value>
   </data>
   <data name="GroupBy.Text" xml:space="preserve">
     <value>Group by</value>

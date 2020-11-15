@@ -133,6 +133,9 @@
     <value>Actuele positie tonen</value>
     <comment>???</comment>
   </data>
+  <data name="Close.Label" xml:space="preserve">
+    <value>Sluiten</value>
+  </data>
   <data name="Copyright.Text" xml:space="preserve">
     <value>Copyright © Chroomsoft. All rechten voorbehouden</value>
   </data>
@@ -153,6 +156,9 @@
   </data>
   <data name="Feedback.Content" xml:space="preserve">
     <value>Feedback</value>
+  </data>
+  <data name="FirstPosition.Text" xml:space="preserve">
+    <value>Eerst positie</value>
   </data>
   <data name="GroupBy.Text" xml:space="preserve">
     <value>Groeperen op</value>

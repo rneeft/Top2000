@@ -1,11 +1,13 @@
 ﻿<Page
     x:Class="Chroomsoft.Top2000.WindowsApp.Navigation.View"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:sys="using:System"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:winui="using:Microsoft.UI.Xaml.Controls"
     mc:Ignorable="d"
+    Name="RootPage"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -25,6 +27,7 @@
         <winui:NavigationView
             x:Name="NavigationViewControl"
             Canvas.ZIndex="0"
+            IsPaneOpen="True"
             PaneDisplayMode="LeftCompact"
             IsTitleBarAutoPaddingEnabled="False"
             AlwaysShowHeader="False"
@@ -34,6 +37,13 @@
                 <winui:NavigationViewItem x:Name="OverviewItem" x:Uid="YearsOverview" Icon="ShowResults" Content="%Year Overview%" Tag="Overview" />
                 <winui:NavigationViewItem x:Name="SearchItem" x:Uid="Search" Icon="Find" Content="%Search%" Tag="Search" />
             </winui:NavigationView.MenuItems>
+
+            <winui:NavigationView.PaneFooter>
+                <StackPanel Margin="10,0">
+                    <TextBlock Text="{x:Bind sys:String.Format('Page-width: {0}', RootPage.ActualWidth), Mode=OneWay}" FontSize="10" Opacity="0.25" />
+                </StackPanel>
+            </winui:NavigationView.PaneFooter>
+
             <Frame x:Name="rootFrame" Navigated="OnRootFrameNavigated" Navigating="rootFrame_Navigating" />
         </winui:NavigationView>
     </Grid>

@@ -34,6 +34,8 @@
                     <BelowWindows10version1809:Color x:Key="SystemChromeWhiteColor">#FFFFFFFF</BelowWindows10version1809:Color>
                     <BelowWindows10version1809:Color x:Key="SystemListLowColor">#FF1D1D1D</BelowWindows10version1809:Color>
                     <BelowWindows10version1809:Color x:Key="SystemListMediumColor">#FF333333</BelowWindows10version1809:Color>
+                    <Color x:Key="LineColour">Gray</Color>
+                    <Color x:Key="ListBackgroundColour">#151515</Color>
                     <Color x:Key="SystemChromeAltMediumHighColor">#CC000000</Color>
                     <Color x:Key="SystemChromeAltHighColor">#FF333333</Color>
                     <Color x:Key="SystemRevealListLowColor">#FF1D1D1D</Color>
@@ -109,6 +111,8 @@
                     <BelowWindows10version1809:Color x:Key="SystemChromeWhiteColor">#FFFFFFFF</BelowWindows10version1809:Color>
                     <BelowWindows10version1809:Color x:Key="SystemListLowColor">#FFE6E6E6</BelowWindows10version1809:Color>
                     <BelowWindows10version1809:Color x:Key="SystemListMediumColor">#FFCCCCCC</BelowWindows10version1809:Color>
+                    <Color x:Key="LineColour">#E6E6E6</Color>
+                    <Color x:Key="ListBackgroundColour">#ECECEC</Color>
                     <Color x:Key="SystemChromeAltMediumHighColor">#CCFFFFFF</Color>
                     <Color x:Key="SystemChromeAltHighColor">#FFCCCCCC</Color>
                     <Color x:Key="SystemRevealListLowColor">#FFE6E6E6</Color>

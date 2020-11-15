@@ -108,21 +108,21 @@
     </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="100" />
+            <RowDefinition Height="101" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <StackPanel Margin="10,8,10,0">
-            <TextBlock Text="{x:Bind ViewModel.Title, Mode=OneWay}" TextLineBounds="Tight"  Style="{StaticResource SubheaderTextBlockStyle}" />
+            <TextBlock Text="{x:Bind ViewModel.Title, Mode=OneWay}" Margin="0,0,60,0" TextLineBounds="Tight" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap" Style="{StaticResource SubheaderTextBlockStyle}" />
 
-            <TextBlock Text="{x:Bind sys:String.Format(x:Null, '{0} ({1})', ViewModel.Artist, ViewModel.RecordedYear), Mode=OneWay}"
+            <TextBlock Text="{x:Bind sys:String.Format(x:Null, '{0} ({1})', ViewModel.Artist, ViewModel.RecordedYear), Mode=OneWay}" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"
                        Foreground="{StaticResource SystemAccentColor}" Style="{StaticResource TitleTextBlockStyle}" Margin="0,15,0,0" />
         </StackPanel>
 
         <StackPanel Grid.Row="1">
-            <Border BorderBrush="#E6E6E6" Height="48" BorderThickness="0,1">
+            <Border BorderBrush="{ThemeResource LineColour}" Height="48" BorderThickness="0,1">
                 <TextBlock x:Uid="Appearances" Text="%Appearances%"
                            Style="{StaticResource SubtitleTextBlockStyle}"
                            Foreground="{ThemeResource SystemAccentColor}"
@@ -254,6 +254,15 @@
                         </StackPanel>
                     </StackPanel>
 
+                    <StackPanel Margin="0,0,20,30">
+                        <TextBlock x:Uid="FirstPosition" Style="{StaticResource BaseTextBlockStyle}" Opacity=".75" />
+                        <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                            <TextBlock Text="{x:Bind ViewModel.First.Position, Mode=OneWay}"  Style="{StaticResource HeaderTextBlockStyle}" VerticalAlignment="Bottom" TextLineBounds="Tight" />
+                            <TextBlock Text="{x:Bind sys:String.Format('({0})', ViewModel.First.Edition), Mode=OneWay}"
+                                       Opacity=".75" TextLineBounds="TrimToBaseline" VerticalAlignment="Bottom" />
+                        </StackPanel>
+                    </StackPanel>
+
                     <StackPanel Margin="0,0,20,0">
                         <TextBlock x:Uid="LastPosition" Style="{StaticResource BaseTextBlockStyle}" Opacity=".75" />
                         <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
@@ -278,8 +287,7 @@
 
         <CommandBar Grid.Row="0" Background="Transparent" DefaultLabelPosition="Right">
             <CommandBar.PrimaryCommands>
-                <AppBarButton Icon="Cancel" Label="Close" HorizontalAlignment="Left" Click="{x:Bind Close}" />
-               
+                <AppBarButton Icon="Cancel" x:Uid="Close" Label="Close" HorizontalAlignment="Left" Click="{x:Bind Close}" />
             </CommandBar.PrimaryCommands>
         </CommandBar>
 
