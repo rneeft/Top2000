@@ -1,7 +1,6 @@
 ﻿#nullable enable
 
 using Chroomsoft.Top2000.Features.AllListingsOfEdition;
-using Chroomsoft.Top2000.WindowsApp.YearOverview;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,38 +10,49 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Chroomsoft.Top2000.WindowsApp.ListingDate
 {
-    public sealed partial class View : Page
+    public sealed partial class View : Page, YearOverview.IListing
     {
         public View()
         {
+            ViewModel = App.GetService<ViewModel>();
+
             this.InitializeComponent();
         }
 
         public ViewModel ViewModel { get; set; }
 
-        public NavigationData NavigationData { get; set; }
+        public YearOverview.NavigationData? NavigationData { get; set; }
 
-        public async Task OnSelectionChanged()
+        public async Task TrackListingChange()
         {
-            if (Listing.SelectedItem != null)
+            if (NavigationData != null && ViewModel.SelectedListing != null)
                 await NavigationData.OnSelectedListingAync((TrackListing)Listing.SelectedItem);
+        }
+
+        public void SetListing(TrackListing? listing)
+        {
+            ViewModel.SelectedListing = listing;
         }
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
 
-            ViewModel = App.GetService<ViewModel>();
+            NavigationData = (YearOverview.NavigationData)e.Parameter;
 
-            NavigationData = (NavigationData)e.Parameter;
             await ViewModel.LoadListingForEdition(NavigationData.SelectedEdition);
 
-            if (NavigationData.SelectedTrackListing != null)
+            if (NavigationData.SelectedTrackListing is null)
+            {
+                ViewModel.SelectedListing = null;
+            }
+            else
             {
                 var listings = ViewModel.Listings
                     .SelectMany(x => x);
 
-                var listing = listings
+                var listing = ViewModel.Listings
+                    .SelectMany(x => x)
                     .SingleOrDefault(x => x.TrackId == NavigationData.SelectedTrackListing.TrackId);
 
                 if (listing != null)
@@ -67,6 +77,8 @@ namespace Chroomsoft.Top2000.WindowsApp.ListingDate
 
         private void BringSelectedItemInView()
         {
+            if (ViewModel.SelectedListing is null) return;
+
             var selectedTime = ViewModel.SelectedListing.LocalPlayDateAndTime;
             var item = ViewModel.Listings.First(x => x.Key.Equals(selectedTime));
 

@@ -61,6 +61,10 @@ namespace Chroomsoft.Top2000.WindowsApp.YearOverview
         {
             ViewModel.SelectedTrackListing = null;
             DetailsFrame.Content = null;
+            if (ListFrame.Content is IListing listingPage)
+            {
+                listingPage.SetListing(null);
+            }
         }
 
         private TrackInformation.NavigationData NavigationData()

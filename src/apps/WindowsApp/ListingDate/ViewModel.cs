@@ -1,4 +1,6 @@
-﻿using Chroomsoft.Top2000.Features.AllEditions;
+﻿#nullable enable
+
+using Chroomsoft.Top2000.Features.AllEditions;
 using Chroomsoft.Top2000.Features.AllListingsOfEdition;
 using Chroomsoft.Top2000.WindowsApp.Common;
 using MediatR;
@@ -23,9 +25,9 @@ namespace Chroomsoft.Top2000.WindowsApp.ListingDate
 
         public ObservableGroupedList<DateTime, DateTime> Dates { get; }
 
-        public TrackListing SelectedListing
+        public TrackListing? SelectedListing
         {
-            get { return GetPropertyValue<TrackListing>(); }
+            get { return GetPropertyValue<TrackListing?>(); }
             set { SetPropertyValue(value); }
         }
 
