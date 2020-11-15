@@ -175,6 +175,7 @@
       <DependentUpon>View.xaml</DependentUpon>
     </Compile>
     <Compile Include="TrackInformation\Converter.cs" />
+    <Compile Include="TrackInformation\NavigationData.cs" />
     <Compile Include="TrackInformation\View.xaml.cs">
       <DependentUpon>View.xaml</DependentUpon>
     </Compile>

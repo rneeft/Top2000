@@ -21,4 +21,9 @@ namespace Chroomsoft.Top2000.WindowsApp.YearOverview
 
         public Func<TrackListing, Task> OnSelectedListingAync { get; }
     }
+
+    public interface IListing
+    {
+        void SetListing(TrackListing? listing);
+    }
 }

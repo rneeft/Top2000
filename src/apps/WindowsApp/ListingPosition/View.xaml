@@ -7,7 +7,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+   >
 
     <Page.Resources>
 
@@ -21,6 +21,7 @@
     <SemanticZoom IsTabStop="False">
         <SemanticZoom.ZoomedInView>
             <ListView x:Name="Listing"
+                      SelectionMode="Single"
                 Style="{StaticResource ListViewStyle1}"
                 ItemsSource="{Binding Source={StaticResource TracksViewSource}}"
                 SelectedItem="{x:Bind ViewModel.SelectedListing, Mode=TwoWay}"
@@ -58,6 +59,7 @@
                 </ListView.GroupStyle>
             </ListView>
         </SemanticZoom.ZoomedInView>
+        
         <SemanticZoom.ZoomedOutView>
             <ListView ItemsSource="{Binding Source={StaticResource TracksViewSource},Path=CollectionGroups}">
                 <ListView.ItemTemplate>
@@ -69,5 +71,6 @@
                 </ListView.ItemTemplate>
             </ListView>
         </SemanticZoom.ZoomedOutView>
+        
     </SemanticZoom>
 </Page>

@@ -115,8 +115,8 @@
         </Grid.RowDefinitions>
 
         <StackPanel Margin="10,8,10,0">
-            <TextBlock Text="{x:Bind ViewModel.Title, Mode=OneWay}"  TextLineBounds="Tight"  Style="{StaticResource SubheaderTextBlockStyle}" />
-            
+            <TextBlock Text="{x:Bind ViewModel.Title, Mode=OneWay}" TextLineBounds="Tight"  Style="{StaticResource SubheaderTextBlockStyle}" />
+
             <TextBlock Text="{x:Bind sys:String.Format(x:Null, '{0} ({1})', ViewModel.Artist, ViewModel.RecordedYear), Mode=OneWay}"
                        Foreground="{StaticResource SystemAccentColor}" Style="{StaticResource TitleTextBlockStyle}" Margin="0,15,0,0" />
         </StackPanel>
@@ -276,7 +276,14 @@
             </StackPanel>
         </ScrollViewer>
 
-        <CommandBar Grid.Row="3">
+        <CommandBar Grid.Row="0" Background="Transparent" DefaultLabelPosition="Right">
+            <CommandBar.PrimaryCommands>
+                <AppBarButton Icon="Cancel" Label="Close" HorizontalAlignment="Left" Click="{x:Bind Close}" />
+               
+            </CommandBar.PrimaryCommands>
+        </CommandBar>
+
+        <CommandBar Grid.Row="3" DefaultLabelPosition="Right">
             <CommandBar.PrimaryCommands>
                 <AppBarButton x:Name="OpenYoutube" Label="%Youtube%" x:Uid="Youtube" Icon="Video" Click="{x:Bind OpenOnYoutube}" />
             </CommandBar.PrimaryCommands>

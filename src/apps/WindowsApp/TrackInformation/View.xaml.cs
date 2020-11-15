@@ -1,4 +1,6 @@
-﻿using System;
+﻿#nullable enable
+
+using System;
 using System.Threading.Tasks;
 using Windows.System;
 using Windows.UI.Xaml.Controls;
@@ -8,6 +10,8 @@ namespace Chroomsoft.Top2000.WindowsApp.TrackInformation
 {
     public sealed partial class View : Page
     {
+        private NavigationData? navigationData;
+
         public View()
         {
             ViewModel = App.GetService<ViewModel>();
@@ -29,9 +33,9 @@ namespace Chroomsoft.Top2000.WindowsApp.TrackInformation
         {
             base.OnNavigatedTo(e);
 
-            var trackId = (int)e.Parameter;
+            navigationData = (NavigationData)e.Parameter;
 
-            await ViewModel.LoadTrackDetails(trackId);
+            await ViewModel.LoadTrackDetails(navigationData.TrackId);
         }
 
         private void ChangeView(int x)
@@ -48,6 +52,13 @@ namespace Chroomsoft.Top2000.WindowsApp.TrackInformation
             GoLeftButton.IsEnabled = newOffSet > 0;
             var rightOffset = newOffSet + (PositionScrollViewer.ActualWidth * 1);
             GoRightButton.IsEnabled = rightOffset < TrackPositions.ActualWidth;
+        }
+
+        private void Close()
+        {
+            if (navigationData is null) return;
+
+            navigationData.OnClose();
         }
 
         private async Task OpenOnYoutube()

@@ -2,6 +2,7 @@
 
 using Chroomsoft.Top2000.Features.AllListingsOfEdition;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
@@ -15,7 +16,6 @@ namespace Chroomsoft.Top2000.WindowsApp.YearOverview
         private const int GroupByDate = 1;
 
         private PivotItem? datePivot;
-        private TrackInformation.View? trackInformationPage;
 
         public View()
         {
@@ -57,6 +57,18 @@ namespace Chroomsoft.Top2000.WindowsApp.YearOverview
             ListFrame.Navigate(ViewTypeForGroupByPivot(), navigationParam, new SuppressNavigationTransitionInfo());
         }
 
+        public void ClearSelectedTrack()
+        {
+            ViewModel.SelectedTrackListing = null;
+            DetailsFrame.Content = null;
+        }
+
+        private TrackInformation.NavigationData NavigationData()
+        {
+            return new TrackInformation.NavigationData
+                (ViewModel.SelectedTrackListing?.TrackId ?? 1, ClearSelectedTrack);
+        }
+
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
@@ -64,6 +76,7 @@ namespace Chroomsoft.Top2000.WindowsApp.YearOverview
             datePivot = (PivotItem)GroupByPivot.Items[1];
 
             await ViewModel.LoadAllEditionsAsync();
+            ViewModel.SelectedEdition = ViewModel.Editions.First();
         }
 
         private Type ViewTypeForGroupByPivot() => GroupByPivot.SelectedIndex switch
@@ -73,25 +86,18 @@ namespace Chroomsoft.Top2000.WindowsApp.YearOverview
             _ => throw new InvalidOperationException("Selected pivot item is not defined"),
         };
 
-        private async Task ShowTrackDetilsAsync(TrackListing listing)
+        private async Task ShowTrackDetilsAsync(TrackListing? listing)
         {
+            if (listing is null) return;
             ViewModel.SelectedTrackListing = listing;
 
-            if (trackInformationPage is null)
+            if (DetailsFrame.Content is TrackInformation.View view)
             {
-                DetailsGrid.Navigate(typeof(TrackInformation.View), listing.TrackId, new SuppressNavigationTransitionInfo());
+                await view.LoadNewTrackAsync(listing.TrackId);
             }
             else
             {
-                await trackInformationPage.LoadNewTrackAsync(listing.TrackId);
-            }
-        }
-
-        private void OnDetailsPageNavigated(object sender, NavigationEventArgs e)
-        {
-            if (e.Content is TrackInformation.View page)
-            {
-                trackInformationPage = page;
+                DetailsFrame.Navigate(typeof(TrackInformation.View), NavigationData(), new SuppressNavigationTransitionInfo());
             }
         }
     }

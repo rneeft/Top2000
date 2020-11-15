@@ -1,5 +1,6 @@
-﻿using Chroomsoft.Top2000.Features.AllListingsOfEdition;
-using Chroomsoft.Top2000.WindowsApp.YearOverview;
+﻿#nullable enable
+
+using Chroomsoft.Top2000.Features.AllListingsOfEdition;
 using System.Linq;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
@@ -7,33 +8,42 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Chroomsoft.Top2000.WindowsApp.ListingPosition
 {
-    public sealed partial class View : Page
+    public sealed partial class View : Page, YearOverview.IListing
     {
         public View()
         {
+            ViewModel = App.GetService<ViewModel>();
             this.InitializeComponent();
         }
 
         public ViewModel ViewModel { get; set; }
 
-        public NavigationData NavigationData { get; set; }
+        public YearOverview.NavigationData? NavigationData { get; set; }
+
+        public void SetListing(TrackListing? listing)
+        {
+            ViewModel.SelectedListing = listing;
+        }
 
         public async Task TrackListingChange()
         {
-            if (Listing.SelectedItem != null)
-                await NavigationData.OnSelectedListingAync((TrackListing)Listing.SelectedItem);
+            if (NavigationData != null && ViewModel.SelectedListing != null)
+                await NavigationData.OnSelectedListingAync(ViewModel.SelectedListing);
         }
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
 
-            NavigationData = (NavigationData)e.Parameter;
+            NavigationData = (YearOverview.NavigationData)e.Parameter;
 
-            ViewModel = App.GetService<ViewModel>();
             await ViewModel.LoadListingForEdition(NavigationData.SelectedEdition);
 
-            if (NavigationData.SelectedTrackListing != null)
+            if (NavigationData.SelectedTrackListing is null)
+            {
+                ViewModel.SelectedListing = null;
+            }
+            else
             {
                 var listing = ViewModel.Listings
                     .SelectMany(x => x)

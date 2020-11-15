@@ -4,7 +4,6 @@ using Chroomsoft.Top2000.Features.AllEditions;
 using Chroomsoft.Top2000.Features.AllListingsOfEdition;
 using Chroomsoft.Top2000.WindowsApp.Common;
 using MediatR;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Chroomsoft.Top2000.WindowsApp.YearOverview
@@ -26,16 +25,15 @@ namespace Chroomsoft.Top2000.WindowsApp.YearOverview
             set { SetPropertyValue(value); }
         }
 
-        public TrackListing SelectedTrackListing
+        public TrackListing? SelectedTrackListing
         {
-            get { return GetPropertyValue<TrackListing>(); }
+            get { return GetPropertyValue<TrackListing?>(); }
             set { SetPropertyValue(value); }
         }
 
         public async Task LoadAllEditionsAsync()
         {
             Editions.AddRange(await mediator.Send(new AllEditionsRequest()));
-            SelectedEdition = Editions.First();
         }
     }
 }

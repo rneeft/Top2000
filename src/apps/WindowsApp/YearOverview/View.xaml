@@ -12,15 +12,10 @@
     <Page.Resources>
         <local:Test x:Key="TestConverter" />
     </Page.Resources>
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="400" x:Name="ListColumn" />
-            <ColumnDefinition Width="*" x:Name="DetailsColumn" />
-        </Grid.ColumnDefinitions>
 
-        <Border BorderThickness="0,0,2,0" BorderBrush="#E6E6E6">
-
-            <Grid x:Name="ListPanel">
+    <SplitView OpenPaneLength="400" DisplayMode="Inline" IsPaneOpen="True">
+        <SplitView.Pane>
+            <Grid x:Name="ListPanel" Margin="0,41,0,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="400" />
                     <ColumnDefinition Width="*" />
@@ -33,10 +28,11 @@
 
                 <StackPanel>
                     <ComboBox x:Name="Editions" Margin="10,0"
-                      HorizontalAlignment="Stretch"
+                         HorizontalAlignment="Stretch"
+                              VerticalAlignment="Center"
                       SelectedItem="{x:Bind ViewModel.SelectedEdition, Mode=TwoWay}"
                       ItemsSource="{x:Bind ViewModel.Editions}"
-                      SelectionChanged="{x:Bind OnEditionChanged}" VerticalAlignment="Center">
+                      SelectionChanged="{x:Bind OnEditionChanged}" >
                         <ComboBox.ItemTemplate>
                             <DataTemplate x:DataType="ae:Edition">
                                 <Grid>
@@ -62,7 +58,9 @@
 
                 <Frame x:Name="ListFrame" Grid.Row="1" />
             </Grid>
-        </Border>
-        <Frame x:Name="DetailsGrid" Grid.Column="1" Navigated="OnDetailsPageNavigated" />
-    </Grid>
+        </SplitView.Pane>
+        <SplitView.Content>
+            <Frame x:Name="DetailsFrame"  Margin="0,40,0,0" />
+        </SplitView.Content>
+    </SplitView>
 </Page>
