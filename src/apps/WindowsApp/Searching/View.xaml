@@ -18,7 +18,7 @@
         <CollectionViewSource x:Key="FlatResultsViewSource"
                               Source="{x:Bind ViewModel.ResultsFlat}"
                               IsSourceGrouped="False" />
-        
+
         <Thickness x:Key="TextControlBorderThemeThickness">2</Thickness>
         <Style x:Key="AutoSuggestBoxTextBoxStyle" TargetType="TextBox">
             <Setter Property="MinWidth" Value="{ThemeResource TextControlThemeMinWidth}" />
@@ -262,7 +262,7 @@
                                      Style="{TemplateBinding TextBoxStyle}"
                                      VerticalContentAlignment="Center"
                                      VerticalAlignment="Center"
-                                     UseSystemFocusVisuals="{TemplateBinding UseSystemFocusVisuals}" 
+                                     UseSystemFocusVisuals="{TemplateBinding UseSystemFocusVisuals}"
                                      Width="{TemplateBinding Width}" Canvas.ZIndex="0" />
                             <Popup x:Name="SuggestionsPopup">
                                 <Border x:Name="SuggestionsContainer">
@@ -277,21 +277,18 @@
     </Page.Resources>
 
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="400" x:Name="ListColumn" />
-            <ColumnDefinition Width="*" x:Name="DetailsColumn" />
-        </Grid.ColumnDefinitions>
 
-        <Border BorderThickness="0,0,2,0" BorderBrush="#E6E6E6">
+        <Grid x:Name="List" Background="{ThemeResource ListBackgroundColour}">
 
-            <Grid x:Name="ListPanel">
+            <Grid Margin="0,41,0,0">
+
                 <Grid.RowDefinitions>
                     <RowDefinition Height="100" />
                     <RowDefinition Height="*" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
-                <StackPanel Margin="0,0,0,0">
+                <StackPanel>
                     <AutoSuggestBox Style="{StaticResource AutoSuggestBoxStyle1}" QueryIcon="Find" x:Uid="SearchTop2000"  Margin="10,0"
                                     HorizontalAlignment="Stretch" Height="39" HorizontalContentAlignment="Center"
                                     Text="{x:Bind ViewModel.QueryText, Mode=TwoWay}"
@@ -340,6 +337,7 @@
                 </StackPanel>
 
                 <ListView x:Name="ListingFlat" Grid.Row="1"
+                          SelectionMode="Single"
                           Style="{StaticResource ListViewStyle1}"
                           ItemsSource="{Binding Source={StaticResource FlatResultsViewSource}}"
                           SelectedItem="{x:Bind ViewModel.SelectedTrack, Mode=TwoWay}"
@@ -412,8 +410,22 @@
                     </CommandBar.Content>
                 </CommandBar>
             </Grid>
-        </Border>
+        </Grid>
 
-        <Frame x:Name="DetailsGrid" Grid.Column="1" Navigated="OnDetailsPageNavigated" />
+        <Frame x:Name="DetailsFrame" Margin="0,40,0,0" />
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="Default">
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="700" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="DetailsFrame.Margin" Value="400,40,0,0" />
+                        <Setter Target="List.Width" Value="400" />
+                        <Setter Target="List.HorizontalAlignment" Value="Left" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
     </Grid>
 </Page>

@@ -57,16 +57,6 @@ namespace Chroomsoft.Top2000.WindowsApp.YearOverview
             ListFrame.Navigate(ViewTypeForGroupByPivot(), navigationParam, new SuppressNavigationTransitionInfo());
         }
 
-        public void ClearSelectedTrack()
-        {
-            ViewModel.SelectedTrackListing = null;
-            DetailsFrame.Content = null;
-            if (ListFrame.Content is IListing listingPage)
-            {
-                listingPage.SetListing(null);
-            }
-        }
-
         private TrackInformation.NavigationData NavigationData()
         {
             return new TrackInformation.NavigationData
@@ -81,6 +71,16 @@ namespace Chroomsoft.Top2000.WindowsApp.YearOverview
 
             await ViewModel.LoadAllEditionsAsync();
             ViewModel.SelectedEdition = ViewModel.Editions.First();
+        }
+
+        private void ClearSelectedTrack()
+        {
+            ViewModel.SelectedTrackListing = null;
+            DetailsFrame.Content = null;
+            if (ListFrame.Content is IListing listingPage)
+            {
+                listingPage.SetListing(null);
+            }
         }
 
         private Type ViewTypeForGroupByPivot() => GroupByPivot.SelectedIndex switch

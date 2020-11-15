@@ -35,25 +35,28 @@ namespace Chroomsoft.Top2000.Features.Searching
 
         public async Task<ReadOnlyCollection<IGrouping<string, Track>>> Handle(SearchTrackRequest request, CancellationToken cancellationToken)
         {
-            List<Track>? results;
+            List<Track> results = new List<Track>();
 
-            if (int.TryParse(request.QueryString, out int year))
+            if (!string.IsNullOrWhiteSpace(request.QueryString))
             {
-                var sql = "SELECT Id, Title, Artist, RecordedYear " +
-                    "FROM Track " +
-                    "WHERE RecordedYear = ?" +
-                    "LIMIT 100";
+                if (int.TryParse(request.QueryString, out int year))
+                {
+                    var sql = "SELECT Id, Title, Artist, RecordedYear " +
+                        "FROM Track " +
+                        "WHERE RecordedYear = ?" +
+                        "LIMIT 100";
 
-                results = await connection.QueryAsync<Track>(sql, year).ConfigureAwait(false);
-            }
-            else
-            {
-                var sql = "SELECT Id, Title, Artist, RecordedYear " +
-                    "FROM Track " +
-                    "WHERE (Title LIKE ?) OR (Artist LIKE ?)" +
-                    "LIMIT 100";
+                    results = await connection.QueryAsync<Track>(sql, year).ConfigureAwait(false);
+                }
+                else
+                {
+                    var sql = "SELECT Id, Title, Artist, RecordedYear " +
+                        "FROM Track " +
+                        "WHERE (Title LIKE ?) OR (Artist LIKE ?)" +
+                        "LIMIT 100";
 
-                results = await connection.QueryAsync<Track>(sql, $"%{request.QueryString}%", $"%{request.QueryString}%").ConfigureAwait(false);
+                    results = await connection.QueryAsync<Track>(sql, $"%{request.QueryString}%", $"%{request.QueryString}%").ConfigureAwait(false);
+                }
             }
 
             var sorted = request.Sorting.Sort(results);

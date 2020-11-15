@@ -26,6 +26,15 @@ namespace Chroomsoft.Top2000.Specs.Features
             result = await mediator.Send(request);
         }
 
+        [When(@"searching without a query")]
+        public async Task WhenSearchingWithoutAQuery()
+        {
+            var mediator = App.ServiceProvider.GetService<IMediator>();
+            var request = new SearchTrackRequest(string.Empty, sorting, grouping);
+
+            result = await mediator.Send(request);
+        }
+
         [Then(@"the following tracks are found:")]
         public void ThenTracksAreFoundWithTheFollowingDetails(Table table)
         {
@@ -52,8 +61,8 @@ namespace Chroomsoft.Top2000.Specs.Features
             var actual = result
                 .SelectMany(x => x);
 
-            actual.Should().NotBeEmpty()
-                .And.HaveCount(count);
+            actual.Should()
+                .HaveCount(count);
         }
     }
 }

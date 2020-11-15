@@ -31,3 +31,8 @@ Scenario: Searching will have a result cap of 100
 Given All data scripts
 When searching for a
 Then the results contain 100 items
+
+Scenario: An empty search querty give zero results
+Given All data scripts
+When searching without a query
+Then the results contain 0 items
