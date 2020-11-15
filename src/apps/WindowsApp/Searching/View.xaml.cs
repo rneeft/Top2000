@@ -134,7 +134,16 @@ namespace Chroomsoft.Top2000.WindowsApp.Searching
         public Track? SelectedTrack
         {
             get { return GetPropertyValue<Track?>(); }
-            set { SetPropertyValue(value); }
+            set
+            {
+                if (value != null)
+                {
+                    if (SelectedTrack?.Id != value?.Id)
+                    {
+                        SetPropertyValue(value);
+                    }
+                }
+            }
         }
 
         public string ResultsCount

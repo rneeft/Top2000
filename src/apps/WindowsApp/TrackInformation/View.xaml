@@ -108,17 +108,17 @@
     </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="94" />
+            <RowDefinition Height="100" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <StackPanel Margin="10,0">
-            <TextBlock Text="{x:Bind ViewModel.Title, Mode=OneWay}"  Style="{StaticResource SubheaderTextBlockStyle}" />
+        <StackPanel Margin="10,8,10,0">
+            <TextBlock Text="{x:Bind ViewModel.Title, Mode=OneWay}"  TextLineBounds="Tight"  Style="{StaticResource SubheaderTextBlockStyle}" />
             
             <TextBlock Text="{x:Bind sys:String.Format(x:Null, '{0} ({1})', ViewModel.Artist, ViewModel.RecordedYear), Mode=OneWay}"
-                       Foreground="{StaticResource SystemAccentColor}" Style="{StaticResource TitleTextBlockStyle}" Margin="0,6,0,0" />
+                       Foreground="{StaticResource SystemAccentColor}" Style="{StaticResource TitleTextBlockStyle}" Margin="0,15,0,0" />
         </StackPanel>
 
         <StackPanel Grid.Row="1">

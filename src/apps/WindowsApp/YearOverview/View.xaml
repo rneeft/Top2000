@@ -14,11 +14,11 @@
     </Page.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" x:Name="ListColumn" />
+            <ColumnDefinition Width="400" x:Name="ListColumn" />
             <ColumnDefinition Width="*" x:Name="DetailsColumn" />
         </Grid.ColumnDefinitions>
 
-        <Border BorderThickness="0,0,2,0" Width="400" BorderBrush="#E6E6E6">
+        <Border BorderThickness="0,0,2,0" BorderBrush="#E6E6E6">
 
             <Grid x:Name="ListPanel">
                 <Grid.ColumnDefinitions>
@@ -27,11 +27,11 @@
                 </Grid.ColumnDefinitions>
 
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="130" />
+                    <RowDefinition Height="100" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
-                <StackPanel Margin="0,41,0,0">
+                <StackPanel>
                     <ComboBox x:Name="Editions" Margin="10,0"
                       HorizontalAlignment="Stretch"
                       SelectedItem="{x:Bind ViewModel.SelectedEdition, Mode=TwoWay}"
@@ -63,6 +63,6 @@
                 <Frame x:Name="ListFrame" Grid.Row="1" />
             </Grid>
         </Border>
-        <Frame x:Name="DetailsGrid" Grid.Column="1" Margin="0,36,0,0" Navigated="OnDetailsPageNavigated" />
+        <Frame x:Name="DetailsGrid" Grid.Column="1" Navigated="OnDetailsPageNavigated" />
     </Grid>
 </Page>

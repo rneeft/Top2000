@@ -34,7 +34,7 @@
                 <winui:NavigationViewItem x:Name="OverviewItem" x:Uid="YearsOverview" Icon="ShowResults" Content="%Year Overview%" Tag="Overview" />
                 <winui:NavigationViewItem x:Name="SearchItem" x:Uid="Search" Icon="Find" Content="%Search%" Tag="Search" />
             </winui:NavigationView.MenuItems>
-            <Frame x:Name="rootFrame" Navigated="OnRootFrameNavigated" Navigating="rootFrame_Navigating" />
+            <Frame x:Name="rootFrame" Navigated="OnRootFrameNavigated" Margin="0,41,0,0" Navigating="rootFrame_Navigating" />
         </winui:NavigationView>
     </Grid>
 </Page>
