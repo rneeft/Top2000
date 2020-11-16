@@ -19,9 +19,9 @@ namespace Chroomsoft.Top2000.WindowsApp.YearOverview
 
         public ObservableList<Edition> Editions { get; } = new ObservableList<Edition>();
 
-        public Edition SelectedEdition
+        public Edition? SelectedEdition
         {
-            get { return GetPropertyValue<Edition>(); }
+            get { return GetPropertyValue<Edition?>(); }
             set { SetPropertyValue(value); }
         }
 
