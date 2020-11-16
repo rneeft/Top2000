@@ -70,13 +70,13 @@ namespace Chroomsoft.Top2000.WindowsApp
                 .AddClientDatabase(new DirectoryInfo(FileSystem.AppDataDirectory))
                 .AddFeatures()
                 .AddTransient<Navigation.View>()
-                .AddSingleton<Navigation.ViewModel>()
+                .AddTransient<Navigation.ViewModel>()
                 .AddTransient<YearOverview.View>()
-                .AddSingleton<YearOverview.ViewModel>()
-                .AddSingleton<ListingDate.ViewModel>()
-                .AddSingleton<ListingPosition.ViewModel>()
-                .AddSingleton<TrackInformation.ViewModel>()
-                .AddSingleton<Searching.ViewModel>()
+                .AddTransient<YearOverview.ViewModel>()
+                .AddTransient<ListingDate.ViewModel>()
+                .AddTransient<ListingPosition.ViewModel>()
+                .AddTransient<TrackInformation.ViewModel>()
+                .AddTransient<Searching.ViewModel>()
             ;
         }
 
