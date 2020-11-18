@@ -8,6 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:winui="using:Microsoft.UI.Xaml.Controls"
     mc:Ignorable="d"
+    NavigationCacheMode="Enabled"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Page.Resources>
 
@@ -320,7 +321,7 @@
                         <TextBlock x:Name="Title"   x:Uid="Title"    Text="%Title%" Visibility="Collapsed" />
                         <TextBlock x:Name="Year"    x:Uid="Year"     Text="%Year%" Visibility="Collapsed" />
 
-                        <ComboBox HorizontalAlignment="Stretch" Grid.Column="2"
+                        <ComboBox x:Name="SortByOptions" HorizontalAlignment="Stretch" Grid.Column="2"
                                   ItemsSource="{x:Bind ViewModel.SortByOptions}"
                                   SelectedItem="{x:Bind ViewModel.SortBy, Mode=TwoWay}" Grid.Row="1"
                                   SelectionChanged="{x:Bind ViewModel.ReSortGroup}">

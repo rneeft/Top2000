@@ -79,12 +79,15 @@ namespace Chroomsoft.Top2000.WindowsApp.Searching
 
         public ObservableList<Track> ResultsFlat { get; }
 
-        public void OnLoad(ISortGroupNameProvider nameProvider)
+        public void OnActivate(ISortGroupNameProvider nameProvider)
         {
-            GroupByOptions.AddRange(groupOptions.Select(x => new GroupViewModel(x, nameProvider.GetNameForGroup(x))));
-            SortByOptions.AddRange(sortOptions.Select(x => new SortViewModel(x, nameProvider.GetNameForSort(x))));
-            GroupBy = GroupByOptions.First();
-            SortBy = SortByOptions.First();
+            if (GroupByOptions.Count == 0)
+            {
+                GroupByOptions.AddRange(groupOptions.Select(x => new GroupViewModel(x, nameProvider.GetNameForGroup(x))));
+                SortByOptions.AddRange(sortOptions.Select(x => new SortViewModel(x, nameProvider.GetNameForSort(x))));
+                GroupBy = GroupByOptions.First();
+                SortBy = SortByOptions.First();
+            }
         }
 
         public async Task ExceuteSearchAsync()
@@ -100,6 +103,7 @@ namespace Chroomsoft.Top2000.WindowsApp.Searching
 
         public void ReSortGroup()
         {
+            if (GroupBy is null || SortBy is null) return;
             var resultFlat = Results.SelectMany(x => x).ToList();
             var sorted = SortBy.Value.Sort(resultFlat);
             ResultsFlat.AddRange(sorted);

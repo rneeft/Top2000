@@ -15,5 +15,12 @@ namespace Chroomsoft.Top2000.WindowsApp.Searching
         public ISort Value { get; }
 
         public string Name { get; }
+
+        public override bool Equals(object obj)
+        {
+            return obj is SortViewModel svm && svm.Name == this.Name;
+        }
+
+        public override int GetHashCode() => this.Name.GetHashCode();
     }
 }

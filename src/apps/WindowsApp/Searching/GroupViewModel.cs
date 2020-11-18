@@ -13,5 +13,12 @@ namespace Chroomsoft.Top2000.WindowsApp.Searching
         public IGroup Value { get; }
 
         public string Name { get; }
+
+        public override bool Equals(object obj)
+        {
+            return obj is GroupViewModel svm && svm.Name == this.Name;
+        }
+
+        public override int GetHashCode() => this.Name.GetHashCode();
     }
 }

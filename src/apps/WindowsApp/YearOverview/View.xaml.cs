@@ -15,7 +15,7 @@ namespace Chroomsoft.Top2000.WindowsApp.YearOverview
         private const int GroupByPosition = 0;
         private const int GroupByDate = 1;
 
-        private PivotItem? datePivot;
+        private static PivotItem? datePivot;
 
         public View()
         {
@@ -27,6 +27,8 @@ namespace Chroomsoft.Top2000.WindowsApp.YearOverview
 
         public void OnEditionChanged()
         {
+            if (ViewModel.SelectedEdition is null) return;
+
             var selectedPivotIndex = GroupByPivot.SelectedIndex;
 
             if (ViewModel.SelectedEdition.HasPlayDateAndTime && GroupByPivot.Items.Count == 1)
@@ -67,10 +69,10 @@ namespace Chroomsoft.Top2000.WindowsApp.YearOverview
         {
             base.OnNavigatedTo(e);
 
-            datePivot = (PivotItem)GroupByPivot.Items[1];
+            datePivot ??= (PivotItem)GroupByPivot.Items[1];
 
             await ViewModel.LoadAllEditionsAsync();
-            ViewModel.SelectedEdition = ViewModel.Editions.First();
+            ViewModel.SelectedEdition ??= ViewModel.Editions.First();
         }
 
         private void ClearSelectedTrack()

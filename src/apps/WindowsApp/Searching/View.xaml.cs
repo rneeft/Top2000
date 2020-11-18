@@ -16,6 +16,7 @@ namespace Chroomsoft.Top2000.WindowsApp.Searching
         {
             ViewModel = App.GetService<ViewModel>();
             this.InitializeComponent();
+            ViewModel.OnActivate(this);
         }
 
         public ViewModel ViewModel { get; }
@@ -69,13 +70,15 @@ namespace Chroomsoft.Top2000.WindowsApp.Searching
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            ViewModel.OnLoad(this);
+            //  ViewModel.OnLoad(this);
         }
 
         private void ClearSelectedTrack()
         {
             ViewModel.SelectedTrack = null;
             DetailsFrame.Content = null;
+            //ListingFlat.SelectedItem = null;
+            //Listing.SelectedItem = null;
         }
 
         private string? GetNameForGroupOrSortBy(object item)

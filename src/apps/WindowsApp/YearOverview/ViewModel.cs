@@ -15,9 +15,10 @@ namespace Chroomsoft.Top2000.WindowsApp.YearOverview
         public ViewModel(IMediator mediator)
         {
             this.mediator = mediator;
+            this.Editions = new ObservableList<Edition>();
         }
 
-        public ObservableList<Edition> Editions { get; } = new ObservableList<Edition>();
+        public ObservableList<Edition> Editions { get; }
 
         public Edition? SelectedEdition
         {
@@ -33,7 +34,10 @@ namespace Chroomsoft.Top2000.WindowsApp.YearOverview
 
         public async Task LoadAllEditionsAsync()
         {
-            Editions.AddRange(await mediator.Send(new AllEditionsRequest()));
+            if (Editions.Count == 0)
+            {
+                Editions.AddRange(await mediator.Send(new AllEditionsRequest()));
+            }
         }
     }
 }
