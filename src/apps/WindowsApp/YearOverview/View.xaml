@@ -26,29 +26,42 @@
                 </Grid.RowDefinitions>
 
                 <StackPanel>
-                    <ComboBox x:Name="Editions" Margin="10,0"
-                         HorizontalAlignment="Stretch"
-                              VerticalAlignment="Center"
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <CommandBar Grid.Column="1" Background="Transparent" DefaultLabelPosition="Collapsed">
+                            <CommandBar.PrimaryCommands>
+                                <AppBarButton Icon="CalendarReply" Click="{x:Bind NavigateToCurrentTimeSlot}" />
+                            </CommandBar.PrimaryCommands>
+                        </CommandBar>
+
+                        <ComboBox x:Name="Editions" Margin="10,0"
+                         HorizontalAlignment="Stretch" VerticalAlignment="Center"
                       SelectedItem="{x:Bind ViewModel.SelectedEdition, Mode=TwoWay}"
                       ItemsSource="{x:Bind ViewModel.Editions}"
                       SelectionChanged="{x:Bind OnEditionChanged}">
-                        <ComboBox.ItemTemplate>
-                            <DataTemplate x:DataType="ae:Edition">
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                    </Grid.RowDefinitions>
-                                    <TextBlock Text="{x:Bind Year}" Style="{StaticResource SubtitleTextBlockStyle}" />
-                                    <StackPanel Grid.Row="1" Orientation="Horizontal" Visibility="{Binding IsDropDownOpen, ElementName=Editions, Converter={StaticResource TestConverter}}">
-                                        <TextBlock Text="{x:Bind local:Converters.ToShortLocalTime(StartUtcDateAndTime)}" Opacity=".25" />
-                                        <TextBlock Text="-" Margin="5,0" Opacity=".25" />
-                                        <TextBlock Text="{x:Bind local:Converters.ToShortLocalTime(EndUtcDateAndTime)}" Opacity=".25" />
-                                    </StackPanel>
-                                </Grid>
-                            </DataTemplate>
-                        </ComboBox.ItemTemplate>
-                    </ComboBox>
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate x:DataType="ae:Edition">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Text="{x:Bind Year}" Style="{StaticResource SubtitleTextBlockStyle}" />
+                                        <StackPanel Grid.Row="1" Orientation="Horizontal" Visibility="{Binding IsDropDownOpen, ElementName=Editions, Converter={StaticResource TestConverter}}">
+                                            <TextBlock Text="{x:Bind local:Converters.ToShortLocalTime(StartUtcDateAndTime)}" Opacity=".25" />
+                                            <TextBlock Text="-" Margin="5,0" Opacity=".25" />
+                                            <TextBlock Text="{x:Bind local:Converters.ToShortLocalTime(EndUtcDateAndTime)}" Opacity=".25" />
+                                        </StackPanel>
+                                    </Grid>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </Grid>
+
                     <Pivot x:Name="GroupByPivot" SelectionChanged="{x:Bind NavigateToListing}">
                         <PivotItem x:Uid="PositionPivot" x:Name="PositionPivot" Header="%Position%" />
                         <PivotItem x:Uid="DatePivot" x:Name="DatePivot" Header="%Date%" />

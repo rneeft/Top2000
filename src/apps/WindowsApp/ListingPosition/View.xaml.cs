@@ -20,6 +20,10 @@ namespace Chroomsoft.Top2000.WindowsApp.ListingPosition
 
         public YearOverview.NavigationData? NavigationData { get; set; }
 
+        public void OpenCurrentDateAndTime()
+        {
+        }
+
         public void SetListing(TrackListing? listing)
         {
             ViewModel.SelectedListing = listing;

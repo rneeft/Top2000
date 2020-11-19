@@ -12,6 +12,8 @@ namespace Chroomsoft.Top2000.WindowsApp.ListingDate
 {
     public sealed partial class View : Page, YearOverview.IListing
     {
+        private bool openCurrentTimeSlotAfterNavigating;
+
         public View()
         {
             ViewModel = App.GetService<ViewModel>();
@@ -34,6 +36,29 @@ namespace Chroomsoft.Top2000.WindowsApp.ListingDate
             ViewModel.SelectedListing = listing;
         }
 
+        public void OpenCurrentDateAndTime()
+        {
+            if (!ViewModel.Listings.Any())
+            {
+                this.openCurrentTimeSlotAfterNavigating = true;
+                return;
+            }
+
+            var currentTime = DateTime.Now;
+
+            var timeSlot = ViewModel.Listings.FirstOrDefault(x =>
+            x.Key.Year == currentTime.Year &&
+            x.Key.Month == currentTime.Month &&
+            x.Key.Day == currentTime.Day &&
+            x.Key.Hour == currentTime.Hour);
+
+            if (timeSlot == null)
+                timeSlot = ViewModel.Listings.FirstOrDefault();
+
+            if (timeSlot != null)
+                Listing.ScrollIntoView(timeSlot, ScrollIntoViewAlignment.Leading);
+        }
+
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
@@ -45,6 +70,11 @@ namespace Chroomsoft.Top2000.WindowsApp.ListingDate
             if (NavigationData.SelectedTrackListing is null)
             {
                 ViewModel.SelectedListing = null;
+
+                if (openCurrentTimeSlotAfterNavigating)
+                {
+                    OpenCurrentDateAndTime();
+                }
             }
             else
             {

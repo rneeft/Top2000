@@ -25,5 +25,7 @@ namespace Chroomsoft.Top2000.WindowsApp.YearOverview
     public interface IListing
     {
         void SetListing(TrackListing? listing);
+
+        void OpenCurrentDateAndTime();
     }
 }

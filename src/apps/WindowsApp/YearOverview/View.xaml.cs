@@ -73,6 +73,29 @@ namespace Chroomsoft.Top2000.WindowsApp.YearOverview
 
             await ViewModel.LoadAllEditionsAsync();
             ViewModel.SelectedEdition ??= ViewModel.Editions.First();
+
+            if (Top2000IsOnAir())
+            {
+                NavigateToCurrentTimeSlot();
+            }
+        }
+
+        private void NavigateToCurrentTimeSlot()
+        {
+            ViewModel.SelectedEdition = ViewModel.Editions.First();
+            GroupByPivot.SelectedIndex = 1;
+            if (ListFrame.Content is IListing listingPage)
+            {
+                listingPage.OpenCurrentDateAndTime();
+            }
+        }
+
+        private bool Top2000IsOnAir()
+        {
+            var edition = ViewModel.Editions.First();
+            var time = DateTime.UtcNow;
+
+            return time > edition.StartUtcDateAndTime && time < edition.EndUtcDateAndTime;
         }
 
         private void ClearSelectedTrack()
