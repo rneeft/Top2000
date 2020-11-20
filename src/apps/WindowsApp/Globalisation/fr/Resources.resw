@@ -117,7 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="About.Text" xml:space="preserve">
+  <data name="About.Header" xml:space="preserve">
     <value>Propos</value>
   </data>
   <data name="AboutThisApp.Text" xml:space="preserve">
@@ -131,6 +131,9 @@
   </data>
   <data name="AutomaticallyScroll.Text" xml:space="preserve">
     <value>Automatically scroll to the playing hour</value>
+  </data>
+  <data name="CheckForUpdates.Content" xml:space="preserve">
+    <value>Rechercher les mises à jour</value>
   </data>
   <data name="Close.Label" xml:space="preserve">
     <value>Fermer</value>
@@ -272,6 +275,9 @@
   <data name="DarkTheme.Content" xml:space="preserve">
     <value>Sombre</value>
   </data>
+  <data name="Database.Text" xml:space="preserve">
+    <value>Database</value>
+  </data>
   <data name="DatePivot.Header" xml:space="preserve">
     <value>Date</value>
   </data>
@@ -387,6 +393,9 @@
   <data name="SelectYear.Text" xml:space="preserve">
     <value>Sélectionnez une année</value>
   </data>
+  <data name="SettingPivot.Title" xml:space="preserve">
+    <value>Réglages</value>
+  </data>
   <data name="Settings.Text" xml:space="preserve">
     <value>Paramètres</value>
   </data>
@@ -405,6 +414,9 @@
   <data name="SystemTheme.Content" xml:space="preserve">
     <value>Utiliser la Paramètre du système</value>
   </data>
+  <data name="TestedBy.Text" xml:space="preserve">
+    <value>Testé par:</value>
+  </data>
   <data name="ThemeMode.Text" xml:space="preserve">
     <value>Mode de thème</value>
   </data>
@@ -419,6 +431,9 @@
   </data>
   <data name="UpdateAvailableHeader.Text" xml:space="preserve">
     <value>Mise à jour de la liste Top 2000 disponible</value>
+  </data>
+  <data name="Version.Text" xml:space="preserve">
+    <value>Version:</value>
   </data>
   <data name="ViewByDate.Text" xml:space="preserve">
     <value>Voir par date</value>

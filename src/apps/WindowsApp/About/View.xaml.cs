@@ -1,7 +1,6 @@
 ﻿#nullable enable
 
 using Chroomsoft.Top2000.WindowsApp.Common;
-using MediatR;
 using System.Linq;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -17,18 +16,17 @@ namespace Chroomsoft.Top2000.WindowsApp.About
             this.InitializeComponent();
         }
 
-        public ViewModel ViewModel { get; private set; }
+        public ViewModel ViewModel { get; }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
 
             CreditsWebView.NavigateToString(CreditsText.Text);
             PrivacyWebView.NavigateToString(PrivacyText.Text);
-        }
 
-        private void OnSettingsPageLoaded(object sender, RoutedEventArgs e)
-        {
+            await ViewModel.LoadViewModelAsync();
+
             var currentTheme = ThemeHelper.RootTheme.ToString();
             (ThemePanel.Children.Cast<RadioButton>().FirstOrDefault(c => c?.Tag?.ToString() == currentTheme)).IsChecked = true;
         }
@@ -38,16 +36,6 @@ namespace Chroomsoft.Top2000.WindowsApp.About
             var selectedTheme = ((RadioButton)sender)?.Tag?.ToString();
             if (selectedTheme != null)
                 ThemeHelper.RootTheme = App.GetEnum<ElementTheme>(selectedTheme);
-        }
-    }
-
-    public class ViewModel : ObservableBase
-    {
-        private readonly IMediator mediator;
-
-        public ViewModel(IMediator mediator)
-        {
-            this.mediator = mediator;
         }
     }
 }

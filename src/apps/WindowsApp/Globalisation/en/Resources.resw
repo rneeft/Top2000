@@ -117,7 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="About.Text" xml:space="preserve">
+  <data name="About.Header" xml:space="preserve">
     <value>About</value>
   </data>
   <data name="AboutThisApp.Text" xml:space="preserve">
@@ -131,6 +131,9 @@
   </data>
   <data name="AutomaticallyScroll.Text" xml:space="preserve">
     <value>Automatically scroll to the playing hour</value>
+  </data>
+  <data name="CheckForUpdates.Content" xml:space="preserve">
+    <value>Check for updates</value>
   </data>
   <data name="Close.Label" xml:space="preserve">
     <value>Close</value>
@@ -272,6 +275,9 @@
   <data name="DarkTheme.Content" xml:space="preserve">
     <value>Dark</value>
   </data>
+  <data name="Database.Text" xml:space="preserve">
+    <value>Database</value>
+  </data>
   <data name="DatePivot.Header" xml:space="preserve">
     <value>Date</value>
   </data>
@@ -388,6 +394,9 @@
   <data name="SelectYear.Text" xml:space="preserve">
     <value>Select a year</value>
   </data>
+  <data name="SettingPivot.Title" xml:space="preserve">
+    <value>Setting</value>
+  </data>
   <data name="Settings.Text" xml:space="preserve">
     <value>Settings</value>
   </data>
@@ -406,6 +415,9 @@
   <data name="SystemTheme.Content" xml:space="preserve">
     <value>Use system setting</value>
   </data>
+  <data name="TestedBy.Text" xml:space="preserve">
+    <value>Tested by:</value>
+  </data>
   <data name="ThemeMode.Text" xml:space="preserve">
     <value>Theme Mode</value>
   </data>
@@ -416,10 +428,13 @@
     <value>To contact</value>
   </data>
   <data name="UpdateAvailable.Text" xml:space="preserve">
-    <value>We’ve downloaded a new version of the Top 2000 list. Please restart the app to apply the new version.</value>
+    <value>We’ve downloaded a new version of the Top 2000 list.</value>
   </data>
   <data name="UpdateAvailableHeader.Text" xml:space="preserve">
     <value>Updated Top 2000 list available</value>
+  </data>
+  <data name="Version.Text" xml:space="preserve">
+    <value>Version:</value>
   </data>
   <data name="ViewByDate.Content" xml:space="preserve">
     <value>View By Date</value>

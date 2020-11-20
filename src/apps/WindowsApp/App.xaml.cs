@@ -22,17 +22,10 @@ using Xamarin.Essentials;
 
 namespace Chroomsoft.Top2000.WindowsApp
 {
-    /// <summary>
-    /// Provides application-specific behavior to supplement the default Application class.
-    /// </summary>
     sealed partial class App : Application
     {
         private static IServiceProvider? serviceProvider;
 
-        /// <summary>
-        /// Initializes the singleton application object.  This is the first line of authored code
-        /// executed, and as such is the logical equivalent of main() or WinMain().
-        /// </summary>
         public App()
         {
             this.InitializeComponent();
@@ -80,7 +73,6 @@ namespace Chroomsoft.Top2000.WindowsApp
                 .AddClientDatabase(new DirectoryInfo(FileSystem.AppDataDirectory))
                 .AddFeatures()
                 .AddTransient<Navigation.View>()
-                .AddSingleton<Navigation.ViewModel>()
                 .AddTransient<YearOverview.View>()
                 .AddSingleton<YearOverview.ViewModel>()
                 .AddSingleton<ListingDate.ViewModel>()
@@ -89,6 +81,7 @@ namespace Chroomsoft.Top2000.WindowsApp
                 .AddSingleton<Searching.ViewModel>()
                 .AddSingleton<About.ViewModel>()
                 .AddSingleton<About.View>()
+                .AddSingleton<IGlobalUpdate, GlobalUpdates>()
             ;
         }
 

@@ -1,4 +1,6 @@
-﻿using System;
+﻿#nullable enable
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -14,7 +16,7 @@ namespace Chroomsoft.Top2000.WindowsApp.Common
         private readonly Action<string> notifyOfPropertyChange;
         private readonly Type type;
 
-        private ILookup<string, string> _dependentLookup;
+        private ILookup<string, string>? _dependentLookup;
 
         public PropertyHelper(Action<string> notifyOfPropertyChange, Type type)
         {

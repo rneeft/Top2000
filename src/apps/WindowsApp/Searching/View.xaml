@@ -316,10 +316,10 @@
                             </ComboBox.ItemTemplate>
                         </ComboBox>
 
-                        <TextBlock x:Name="None"    x:Uid="None"     Text="%None%" Visibility="Collapsed" />
-                        <TextBlock x:Name="Artist"  x:Uid="Artist"   Text="%Artist%" Visibility="Collapsed" />
-                        <TextBlock x:Name="Title"   x:Uid="Title"    Text="%Title%" Visibility="Collapsed" />
-                        <TextBlock x:Name="Year"    x:Uid="Year"     Text="%Year%" Visibility="Collapsed" />
+                        <TextBlock x:Name="NoneDisplayName"    x:Uid="None"     Text="%None%" Visibility="Collapsed" />
+                        <TextBlock x:Name="ArtistDisplayName"  x:Uid="Artist"   Text="%Artist%" Visibility="Collapsed" />
+                        <TextBlock x:Name="TitleDisplayName"   x:Uid="Title"    Text="%Title%" Visibility="Collapsed" />
+                        <TextBlock x:Name="YearDisplayName"    x:Uid="Year"     Text="%Year%" Visibility="Collapsed" />
 
                         <ComboBox x:Name="SortByOptions" HorizontalAlignment="Stretch" Grid.Column="2"
                                   ItemsSource="{x:Bind ViewModel.SortByOptions}"
@@ -343,7 +343,7 @@
                           ItemsSource="{Binding Source={StaticResource FlatResultsViewSource}}"
                           SelectedItem="{x:Bind ViewModel.SelectedTrack, Mode=TwoWay}"
                           SelectionChanged="{x:Bind OpenTrackDetailsAsync}"
-                          Visibility="{x:Bind HideWhenGrouped(ViewModel.GroupBy), Mode=OneWay}">
+                          Visibility="{x:Bind local:Converters.HideWhenGrouped(ViewModel.GroupBy), Mode=OneWay}">
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType="features:Track">
                             <Grid Margin="0,2,0,5">
@@ -369,7 +369,7 @@
                           ItemsSource="{Binding Source={StaticResource ResultsViewSource}}"
                           SelectedItem="{x:Bind ViewModel.SelectedTrack, Mode=TwoWay}"
                           SelectionChanged="{x:Bind OpenTrackDetailsAsync}"
-                          Visibility="{x:Bind ShowWhenGrouped(ViewModel.GroupBy), Mode=OneWay}">
+                          Visibility="{x:Bind local:Converters.ShowWhenGrouped(ViewModel.GroupBy), Mode=OneWay}">
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType="features:Track">
                             <Grid Margin="0,2,0,5">

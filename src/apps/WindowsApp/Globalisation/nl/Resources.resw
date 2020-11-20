@@ -117,8 +117,8 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="About.Text" xml:space="preserve">
-    <value>Over</value>
+  <data name="About.Header" xml:space="preserve">
+    <value>Info</value>
   </data>
   <data name="AboutThisApp.Text" xml:space="preserve">
     <value>Deze app toont de Top 2000 lijst sinds het jaar 1999 en toont statistieken van een plaat.</value>
@@ -132,6 +132,9 @@
   <data name="AutomaticallyScroll.Text" xml:space="preserve">
     <value>Actuele positie tonen</value>
     <comment>???</comment>
+  </data>
+  <data name="CheckForUpdates.Content" xml:space="preserve">
+    <value>Controleer op updates</value>
   </data>
   <data name="Close.Label" xml:space="preserve">
     <value>Sluiten</value>
@@ -273,6 +276,9 @@
   <data name="DarkTheme.Content" xml:space="preserve">
     <value>Donker</value>
   </data>
+  <data name="Database.Text" xml:space="preserve">
+    <value>Database</value>
+  </data>
   <data name="DatePivot.Header" xml:space="preserve">
     <value>Datum</value>
   </data>
@@ -372,6 +378,9 @@
   <data name="SelectYear.Text" xml:space="preserve">
     <value>Selecteer een jaar</value>
   </data>
+  <data name="SettingPivot.Title" xml:space="preserve">
+    <value>Instellingen</value>
+  </data>
   <data name="Settings.Text" xml:space="preserve">
     <value>Instellingen</value>
   </data>
@@ -390,6 +399,9 @@
   <data name="SystemTheme.Content" xml:space="preserve">
     <value>Gebruik systeem instellingen</value>
   </data>
+  <data name="TestedBy.Text" xml:space="preserve">
+    <value>Getest door:</value>
+  </data>
   <data name="ThemeMode.Text" xml:space="preserve">
     <value>Thema</value>
   </data>
@@ -400,12 +412,15 @@
     <value>Benader</value>
   </data>
   <data name="UpdateAvailable.Text" xml:space="preserve">
-    <value>We hebben een nieuwe Top 2000 lijst gedownload. Herstart de app om deze versie te gebruiken.</value>
+    <value>We hebben een nieuwe Top 2000 lijst gedownload.</value>
     <comment>List Update</comment>
   </data>
   <data name="UpdateAvailableHeader.Text" xml:space="preserve">
     <value>Nieuwe Top 2000 lijst beschikbaar</value>
     <comment>List Update</comment>
+  </data>
+  <data name="Version.Text" xml:space="preserve">
+    <value>Versie:</value>
   </data>
   <data name="ViewByDate.Text" xml:space="preserve">
     <value>Bekijk per datum</value>

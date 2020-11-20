@@ -1,6 +1,7 @@
 ﻿#nullable enable
 
 using Chroomsoft.Top2000.Features.AllListingsOfEdition;
+using Chroomsoft.Top2000.WindowsApp.Common;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -21,6 +22,8 @@ namespace Chroomsoft.Top2000.WindowsApp.YearOverview
         {
             this.InitializeComponent();
             ViewModel = App.GetService<ViewModel>();
+            var updater = App.GetService<IGlobalUpdate>();
+            updater.UpdateListsHandlerAsync = UpdateForNewList;
         }
 
         public ViewModel ViewModel { get; }
@@ -88,6 +91,13 @@ namespace Chroomsoft.Top2000.WindowsApp.YearOverview
             {
                 listingPage.OpenCurrentDateAndTime();
             }
+        }
+
+        private async Task UpdateForNewList()
+        {
+            await ViewModel.LoadAllEditionsAsync();
+            ViewModel.SelectedEdition = ViewModel.Editions.First();
+            if (Top2000IsOnAir()) NavigateToCurrentTimeSlot();
         }
 
         private bool Top2000IsOnAir()

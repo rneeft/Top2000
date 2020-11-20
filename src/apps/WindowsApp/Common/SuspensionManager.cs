@@ -38,11 +38,9 @@ namespace Chroomsoft.Top2000.WindowsApp.Common
     /// upgraded.
     /// </summary>
     /// <seealso cref="https://github.com/microsoft/Xaml-Controls-Gallery/blob/master/XamlControlsGallery/Common/SuspensionManager.cs"/>
-    internal sealed class SuspensionManager
+    internal static class SuspensionManager
     {
         private const string sessionStateFilename = "_sessionState.xml";
-        private static Dictionary<string, object> _sessionState = new Dictionary<string, object>();
-        private static List<Type> _knownTypes = new List<Type>();
 
         private static readonly DependencyProperty FrameSessionStateKeyProperty =
                     DependencyProperty.RegisterAttached("_FrameSessionStateKey", typeof(string), typeof(SuspensionManager), null);
@@ -50,7 +48,9 @@ namespace Chroomsoft.Top2000.WindowsApp.Common
         private static readonly DependencyProperty FrameSessionStateProperty =
                     DependencyProperty.RegisterAttached("_FrameSessionState", typeof(Dictionary<string, object>), typeof(SuspensionManager), null);
 
-        private static List<WeakReference<Frame>> _registeredFrames = new List<WeakReference<Frame>>();
+        private static readonly List<WeakReference<Frame>> _registeredFrames = new List<WeakReference<Frame>>();
+        private static readonly List<Type> _knownTypes = new List<Type>();
+        private static Dictionary<string, object> _sessionState = new Dictionary<string, object>();
 
         /// <summary>
         /// Provides access to global session state for the current session.  This state is

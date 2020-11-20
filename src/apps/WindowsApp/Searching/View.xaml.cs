@@ -3,7 +3,6 @@
 using Chroomsoft.Top2000.Features.Searching;
 using System;
 using System.Threading.Tasks;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
@@ -47,20 +46,6 @@ namespace Chroomsoft.Top2000.WindowsApp.Searching
             }
         }
 
-        public Visibility ShowWhenGrouped(GroupViewModel group)
-        {
-            return group.Value is GroupByNothing
-                ? Visibility.Collapsed
-                : Visibility.Visible;
-        }
-
-        public Visibility HideWhenGrouped(GroupViewModel group)
-        {
-            return group.Value is GroupByNothing
-                            ? Visibility.Visible
-                            : Visibility.Collapsed;
-        }
-
         private TrackInformation.NavigationData NavigationData()
         {
             return new TrackInformation.NavigationData
@@ -70,7 +55,6 @@ namespace Chroomsoft.Top2000.WindowsApp.Searching
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            //  ViewModel.OnLoad(this);
         }
 
         private void ClearSelectedTrack()
@@ -85,12 +69,12 @@ namespace Chroomsoft.Top2000.WindowsApp.Searching
         {
             switch (item)
             {
-                case GroupByNothing _: return None.Text;
+                case GroupByNothing _: return NoneDisplayName.Text;
                 case SortByArtist _:
-                case GroupByArtist _: return Artist.Text;
+                case GroupByArtist _: return ArtistDisplayName.Text;
                 case SortByRecordedYear _:
-                case GroupByRecordedYear _: return Year.Text;
-                case SortByTitle _: return Title.Text;
+                case GroupByRecordedYear _: return YearDisplayName.Text;
+                case SortByTitle _: return TitleDisplayName.Text;
                 default:
                     return null;
             }

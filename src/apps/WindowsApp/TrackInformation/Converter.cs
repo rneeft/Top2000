@@ -1,5 +1,6 @@
 ﻿using Chroomsoft.Top2000.Features.TrackInformation;
 using System;
+using System.Globalization;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
@@ -15,6 +16,8 @@ namespace Chroomsoft.Top2000.WindowsApp.TrackInformation
 
         private static readonly Thickness NoMargin = new Thickness(0, 0, 0, 0);
         private static readonly Thickness DecreasedMargin = new Thickness(0, 1, 0, 0);
+
+        private static readonly IFormatProvider formatProvider = DateTimeFormatInfo.InvariantInfo;
 
         public static string ToSymbol(ListingStatus status) => status switch
         {
@@ -64,7 +67,7 @@ namespace Chroomsoft.Top2000.WindowsApp.TrackInformation
             if (untilHour > 24)
                 untilHour = 0;
 
-            var date = value.Value.ToString("dddd d MMMM yyyy");
+            var date = value.Value.ToString("dddd d MMMM yyyy", formatProvider);
 
             return $"{date} {hour}:00 - {untilHour}:00";
         }

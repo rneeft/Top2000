@@ -138,12 +138,16 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="About\Converter.cs" />
+    <Compile Include="About\PackageHelper.cs" />
     <Compile Include="About\View.xaml.cs">
       <DependentUpon>View.xaml</DependentUpon>
     </Compile>
+    <Compile Include="About\ViewModel.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Common\IGlobalUpdate.cs" />
     <Compile Include="Common\ObservableBase.cs" />
     <Compile Include="Common\Converters.cs" />
     <Compile Include="Common\NotifiesOnAttribute.cs" />
@@ -165,13 +169,13 @@
       <DependentUpon>View.xaml</DependentUpon>
     </Compile>
     <Compile Include="ListingPosition\ViewModel.cs" />
-    <Compile Include="Navigation\NavigationOrientationHelper.cs" />
     <Compile Include="Navigation\View.xaml.cs">
       <DependentUpon>View.xaml</DependentUpon>
     </Compile>
     <Compile Include="Navigation\RootFrameNavigationHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AppHostBuilder.cs" />
+    <Compile Include="Searching\Converters.cs" />
     <Compile Include="Searching\GroupViewModel.cs" />
     <Compile Include="Searching\ISortGroupNameProvider.cs" />
     <Compile Include="Searching\SortViewModel.cs" />

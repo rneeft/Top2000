@@ -1,4 +1,6 @@
-﻿using Windows.Storage;
+﻿#nullable enable
+
+using Windows.Storage;
 using Windows.UI;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
@@ -11,10 +13,10 @@ namespace Chroomsoft.Top2000.WindowsApp.Common
     public static class ThemeHelper
     {
         private const string SelectedAppThemeKey = "SelectedAppTheme";
-        private static Window CurrentApplicationWindow;
+        private static Window? CurrentApplicationWindow;
 
         // Keep reference so it does not get optimized/garbage collected
-        private static UISettings uiSettings;
+        private static UISettings? uiSettings;
 
         /// <summary>
         /// Gets the current actual theme of the app based on the requested theme of the

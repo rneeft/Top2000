@@ -4,7 +4,6 @@ using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-
 namespace Chroomsoft.Top2000.WindowsApp.Navigation
 {
     /// <summary>
@@ -27,9 +26,7 @@ namespace Chroomsoft.Top2000.WindowsApp.Navigation
     [Windows.Foundation.Metadata.WebHostHidden]
     public class RootFrameNavigationHelper
     {
-        private Frame Frame { get; set; }
-        SystemNavigationManager systemNavigationManager;
-        private Microsoft.UI.Xaml.Controls.NavigationView CurrentNavView { get; set; }
+        private readonly SystemNavigationManager systemNavigationManager;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RootNavigationHelper"/> class.
@@ -63,6 +60,10 @@ namespace Chroomsoft.Top2000.WindowsApp.Navigation
             Window.Current.CoreWindow.PointerPressed +=
                 this.CoreWindow_PointerPressed;
         }
+
+        private Frame Frame { get; set; }
+
+        private Microsoft.UI.Xaml.Controls.NavigationView CurrentNavView { get; set; }
 
         private void NavView_BackRequested(Microsoft.UI.Xaml.Controls.NavigationView sender, Microsoft.UI.Xaml.Controls.NavigationViewBackRequestedEventArgs args)
         {
@@ -110,13 +111,12 @@ namespace Chroomsoft.Top2000.WindowsApp.Navigation
         {
             if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 6))
             {
-                this.CurrentNavView.IsBackEnabled = this.Frame.CanGoBack ? true : false;
+                this.CurrentNavView.IsBackEnabled = Frame.CanGoBack;
             }
             else
             {
                 systemNavigationManager.AppViewBackButtonVisibility = this.Frame.CanGoBack ? AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
             }
-
         }
 
         /// <summary>
