@@ -138,6 +138,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="About\View.xaml.cs">
+      <DependentUpon>View.xaml</DependentUpon>
+    </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
@@ -148,6 +151,7 @@
     <Compile Include="Common\ObservableList.cs" />
     <Compile Include="Common\PropertyHelper.cs" />
     <Compile Include="Common\SuspensionManager.cs" />
+    <Compile Include="Common\ThemeHelper.cs" />
     <Compile Include="Common\ValueConverterBase.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="ListingDate\DateTimeKeyToString.cs" />
@@ -252,6 +256,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="About\View.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="ListingDate\View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

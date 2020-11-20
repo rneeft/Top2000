@@ -38,12 +38,6 @@
                 <winui:NavigationViewItem x:Name="SearchItem" x:Uid="Search" Icon="Find" Content="%Search%" Tag="Search" />
             </winui:NavigationView.MenuItems>
 
-            <winui:NavigationView.PaneFooter>
-                <StackPanel Margin="10,0">
-                    <TextBlock Text="{x:Bind sys:String.Format('Page-width: {0}', RootPage.ActualWidth), Mode=OneWay}" FontSize="10" Opacity="0.25" />
-                </StackPanel>
-            </winui:NavigationView.PaneFooter>
-
             <Frame x:Name="rootFrame" Navigated="OnRootFrameNavigated" Navigating="rootFrame_Navigating" />
         </winui:NavigationView>
     </Grid>

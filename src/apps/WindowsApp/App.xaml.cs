@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Reflection;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
@@ -52,6 +53,15 @@ namespace Chroomsoft.Top2000.WindowsApp
             }
         }
 
+        public static TEnum GetEnum<TEnum>(string text) where TEnum : struct
+        {
+            if (!typeof(TEnum).GetTypeInfo().IsEnum)
+            {
+                throw new InvalidOperationException("Generic parameter 'TEnum' must be an enum.");
+            }
+            return (TEnum)Enum.Parse(typeof(TEnum), text);
+        }
+
         public static T GetService<T>() where T : notnull => ServiceProvider.GetRequiredService<T>();
 
         public static void InitialiseDependencyInjectionFramework()
@@ -77,6 +87,8 @@ namespace Chroomsoft.Top2000.WindowsApp
                 .AddSingleton<ListingPosition.ViewModel>()
                 .AddSingleton<TrackInformation.ViewModel>()
                 .AddSingleton<Searching.ViewModel>()
+                .AddSingleton<About.ViewModel>()
+                .AddSingleton<About.View>()
             ;
         }
 
@@ -134,6 +146,8 @@ namespace Chroomsoft.Top2000.WindowsApp
             await EnsureDatabaseIsCreatedAsync();
 
             var rootFrame = GetRootFrame();
+
+            ThemeHelper.Initialize();
 
             var targetPageArguments = string.Empty;
 

@@ -167,10 +167,10 @@ namespace Chroomsoft.Top2000.WindowsApp.Navigation
 
             if (args.IsSettingsInvoked)
             {
-                //if (rootFrame.CurrentSourcePageType != typeof(SettingsPage))
-                //{
-                //    rootFrame.Navigate(typeof(SettingsPage));
-                //}
+                if (rootFrame.CurrentSourcePageType != typeof(About.View))
+                {
+                    rootFrame.Navigate(typeof(About.View));
+                }
             }
             else
             {
