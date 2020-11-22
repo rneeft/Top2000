@@ -44,8 +44,8 @@ namespace Chroomsoft.Top2000.WindowsApp.ListingDate
                 .Select(x => x.Key)
                 .GroupBy(LocalPlayDate);
 
-            Listings.AddRange(listings);
-            Dates.AddRange(dates);
+            Listings.ClearAddRange(listings);
+            Dates.ClearAddRange(dates);
         }
 
         private DateTime LocalPlayDate(DateTime arg) => arg.Date;

@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿#nullable enable
+
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
@@ -7,13 +9,13 @@ namespace Chroomsoft.Top2000.WindowsApp.Common
 {
     public class ObservableList<TItem> : Collection<TItem>, INotifyCollectionChanged
     {
-        public event NotifyCollectionChangedEventHandler CollectionChanged;
+        public event NotifyCollectionChangedEventHandler? CollectionChanged;
 
         /// <summary>
         /// Removed all the items in the list, add the list of items and notify the observers.
         /// </summary>
         /// <param name="items">Items to add</param>
-        public void AddRange(IEnumerable<TItem> items)
+        public void ClearAddRange(IEnumerable<TItem> items)
         {
             this.Clear();
             items.ToList().ForEach(Add);

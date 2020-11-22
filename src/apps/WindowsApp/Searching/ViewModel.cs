@@ -83,8 +83,8 @@ namespace Chroomsoft.Top2000.WindowsApp.Searching
         {
             if (GroupByOptions.Count == 0)
             {
-                GroupByOptions.AddRange(groupOptions.Select(x => new GroupViewModel(x, nameProvider.GetNameForGroup(x))));
-                SortByOptions.AddRange(sortOptions.Select(x => new SortViewModel(x, nameProvider.GetNameForSort(x))));
+                GroupByOptions.ClearAddRange(groupOptions.Select(x => new GroupViewModel(x, nameProvider.GetNameForGroup(x))));
+                SortByOptions.ClearAddRange(sortOptions.Select(x => new SortViewModel(x, nameProvider.GetNameForSort(x))));
                 GroupBy = GroupByOptions.First();
                 SortBy = SortByOptions.First();
             }
@@ -95,8 +95,8 @@ namespace Chroomsoft.Top2000.WindowsApp.Searching
             var request = new SearchTrackRequest(QueryText, SortBy.Value, GroupBy.Value);
             var result = await mediator.Send(request);
 
-            Results.AddRange(result);
-            ResultsFlat.AddRange(Results.SelectMany(x => x));
+            Results.ClearAddRange(result);
+            ResultsFlat.ClearAddRange(Results.SelectMany(x => x));
 
             ResultsCount = ResultsFlat.Count > 99 ? "100+" : "" + ResultsFlat.Count;
         }
@@ -106,10 +106,10 @@ namespace Chroomsoft.Top2000.WindowsApp.Searching
             if (GroupBy is null || SortBy is null) return;
             var resultFlat = Results.SelectMany(x => x).ToList();
             var sorted = SortBy.Value.Sort(resultFlat);
-            ResultsFlat.AddRange(sorted);
+            ResultsFlat.ClearAddRange(sorted);
 
             var groupedAndSorted = GroupBy.Value.Group(sorted);
-            Results.AddRange(groupedAndSorted);
+            Results.ClearAddRange(groupedAndSorted);
 
             IsGrouped = !(GroupBy.Value is GroupByNothing);
         }

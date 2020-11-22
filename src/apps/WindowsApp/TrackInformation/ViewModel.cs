@@ -94,7 +94,7 @@ namespace Chroomsoft.Top2000.WindowsApp.TrackInformation
             AppearancesPossible = track.AppearancesPossible;
             IsLatestListed = track.Listings.First().Status != ListingStatus.NotListed;
             Listings.Clear();
-            Listings.AddRange(track.Listings);
+            Listings.ClearAddRange(track.Listings);
         }
     }
 }

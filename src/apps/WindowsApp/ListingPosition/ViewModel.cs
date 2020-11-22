@@ -44,7 +44,7 @@ namespace Chroomsoft.Top2000.WindowsApp.ListingPosition
         {
             var tracks = await mediator.Send(new AllListingsOfEditionRequest(edition.Year));
             var x = tracks.GroupBy(Position);
-            Listings.AddRange(x);
+            Listings.ClearAddRange(x);
 
             SelectedListing = null;
         }

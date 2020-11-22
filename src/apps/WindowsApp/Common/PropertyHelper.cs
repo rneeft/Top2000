@@ -1,4 +1,4 @@
-﻿#nullable enable
+﻿#nullable disable
 
 using System;
 using System.Collections.Generic;
@@ -16,7 +16,7 @@ namespace Chroomsoft.Top2000.WindowsApp.Common
         private readonly Action<string> notifyOfPropertyChange;
         private readonly Type type;
 
-        private ILookup<string, string>? _dependentLookup;
+        private ILookup<string, string> _dependentLookup;
 
         public PropertyHelper(Action<string> notifyOfPropertyChange, Type type)
         {
@@ -28,16 +28,16 @@ namespace Chroomsoft.Top2000.WindowsApp.Common
         {
             get
             {
-                return _dependentLookup ?? (_dependentLookup = (from p in type.GetProperties()
-                                                                let attrs = p.GetCustomAttributes(typeof(NotifiesOnAttribute), false)
-                                                                from NotifiesOnAttribute a in attrs
-                                                                select new { Independent = a.Name, Dependent = p.Name }).ToLookup(i => i.Independent, d => d.Dependent));
+                return _dependentLookup ??= (from p in type.GetProperties()
+                                             let attrs = p.GetCustomAttributes(typeof(NotifiesOnAttribute), false)
+                                             from NotifiesOnAttribute a in attrs
+                                             select new { Independent = a.Name, Dependent = p.Name }).ToLookup(i => i.Independent, d => d.Dependent);
             }
         }
 
         public T GetPropertyValue<T>([CallerMemberName] string propertyName = null)
         {
-            if (propertyName == null) throw new ArgumentNullException(nameof(propertyName));
+            _ = propertyName ?? throw new ArgumentNullException(nameof(propertyName));
 
             if (propertyBackingDictionary.TryGetValue(propertyName, out object value))
                 return (T)value;

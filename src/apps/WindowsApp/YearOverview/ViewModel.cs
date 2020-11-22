@@ -46,12 +46,12 @@ namespace Chroomsoft.Top2000.WindowsApp.YearOverview
         {
             if (Editions.Count == 0)
             {
-                Editions.AddRange(await mediator.Send(new AllEditionsRequest()));
+                Editions.ClearAddRange(await mediator.Send(new AllEditionsRequest()));
             }
 
             if (globalUpdate.IsUpdateAvalable)
             {
-                Editions.AddRange(await mediator.Send(new AllEditionsRequest()));
+                Editions.ClearAddRange(await mediator.Send(new AllEditionsRequest()));
                 SelectedEdition = Editions.First();
                 globalUpdate.IsUpdateAvalable = false;
             }
