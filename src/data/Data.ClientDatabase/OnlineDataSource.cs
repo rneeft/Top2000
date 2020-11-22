@@ -38,8 +38,8 @@ namespace Chroomsoft.Top2000.Data.ClientDatabase
         {
             var httpClient = httpClientFactory.CreateClient("top2000");
             var requestUri = $"data/{scriptName}";
-            var response = await httpClient.GetAsync(requestUri).ConfigureAwait(false);
 
+            var response = await httpClient.GetAsync(requestUri).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
 
             var contents = await response.Content.ReadAsStringAsync().ConfigureAwait(false);

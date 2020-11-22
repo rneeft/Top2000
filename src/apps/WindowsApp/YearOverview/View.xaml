@@ -34,7 +34,8 @@
 
                         <CommandBar Grid.Column="1" Background="Transparent" DefaultLabelPosition="Collapsed">
                             <CommandBar.PrimaryCommands>
-                                <AppBarButton Icon="CalendarReply" Click="{x:Bind NavigateToCurrentTimeSlot}" />
+                                <AppBarButton Icon="CalendarReply" x:Name="NavToTimeSlot"
+                                              Click="{x:Bind NavigateToCurrentTimeSlot}" />
                             </CommandBar.PrimaryCommands>
                         </CommandBar>
 

@@ -436,7 +436,7 @@
   <data name="Version.Text" xml:space="preserve">
     <value>Version:</value>
   </data>
-  <data name="ViewByDate.Content" xml:space="preserve">
+  <data name="ViewByDate.Text" xml:space="preserve">
     <value>View By Date</value>
   </data>
   <data name="VisitTop2000Site.Text" xml:space="preserve">

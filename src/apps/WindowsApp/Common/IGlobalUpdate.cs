@@ -11,7 +11,7 @@ namespace Chroomsoft.Top2000.WindowsApp.Common
 
         Func<Task>? UpdateListsHandlerAsync { get; set; }
 
-        bool UpdateAvalable { get; set; }
+        bool IsUpdateAvalable { get; set; }
 
         Task NewVersionAvailableAsync();
     }
@@ -22,11 +22,11 @@ namespace Chroomsoft.Top2000.WindowsApp.Common
 
         public Func<Task>? UpdateListsHandlerAsync { get; set; }
 
-        public bool UpdateAvalable { get; set; }
+        public bool IsUpdateAvalable { get; set; }
 
         public Task NewVersionAvailableAsync()
         {
-            UpdateAvalable = true;
+            IsUpdateAvalable = true;
             NotificationHandler?.Invoke();
 
             if (UpdateListsHandlerAsync != null)

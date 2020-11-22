@@ -77,10 +77,9 @@ namespace Chroomsoft.Top2000.WindowsApp.YearOverview
             await ViewModel.LoadAllEditionsAsync();
             ViewModel.SelectedEdition ??= ViewModel.Editions.First();
 
-            if (Top2000IsOnAir())
-            {
-                NavigateToCurrentTimeSlot();
-            }
+            NavToTimeSlot.Visibility = ViewModel.IsTop2000OnAir
+                ? Windows.UI.Xaml.Visibility.Visible
+                : Windows.UI.Xaml.Visibility.Collapsed;
         }
 
         private void NavigateToCurrentTimeSlot()
@@ -97,15 +96,7 @@ namespace Chroomsoft.Top2000.WindowsApp.YearOverview
         {
             await ViewModel.LoadAllEditionsAsync();
             ViewModel.SelectedEdition = ViewModel.Editions.First();
-            if (Top2000IsOnAir()) NavigateToCurrentTimeSlot();
-        }
-
-        private bool Top2000IsOnAir()
-        {
-            var edition = ViewModel.Editions.First();
-            var time = DateTime.UtcNow;
-
-            return time > edition.StartUtcDateAndTime && time < edition.EndUtcDateAndTime;
+            if (ViewModel.IsTop2000OnAir) NavigateToCurrentTimeSlot();
         }
 
         private void ClearSelectedTrack()
