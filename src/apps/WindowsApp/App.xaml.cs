@@ -82,6 +82,7 @@ namespace Chroomsoft.Top2000.WindowsApp
                 .AddSingleton<About.ViewModel>()
                 .AddSingleton<About.View>()
                 .AddSingleton<IGlobalUpdate, GlobalUpdates>()
+                .AddTransient<IOnlineUpdateChecker, OnlineUpdateChecker>();
             ;
         }
 
@@ -98,10 +99,6 @@ namespace Chroomsoft.Top2000.WindowsApp
         protected override async void OnLaunched(LaunchActivatedEventArgs args)
         {
 #if DEBUG
-            if (Debugger.IsAttached)
-            {
-                // this.DebugSettings.EnableFrameRateCounter = true;
-            }
             if (Debugger.IsAttached)
             {
                 this.DebugSettings.BindingFailed += DebugSettings_BindingFailed;
@@ -128,6 +125,14 @@ namespace Chroomsoft.Top2000.WindowsApp
             return databaseGen.RunAsync(top2000);
         }
 
+        private static async Task CheckForOnlineUpdates()
+        {
+            await Task.Delay(5 * 1000);
+
+            var checker = App.GetService<IOnlineUpdateChecker>();
+            await checker.UpdateAsync();
+        }
+
         private void DebugSettings_BindingFailed(object sender, BindingFailedEventArgs e)
         {
             Debugger.Break();
@@ -137,6 +142,10 @@ namespace Chroomsoft.Top2000.WindowsApp
         {
             InitialiseDependencyInjectionFramework();
             await EnsureDatabaseIsCreatedAsync();
+
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+            CheckForOnlineUpdates();
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
 
             var rootFrame = GetRootFrame();
 
@@ -174,11 +183,8 @@ namespace Chroomsoft.Top2000.WindowsApp
             if (!(Window.Current.Content is Navigation.View rootPage))
             {
                 rootPage = ServiceProvider.GetRequiredService<Navigation.View>();
-                rootFrame = (Frame)rootPage.FindName("rootFrame");
-                if (rootFrame == null)
-                {
-                    throw new Exception("Root frame not found");
-                }
+                rootFrame = (Frame)rootPage.FindName("rootFrame")
+                    ?? throw new Exception("Root frame not found");
 
                 SuspensionManager.RegisterFrame(rootFrame, "AppFrame");
                 rootFrame.Language = Windows.Globalization.ApplicationLanguages.Languages[0];

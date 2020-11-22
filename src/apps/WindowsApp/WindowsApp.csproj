@@ -148,6 +148,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Common\IGlobalUpdate.cs" />
+    <Compile Include="Common\IOnlineUpdateChecker.cs" />
     <Compile Include="Common\ObservableBase.cs" />
     <Compile Include="Common\Converters.cs" />
     <Compile Include="Common\NotifiesOnAttribute.cs" />

@@ -1,6 +1,5 @@
 ﻿#nullable enable
 
-using Chroomsoft.Top2000.Data.ClientDatabase;
 using Chroomsoft.Top2000.Features.DatabaseInfo;
 using Chroomsoft.Top2000.WindowsApp.Common;
 using MediatR;
@@ -11,16 +10,12 @@ namespace Chroomsoft.Top2000.WindowsApp.About
     public class ViewModel : ObservableBase
     {
         private readonly IMediator mediator;
-        private readonly IUpdateClientDatabase updateClientDatabase;
-        private readonly OnlineDataSource onlineDataSource;
-        private readonly IGlobalUpdate globalUpdate;
+        private readonly IOnlineUpdateChecker onlineUpdateChecker;
 
-        public ViewModel(IMediator mediator, IUpdateClientDatabase updateClientDatabase, OnlineDataSource onlineDataSource, IGlobalUpdate globalUpdate)
+        public ViewModel(IMediator mediator, IOnlineUpdateChecker onlineUpdateChecker)
         {
             this.mediator = mediator;
-            this.updateClientDatabase = updateClientDatabase;
-            this.onlineDataSource = onlineDataSource;
-            this.globalUpdate = globalUpdate;
+            this.onlineUpdateChecker = onlineUpdateChecker;
         }
 
         public bool IsBusy
@@ -35,33 +30,14 @@ namespace Chroomsoft.Top2000.WindowsApp.About
             set { SetPropertyValue(value); }
         }
 
-        public string ApplicationVersion
-        {
-            get { return GetPropertyValue<string>(); }
-            set { SetPropertyValue(value); }
-        }
-
         public async Task CheckForUpdatesAsync()
         {
             IsBusy = true;
 
-            try
-            {
-                await updateClientDatabase.RunAsync(onlineDataSource);
-                var newVersion = await mediator.Send(new DatabaseInfoRequest());
+            var isUpdated = await this.onlineUpdateChecker.UpdateAsync();
 
-                if (DatabaseVersion != newVersion)
-                {
-                    await globalUpdate.NewVersionAvailableAsync();
-                    DatabaseVersion = newVersion;
-                }
-            }
-#pragma warning disable CA1031 // Do not catch general exception types
-            catch
-#pragma warning restore CA1031 // Do not catch general exception types
-            {
-                // lets not crash the app here
-            }
+            if (isUpdated)
+                DatabaseVersion = await mediator.Send(new DatabaseInfoRequest());
 
             IsBusy = false;
         }
