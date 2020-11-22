@@ -3,6 +3,11 @@
 using Chroomsoft.Top2000.Data.ClientDatabase;
 using Chroomsoft.Top2000.Features;
 using Chroomsoft.Top2000.WindowsApp.Common;
+using Chroomsoft.Top2000.WindowsApp.Common.Behavior;
+using MediatR;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -25,9 +30,14 @@ namespace Chroomsoft.Top2000.WindowsApp
     sealed partial class App : Application
     {
         private static IServiceProvider? serviceProvider;
+        private static Stopwatch? startupWatch;
 
         public App()
         {
+            startupWatch = Stopwatch.StartNew();
+            AppCenter.Start("a73816a5-fcfd-4cdf-9a34-8413c2f22190",
+                   typeof(Analytics), typeof(Crashes));
+
             this.InitializeComponent();
             this.Suspending += OnSuspending;
 
@@ -44,6 +54,18 @@ namespace Chroomsoft.Top2000.WindowsApp
             {
                 serviceProvider = value;
             }
+        }
+
+        public static TimeSpan? GetStartupTime()
+        {
+            if (startupWatch is null) return null;
+
+            var time = startupWatch.Elapsed;
+
+            startupWatch.Stop();
+            startupWatch = null;
+
+            return time;
         }
 
         public static TEnum GetEnum<TEnum>(string text) where TEnum : struct
@@ -72,6 +94,7 @@ namespace Chroomsoft.Top2000.WindowsApp
             services
                 .AddClientDatabase(new DirectoryInfo(FileSystem.AppDataDirectory))
                 .AddFeatures()
+                .AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>))
                 .AddTransient<Navigation.View>()
                 .AddTransient<YearOverview.View>()
                 .AddSingleton<YearOverview.ViewModel>()
@@ -82,7 +105,7 @@ namespace Chroomsoft.Top2000.WindowsApp
                 .AddSingleton<About.ViewModel>()
                 .AddSingleton<About.View>()
                 .AddSingleton<IGlobalUpdate, GlobalUpdates>()
-                .AddTransient<IOnlineUpdateChecker, OnlineUpdateChecker>();
+                .AddTransient<IOnlineUpdateChecker, OnlineUpdateChecker>()
             ;
         }
 

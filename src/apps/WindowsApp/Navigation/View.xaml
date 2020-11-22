@@ -39,7 +39,7 @@
                 <winui:NavigationViewItem x:Name="SearchItem" x:Uid="Search" Icon="Find" Content="%Search%" Tag="Search" />
             </winui:NavigationView.MenuItems>
 
-            <Frame x:Name="rootFrame" />
+            <Frame x:Name="rootFrame" Navigated="rootFrame_Navigated" />
         </winui:NavigationView>
 
         <control:InAppNotification x:Name="UpdateNotification">

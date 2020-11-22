@@ -1,6 +1,8 @@
 ﻿#nullable enable
 
 using Chroomsoft.Top2000.WindowsApp.Common;
+using Microsoft.AppCenter.Analytics;
+using System.Collections.Generic;
 using Windows.ApplicationModel.Core;
 using Windows.UI;
 using Windows.UI.ViewManagement;
@@ -43,10 +45,6 @@ namespace Chroomsoft.Top2000.WindowsApp.Navigation
             UpdateNotification.Show();
         }
 
-        //private static View Current { get; }
-
-        //private static Frame RootFrame { get; }
-
         private void UpdateAppTitle(CoreApplicationViewTitleBar coreTitleBar)
         {
             //ensure the custom title bar does not overlap window caption controls
@@ -65,6 +63,7 @@ namespace Chroomsoft.Top2000.WindowsApp.Navigation
 
             if (args.IsSettingsInvoked)
             {
+                Analytics.TrackEvent("SettingsOpen");
                 if (rootFrame.CurrentSourcePageType != typeof(About.View))
                 {
                     rootFrame.Navigate(typeof(About.View));
@@ -83,6 +82,22 @@ namespace Chroomsoft.Top2000.WindowsApp.Navigation
                 {
                     rootFrame.Navigate(typeof(Searching.View));
                 }
+            }
+        }
+
+        private void rootFrame_Navigated(object sender, Windows.UI.Xaml.Navigation.NavigationEventArgs e)
+        {
+            rootFrame.Navigated -= rootFrame_Navigated;
+
+            var startupTime = App.GetStartupTime();
+
+            if (startupTime != null)
+            {
+                Analytics.TrackEvent("Startup", new Dictionary<string, string>
+                {
+                    { "StartTotalSeconds", "" + startupTime.Value.TotalSeconds },
+                    { "StartTotalMilliseconds", "" + startupTime.Value.TotalMilliseconds }
+                });
             }
         }
     }
