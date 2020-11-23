@@ -4,14 +4,15 @@ using System.IO;
 using System.Reflection;
 using Xamarin.Essentials;
 
-namespace WindowsApp
+namespace Chroomsoft.Top2000.WindowsApp
 {
     public class AppHostBuilder
     {
         public IHostBuilder CreateDefaultAppHostBuilder()
         {
             return new HostBuilder()
-                .ConfigureHostConfiguration(ConfigureConfiguration);
+                .ConfigureHostConfiguration(ConfigureConfiguration)
+                ;
         }
 
         private static string SaveAppSettingsToLocalDisk()

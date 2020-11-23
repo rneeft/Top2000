@@ -3,7 +3,7 @@
     <Nullable>disable</Nullable>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="FluentAssertions" Version="5.10.3" />
-    <PackageReference Include="Moq" Version="4.14.5" />
+    <PackageReference Include="FluentAssertions" Version="5.*" />
+    <PackageReference Include="Moq" Version="4.*" />
   </ItemGroup>
 </Project>

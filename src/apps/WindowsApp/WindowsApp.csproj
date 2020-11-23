@@ -4,15 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <LangVersion>8.0</LangVersion>
+    <Nullable>enable</Nullable>
     <ProjectGuid>{B32D1952-CDE0-4974-A35D-BB61C45F26A9}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WindowsApp</RootNamespace>
-    <AssemblyName>WindowsApp</AssemblyName>
-    <DefaultLanguage>en-US</DefaultLanguage>
+    <RootNamespace>Chroomsoft.Top2000.WindowsApp</RootNamespace>
+    <AssemblyName>Chroomsoft.Top2000.WindowsApp</AssemblyName>
+    <DefaultLanguage>nl</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.18362.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.16299.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.19041.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.18362.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -21,6 +23,8 @@
     <BuildForLiveUnitTesting>false</BuildForLiveUnitTesting>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <LangVersion>8.0</LangVersion>
+    <Nullable>enable</Nullable>
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\x86\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
@@ -33,6 +37,8 @@
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <LangVersion>8.0</LangVersion>
+    <Nullable>enable</Nullable>
     <OutputPath>bin\x86\Release\</OutputPath>
     <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
     <Optimize>true</Optimize>
@@ -45,6 +51,8 @@
     <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
+    <LangVersion>8.0</LangVersion>
+    <Nullable>enable</Nullable>
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\ARM\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
@@ -56,6 +64,8 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'">
+    <LangVersion>8.0</LangVersion>
+    <Nullable>enable</Nullable>
     <OutputPath>bin\ARM\Release\</OutputPath>
     <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
     <Optimize>true</Optimize>
@@ -68,6 +78,8 @@
     <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM64'">
+    <LangVersion>8.0</LangVersion>
+    <Nullable>enable</Nullable>
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\ARM64\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
@@ -80,6 +92,8 @@
     <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM64'">
+    <LangVersion>8.0</LangVersion>
+    <Nullable>enable</Nullable>
     <OutputPath>bin\ARM64\Release\</OutputPath>
     <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
     <Optimize>true</Optimize>
@@ -92,6 +106,8 @@
     <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <LangVersion>8.0</LangVersion>
+    <Nullable>enable</Nullable>
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\x64\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
@@ -103,6 +119,8 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <LangVersion>8.0</LangVersion>
+    <Nullable>enable</Nullable>
     <OutputPath>bin\x64\Release\</OutputPath>
     <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
     <Optimize>true</Optimize>
@@ -117,17 +135,69 @@
   <PropertyGroup>
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
     <LangVersion>8</LangVersion>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="About\Converter.cs" />
+    <Compile Include="About\PackageHelper.cs" />
+    <Compile Include="About\View.xaml.cs">
+      <DependentUpon>View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="About\ViewModel.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Features\AllEditions.cs" />
-    <Compile Include="MainPage.xaml.cs">
-      <DependentUpon>MainPage.xaml</DependentUpon>
+    <Compile Include="Common\Behavior\LogBehavior.cs" />
+    <Compile Include="Common\IGlobalUpdate.cs" />
+    <Compile Include="Common\IOnlineUpdateChecker.cs" />
+    <Compile Include="Common\ObservableBase.cs" />
+    <Compile Include="Common\Converters.cs" />
+    <Compile Include="Common\NotifiesOnAttribute.cs" />
+    <Compile Include="Common\ObservableGroupedList.cs" />
+    <Compile Include="Common\ObservableList.cs" />
+    <Compile Include="Common\PropertyHelper.cs" />
+    <Compile Include="Common\SuspensionManager.cs" />
+    <Compile Include="Common\ThemeHelper.cs" />
+    <Compile Include="Common\ValueConverterBase.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="ListingDate\DateTimeKeyToString.cs" />
+    <Compile Include="ListingDate\DateTimeToDateOnlyString.cs" />
+    <Compile Include="ListingDate\DateTimeToTimeOnlyString.cs" />
+    <Compile Include="ListingDate\View.xaml.cs">
+      <DependentUpon>View.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ListingDate\ViewModel.cs" />
+    <Compile Include="ListingPosition\View.xaml.cs">
+      <DependentUpon>View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ListingPosition\ViewModel.cs" />
+    <Compile Include="Navigation\View.xaml.cs">
+      <DependentUpon>View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Navigation\RootFrameNavigationHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AppHostBuilder.cs" />
+    <Compile Include="Searching\Converters.cs" />
+    <Compile Include="Searching\GroupViewModel.cs" />
+    <Compile Include="Searching\ISortGroupNameProvider.cs" />
+    <Compile Include="Searching\SortViewModel.cs" />
+    <Compile Include="Searching\View.xaml.cs">
+      <DependentUpon>View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Searching\ViewModel.cs" />
+    <Compile Include="TrackInformation\Converter.cs" />
+    <Compile Include="TrackInformation\NavigationData.cs" />
+    <Compile Include="TrackInformation\View.xaml.cs">
+      <DependentUpon>View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TrackInformation\ViewModel.cs" />
+    <Compile Include="YearOverview\Converters.cs" />
+    <Compile Include="YearOverview\NavigationData.cs" />
+    <Compile Include="YearOverview\Test.cs" />
+    <Compile Include="YearOverview\ViewModel.cs" />
+    <Compile Include="YearOverview\View.xaml.cs">
+      <DependentUpon>View.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -135,46 +205,123 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Common\Assets\Images\LargeTile.scale-100.png" />
+    <Content Include="Common\Assets\Images\LargeTile.scale-125.png" />
+    <Content Include="Common\Assets\Images\LargeTile.scale-150.png" />
+    <Content Include="Common\Assets\Images\LargeTile.scale-200.png" />
+    <Content Include="Common\Assets\Images\LargeTile.scale-400.png" />
+    <Content Include="Common\Assets\Images\SmallTile.scale-100.png" />
+    <Content Include="Common\Assets\Images\SmallTile.scale-125.png" />
+    <Content Include="Common\Assets\Images\SmallTile.scale-150.png" />
+    <Content Include="Common\Assets\Images\SmallTile.scale-200.png" />
+    <Content Include="Common\Assets\Images\SmallTile.scale-400.png" />
+    <Content Include="Common\Assets\Images\SplashScreen.scale-100.png" />
+    <Content Include="Common\Assets\Images\SplashScreen.scale-125.png" />
+    <Content Include="Common\Assets\Images\SplashScreen.scale-150.png" />
+    <Content Include="Common\Assets\Images\SplashScreen.scale-200.png" />
+    <Content Include="Common\Assets\Images\SplashScreen.scale-400.png" />
+    <Content Include="Common\Assets\Images\Square150x150Logo.scale-100.png" />
+    <Content Include="Common\Assets\Images\Square150x150Logo.scale-125.png" />
+    <Content Include="Common\Assets\Images\Square150x150Logo.scale-150.png" />
+    <Content Include="Common\Assets\Images\Square150x150Logo.scale-200.png" />
+    <Content Include="Common\Assets\Images\Square150x150Logo.scale-400.png" />
+    <Content Include="Common\Assets\Images\Square44x44Logo.altform-lightunplated_targetsize-16.png" />
+    <Content Include="Common\Assets\Images\Square44x44Logo.altform-lightunplated_targetsize-24.png" />
+    <Content Include="Common\Assets\Images\Square44x44Logo.altform-lightunplated_targetsize-256.png" />
+    <Content Include="Common\Assets\Images\Square44x44Logo.altform-lightunplated_targetsize-32.png" />
+    <Content Include="Common\Assets\Images\Square44x44Logo.altform-lightunplated_targetsize-48.png" />
+    <Content Include="Common\Assets\Images\Square44x44Logo.altform-unplated_targetsize-16.png" />
+    <Content Include="Common\Assets\Images\Square44x44Logo.altform-unplated_targetsize-24.png" />
+    <Content Include="Common\Assets\Images\Square44x44Logo.altform-unplated_targetsize-256.png" />
+    <Content Include="Common\Assets\Images\Square44x44Logo.altform-unplated_targetsize-32.png" />
+    <Content Include="Common\Assets\Images\Square44x44Logo.altform-unplated_targetsize-48.png" />
+    <Content Include="Common\Assets\Images\Square44x44Logo.scale-100.png" />
+    <Content Include="Common\Assets\Images\Square44x44Logo.scale-125.png" />
+    <Content Include="Common\Assets\Images\Square44x44Logo.scale-150.png" />
+    <Content Include="Common\Assets\Images\Square44x44Logo.scale-200.png" />
+    <Content Include="Common\Assets\Images\Square44x44Logo.scale-400.png" />
+    <Content Include="Common\Assets\Images\Square44x44Logo.targetsize-16.png" />
+    <Content Include="Common\Assets\Images\Square44x44Logo.targetsize-24.png" />
+    <Content Include="Common\Assets\Images\Square44x44Logo.targetsize-256.png" />
+    <Content Include="Common\Assets\Images\Square44x44Logo.targetsize-32.png" />
+    <Content Include="Common\Assets\Images\Square44x44Logo.targetsize-48.png" />
+    <Content Include="Common\Assets\Images\StoreLogo.scale-100.png" />
+    <Content Include="Common\Assets\Images\StoreLogo.scale-125.png" />
+    <Content Include="Common\Assets\Images\StoreLogo.scale-150.png" />
+    <Content Include="Common\Assets\Images\StoreLogo.scale-200.png" />
+    <Content Include="Common\Assets\Images\StoreLogo.scale-400.png" />
+    <Content Include="Common\Assets\Images\Wide310x150Logo.scale-100.png" />
+    <Content Include="Common\Assets\Images\Wide310x150Logo.scale-125.png" />
+    <Content Include="Common\Assets\Images\Wide310x150Logo.scale-150.png" />
+    <Content Include="Common\Assets\Images\Wide310x150Logo.scale-200.png" />
+    <Content Include="Common\Assets\Images\Wide310x150Logo.scale-400.png" />
     <Content Include="Properties\Default.rd.xml" />
-    <Content Include="Assets\LockScreenLogo.scale-200.png" />
-    <Content Include="Assets\SplashScreen.scale-200.png" />
-    <Content Include="Assets\Square150x150Logo.scale-200.png" />
-    <Content Include="Assets\Square44x44Logo.scale-200.png" />
-    <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
-    <Content Include="Assets\StoreLogo.png" />
-    <Content Include="Assets\Wide310x150Logo.scale-200.png" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="MainPage.xaml">
+    <Page Include="About\View.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="ListingDate\View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ListingPosition\View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Navigation\View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Common\Assets\Top2000Theme.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Searching\View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TrackInformation\View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="YearOverview\View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="CommandDotNet.IoC.MicrosoftDependencyInjection">
-      <Version>3.0.0</Version>
-    </PackageReference>
     <PackageReference Include="MediatR">
-      <Version>8.1.0</Version>
+      <Version>9.0.0</Version>
     </PackageReference>
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection">
-      <Version>8.1.0</Version>
+      <Version>9.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AppCenter.Analytics">
+      <Version>4.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AppCenter.Crashes">
+      <Version>4.0.0</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Hosting">
-      <Version>3.1.7</Version>
+      <Version>3.1.9</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Http">
-      <Version>3.1.7</Version>
+      <Version>3.1.9</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions">
-      <Version>3.1.7</Version>
+      <Version>3.1.9</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.2.10</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Controls">
+      <Version>6.1.1</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.UI.Xaml">
       <Version>2.4.3</Version>
@@ -186,7 +333,7 @@
       <Version>1.6.292</Version>
     </PackageReference>
     <PackageReference Include="sqlite-net-pcl">
-      <Version>1.6.292</Version>
+      <Version>1.7.335</Version>
     </PackageReference>
     <PackageReference Include="System.Text.Json">
       <Version>4.7.2</Version>
@@ -198,7 +345,6 @@
   <ItemGroup>
     <EmbeddedResource Include="appsettings.json" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\..\data\Data.ClientDatabase\Data.ClientDatabase.csproj">
       <Project>{AC263E16-2ACF-4377-A6A6-9D34F6240FA3}</Project>
@@ -208,7 +354,21 @@
       <Project>{9CA84A58-FD3C-4ED5-8438-3F41F9AE3214}</Project>
       <Name>Data.SQLScripts</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Features\Features.csproj">
+      <Project>{B76E202F-8911-4945-A48B-F5680554AC5F}</Project>
+      <Name>Features</Name>
+    </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="Globalisation\fr\Resources.resw" />
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="Globalisation\nl\Resources.resw" />
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="Globalisation\en\Resources.resw" />
+  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

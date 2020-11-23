@@ -1,0 +1,99 @@
+﻿<Page
+    x:Class="Chroomsoft.Top2000.WindowsApp.About.View"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Chroomsoft.Top2000.WindowsApp.About"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:winui="using:Microsoft.UI.Xaml.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Pivot Margin="0,36,0,0" x:Name="AboutPivot" x:Uid="SettingPivot" Title="%Setting%">
+        <PivotItem x:Uid="GeneralPivot" Header="%General%">
+            <StackPanel>
+                <TextBlock x:Uid="ThemeMode" Text="%Theme Mode%" Style="{StaticResource SubtitleTextBlockStyle }" />
+
+                <StackPanel x:Name="ThemePanel" Margin="0,10,0,0">
+                    <RadioButton Tag="Light" Checked="OnThemeRadioButtonChecked" Content="Light" x:Uid="LightTheme" />
+                    <RadioButton Tag="Dark" Checked="OnThemeRadioButtonChecked" Content="Dark" x:Uid="DarkTheme" />
+                    <RadioButton Tag="Default" Checked="OnThemeRadioButtonChecked" Content="Use system setting" x:Uid="SystemTheme" />
+                </StackPanel>
+
+                <TextBlock x:Uid="Database" Text="%Database%" Margin="0,30,0,0" Style="{StaticResource SubtitleTextBlockStyle }" />
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock x:Uid="Version" Text="%Version:%" />
+                    <TextBlock Text="{x:Bind ViewModel.DatabaseVersion, Mode=OneWay}" Margin="5,0,0,0" />
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <Button x:Uid="CheckForUpdates" Content="%Check for updates%"
+                            Click="{x:Bind ViewModel.CheckForUpdatesAsync}"
+                            IsEnabled="{x:Bind local:Converter.Not(ViewModel.IsBusy), Mode=OneWay}" />
+                    <winui:ProgressRing Visibility="{x:Bind local:Converter.VisibilityIfTrue(ViewModel.IsBusy), Mode=OneWay}" Margin="5,0,0,0" />
+                </StackPanel>
+            </StackPanel>
+        </PivotItem>
+
+        <PivotItem x:Uid="PrivacyPivot" Header="%Privacy Statement%">
+            <Grid>
+                <WebView x:Name="PrivacyWebView" />
+                <TextBlock x:Uid="PrivacyStatement" x:Name="PrivacyText" Visibility="Collapsed" />
+            </Grid>
+        </PivotItem>
+
+        <PivotItem x:Uid="CreditPivot" x:Name="CreditPivot" Header="%Thirth-party code Erkenning%">
+            <Grid>
+                <WebView x:Name="CreditsWebView" />
+                <TextBlock x:Uid="Credits" x:Name="CreditsText" Visibility="Collapsed" />
+            </Grid>
+        </PivotItem>
+
+        <PivotItem x:Uid="About" Header="%About%">
+            <StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock x:Uid="Version" Text="%Version%" />
+                    <TextBlock Text="{x:Bind local:PackageHelper.GetAppVersion()}" Margin="5,0,0,0" FontWeight="Bold" />
+                </StackPanel>
+
+                <TextBlock x:Uid="AboutThisApp" Text="%This app displays the Top 2000 lists since the year 1999. View the statistics and the positions for a single track%" TextWrapping="Wrap" />
+                <TextBlock x:Uid="WhatIsTop2000" Text="%The Top 2000 app is an annual broadcasting program of the Dutch radio station Radio 2. The show begins broadcasting at noon on Christmas Days and continues until midnight of New Year's Eve (CET Time).%" Margin="0,5,0,0" TextWrapping="Wrap" />
+
+                <StackPanel Orientation="Horizontal"  Margin="0,30,0,0">
+                    <TextBlock x:Uid="DevelopedBy"  Text="%Developed by:%" />
+                    <TextBlock Text="Rick Neeft" Margin="5,0" />
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal"  Margin="0,0,0,0">
+                    <TextBlock x:Uid="TestedBy"  Text="%Tested by:%" />
+                    <TextBlock Text="Bhavna Devi Ruttun" Margin="5,0" />
+                </StackPanel>
+
+                <controls:WrapPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock x:Uid="ToContact" Text="%To contact:%" VerticalAlignment="Center" />
+                        <HyperlinkButton x:Name="MailTo" Content="mailto:rick@chroomsoft.nl" Margin="5,0" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock x:Uid="OrVisitFacebook" Text="%or visit Facebook at%"  VerticalAlignment="Center" />
+                        <HyperlinkButton x:Name="Facebook" Content="https://www.facebook.com/Top2000App/" Margin="5,0" />
+                    </StackPanel>
+                </controls:WrapPanel>
+
+                <StackPanel Orientation="Horizontal" Margin="0,-10,0,0">
+                    <TextBlock x:Uid="VisitTop2000Site" Text="%Visit the Official NPO Top 2000 Web site at:%" VerticalAlignment="Center" />
+                    <HyperlinkButton x:Name="VisitTop2000Site" Content="http://www.nporadio2.nl/top2000" Margin="5,0" />
+                </StackPanel>
+
+                <Button x:Name="Feedback" x:Uid="Feedback" Content="%Send Feedback%" />
+
+                <TextBlock x:Uid="Disclaimer" Text="%Disclaimer%" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0,30,0,0" />
+                <TextBlock x:Uid="DisclaimerText" Text="%THIS IS NOT AN OFFICAL APP FROM THE NEDERLANDSE PUBLIEKE OMROEP (DUTCH PUBLIC BROADCASTING [AGENCY]). THE INFORMATION OF THIS APP IS PROVIDED 'AS IS' WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.%"
+                   TextWrapping="Wrap" />
+
+                <TextBlock x:Uid="Copyright" Text="%Copyright (c) Chroomsoft. All rights reserved.%" Margin="0,5,0,20" TextWrapping="Wrap" />
+            </StackPanel>
+        </PivotItem>
+    </Pivot>
+</Page>

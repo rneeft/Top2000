@@ -1,6 +1,5 @@
 ﻿using Chroomsoft.Top2000.Data.ClientDatabase;
-using Chroomsoft.Top2000.Features.AllEditions;
-using MediatR;
+using Chroomsoft.Top2000.Features;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -32,7 +31,7 @@ namespace Chroomsoft.Top2000.Specs
         private static void ConfigureServices(IServiceCollection services)
         {
             services
-                .AddMediatR(typeof(AllEditionsRequest).Assembly)
+                .AddFeatures()
                 .AddClientDatabase(new DirectoryInfo(Directory.GetCurrentDirectory()))
                 .AddHttpClient("top2000", c =>
                 {

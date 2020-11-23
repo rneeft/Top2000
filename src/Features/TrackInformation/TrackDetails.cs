@@ -1,45 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
+﻿using System.Collections.Immutable;
 using System.Linq;
 
 namespace Chroomsoft.Top2000.Features.TrackInformation
 {
-    public enum ListingStatus
-    {
-        Unknown = 0,
-        New = 1,
-        Decreased = 2,
-        Increased = 3,
-        NotAvailable = 4,
-        NotListed = 5,
-        Unchanged = 6,
-        Back = 7,
-    };
-
-    public class ListingInformation
-    {
-        public int Edition { get; set; }
-
-        public int? Position { get; set; }
-
-        public DateTime? PlayUtcDateAndTime { get; set; }
-
-        public int? Offset { get; set; }
-
-        public ListingStatus Status { get; set; }
-
-        public bool CouldBeListed(int recoredYear) => recoredYear <= Edition;
-    }
-
-    public class ListingInformationDescendingComparer : Comparer<ListingInformation>
-    {
-        public override int Compare(ListingInformation x, ListingInformation y)
-        {
-            return y.Edition - x.Edition;
-        }
-    }
-
     public class TrackDetails
     {
         public TrackDetails(string title, string artist, int recordedYear, ImmutableSortedSet<ListingInformation> listings)

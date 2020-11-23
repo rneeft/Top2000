@@ -1,38 +1,47 @@
-﻿using Chroomsoft.Top2000.Data.ClientDatabase;
+﻿#nullable enable
+
+using Chroomsoft.Top2000.Data.ClientDatabase;
+using Chroomsoft.Top2000.Features;
+using Chroomsoft.Top2000.WindowsApp.Common;
+using Chroomsoft.Top2000.WindowsApp.Common.Behavior;
 using MediatR;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Reflection;
+using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.ApplicationModel.Core;
+using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using Xamarin.Essentials;
 
-namespace WindowsApp
+namespace Chroomsoft.Top2000.WindowsApp
 {
-    /// <summary>
-    /// Provides application-specific behavior to supplement the default Application class.
-    /// </summary>
     sealed partial class App : Application
     {
         private static IServiceProvider? serviceProvider;
+        private static Stopwatch? startupWatch;
 
-        /// <summary>
-        /// Initializes the singleton application object.  This is the first line of authored code
-        /// executed, and as such is the logical equivalent of main() or WinMain().
-        /// </summary>
         public App()
         {
+            startupWatch = Stopwatch.StartNew();
+            AppCenter.Start("a73816a5-fcfd-4cdf-9a34-8413c2f22190",
+                   typeof(Analytics), typeof(Crashes));
+
             this.InitializeComponent();
-
-            Init((x, c) => { });
-
             this.Suspending += OnSuspending;
+
+            FixSqLiteIssue();
         }
 
         public static IServiceProvider ServiceProvider
@@ -47,28 +56,57 @@ namespace WindowsApp
             }
         }
 
-        public static void Init(Action<HostBuilderContext, IServiceCollection> nativeConfigureServices)
+        public static TimeSpan? GetStartupTime()
         {
-            var host = new AppHostBuilder()
-                .CreateDefaultAppHostBuilder()
-                .ConfigureServices((c, x) =>
-                {
-                    nativeConfigureServices.Invoke(c, x);
-                    ConfigureServices(x);
-                })
-                .ConfigureLogging(ConfigureLogging)
-                .Build();
+            if (startupWatch is null) return null;
 
-            ServiceProvider = host.Services;
+            var time = startupWatch.Elapsed;
+
+            startupWatch.Stop();
+            startupWatch = null;
+
+            return time;
         }
 
-        public static void ConfigureServices(IServiceCollection services)
+        public static TEnum GetEnum<TEnum>(string text) where TEnum : struct
+        {
+            if (!typeof(TEnum).GetTypeInfo().IsEnum)
+            {
+                throw new InvalidOperationException("Generic parameter 'TEnum' must be an enum.");
+            }
+            return (TEnum)Enum.Parse(typeof(TEnum), text);
+        }
+
+        public static T GetService<T>() where T : notnull => ServiceProvider.GetRequiredService<T>();
+
+        public static void InitialiseDependencyInjectionFramework()
+        {
+            ServiceProvider = new AppHostBuilder()
+               .CreateDefaultAppHostBuilder()
+               .ConfigureServices(ConfigureServices)
+               .ConfigureLogging(ConfigureLogging)
+               .Build()
+               .Services;
+        }
+
+        public static void ConfigureServices(HostBuilderContext context, IServiceCollection services)
         {
             services
                 .AddClientDatabase(new DirectoryInfo(FileSystem.AppDataDirectory))
-                .AddTransient<MainPage>();
-
-            services.AddMediatR(Assembly.GetExecutingAssembly());
+                .AddFeatures()
+                .AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>))
+                .AddTransient<Navigation.View>()
+                .AddTransient<YearOverview.View>()
+                .AddSingleton<YearOverview.ViewModel>()
+                .AddSingleton<ListingDate.ViewModel>()
+                .AddSingleton<ListingPosition.ViewModel>()
+                .AddSingleton<TrackInformation.ViewModel>()
+                .AddSingleton<Searching.ViewModel>()
+                .AddSingleton<About.ViewModel>()
+                .AddSingleton<About.View>()
+                .AddSingleton<IGlobalUpdate, GlobalUpdates>()
+                .AddTransient<IOnlineUpdateChecker, OnlineUpdateChecker>()
+            ;
         }
 
         public static void ConfigureLogging(ILoggingBuilder builder)
@@ -81,38 +119,108 @@ namespace WindowsApp
         /// will be used such as when the application is launched to open a specific file.
         /// </summary>
         /// <param name="e">Details about the launch request and process.</param>
-        protected override void OnLaunched(LaunchActivatedEventArgs e)
+        protected override async void OnLaunched(LaunchActivatedEventArgs args)
         {
-            // Do not repeat app initialization when the Window already has content,
-            // just ensure that the window is active
-            if (!(Window.Current.Content is Frame rootFrame))
+#if DEBUG
+            if (Debugger.IsAttached)
             {
-                // Create a Frame to act as the navigation context and navigate to the first page
-                rootFrame = new Frame();
+                this.DebugSettings.BindingFailed += DebugSettings_BindingFailed;
+            }
+#endif
 
+            CoreApplication.GetCurrentView().TitleBar.ExtendViewIntoTitleBar = true;
+
+            await EnsureWindow(args);
+        }
+
+        private static void FixSqLiteIssue()
+        {
+            SQLitePCL.Batteries.Init();
+            SQLitePCL.raw.sqlite3_win32_set_directory(1, ApplicationData.Current.LocalFolder.Path);
+            SQLitePCL.raw.sqlite3_win32_set_directory(2, ApplicationData.Current.TemporaryFolder.Path);
+        }
+
+        private static Task EnsureDatabaseIsCreatedAsync()
+        {
+            var databaseGen = GetService<IUpdateClientDatabase>();
+            var top2000 = GetService<Top2000AssemblyDataSource>();
+
+            return databaseGen.RunAsync(top2000);
+        }
+
+        private static async Task CheckForOnlineUpdates()
+        {
+            await Task.Delay(5 * 1000);
+
+            var checker = App.GetService<IOnlineUpdateChecker>();
+            await checker.UpdateAsync();
+        }
+
+        private void DebugSettings_BindingFailed(object sender, BindingFailedEventArgs e)
+        {
+            Debugger.Break();
+        }
+
+        private async Task EnsureWindow(IActivatedEventArgs args)
+        {
+            InitialiseDependencyInjectionFramework();
+            await EnsureDatabaseIsCreatedAsync();
+
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+            CheckForOnlineUpdates();
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+
+            var rootFrame = GetRootFrame();
+
+            ThemeHelper.Initialize();
+
+            var targetPageArguments = string.Empty;
+
+            if (args.Kind == ActivationKind.Launch)
+            {
+                if (args.PreviousExecutionState == ApplicationExecutionState.Terminated)
+                {
+                    try
+                    {
+                        await SuspensionManager.RestoreAsync().ConfigureAwait(false);
+                    }
+                    catch (SuspensionManagerException)
+                    {
+                        //Something went wrong restoring state.
+                        //Assume there is no state and continue
+                    }
+                }
+                targetPageArguments = ((LaunchActivatedEventArgs)args).Arguments;
+            }
+
+            rootFrame.Navigate(typeof(YearOverview.View), targetPageArguments);
+            ((Microsoft.UI.Xaml.Controls.NavigationViewItem)(((Navigation.View)(Window.Current.Content)).NavigationView.MenuItems[0])).IsSelected = true;
+
+            // Ensure the current window is active
+            Window.Current.Activate();
+        }
+
+        private Frame GetRootFrame()
+        {
+            Frame rootFrame;
+            if (!(Window.Current.Content is Navigation.View rootPage))
+            {
+                rootPage = ServiceProvider.GetRequiredService<Navigation.View>();
+                rootFrame = (Frame)rootPage.FindName("rootFrame")
+                    ?? throw new Exception("Root frame not found");
+
+                SuspensionManager.RegisterFrame(rootFrame, "AppFrame");
+                rootFrame.Language = Windows.Globalization.ApplicationLanguages.Languages[0];
                 rootFrame.NavigationFailed += OnNavigationFailed;
 
-                if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
-                {
-                    //TODO: Load state from previously suspended application
-                }
-
-                // Place the frame in the current Window
-                Window.Current.Content = rootFrame;
+                Window.Current.Content = rootPage;
             }
-
-            if (e.PrelaunchActivated == false)
+            else
             {
-                if (rootFrame.Content == null)
-                {
-                    // When the navigation stack isn't restored navigate to the first page,
-                    // configuring the new page by passing required information as a navigation
-                    // parameter
-                    rootFrame.Navigate(typeof(MainPage), e.Arguments);
-                }
-                // Ensure the current window is active
-                Window.Current.Activate();
+                rootFrame = (Frame)rootPage.FindName("rootFrame");
             }
+
+            return rootFrame;
         }
 
         /// <summary>
@@ -132,10 +240,10 @@ namespace WindowsApp
         /// </summary>
         /// <param name="sender">The source of the suspend request.</param>
         /// <param name="e">Details about the suspend request.</param>
-        private void OnSuspending(object sender, SuspendingEventArgs e)
+        private async void OnSuspending(object sender, SuspendingEventArgs e)
         {
             var deferral = e.SuspendingOperation.GetDeferral();
-            //TODO: Save application state and stop any background activity
+            await SuspensionManager.SaveAsync().ConfigureAwait(false);
             deferral.Complete();
         }
     }

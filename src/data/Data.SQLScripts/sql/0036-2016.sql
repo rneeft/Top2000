@@ -1,5 +1,5 @@
-INSERT INTO [Edition] ([Year], [StartUtcDateAndTime], [EndUtcDateAndTime]) VALUES
-(2016, '2016-12-25T08:00:00', '2016-12-31T22:59:59');
+INSERT INTO [Edition] ([Year], [StartUtcDateAndTime], [EndUtcDateAndTime], [HasPlayDateAndTime]) VALUES
+(2016, '2016-12-25T08:00:00', '2016-12-31T23:00:00', 1);
 
 INSERT INTO Track ([Id] ,[Title] ,[Artist],[RecordedYear]) VALUES
   (4097,'Politik','Coldplay',2002)

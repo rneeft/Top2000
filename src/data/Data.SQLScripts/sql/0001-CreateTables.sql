@@ -12,6 +12,7 @@ CREATE TABLE Edition
     Year int NOT NULL,
     StartUtcDateAndTime DATETIME NOT NULL,
     EndUtcDateAndTime DATETIME NOT NULL,
+    HasPlayDateAndTime BIT NOT NULL,
     PRIMARY KEY (Year)
 );
 
