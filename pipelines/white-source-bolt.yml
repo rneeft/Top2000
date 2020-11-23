@@ -15,5 +15,24 @@ pool:
   name: At Home
 
 steps:
+- task: NuGetToolInstaller@0
+  displayName: 'Use NuGet 5.8.0'
+  inputs:
+    versionSpec: 5.8.0
+
+- task: NuGetCommand@2
+  displayName: 'Nuget restore'
+  inputs:
+    command: 'restore'
+    restoreSolution: '**/*.sln'
+    feedsToUse: 'select'
+
+- task: VSBuild@1
+  displayName: 'Build solution'
+  inputs:
+    solution: '**\*.sln'
+    platform: 'Any CPU'
+    configuration: 'Release'
+
 - task: WhiteSource Bolt@20
   displayName: 'WhiteSource Bolt'
