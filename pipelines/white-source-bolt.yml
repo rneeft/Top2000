@@ -27,5 +27,12 @@ steps:
     restoreSolution: '**/*.sln'
     feedsToUse: 'select'
 
+- task: VSBuild@1
+  displayName: 'Build solution'
+  inputs:
+    solution: '**\*.sln'
+    platform: 'Any CPU'
+    configuration: 'Release'
+
 - task: WhiteSource Bolt@20
   displayName: 'WhiteSource Bolt'
