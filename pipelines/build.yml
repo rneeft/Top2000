@@ -37,7 +37,7 @@ steps:
       msbuildArgs:  '/p:AppxBundlePlatforms="x86|x64|ARM"
                      /p:AppxPackageDir="$(build.artifactStagingDirectory)\AppxPackages\"
                      /p:AppxBundle=Always 
-                     /p:UapAppxPackageBuildMode=StoreUpload'
+                     /p:UapAppxPackageBuildMode=StoreUpload
                      /p:AppxPackageSigningEnabled=true
                      /p:PackageCertificateThumbprint="a8368efa8c6537019b48ecb0077702b8f36342d3" 
                      /p:PackageCertificateKeyFile="$(signingCert.secureFilePath)"
