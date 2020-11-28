@@ -32,7 +32,7 @@ steps:
     displayName: 'Build solution'
     inputs:
       solution: '**\*.sln'
-      platform: 'Any CPU'
+      platform: 'x86'
       configuration: 'Release'
       msbuildArgs:  '/p:AppxBundlePlatforms="x86|x64|ARM"
                      /p:AppxPackageDir="$(build.artifactStagingDirectory)\AppxPackages\"
