@@ -35,7 +35,7 @@ steps:
       platform: 'x86'
       configuration: 'Release'
       msbuildArgs:  '/p:AppxBundlePlatforms="x86|x64|ARM"
-                     /p:AppxPackageDir="$(build.artifactStagingDirectory)\AppxPackages\"
+                     /p:AppxPackageDir="$(build.artifactStagingDirectory)\AppxPackages\\"
                      /p:AppxBundle=Always 
                      /p:UapAppxPackageBuildMode=StoreUpload
                      /p:AppxPackageSigningEnabled=true
