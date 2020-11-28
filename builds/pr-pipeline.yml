@@ -1,5 +1,3 @@
-name: Top 2000 App Pull Request $(fullVersion) build - 
-
 trigger: none
 
 pr:
