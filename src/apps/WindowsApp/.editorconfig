@@ -1,0 +1,2 @@
+﻿[*.cs]
+dotnet_diagnostic.CS4041.severity = none # this causes issues with the generated .g.cs calls

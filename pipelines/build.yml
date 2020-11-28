@@ -10,6 +10,12 @@ steps:
       projectVersion: '$(fullVersion)'
       extraProperties: 'sonar.exclusions=**/*.sql'
 
+  - task: DownloadSecureFile@1
+    name: signingCert
+    displayName: 'Download WindowsStore certificate'
+    inputs:
+      secureFile: 'WindowsStore.pfx'
+
   - task: NuGetToolInstaller@0
     displayName: 'Use NuGet 5.8.0'
     inputs:
@@ -28,6 +34,14 @@ steps:
       solution: '**\*.sln'
       platform: 'Any CPU'
       configuration: 'Release'
+      msbuildArgs:  '/p:AppxBundlePlatforms="x86|x64|ARM"
+                     /p:AppxPackageDir="$(build.artifactStagingDirectory)\AppxPackages\"
+                     /p:AppxBundle=Always 
+                     /p:UapAppxPackageBuildMode=StoreUpload'
+                     /p:AppxPackageSigningEnabled=true
+                     /p:PackageCertificateThumbprint="a8368efa8c6537019b48ecb0077702b8f36342d3" 
+                     /p:PackageCertificateKeyFile="$(signingCert.secureFilePath)"
+                     /p:PackageCertificatePassword="$(WindowsStorePfxPassword)"'
 
   - task: VSTest@2
     displayName: 'Test - Unittests'
@@ -50,6 +64,10 @@ steps:
   - publish: '$(Build.ArtifactStagingDirectory)\StaticApi'
     displayName: 'Publishing StaticApi'
     artifact: StaticApi
+
+  - publish: '$(build.artifactStagingDirectory)\AppxPackages'
+    displayName: 'Publishing StaticApi'
+    artifact: UWP
 
   - task: CopyFiles@2
     displayName: 'Copy Azure Resources'

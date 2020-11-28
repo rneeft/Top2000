@@ -156,11 +156,6 @@ namespace Chroomsoft.Top2000.WindowsApp
             await checker.UpdateAsync();
         }
 
-        private void DebugSettings_BindingFailed(object sender, BindingFailedEventArgs e)
-        {
-            Debugger.Break();
-        }
-
         private async Task EnsureWindow(IActivatedEventArgs args)
         {
             InitialiseDependencyInjectionFramework();
