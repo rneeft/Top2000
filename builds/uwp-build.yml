@@ -18,6 +18,14 @@ steps:
       restoreSolution: '**/*.sln'
       feedsToUse: 'select'
 
+  - task: VersionAPPX@2
+    inputs:
+      Path: '$(Build.SourcesDirectory)'
+      VersionNumber: '$(uwp-version)'
+      InjectVersion: False
+      VersionRegex: '(0|[1-9][0-9]{0,3}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])(\.(0|[1-9][0-9]{0,3}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])){3}'
+      OutputVersion: 'OutputedVersion'
+
   - task: VSBuild@1
     displayName: 'Build solution'
     inputs:
@@ -47,3 +55,24 @@ steps:
   - publish: '$(build.artifactStagingDirectory)\AppxPackages'
     displayName: 'Publishing WindowsStore Artifacts'
     artifact: UWP
+
+# release yml here
+
+  - task: ArchiveFiles@2
+    inputs:
+      rootFolderOrFile: '$(build.artifactstagingdirectory)\AppxPackages'
+      includeRootFolder: false
+      archiveType: 'zip'
+      archiveFile: '$(Build.ArtifactStagingDirectory)/release.zip'
+      replaceExistingArchive: true
+
+  - task: AppCenterDistribute@3
+    inputs:
+      serverEndpoint: 'AppCenter'
+      appSlug: 'Chroomsoft/TOP2000-UWP'
+      appFile: '$(Build.ArtifactStagingDirectory)/release.zip'
+      symbolsOption: 'UWP'
+      appxsymPath: 'symbol-path'
+      releaseNotesOption: 'input'
+      releaseNotesInput: 'Automation'
+      destinationType: 'groups'
