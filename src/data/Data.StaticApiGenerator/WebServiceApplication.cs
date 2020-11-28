@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using System;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -17,11 +18,12 @@ namespace Chroomsoft.Top2000.Data.StaticApiGenerator
         public async Task RunAsync()
         {
             var location = Path.Combine("wwwroot");
-
+            var utc = DateTime.UtcNow;
             await Task.WhenAll
             (
                 fileCreator.CreateApiFileAsync(location),
-                fileCreator.CreateDataFilesAsync(location)
+                fileCreator.CreateDataFilesAsync(location),
+                fileCreator.CreateVersionInformationAsync(location, "1.0.0-alpha0", "local", $"#{utc.Year}{utc.Month}{utc.Day}.1")
             ).ConfigureAwait(false);
 
             var host = new WebHostBuilder()

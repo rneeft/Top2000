@@ -1,15 +1,5 @@
 steps:
 
-  - task: SonarCloudPrepare@1
-    inputs:
-      SonarCloud: 'SonarCloud'
-      organization: 'chroomsoft'
-      scannerMode: 'MSBuild'
-      projectKey: 'Top2000'
-      projectName: 'Top2000'
-      projectVersion: '$(fullVersion)'
-      extraProperties: 'sonar.exclusions=**/*.sql'
-
   - task: DownloadSecureFile@1
     name: signingCert
     displayName: 'Download WindowsStore certificate'
@@ -54,38 +44,6 @@ steps:
         !**\obj\**
       searchFolder: '$(System.DefaultWorkingDirectory)'
 
-  - task: DotNetCoreCLI@2
-    displayName: 'Run static Api Generator'
-    inputs:
-      command: 'run'
-      projects: 'src/data/Data.StaticApiGenerator/Data.StaticApiGenerator.csproj'
-      arguments: '/PublishOnly:location=$(Build.ArtifactStagingDirectory)\StaticApi\'
-
-  - publish: '$(Build.ArtifactStagingDirectory)\StaticApi'
-    displayName: 'Publishing StaticApi'
-    artifact: StaticApi
-
   - publish: '$(build.artifactStagingDirectory)\AppxPackages'
-    displayName: 'Publishing StaticApi'
+    displayName: 'Publishing WindowsStore Artifacts'
     artifact: UWP
-
-  - task: CopyFiles@2
-    displayName: 'Copy Azure Resources'
-    inputs:
-      SourceFolder: pipelines\
-      Contents: '*.json'
-      TargetFolder: '$(Build.ArtifactStagingDirectory)\Azure'
-
-  - publish: '$(Build.ArtifactStagingDirectory)\Azure'
-    displayName: 'Publishing Azure Resources'
-    artifact: Azure
-  
-  - publish: 'tests/Top2000.Specs/bin/Release/netcoreapp3.1/'
-    displayName: Publishing Specification binaries
-    artifact: Specification
-
-  - task: SonarCloudAnalyze@1
-
-  - task: SonarCloudPublish@1
-    inputs:
-      pollingTimeoutSec: '300'

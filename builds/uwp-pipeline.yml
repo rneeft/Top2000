@@ -1,0 +1,19 @@
+name: Top 2000 UWP $(fullVersion) build - 
+
+variables:
+- group: Top-2000-variable-group
+- template: version.yml
+- name: product
+  value: 'TOP2000'
+
+trigger: none
+pr: none
+  
+stages:
+- stage: Build
+  jobs:
+  - job: Build
+    pool:
+      name: At Home
+    steps:
+    - template: uwp-build.yml

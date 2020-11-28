@@ -1,7 +1,6 @@
 name: Top 2000 App $(fullVersion) build - 
 
 variables:
-- group: Top-2000-variable-group
 - template: version.yml
 - name: product
   value: 'TOP2000'

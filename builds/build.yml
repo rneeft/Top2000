@@ -1,0 +1,69 @@
+steps:
+
+  - task: SonarCloudPrepare@1
+    inputs:
+      SonarCloud: 'SonarCloud'
+      organization: 'chroomsoft'
+      scannerMode: 'MSBuild'
+      projectKey: 'Top2000'
+      projectName: 'Top2000'
+      projectVersion: '$(fullVersion)'
+      extraProperties: 'sonar.exclusions=**/*.sql'
+
+  - task: NuGetToolInstaller@0
+    displayName: 'Use NuGet 5.8.0'
+    inputs:
+      versionSpec: 5.8.0
+
+  - task: NuGetCommand@2
+    displayName: 'Nuget restore'
+    inputs:
+      command: 'restore'
+      restoreSolution: '**/*.sln'
+      feedsToUse: 'select'
+
+  - task: VSBuild@1
+    displayName: 'Build solution'
+    inputs:
+      solution: '**\*.sln'
+      platform: 'Any CPU'
+      configuration: 'Release'
+
+  - task: VSTest@2
+    displayName: 'Test - Unittests'
+    inputs:
+      testSelector: 'testAssemblies'
+      codeCoverageEnabled: true
+      testAssemblyVer2: |
+        **\*Unittests.dll
+        !**\*TestAdapter.dll
+        !**\obj\**
+      searchFolder: '$(System.DefaultWorkingDirectory)'
+
+  - task: DotNetCoreCLI@2
+    displayName: 'Run static Api Generator'
+    inputs:
+      command: 'run'
+      projects: 'src/data/Data.StaticApiGenerator/Data.StaticApiGenerator.csproj'
+      arguments: '/PublishOnly:location=$(Build.ArtifactStagingDirectory)\StaticApi\ 
+                  /Shields:Version=$(fullVersion)
+                  /Shields:BranchName=$(Build.SourceBranchName)
+                  /Shields:BuildNumber=$(name)'
+
+  - publish: '$(Build.ArtifactStagingDirectory)\StaticApi'
+    displayName: 'Publishing StaticApi'
+    artifact: StaticApi
+
+  - publish: 'azure/'
+    displayName: 'Publishing Azure Resources'
+    artifact: Azure
+  
+  - publish: 'tests/Top2000.Specs/bin/Release/netcoreapp3.1/'
+    displayName: Publishing Specification binaries
+    artifact: Specification
+
+  - task: SonarCloudAnalyze@1
+
+  - task: SonarCloudPublish@1
+    inputs:
+      pollingTimeoutSec: '300'

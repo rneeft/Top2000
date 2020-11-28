@@ -2,11 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-
     <IsPackable>false</IsPackable>
-
     <AssemblyName>Chroomsoft.Top2000.Specs</AssemblyName>
-
     <RootNamespace>Chroomsoft.Top2000.Specs</RootNamespace>
   </PropertyGroup>
 
