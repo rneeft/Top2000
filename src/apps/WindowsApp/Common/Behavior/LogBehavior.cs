@@ -1,4 +1,6 @@
-﻿using MediatR;
+﻿#nullable enable
+
+using MediatR;
 using Microsoft.AppCenter.Analytics;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -7,10 +9,12 @@ using System.Threading.Tasks;
 
 namespace Chroomsoft.Top2000.WindowsApp.Common.Behavior
 {
-    public class LoggingBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
+    public class LoggingBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : notnull
     {
         public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
         {
+            //      if (request is null) return await next();
+
             var watch = Stopwatch.StartNew();
 
             var response = await next();
@@ -29,6 +33,8 @@ namespace Chroomsoft.Top2000.WindowsApp.Common.Behavior
             {
                 { nameof(watch.ElapsedMilliseconds), "" + watch.ElapsedMilliseconds },
             };
+
+            if (response is null) return properties;
 
             if (request is Features.Searching.SearchTrackRequest searching)
             {
