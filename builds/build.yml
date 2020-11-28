@@ -7,7 +7,7 @@ steps:
       scannerMode: 'MSBuild'
       projectKey: 'Top2000'
       projectName: 'Top2000'
-      projectVersion: '$(fullVersion)'
+      projectVersion: '$(version)'
       extraProperties: 'sonar.exclusions=**/*.sql'
 
   - task: NuGetToolInstaller@0
@@ -46,9 +46,9 @@ steps:
       command: 'run'
       projects: 'src/data/Data.StaticApiGenerator/Data.StaticApiGenerator.csproj'
       arguments: '/PublishOnly:location=$(Build.ArtifactStagingDirectory)\StaticApi\ 
-                  /Shields:Version=$(fullVersion)
+                  /Shields:Version=$(version)
                   /Shields:BranchName=$(Build.SourceBranchName)
-                  /Shields:BuildNumber=$(name)'
+                  /Shields:BuildNumber=$(Build.BuildNumber)'
 
   - publish: '$(Build.ArtifactStagingDirectory)\StaticApi'
     displayName: 'Publishing StaticApi'

@@ -7,7 +7,6 @@ variables:
   patch: $[counter(variables['major-minor'])]
 
   label: '' # if filled, must start with dash '-'
-
+  
   version: $[format('{0}.{1}.{2}{3}', variables['major'], variables['minor'], variables['patch'], variables['label'])]
-  fullVersion: $[format('{0}{1}.{2}', variables['version'], variables['quality'], variables['counter'])]
   uwp-version: $[format('{0}.{1}.{2}.0', variables['major'], variables['minor'], variables['patch'])]

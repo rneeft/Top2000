@@ -29,7 +29,7 @@ jobs:
     displayName: 'Build solution'
     inputs:
       solution: '**\*.sln'
-      platform: 'Any CPU'
+      platform: 'x86'
       configuration: 'Release'
 
   - task: VSTest@2
