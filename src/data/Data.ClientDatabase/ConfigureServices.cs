@@ -7,11 +7,11 @@ namespace Chroomsoft.Top2000.Data.ClientDatabase
 {
     public static class ConfigureServices
     {
-        public static IServiceCollection AddClientDatabase(this IServiceCollection services, DirectoryInfo appDataDirectory, string clientDatabaseName = "Top2000.db")
+        public static IServiceCollection AddClientDatabase(this IServiceCollection services, DirectoryInfo appDataDirectory, Uri apiBaseUrl, string clientDatabaseName = "Top2000.db")
         {
             services.AddHttpClient("top2000", c =>
             {
-                c.BaseAddress = new Uri("https://www-dev.top2000.app");
+                c.BaseAddress = apiBaseUrl;
             });
 
             return services

@@ -7,7 +7,7 @@ namespace Chroomsoft.Top2000.Data.StaticApiGenerator
     [DebuggerDisplay("{FileName}")]
     public class VersionFile
     {
-        private List<VersionFile> upgrades;
+        private readonly List<VersionFile> upgrades;
 
         public VersionFile(string fileName)
         {

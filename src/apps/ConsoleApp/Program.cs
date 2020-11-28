@@ -10,12 +10,16 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp
 {
-    internal class Program
+    internal static class Program
     {
         public static IServiceProvider ConfigureServices(AppRunner appRunner)
         {
+#pragma warning disable S1075 // URIs should not be hardcoded
+            var baseUrl = new Uri("https://www-dev.top2000.app");
+#pragma warning restore S1075 // URIs should not be hardcoded
+
             var services = new ServiceCollection()
-                .AddClientDatabase(new DirectoryInfo(Directory.GetCurrentDirectory()))
+                .AddClientDatabase(new DirectoryInfo(Directory.GetCurrentDirectory()), baseUrl)
                 .AddMediatR(Assembly.GetExecutingAssembly());
 
             foreach (Type type in appRunner.GetCommandClassTypes())
@@ -40,7 +44,7 @@ namespace ConsoleApp
 
             return await appRunner
                 .UseMicrosoftDependencyInjection(serviceProvider)
-                .RunAsync(args).ConfigureAwait(false);
+                .RunAsync(args).ConfigureAwait(false)
             ;
         }
     }

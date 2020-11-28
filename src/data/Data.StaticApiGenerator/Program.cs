@@ -5,7 +5,8 @@ using System.Threading.Tasks;
 
 namespace Chroomsoft.Top2000.Data.StaticApiGenerator
 {
-    public class Program
+    public static class Program
+
     {
         private static async Task Main(string[] args)
         {

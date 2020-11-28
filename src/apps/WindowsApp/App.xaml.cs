@@ -91,8 +91,10 @@ namespace Chroomsoft.Top2000.WindowsApp
 
         public static void ConfigureServices(HostBuilderContext context, IServiceCollection services)
         {
+            var baseUrl = new Uri("https://www-dev.top2000.app");
+
             services
-                .AddClientDatabase(new DirectoryInfo(FileSystem.AppDataDirectory))
+                .AddClientDatabase(new DirectoryInfo(FileSystem.AppDataDirectory), baseUrl)
                 .AddFeatures()
                 .AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>))
                 .AddTransient<Navigation.View>()
@@ -121,13 +123,6 @@ namespace Chroomsoft.Top2000.WindowsApp
         /// <param name="e">Details about the launch request and process.</param>
         protected override async void OnLaunched(LaunchActivatedEventArgs args)
         {
-#if DEBUG
-            if (Debugger.IsAttached)
-            {
-                this.DebugSettings.BindingFailed += DebugSettings_BindingFailed;
-            }
-#endif
-
             CoreApplication.GetCurrentView().TitleBar.ExtendViewIntoTitleBar = true;
 
             await EnsureWindow(args);
