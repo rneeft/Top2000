@@ -39,7 +39,7 @@ steps:
                      /p:AppxBundle=Always 
                      /p:UapAppxPackageBuildMode=StoreUpload
                      /p:AppxPackageSigningEnabled=true
-                     /p:PackageCertificateThumbprint="a8368efa8c6537019b48ecb0077702b8f36342d3" 
+                     /p:PackageCertificateThumbprint="" 
                      /p:PackageCertificateKeyFile="$(signingCert.secureFilePath)"
                      /p:PackageCertificatePassword="$(WindowsStorePfxPassword)"'
 
