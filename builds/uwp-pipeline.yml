@@ -12,6 +12,14 @@ stages:
   jobs:
   - job: Build
     pool:
+      name: uwp-agent
+    steps:
+    - template: uwp/build.yml
+
+- stage: Release
+  jobs:
+  - job: Release
+    pool:
       name: At Home
     steps:
-    - template: uwp-build.yml
+    - template: uwp/release.yml
