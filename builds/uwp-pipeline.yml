@@ -13,7 +13,7 @@ stages:
   jobs:
   - job: AgentStartJob
     pool:
-      vmImage: 'windows-latest'
+      name: At Home
     steps:
     - checkout: none
     - task: AzureCLI@2
@@ -26,7 +26,6 @@ stages:
 - stage: Build
   jobs:
   - job: UWPBuild
-    dependsOn: AgentStart
     pool:
       name: uwp-agent
     steps:
