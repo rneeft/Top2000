@@ -1,5 +1,6 @@
 variables:
 - group: Top-2000-variable-group
+- group: shared-infra
 - template: version.yml
 - name: product
   value: 'TOP2000'
@@ -8,15 +9,48 @@ trigger: none
 pr: none
   
 stages:
+- stage: AgentStart
+  jobs:
+  - job: AgentStartJob
+    pool:
+      vmImage: 'windows-latest'
+    steps:
+    - checkout: none
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureConnection'
+        scriptType: 'ps'
+        scriptLocation: 'inlineScript'
+        inlineScript: 'az vm start --resource-group CHR-RG-ABA-PRD-WE --name CHR-VM-ABA-PRD-WE'
+
 - stage: Build
   jobs:
-  - job: Build
+  - job: UWPBuild
+    dependsOn: AgentStart
     pool:
       name: uwp-agent
     steps:
     - template: uwp/build.yml
 
+- stage: AgentShutdown
+  dependsOn: Build
+  jobs:
+  - job: AgentStutdownJob
+    pool:
+      vmImage: 'windows-latest'
+    steps:
+    - checkout: none
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureConnection'
+        scriptType: 'ps'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az vm stop --resource-group CHR-RG-ABA-PRD-WE --name CHR-VM-ABA-PRD-WE
+          az vm deallocate --resource-group CHR-RG-ABA-PRD-WE --name CHR-VM-ABA-PRD-WE
+
 - stage: Release
+  dependsOn: Build
   jobs:
   - job: Release
     pool:
