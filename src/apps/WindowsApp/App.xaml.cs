@@ -16,7 +16,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
-using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Core;
 using Windows.Storage;
@@ -38,7 +37,6 @@ namespace Chroomsoft.Top2000.WindowsApp
                    typeof(Analytics), typeof(Crashes));
 
             this.InitializeComponent();
-            this.Suspending += OnSuspending;
 
             FixSqLiteIssue();
         }
@@ -167,18 +165,6 @@ namespace Chroomsoft.Top2000.WindowsApp
 
             if (args.Kind == ActivationKind.Launch)
             {
-                if (args.PreviousExecutionState == ApplicationExecutionState.Terminated)
-                {
-                    try
-                    {
-                        await SuspensionManager.RestoreAsync().ConfigureAwait(false);
-                    }
-                    catch (SuspensionManagerException)
-                    {
-                        //Something went wrong restoring state.
-                        //Assume there is no state and continue
-                    }
-                }
                 targetPageArguments = ((LaunchActivatedEventArgs)args).Arguments;
             }
 
@@ -198,7 +184,6 @@ namespace Chroomsoft.Top2000.WindowsApp
                 rootFrame = (Frame)rootPage.FindName("rootFrame")
                     ?? throw new Exception("Root frame not found");
 
-                SuspensionManager.RegisterFrame(rootFrame, "AppFrame");
                 rootFrame.Language = Windows.Globalization.ApplicationLanguages.Languages[0];
                 rootFrame.NavigationFailed += OnNavigationFailed;
 
@@ -220,20 +205,6 @@ namespace Chroomsoft.Top2000.WindowsApp
         private void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
         {
             throw new InvalidOperationException("Failed to load Page " + e.SourcePageType.FullName);
-        }
-
-        /// <summary>
-        /// Invoked when application execution is being suspended.  Application state is saved
-        /// without knowing whether the application will be terminated or resumed with the contents
-        /// of memory still intact.
-        /// </summary>
-        /// <param name="sender">The source of the suspend request.</param>
-        /// <param name="e">Details about the suspend request.</param>
-        private async void OnSuspending(object sender, SuspendingEventArgs e)
-        {
-            var deferral = e.SuspendingOperation.GetDeferral();
-            await SuspensionManager.SaveAsync().ConfigureAwait(false);
-            deferral.Complete();
         }
     }
 }

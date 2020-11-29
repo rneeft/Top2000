@@ -16,7 +16,9 @@ namespace Chroomsoft.Top2000.WindowsApp.Common
         private static Window? CurrentApplicationWindow;
 
         // Keep reference so it does not get optimized/garbage collected
+#pragma warning disable S1450 // Private fields only used as local variables in methods should become local variables
         private static UISettings? uiSettings;
+#pragma warning restore S1450 // Private fields only used as local variables in methods should become local variables
 
         /// <summary>
         /// Gets the current actual theme of the app based on the requested theme of the
@@ -26,12 +28,10 @@ namespace Chroomsoft.Top2000.WindowsApp.Common
         {
             get
             {
-                if (Window.Current.Content is FrameworkElement rootElement)
+                if (Window.Current.Content is FrameworkElement rootElement &&
+                    rootElement.RequestedTheme != ElementTheme.Default)
                 {
-                    if (rootElement.RequestedTheme != ElementTheme.Default)
-                    {
-                        return rootElement.RequestedTheme;
-                    }
+                    return rootElement.RequestedTheme;
                 }
 
                 return App.GetEnum<ElementTheme>(App.Current.RequestedTheme.ToString());

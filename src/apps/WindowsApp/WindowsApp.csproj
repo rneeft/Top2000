@@ -168,7 +168,6 @@
     <Compile Include="Common\ObservableGroupedList.cs" />
     <Compile Include="Common\ObservableList.cs" />
     <Compile Include="Common\PropertyHelper.cs" />
-    <Compile Include="Common\SuspensionManager.cs" />
     <Compile Include="Common\ThemeHelper.cs" />
     <Compile Include="Common\ValueConverterBase.cs" />
     <Compile Include="GlobalSuppressions.cs" />

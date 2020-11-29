@@ -5,7 +5,6 @@ using System;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
-using Windows.UI.Xaml.Navigation;
 
 namespace Chroomsoft.Top2000.WindowsApp.Searching
 {
@@ -52,17 +51,10 @@ namespace Chroomsoft.Top2000.WindowsApp.Searching
                 (ViewModel.SelectedTrack?.Id ?? 1, ClearSelectedTrack);
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            base.OnNavigatedTo(e);
-        }
-
         private void ClearSelectedTrack()
         {
             ViewModel.SelectedTrack = null;
             DetailsFrame.Content = null;
-            //ListingFlat.SelectedItem = null;
-            //Listing.SelectedItem = null;
         }
 
         private string? GetNameForGroupOrSortBy(object item)
