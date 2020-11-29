@@ -30,11 +30,10 @@ namespace Chroomsoft.Top2000.WindowsApp
     sealed partial class App : Application
     {
         private static IServiceProvider? serviceProvider;
-        private static Stopwatch? startupWatch;
+        private static Stopwatch? startupWatch = Stopwatch.StartNew();
 
         public App()
         {
-            startupWatch = Stopwatch.StartNew();
             AppCenter.Start("a73816a5-fcfd-4cdf-9a34-8413c2f22190",
                    typeof(Analytics), typeof(Crashes));
 
@@ -220,7 +219,7 @@ namespace Chroomsoft.Top2000.WindowsApp
         /// <param name="e">Details about the navigation failure</param>
         private void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
         {
-            throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
+            throw new InvalidOperationException("Failed to load Page " + e.SourcePageType.FullName);
         }
 
         /// <summary>

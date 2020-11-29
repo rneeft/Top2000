@@ -13,8 +13,6 @@ namespace Chroomsoft.Top2000.WindowsApp.Common.Behavior
     {
         public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
         {
-            //      if (request is null) return await next();
-
             var watch = Stopwatch.StartNew();
 
             var response = await next();
