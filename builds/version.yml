@@ -1,6 +1,6 @@
 variables:
   major: 6 # +1 when breaking changes
-  minor: 0 # +1 when adding a new feature
+  minor: 1 # +1 when adding a new feature
   major-minor: $[format('{0}.{1}', variables['major'], variables['minor'])]
 
   # becuse of the way UWP application are versioned the patch is an automatic incremented number
