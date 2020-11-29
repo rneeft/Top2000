@@ -16,20 +16,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Directory.Build.props = Directory.Build.props
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "pipelines", "pipelines", "{E502F3BA-2F12-4DD6-B48C-0840C3DD4829}"
-	ProjectSection(SolutionItems) = preProject
-		pipelines\azure-pipelines.yml = pipelines\azure-pipelines.yml
-		pipelines\azure-pr-pipelines.yml = pipelines\azure-pr-pipelines.yml
-		pipelines\azuredeploy.json = pipelines\azuredeploy.json
-		pipelines\azuredeploy.parameters.json = pipelines\azuredeploy.parameters.json
-		pipelines\build.yml = pipelines\build.yml
-		pipelines\Deploy-AzureResourceGroup.ps1 = pipelines\Deploy-AzureResourceGroup.ps1
-		pipelines\release.yml = pipelines\release.yml
-		pipelines\specrun.yml = pipelines\specrun.yml
-		pipelines\version.yml = pipelines\version.yml
-		pipelines\white-source-bolt.yml = pipelines\white-source-bolt.yml
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "apps", "apps", "{CAF58F84-2057-44BB-AAA0-D1919125A96C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsApp", "src\apps\WindowsApp\WindowsApp.csproj", "{B32D1952-CDE0-4974-A35D-BB61C45F26A9}"
