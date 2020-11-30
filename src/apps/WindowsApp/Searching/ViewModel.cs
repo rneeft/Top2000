@@ -55,12 +55,9 @@ namespace Chroomsoft.Top2000.WindowsApp.Searching
             get { return GetPropertyValue<Track?>(); }
             set
             {
-                if (value != null)
+                if (value != null && SelectedTrack?.Id != value?.Id)
                 {
-                    if (SelectedTrack?.Id != value?.Id)
-                    {
-                        SetPropertyValue(value);
-                    }
+                    SetPropertyValue(value);
                 }
             }
         }

@@ -1,0 +1,7 @@
+﻿[*.cs]
+
+# S3241: Methods should not return values that are never used
+dotnet_diagnostic.S3241.severity = none
+
+# S1075: URIs should not be hardcoded
+dotnet_diagnostic.S1075.severity = none

@@ -1,0 +1,14 @@
+steps:
+
+  - download: current
+    displayName: Download UWP files
+    artifact: UWP
+
+  - task: AppCenterDistribute@3
+    inputs:
+      serverEndpoint: 'AppCenter'
+      appSlug: 'Chroomsoft/TOP2000-UWP'
+      appFile: '$(Pipeline.Workspace)/UWP/WindowsApp_$(uwp-version)_Test/WindowsApp_$(uwp-version)_x86_x64_ARM.msixbundle'
+      releaseNotesOption: 'input'
+      releaseNotesInput: 'Automation'
+      destinationType: 'groups'

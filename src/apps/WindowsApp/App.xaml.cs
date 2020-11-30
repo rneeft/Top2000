@@ -16,7 +16,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
-using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Core;
 using Windows.Storage;
@@ -30,16 +29,14 @@ namespace Chroomsoft.Top2000.WindowsApp
     sealed partial class App : Application
     {
         private static IServiceProvider? serviceProvider;
-        private static Stopwatch? startupWatch;
+        private static Stopwatch? startupWatch = Stopwatch.StartNew();
 
         public App()
         {
-            startupWatch = Stopwatch.StartNew();
             AppCenter.Start("a73816a5-fcfd-4cdf-9a34-8413c2f22190",
                    typeof(Analytics), typeof(Crashes));
 
             this.InitializeComponent();
-            this.Suspending += OnSuspending;
 
             FixSqLiteIssue();
         }
@@ -91,8 +88,10 @@ namespace Chroomsoft.Top2000.WindowsApp
 
         public static void ConfigureServices(HostBuilderContext context, IServiceCollection services)
         {
+            var baseUrl = new Uri("https://www-dev.top2000.app");
+
             services
-                .AddClientDatabase(new DirectoryInfo(FileSystem.AppDataDirectory))
+                .AddClientDatabase(new DirectoryInfo(FileSystem.AppDataDirectory), baseUrl)
                 .AddFeatures()
                 .AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>))
                 .AddTransient<Navigation.View>()
@@ -121,13 +120,6 @@ namespace Chroomsoft.Top2000.WindowsApp
         /// <param name="e">Details about the launch request and process.</param>
         protected override async void OnLaunched(LaunchActivatedEventArgs args)
         {
-#if DEBUG
-            if (Debugger.IsAttached)
-            {
-                this.DebugSettings.BindingFailed += DebugSettings_BindingFailed;
-            }
-#endif
-
             CoreApplication.GetCurrentView().TitleBar.ExtendViewIntoTitleBar = true;
 
             await EnsureWindow(args);
@@ -156,11 +148,6 @@ namespace Chroomsoft.Top2000.WindowsApp
             await checker.UpdateAsync();
         }
 
-        private void DebugSettings_BindingFailed(object sender, BindingFailedEventArgs e)
-        {
-            Debugger.Break();
-        }
-
         private async Task EnsureWindow(IActivatedEventArgs args)
         {
             InitialiseDependencyInjectionFramework();
@@ -178,18 +165,6 @@ namespace Chroomsoft.Top2000.WindowsApp
 
             if (args.Kind == ActivationKind.Launch)
             {
-                if (args.PreviousExecutionState == ApplicationExecutionState.Terminated)
-                {
-                    try
-                    {
-                        await SuspensionManager.RestoreAsync().ConfigureAwait(false);
-                    }
-                    catch (SuspensionManagerException)
-                    {
-                        //Something went wrong restoring state.
-                        //Assume there is no state and continue
-                    }
-                }
                 targetPageArguments = ((LaunchActivatedEventArgs)args).Arguments;
             }
 
@@ -209,7 +184,6 @@ namespace Chroomsoft.Top2000.WindowsApp
                 rootFrame = (Frame)rootPage.FindName("rootFrame")
                     ?? throw new Exception("Root frame not found");
 
-                SuspensionManager.RegisterFrame(rootFrame, "AppFrame");
                 rootFrame.Language = Windows.Globalization.ApplicationLanguages.Languages[0];
                 rootFrame.NavigationFailed += OnNavigationFailed;
 
@@ -230,21 +204,7 @@ namespace Chroomsoft.Top2000.WindowsApp
         /// <param name="e">Details about the navigation failure</param>
         private void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
         {
-            throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
-        }
-
-        /// <summary>
-        /// Invoked when application execution is being suspended.  Application state is saved
-        /// without knowing whether the application will be terminated or resumed with the contents
-        /// of memory still intact.
-        /// </summary>
-        /// <param name="sender">The source of the suspend request.</param>
-        /// <param name="e">Details about the suspend request.</param>
-        private async void OnSuspending(object sender, SuspendingEventArgs e)
-        {
-            var deferral = e.SuspendingOperation.GetDeferral();
-            await SuspensionManager.SaveAsync().ConfigureAwait(false);
-            deferral.Complete();
+            throw new InvalidOperationException("Failed to load Page " + e.SourcePageType.FullName);
         }
     }
 }

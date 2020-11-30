@@ -16,7 +16,7 @@ steps:
       csmFile: '$(Pipeline.Workspace)/Azure/azuredeploy.json'
       overrideParameters: '-stage "$(stage)" -product "$(product)" -hostName "$(hostName)"'
       deploymentMode: 'Increment'
-      deploymentName: '$(product)-AzureDeployment-$(fullVersion)-$(stage)'
+      deploymentName: '$(product)-AzureDeployment-$(version)-$(stage)'
 
   - task: ARM Outputs@5
     displayName: 'Parse ARM Output'

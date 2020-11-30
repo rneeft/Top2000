@@ -3,7 +3,7 @@ using System;
 
 namespace Chroomsoft.Top2000.Data.LocalDb
 {
-    public class Program
+    public static class Program
     {
         private static int Main()
         {

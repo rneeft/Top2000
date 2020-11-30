@@ -7,15 +7,15 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="d09987c7-8bb5-42b3-ac30-d6a8ae1f9970"
-    Publisher="CN=RickNeeft"
-    Version="1.0.0.0" />
+    Name="52605Chroomsoft.nl.Top2000"
+    Publisher="CN=D95AA35D-D179-4CB0-ABCA-E6C1F40A082A"
+    Version="6.0.3.0" />
 
-  <mp:PhoneIdentity PhoneProductId="d09987c7-8bb5-42b3-ac30-d6a8ae1f9970" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="69e5ee63-3b4c-40cf-929e-087b8b20e568" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
-    <DisplayName>WindowsApp</DisplayName>
-    <PublisherDisplayName>RickNeeft</PublisherDisplayName>
+    <DisplayName>Top 2000</DisplayName>
+    <PublisherDisplayName>Chroomsoft</PublisherDisplayName>
     <Logo>Common\Assets\Images\StoreLogo.png</Logo>
   </Properties>
 

@@ -72,7 +72,9 @@ namespace Chroomsoft.Top2000.WindowsApp.YearOverview
         {
             base.OnNavigatedTo(e);
 
+#pragma warning disable S2696 // Instance members should not write to "static" fields
             datePivot ??= (PivotItem)GroupByPivot.Items[1];
+#pragma warning restore S2696 // Instance members should not write to "static" fields
 
             await ViewModel.LoadAllEditionsAsync();
             ViewModel.SelectedEdition ??= ViewModel.Editions.First();

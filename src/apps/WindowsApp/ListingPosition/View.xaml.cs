@@ -22,6 +22,7 @@ namespace Chroomsoft.Top2000.WindowsApp.ListingPosition
 
         public void OpenCurrentDateAndTime()
         {
+            // no implementation inside this class
         }
 
         public void SetListing(TrackListing? listing)

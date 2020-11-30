@@ -1,5 +1,3 @@
-name: Top 2000 App $(fullVersion) build - 
-
 variables:
 - template: version.yml
 - name: product
@@ -17,7 +15,7 @@ stages:
     pool:
       name: At Home
     steps:
-    - template: build.yml
+    - template: default/build.yml
 
 - stage: DevRelease
   variables:
@@ -32,11 +30,11 @@ stages:
       runOnce:
         deploy:
           steps:
-          - template: release.yml
+          - template: default/release.yml
 
   - job: DevSpecifications
     dependsOn: DevReleaseJob
     pool:
       name: At Home
     steps:
-    - template: specrun.yml
+    - template: default/specrun.yml
