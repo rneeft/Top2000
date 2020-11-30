@@ -10,7 +10,7 @@
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Chroomsoft.Top2000.WindowsApp</RootNamespace>
-    <AssemblyName>Chroomsoft.Top2000.WindowsApp</AssemblyName>
+    <AssemblyName>Chroomsoft.Top2000.App</AssemblyName>
     <DefaultLanguage>nl-NL</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.19041.0</TargetPlatformVersion>
