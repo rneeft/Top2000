@@ -1,7 +1,6 @@
-﻿using Chroomsoft.Top2000.Data.ClientDatabase;
+﻿using Chroomsoft.Top2000.Apps.Common.Behavior;
+using Chroomsoft.Top2000.Data.ClientDatabase;
 using Chroomsoft.Top2000.Features;
-using Chroomsoft.Top2000.WindowsApp.Common;
-using Chroomsoft.Top2000.WindowsApp.Common.Behavior;
 using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,15 +11,16 @@ using System.IO;
 using System.Reflection;
 using Xamarin.Essentials;
 
-namespace Chroomsoft.Top2000.WindowsApp
+namespace Chroomsoft.Top2000.Apps
 {
     public static class AppHostBuilder
     {
-        public static IServiceProvider CreateServices()
+        public static IServiceProvider CreateServices(Action<HostBuilderContext, IServiceCollection> PlatformServices)
         {
             return new HostBuilder()
                .ConfigureHostConfiguration(ConfigureConfiguration)
                .ConfigureServices(ConfigureServices)
+               .ConfigureServices(PlatformServices)
                .ConfigureLogging(ConfigureLogging)
                .Build().Services;
         }
@@ -33,17 +33,7 @@ namespace Chroomsoft.Top2000.WindowsApp
                 .AddClientDatabase(new DirectoryInfo(FileSystem.AppDataDirectory), baseUrl)
                 .AddFeatures()
                 .AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>))
-                .AddTransient<Navigation.View>()
-                .AddTransient<YearOverview.View>()
-                .AddSingleton<YearOverview.ViewModel>()
-                .AddSingleton<ListingDate.ViewModel>()
-                .AddSingleton<ListingPosition.ViewModel>()
-                .AddSingleton<TrackInformation.ViewModel>()
-                .AddSingleton<Searching.ViewModel>()
-                .AddSingleton<About.ViewModel>()
-                .AddSingleton<About.View>()
-                .AddSingleton<IGlobalUpdate, GlobalUpdates>()
-                .AddTransient<IOnlineUpdateChecker, OnlineUpdateChecker>()
+                .AddSingleton<Navigation.View>()
             ;
         }
 
@@ -54,11 +44,10 @@ namespace Chroomsoft.Top2000.WindowsApp
 
         private static string SaveAppSettingsToLocalDisk()
         {
-            var filename = "appsettings.json";
+            var filename = "Chroomsoft.Top2000.Apps.appsettings.json";
             var assembly = Assembly.GetExecutingAssembly();
-            var appsettingsFile = assembly.GetName().Name + "." + filename;
 
-            using var resFilestream = assembly.GetManifestResourceStream(appsettingsFile)
+            using var resFilestream = assembly.GetManifestResourceStream(filename)
                 ?? throw new FileNotFoundException($"Unable to find {filename} in {assembly.GetName()}");
 
             var localPath = Path.Combine(FileSystem.CacheDirectory, filename);

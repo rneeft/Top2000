@@ -170,7 +170,6 @@
     <Compile Include="Common\PropertyHelper.cs" />
     <Compile Include="Common\ThemeHelper.cs" />
     <Compile Include="Common\ValueConverterBase.cs" />
-    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="ListingDate\DateTimeKeyToString.cs" />
     <Compile Include="ListingDate\DateTimeToDateOnlyString.cs" />
     <Compile Include="ListingDate\DateTimeToTimeOnlyString.cs" />

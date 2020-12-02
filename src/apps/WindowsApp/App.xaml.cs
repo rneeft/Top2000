@@ -1,19 +1,13 @@
 ﻿#nullable enable
 
 using Chroomsoft.Top2000.Data.ClientDatabase;
-using Chroomsoft.Top2000.Features;
 using Chroomsoft.Top2000.WindowsApp.Common;
-using Chroomsoft.Top2000.WindowsApp.Common.Behavior;
-using MediatR;
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using System;
 using System.Diagnostics;
-using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Activation;
@@ -22,7 +16,6 @@ using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using Xamarin.Essentials;
 
 namespace Chroomsoft.Top2000.WindowsApp
 {
@@ -76,43 +69,6 @@ namespace Chroomsoft.Top2000.WindowsApp
 
         public static T GetService<T>() where T : notnull => ServiceProvider.GetRequiredService<T>();
 
-        public static void InitialiseDependencyInjectionFramework()
-        {
-            ServiceProvider = new AppHostBuilder()
-               .CreateDefaultAppHostBuilder()
-               .ConfigureServices(ConfigureServices)
-               .ConfigureLogging(ConfigureLogging)
-               .Build()
-               .Services;
-        }
-
-        public static void ConfigureServices(HostBuilderContext context, IServiceCollection services)
-        {
-            var baseUrl = new Uri("https://www-dev.top2000.app");
-
-            services
-                .AddClientDatabase(new DirectoryInfo(FileSystem.AppDataDirectory), baseUrl)
-                .AddFeatures()
-                .AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>))
-                .AddTransient<Navigation.View>()
-                .AddTransient<YearOverview.View>()
-                .AddSingleton<YearOverview.ViewModel>()
-                .AddSingleton<ListingDate.ViewModel>()
-                .AddSingleton<ListingPosition.ViewModel>()
-                .AddSingleton<TrackInformation.ViewModel>()
-                .AddSingleton<Searching.ViewModel>()
-                .AddSingleton<About.ViewModel>()
-                .AddSingleton<About.View>()
-                .AddSingleton<IGlobalUpdate, GlobalUpdates>()
-                .AddTransient<IOnlineUpdateChecker, OnlineUpdateChecker>()
-            ;
-        }
-
-        public static void ConfigureLogging(ILoggingBuilder builder)
-        {
-            builder.AddConsole(o => o.DisableColors = true);
-        }
-
         /// <summary>
         /// Invoked when the application is launched normally by the end user.  Other entry points
         /// will be used such as when the application is launched to open a specific file.
@@ -122,7 +78,15 @@ namespace Chroomsoft.Top2000.WindowsApp
         {
             CoreApplication.GetCurrentView().TitleBar.ExtendViewIntoTitleBar = true;
 
-            await EnsureWindow(args);
+            ServiceProvider = AppHostBuilder.CreateServices();
+
+            await EnsureDatabaseIsCreatedAsync();
+
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+            CheckForOnlineUpdates();
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+
+            EnsureWindow(args);
         }
 
         private static void FixSqLiteIssue()
@@ -148,15 +112,8 @@ namespace Chroomsoft.Top2000.WindowsApp
             await checker.UpdateAsync();
         }
 
-        private async Task EnsureWindow(IActivatedEventArgs args)
+        private void EnsureWindow(IActivatedEventArgs args)
         {
-            InitialiseDependencyInjectionFramework();
-            await EnsureDatabaseIsCreatedAsync();
-
-#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
-            CheckForOnlineUpdates();
-#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
-
             var rootFrame = GetRootFrame();
 
             ThemeHelper.Initialize();
