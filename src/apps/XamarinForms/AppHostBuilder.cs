@@ -1,4 +1,5 @@
 ﻿using Chroomsoft.Top2000.Apps.Common.Behavior;
+using Chroomsoft.Top2000.Apps.Globalisation;
 using Chroomsoft.Top2000.Data.ClientDatabase;
 using Chroomsoft.Top2000.Features;
 using MediatR;
@@ -33,7 +34,12 @@ namespace Chroomsoft.Top2000.Apps
                 .AddClientDatabase(new DirectoryInfo(FileSystem.AppDataDirectory), baseUrl)
                 .AddFeatures()
                 .AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>))
-                .AddSingleton<Navigation.View>()
+                .AddSingleton<NavigationShell.View>()
+                .AddSingleton<YearSelector.View>()
+                .AddSingleton<YearSelector.ViewModel>()
+                .AddSingleton<ICulture>(new SupportedCulture("nl"))
+                .AddSingleton<ICulture>(new SupportedCulture("en"))
+                .AddSingleton<ICulture>(new SupportedCulture("fr"))
             ;
         }
 

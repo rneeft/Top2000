@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Shell xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:g="clr-namespace:Chroomsoft.Top2000.Apps.Common"
+       xmlns:overview="clr-namespace:Chroomsoft.Top2000.Apps.Overview"
+       xmlns:searching="clr-namespace:Chroomsoft.Top2000.Apps.Searching"
+       xmlns:settings="clr-namespace:Chroomsoft.Top2000.Apps.Settings"
+       xmlns:res="clr-namespace:Chroomsoft.Top2000.Apps.Globalisation"
+             x:Class="Chroomsoft.Top2000.Apps.NavigationShell.View">
+
+    <TabBar>
+        <Tab Title="Overzicht">
+            <Tab.Icon>
+                <FontImageSource FontFamily="{OnPlatform Android=MaterialIcons.ttf#}" Glyph="{x:Static g:Symbols.Overview}" />
+            </Tab.Icon>
+            <ShellContent Title="{Binding [Position], Source={x:Static res:Translator.Instance}}">
+                <overview:View />
+            </ShellContent>
+            <ShellContent Title="{Binding [Date], Source={x:Static res:Translator.Instance}}" x:Name="DateContent">
+                <searching:View />
+            </ShellContent>
+        </Tab>
+
+        <Tab Title="{Binding [Search], Source={x:Static res:Translator.Instance}}">
+            <Tab.Icon>
+                <FontImageSource FontFamily="{OnPlatform Android=MaterialIcons.ttf#}" Glyph="{x:Static g:Symbols.Search}" />
+            </Tab.Icon>
+            <overview:View />
+        </Tab>
+
+        <Tab Title="{Binding [Settings], Source={x:Static res:Translator.Instance}}">
+            <Tab.Icon>
+                <FontImageSource FontFamily="{OnPlatform Android=MaterialIcons.ttf#}" Glyph="{x:Static g:Symbols.Settings}" />
+            </Tab.Icon>
+            <ShellContent Title="{Binding [General], Source={x:Static res:Translator.Instance}}">
+                <settings:Start />
+            </ShellContent>
+            <ShellContent Title="{Binding [Privacy], Source={x:Static res:Translator.Instance}}">
+                <settings:Privacy />
+            </ShellContent>
+            <ShellContent Title="{Binding [ThirdParty], Source={x:Static res:Translator.Instance}}">
+                <settings:ThirdParty />
+            </ShellContent>
+            <ShellContent Title="{Binding [About], Source={x:Static res:Translator.Instance}}">
+                <settings:About />
+            </ShellContent>
+        </Tab>
+    </TabBar>
+</Shell>

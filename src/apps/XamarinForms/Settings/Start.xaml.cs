@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace Chroomsoft.Top2000.Apps.Navigation
+namespace Chroomsoft.Top2000.Apps.Settings
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class View : ContentPage
+    public partial class Start : ContentPage
     {
-        public View()
+        public Start()
         {
             InitializeComponent();
         }

@@ -3,5 +3,50 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Chroomsoft.Top2000.Apps.XamarinForms.App">
     <Application.Resources>
+        <ResourceDictionary>
+            <Color x:Key="Top2000Colour">#DA161C</Color>
+
+            <ResourceDictionary Source="Themes/Light.xaml" />
+
+            <Style TargetType="TabBar">
+                <Setter Property="Shell.BackgroundColor" Value="{DynamicResource NavigationBarColor}" />
+                <Setter Property="Shell.TabBarBackgroundColor" Value="{DynamicResource TabBarBackgroundColor}" />
+                <Setter Property="Shell.TabBarUnselectedColor" Value="{DynamicResource TabBarUnselectedColor}" />
+                <Setter Property="Shell.TabBarTitleColor" Value="{DynamicResource TabBarSelectedColor}" />
+                <Setter Property="Shell.ForegroundColor" Value="{DynamicResource ShellForegroundColor}" />
+            </Style>
+
+            <Style TargetType="NavigationPage">
+                <Setter Property="BarBackgroundColor" Value="{DynamicResource NavigationBarColor}" />
+                <Setter Property="BarTextColor" Value="{DynamicResource ShellForegroundColor}" />
+            </Style>
+
+            <Style TargetType="ContentPage">
+                <Setter Property="BackgroundColor" Value="{DynamicResource PageBackgroundColor}" />
+            </Style>
+
+            <Style x:Key="ButtonStyle" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{DynamicResource PrimaryColor}" />
+                <Setter Property="TextColor" Value="{DynamicResource SecondaryColor}" />
+                <Setter Property="HeightRequest" Value="45" />
+                <Setter Property="WidthRequest" Value="190" />
+                <Setter Property="CornerRadius" Value="18" />
+            </Style>
+
+            <Style x:Key="LargeLabelStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}" />
+                <Setter Property="FontSize" Value="30" />
+            </Style>
+
+            <Style x:Key="MediumLabelStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}" />
+                <Setter Property="FontSize" Value="25" />
+            </Style>
+
+            <Style x:Key="SmallLabelStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="{DynamicResource TertiaryTextColor}" />
+                <Setter Property="FontSize" Value="15" />
+            </Style>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

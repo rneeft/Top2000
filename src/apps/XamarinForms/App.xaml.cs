@@ -14,7 +14,7 @@ namespace Chroomsoft.Top2000.Apps.XamarinForms
         {
             InitializeComponent();
 
-            MainPage = GetService<Navigation.View>();
+            MainPage = GetService<NavigationShell.View>();
         }
 
         public static IServiceProvider ServiceProvider

@@ -8,3 +8,6 @@ dotnet_diagnostic.S1075.severity = none
 
 # CA2007: Consider calling ConfigureAwait on the awaited task
 dotnet_diagnostic.CA2007.severity = none
+
+# not everything called in code can be made static
+dotnet_diagnostic.CA1822.severity = none
