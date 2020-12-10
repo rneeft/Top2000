@@ -21,7 +21,7 @@ namespace XamarinForms.Droid
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
 
-        protected override void OnCreate(Bundle savedInstanceState)
+        async protected override void OnCreate(Bundle savedInstanceState)
         {
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
@@ -32,6 +32,8 @@ namespace XamarinForms.Droid
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+
+            await App.EnsureDatabaseIsCreatedAsync();
 
             LoadApplication(new App());
         }

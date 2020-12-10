@@ -426,6 +426,9 @@
   <data name="SelectEdition" xml:space="preserve">
     <value>Sélectionnez une édition</value>
   </data>
+  <data name="SelectTheme" xml:space="preserve">
+    <value>Sélectionnez un thème</value>
+  </data>
   <data name="SelectYear" xml:space="preserve">
     <value>Sélectionnez une année</value>
   </data>

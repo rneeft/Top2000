@@ -35,6 +35,8 @@ namespace Chroomsoft.Top2000.Apps
                 .AddFeatures()
                 .AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>))
                 .AddSingleton<NavigationShell.View>()
+                .AddSingleton<NavigationShell.ViewModel>()
+                .AddSingleton<Overview.ViewModel>()
                 .AddSingleton<YearSelector.View>()
                 .AddSingleton<YearSelector.ViewModel>()
                 .AddSingleton<ICulture>(new SupportedCulture("nl"))

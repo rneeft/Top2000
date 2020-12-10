@@ -431,6 +431,9 @@
   <data name="SelectEdition" xml:space="preserve">
     <value>Select an edition</value>
   </data>
+  <data name="SelectTheme" xml:space="preserve">
+    <value>Select a theme</value>
+  </data>
   <data name="Settings" xml:space="preserve">
     <value>Settings</value>
   </data>

@@ -477,6 +477,15 @@ namespace Chroomsoft.Top2000.Apps.Globalisation {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Selecteer een thema.
+        /// </summary>
+        internal static string SelectTheme {
+            get {
+                return ResourceManager.GetString("SelectTheme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Instellingen.
         /// </summary>
         internal static string Settings {

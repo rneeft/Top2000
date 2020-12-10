@@ -9,5 +9,7 @@
         public static string Back => "\xe5c4";
 
         public static string Settings => "\xe8b8";
+
+        public static string Menu => "\xe3c7";
     }
 }
