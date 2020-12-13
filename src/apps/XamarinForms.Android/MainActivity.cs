@@ -33,13 +33,16 @@ namespace XamarinForms.Droid
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
 
+#pragma warning disable CA2007 // Consider calling ConfigureAwait on the awaited task
             await App.EnsureDatabaseIsCreatedAsync();
+#pragma warning restore CA2007 // Consider calling ConfigureAwait on the awaited task
 
             LoadApplication(new App());
         }
 
         private void PlatformServices(HostBuilderContext ctx, IServiceCollection services)
         {
+            // blah
         }
     }
 }

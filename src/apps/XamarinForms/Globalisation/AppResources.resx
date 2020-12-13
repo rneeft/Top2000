@@ -315,7 +315,7 @@
     <value>In Top 2000</value>
   </data>
   <data name="JumpToGroup" xml:space="preserve">
-    <value>Kies een group</value>
+    <value>Kies een groep</value>
   </data>
   <data name="LanguageHeader" xml:space="preserve">
     <value>Taal voorkeur</value>
@@ -340,6 +340,9 @@
   </data>
   <data name="OrVisitFacebook" xml:space="preserve">
     <value>of bezoek ons op Facebook op</value>
+  </data>
+  <data name="Overview" xml:space="preserve">
+    <value>Overzicht</value>
   </data>
   <data name="Position" xml:space="preserve">
     <value>Positie</value>

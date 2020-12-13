@@ -6,6 +6,15 @@ using Xamarin.Forms;
 
 namespace Chroomsoft.Top2000.Apps.XamarinForms
 {
+    public class FactoryFor<TView> : RouteFactorFor<TView> where TView : notnull
+    {
+        public override Element GetOrCreate() => (App.GetService<TView>() as Element)
+            ?? throw new InvalidOperationException("TView must of Element type");
+    }
+
+    public abstract class RouteFactorFor<TView> : RouteFactory where TView : notnull
+    { }
+
     public partial class App : Application
     {
         private static IServiceProvider? serviceProvider;
@@ -32,9 +41,16 @@ namespace Chroomsoft.Top2000.Apps.XamarinForms
 
         public static T GetService<T>() where T : notnull => ServiceProvider.GetRequiredService<T>();
 
-        protected override async void OnStart()
+        public static Task EnsureDatabaseIsCreatedAsync()
         {
-            await EnsureDatabaseIsCreatedAsync();
+            var databaseGen = GetService<IUpdateClientDatabase>();
+            var top2000 = GetService<Top2000AssemblyDataSource>();
+
+            return databaseGen.RunAsync(top2000);
+        }
+
+        protected override void OnStart()
+        {
         }
 
         protected override void OnSleep()
@@ -43,14 +59,6 @@ namespace Chroomsoft.Top2000.Apps.XamarinForms
 
         protected override void OnResume()
         {
-        }
-
-        private static Task EnsureDatabaseIsCreatedAsync()
-        {
-            var databaseGen = GetService<IUpdateClientDatabase>();
-            var top2000 = GetService<Top2000AssemblyDataSource>();
-
-            return databaseGen.RunAsync(top2000);
         }
 
         //private static async Task CheckForOnlineUpdates()

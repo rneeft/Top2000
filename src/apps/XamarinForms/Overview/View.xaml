@@ -3,14 +3,70 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Chroomsoft.Top2000.Apps.Overview.View"
              xmlns:g="clr-namespace:Chroomsoft.Top2000.Apps.Common"
-             Title="Overview"
-             BackgroundColor="{DynamicResource PageBackgroundColor}"
-             >
-    <ContentPage.Content>
-        <StackLayout Margin="0,25,0,0">
-            <Button Text="Show Dates" Clicked="ShowDatesView" />
-            <Button Text="Hides Dates" Clicked="HideDatesView" />
-            <Button Text="Select Year" Clicked="Button_Clicked" />
+             Title="{Binding SelectedEditionYear, Mode=OneWay}"
+             BackgroundColor="{DynamicResource PageBackgroundColor}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Clicked="OnJumpGroupButtonClick">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource Glyph="{x:Static g:Symbols.FilterList}" Color="White"
+                                 FontFamily="{OnPlatform Android=MaterialIcons.ttf#}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+
+    <Shell.TitleView>
+        <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+
+            <Label Text="{x:Static g:Symbols.Menu}" FontFamily="{OnPlatform Android=MaterialIcons.ttf#}" FontSize="25"
+                   TextColor="White"
+                   VerticalOptions="Center" />
+
+            <Label Margin="5,0,0,0" Text="{Binding SelectedEditionYear, Mode=OneWay}" TextColor="White" FontSize="20" VerticalTextAlignment="Center" VerticalOptions="Center" />
+
+            <StackLayout.GestureRecognizers>
+                <TapGestureRecognizer Tapped="OnSelectYearButtonClick" />
+            </StackLayout.GestureRecognizers>
         </StackLayout>
+    </Shell.TitleView>
+
+    <ContentPage.Content>
+        <CollectionView x:Name="listings" ItemsSource="{Binding Listings}"
+                            VerticalOptions="FillAndExpand"
+                            ItemSizingStrategy="MeasureAllItems"
+                            IsGrouped="True"
+                            SelectionMode="Single">
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="0,0,0,5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Label Text="{Binding Position}" Style="{StaticResource MediumLabelStyle}" Margin="20,4,0,0" />
+                        <StackLayout Grid.Column="1" Spacing="0">
+                            <Label Text="{Binding Title}"  Style="{StaticResource MediumLabelStyle}" LineBreakMode="WordWrap" Margin="0,4,20,0" />
+                            <Label Text="{Binding Artist}" Opacity=".5" Style="{StaticResource SmallLabelStyle}" LineBreakMode="WordWrap" Margin="0,0,20,0" />
+                        </StackLayout>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+            <CollectionView.GroupHeaderTemplate>
+                <DataTemplate>
+                    <StackLayout>
+                        <Label Text="{Binding Key}"
+                               TextColor="{StaticResource Top2000Colour}"
+                               Style="{StaticResource MediumLabelStyle}"
+                               Margin="20,5,0,0" />
+                        <BoxView Style="{StaticResource Separator}" Margin="20,-3,20,5" />
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnJumpGroupButtonClick" />
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.GroupHeaderTemplate>
+        </CollectionView>
     </ContentPage.Content>
 </ContentPage>

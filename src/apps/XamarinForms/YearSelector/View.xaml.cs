@@ -1,7 +1,7 @@
 ﻿using Chroomsoft.Top2000.Apps.Common;
 using Chroomsoft.Top2000.Apps.XamarinForms;
 using Chroomsoft.Top2000.Features.AllEditions;
-using MediatR;
+using System;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -11,6 +11,8 @@ namespace Chroomsoft.Top2000.Apps.YearSelector
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class View : ContentPage, IModalPage
     {
+        private int startYear;
+
         public View()
         {
             BindingContext = App.GetService<ViewModel>();
@@ -20,31 +22,27 @@ namespace Chroomsoft.Top2000.Apps.YearSelector
 
         public ViewModel ViewModel => (ViewModel)BindingContext;
 
-        public Task DismissAsync() => Navigation.PopModalAsync();
+        public Func<Edition, Task>? OnSelection { get; set; }
 
-        async protected override void OnAppearing()
+        public Task DismissAsync() => Navigation.PopModalAsync(animated: false);
+
+        public async Task ShowAsModalDialog(int year, Func<Edition, Task> onSelection)
         {
-            await ViewModel.LoadAllEditionsAsync();
-        }
-    }
-
-    public class ViewModel
-    {
-        private readonly IMediator mediator;
-
-        public ViewModel(IMediator mediator)
-        {
-            this.mediator = mediator;
-            this.Editions = new ObservableList<Edition>();
+            startYear = year;
+            await ViewModel.LoadAllEditionsAsync(year);
+            this.OnSelection = onSelection;
         }
 
-        public ObservableList<Edition> Editions { get; }
-
-        public async Task LoadAllEditionsAsync()
+        async private void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (Editions.Count == 0)
+            if (OnSelection is null || e.CurrentSelection.Count == 0) return;
+
+            var selectedEdition = (Edition)e.CurrentSelection[0];
+
+            if (selectedEdition.Year != startYear)
             {
-                Editions.ClearAddRange(await mediator.Send(new AllEditionsRequest()));
+                await DismissAsync();
+                await OnSelection.Invoke(selectedEdition);
             }
         }
     }

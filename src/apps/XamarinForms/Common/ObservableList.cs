@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
 
 namespace Chroomsoft.Top2000.Apps.Common
 {
-    public class ObservableList<TItem> : Collection<TItem>, INotifyCollectionChanged
+    public class ObservableList<TItem> : List<TItem>, INotifyCollectionChanged
     {
         public event NotifyCollectionChangedEventHandler? CollectionChanged;
 

@@ -341,6 +341,9 @@
   <data name="OrVisitFacebook" xml:space="preserve">
     <value>ou visitez Facebook au</value>
   </data>
+  <data name="Overview" xml:space="preserve">
+    <value>Aperçu</value>
+  </data>
   <data name="Position" xml:space="preserve">
     <value>Position</value>
   </data>

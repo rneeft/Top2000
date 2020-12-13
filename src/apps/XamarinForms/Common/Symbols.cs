@@ -10,6 +10,8 @@
 
         public static string Settings => "\xe8b8";
 
-        public static string Menu => "\xe3c7";
+        public static string Menu => "\xe5d2";
+
+        public static string FilterList => "\xe152";
     }
 }

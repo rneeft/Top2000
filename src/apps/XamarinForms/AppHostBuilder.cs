@@ -1,5 +1,6 @@
 ﻿using Chroomsoft.Top2000.Apps.Common.Behavior;
 using Chroomsoft.Top2000.Apps.Globalisation;
+using Chroomsoft.Top2000.Apps.XamarinForms;
 using Chroomsoft.Top2000.Data.ClientDatabase;
 using Chroomsoft.Top2000.Features;
 using MediatR;
@@ -42,6 +43,7 @@ namespace Chroomsoft.Top2000.Apps
                 .AddSingleton<ICulture>(new SupportedCulture("nl"))
                 .AddSingleton<ICulture>(new SupportedCulture("en"))
                 .AddSingleton<ICulture>(new SupportedCulture("fr"))
+                .AddTransient(typeof(RouteFactorFor<>), typeof(FactoryFor<>));
             ;
         }
 

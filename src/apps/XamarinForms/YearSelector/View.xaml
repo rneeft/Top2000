@@ -14,16 +14,30 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <CollectionView ItemsSource="{Binding Editions}" SelectionMode="Single">
+        <CollectionView ItemsSource="{Binding Editions}"
+                        SelectedItem="{Binding SelectedEdition, Mode=TwoWay}"
+                        SelectionMode="Single" SelectionChanged="OnSelectionChanged">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <StackLayout>
-                        <Label Text="{Binding Year}" Margin="20,2,0,0"
-                               Style="{StaticResource LargeLabelStyle}" />
-                        <Label Text="{Binding Converter={StaticResource EditionPlayTimeConverter}}"
-                               Opacity="0.75"
-                               Margin="20,-10,0,7" Style="{StaticResource SmallLabelStyle}" />
-                    </StackLayout>
+                    <Grid Padding="20,4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Label Text="{Binding Year}"
+                               Style="{StaticResource MediumLabelStyle}" />
+
+                        <StackLayout Grid.Column="1" Spacing="0">
+                            <Label Text="{Binding LocalStartDateAndTime, Converter={StaticResource EditionPlayTimeConverter}}"
+                                   Style="{StaticResource MediumLabelStyle}"
+                                   LineBreakMode="WordWrap" />
+
+                            <Label Text="{Binding LocalEndDateAndTime, Converter={StaticResource EditionPlayTimeConverter}}" Opacity=".5"
+                                       Style="{StaticResource SmallLabelStyle}"
+                                   LineBreakMode="WordWrap" />
+                        </StackLayout>
+                    </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>

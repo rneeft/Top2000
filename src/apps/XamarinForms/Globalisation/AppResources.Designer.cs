@@ -248,7 +248,7 @@ namespace Chroomsoft.Top2000.Apps.Globalisation {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Kies een group.
+        ///   Looks up a localized string similar to Kies een groep.
         /// </summary>
         internal static string JumpToGroup {
             get {
@@ -325,6 +325,15 @@ namespace Chroomsoft.Top2000.Apps.Globalisation {
         internal static string OrVisitFacebook {
             get {
                 return ResourceManager.GetString("OrVisitFacebook", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Overzicht.
+        /// </summary>
+        internal static string Overview {
+            get {
+                return ResourceManager.GetString("Overview", resourceCulture);
             }
         }
         

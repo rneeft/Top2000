@@ -1,39 +1,66 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Shell xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:g="clr-namespace:Chroomsoft.Top2000.Apps.Common"
+       xmlns:local="clr-namespace:Chroomsoft.Top2000.Apps.NavigationShell"
        xmlns:overview="clr-namespace:Chroomsoft.Top2000.Apps.Overview"
        xmlns:searching="clr-namespace:Chroomsoft.Top2000.Apps.Searching"
        xmlns:settings="clr-namespace:Chroomsoft.Top2000.Apps.Settings"
        xmlns:res="clr-namespace:Chroomsoft.Top2000.Apps.Globalisation"
-             x:Class="Chroomsoft.Top2000.Apps.NavigationShell.View">
+       x:Class="Chroomsoft.Top2000.Apps.NavigationShell.View"
+   >
+
+    <Shell.Resources>
+        <local:EditionPlayTimeConverter x:Key="EditionPlayTimeConverter" />
+        <local:SplitConverter x:Key="SplitConverter" />
+    </Shell.Resources>
+
+    <!--<Shell.FlyoutHeader>
+        <CollectionView ItemsSource="{Binding Editions}"
+                        SelectedItem="{Binding SelectedEdition, Mode=TwoWay}"
+                        SelectionMode="Single">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout>
+                        <Label Text="{Binding Year}" Margin="20,2,0,0"
+                               Style="{StaticResource MediumLabelStyle}" />
+                        <Label Text="{Binding Converter={StaticResource EditionPlayTimeConverter}}"
+                               Opacity="0.75"
+                               Margin="20,-10,0,7" Style="{StaticResource SmallLabelStyle}" />
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Shell.FlyoutHeader>-->
 
     <TabBar>
-        <Tab Title="Overzicht">
+        <Tab Title="{Binding [Overview], Source={x:Static res:Translator.Instance}}">
             <Tab.Icon>
                 <FontImageSource FontFamily="{OnPlatform Android=MaterialIcons.ttf#}" Glyph="{x:Static g:Symbols.Overview}" />
             </Tab.Icon>
-            <ShellContent Title="{Binding [Position], Source={x:Static res:Translator.Instance}}">
-                <overview:View />
-            </ShellContent>
-            <ShellContent Title="{Binding [Date], Source={x:Static res:Translator.Instance}}" x:Name="DateContent">
-                <searching:View />
-            </ShellContent>
+            <ShellContent Title="{Binding [Position], Source={x:Static res:Translator.Instance}}"
+                          IsVisible="True"
+                          ContentTemplate="{DataTemplate overview:View}" />
+
+            <ShellContent Title="{Binding [Date], Source={x:Static res:Translator.Instance}}"
+                          x:Name="DateContent" IsEnabled="False"
+                          ContentTemplate="{DataTemplate settings:About}" />
         </Tab>
 
         <Tab Title="{Binding [Search], Source={x:Static res:Translator.Instance}}">
             <Tab.Icon>
                 <FontImageSource FontFamily="{OnPlatform Android=MaterialIcons.ttf#}" Glyph="{x:Static g:Symbols.Search}" />
             </Tab.Icon>
-            <overview:View />
+            <ShellContent Title="{Binding [Search], Source={x:Static res:Translator.Instance}}"
+                          ContentTemplate="{DataTemplate searching:View}" />
         </Tab>
 
-        <Tab Title="{Binding [Settings], Source={x:Static res:Translator.Instance}}">
+        <!--<Tab Title="{Binding [Settings], Source={x:Static res:Translator.Instance}}">
             <Tab.Icon>
                 <FontImageSource FontFamily="{OnPlatform Android=MaterialIcons.ttf#}" Glyph="{x:Static g:Symbols.Settings}" />
             </Tab.Icon>
             <ShellContent Title="{Binding [General], Source={x:Static res:Translator.Instance}}">
-                <settings:Start />
+                <settings:General />
             </ShellContent>
             <ShellContent Title="{Binding [Privacy], Source={x:Static res:Translator.Instance}}">
                 <settings:Privacy />
@@ -44,6 +71,6 @@
             <ShellContent Title="{Binding [About], Source={x:Static res:Translator.Instance}}">
                 <settings:About />
             </ShellContent>
-        </Tab>
+        </Tab>-->
     </TabBar>
 </Shell>

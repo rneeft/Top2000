@@ -16,6 +16,14 @@
                 <Setter Property="Shell.ForegroundColor" Value="{DynamicResource ShellForegroundColor}" />
             </Style>
 
+            <Style x:Key="Separator" TargetType="BoxView">
+                <Setter Property="HeightRequest" Value="1" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="Color" Value="{DynamicResource SeparatorColor}" />
+                <Setter Property="Margin" Value="0, 5, 0, 5" />
+                <Setter Property="Opacity" Value="0.5" />
+            </Style>
+
             <Style TargetType="NavigationPage">
                 <Setter Property="BarBackgroundColor" Value="{DynamicResource NavigationBarColor}" />
                 <Setter Property="BarTextColor" Value="{DynamicResource ShellForegroundColor}" />
@@ -40,7 +48,7 @@
 
             <Style x:Key="MediumLabelStyle" TargetType="Label">
                 <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}" />
-                <Setter Property="FontSize" Value="25" />
+                <Setter Property="FontSize" Value="20" />
             </Style>
 
             <Style x:Key="SmallLabelStyle" TargetType="Label">
