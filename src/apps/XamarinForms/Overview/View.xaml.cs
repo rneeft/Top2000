@@ -14,40 +14,36 @@ namespace Chroomsoft.Top2000.Apps.Overview
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class View : ContentPage
     {
+        private readonly NavigationShell.View shell;
+
         public View()
         {
             BindingContext = App.GetService<ViewModel>();
-
+            shell = App.GetService<NavigationShell.View>();
             InitializeComponent();
         }
-
-        public static View MyView => App.GetService<View>();
 
         public ViewModel ViewModel => (ViewModel)BindingContext;
 
         async protected override void OnAppearing()
         {
             base.OnAppearing();
-            if (ViewModel.Listings.Count == 0)
+            if (ViewModel.Editions.Count == 0)
             {
-                var edition = await ViewModel.LatestEditionAsync();
-                await ViewModel.LoadListingForEditionAsync(edition);
+                await ViewModel.InitialiseViewModelAsync();
             }
-        }
-
-        private async Task OnEditionSelected(Edition edition)
-        {
-            await ViewModel.LoadListingForEditionAsync(edition);
-
-            var view = App.GetService<NavigationShell.View>();
-            view.IsDatesVisible = edition.HasPlayDateAndTime;
         }
 
         async private void OnSelectYearButtonClick(object sender, System.EventArgs e)
         {
-            var view = App.GetService<YearSelector.View>();
-            await view.ShowAsModalDialog(2019, OnEditionSelected);
-            await Navigation.PushModalAsync(new NavigationPage(view), animated: false);
+            Shell.SetTabBarIsVisible(this, false);
+            Shell.SetNavBarIsVisible(this, false);
+            shell.IsDatesVisible = false;
+
+            await EditionsFlyout.TranslateTo(this.Width * -1, 0, 0);
+
+            EditionsFlyout.IsVisible = true;
+            await EditionsFlyout.TranslateTo(0, 0);
         }
 
         async private void OnJumpGroupButtonClick(object sender, System.EventArgs e)
@@ -72,6 +68,21 @@ namespace Chroomsoft.Top2000.Apps.Overview
                 listings.ScrollTo(index, position: ScrollToPosition.Start, animate: false);
             }
         }
+
+        async private void NewEditionSelected(object sender, SelectionChangedEventArgs e)
+        {
+            if (ViewModel.SelectedEdition is null) return;
+
+            ViewModel.SelectedEditionYear = ViewModel.SelectedEdition.Year;
+
+            await ViewModel.LoadAllListingsAsync();
+
+            Shell.SetTabBarIsVisible(this, true);
+            Shell.SetNavBarIsVisible(this, true);
+            shell.IsDatesVisible = ViewModel.SelectedEdition.HasPlayDateAndTime;
+            await EditionsFlyout.TranslateTo(this.Width * -1, 0);
+            this.EditionsFlyout.IsVisible = false;
+        }
     }
 
     public class ViewModel : ObservableBase
@@ -82,6 +93,7 @@ namespace Chroomsoft.Top2000.Apps.Overview
         {
             this.mediator = mediator;
             this.Listings = new ObservableGroupedList<string, TrackListing>();
+            this.Editions = new ObservableList<Edition>();
         }
 
         public ObservableGroupedList<string, TrackListing> Listings { get; }
@@ -89,6 +101,14 @@ namespace Chroomsoft.Top2000.Apps.Overview
         public TrackListing? SelectedListing
         {
             get { return GetPropertyValue<TrackListing?>(); }
+            set { SetPropertyValue(value); }
+        }
+
+        public ObservableList<Edition> Editions { get; }
+
+        public Edition? SelectedEdition
+        {
+            get { return GetPropertyValue<Edition?>(); }
             set { SetPropertyValue(value); }
         }
 
@@ -111,20 +131,25 @@ namespace Chroomsoft.Top2000.Apps.Overview
             return $"{min} - {max}";
         }
 
-        public async Task LoadListingForEditionAsync(Edition edition)
-        {
-            var tracks = await mediator.Send(new AllListingsOfEditionRequest(edition.Year));
-            var x = tracks.GroupBy(Position);
-            Listings.ClearAddRange(x);
-
-            SelectedListing = null;
-            SelectedEditionYear = edition.Year;
-        }
-
-        public async Task<Edition> LatestEditionAsync()
+        public async Task InitialiseViewModelAsync()
         {
             var editions = await mediator.Send(new AllEditionsRequest());
-            return editions.First();
+            SelectedEdition = editions.First();
+            SelectedEditionYear = SelectedEdition.Year;
+            Editions.ClearAddRange(editions);
+
+            await LoadAllListingsAsync();
+        }
+
+        public async Task LoadAllListingsAsync()
+        {
+            if (SelectedEdition is null) return;
+
+            var listings = await mediator.Send(new AllListingsOfEditionRequest(SelectedEdition.Year));
+
+            Listings.ClearAddRange(listings.GroupBy(Position));
+
+            SelectedListing = null;
         }
     }
 }

@@ -7,39 +7,7 @@
              xmlns:res="clr-namespace:Chroomsoft.Top2000.Apps.Globalisation"
              Title="{Binding [SelectEdition], Source={x:Static res:Translator.Instance}}"
              BackgroundColor="{DynamicResource PageBackgroundColor}">
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <local:EditionPlayTimeConverter x:Key="EditionPlayTimeConverter" />
-        </ResourceDictionary>
-    </ContentPage.Resources>
-
     <ContentPage.Content>
-        <CollectionView ItemsSource="{Binding Editions}"
-                        SelectedItem="{Binding SelectedEdition, Mode=TwoWay}"
-                        SelectionMode="Single" SelectionChanged="OnSelectionChanged">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Grid Padding="20,4">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="80" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-
-                        <Label Text="{Binding Year}"
-                               Style="{StaticResource MediumLabelStyle}" />
-
-                        <StackLayout Grid.Column="1" Spacing="0">
-                            <Label Text="{Binding LocalStartDateAndTime, Converter={StaticResource EditionPlayTimeConverter}}"
-                                   Style="{StaticResource MediumLabelStyle}"
-                                   LineBreakMode="WordWrap" />
-
-                            <Label Text="{Binding LocalEndDateAndTime, Converter={StaticResource EditionPlayTimeConverter}}" Opacity=".5"
-                                       Style="{StaticResource SmallLabelStyle}"
-                                   LineBreakMode="WordWrap" />
-                        </StackLayout>
-                    </Grid>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+        <StackLayout />
     </ContentPage.Content>
 </ContentPage>

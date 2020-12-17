@@ -33,7 +33,7 @@
         </CollectionView>
     </Shell.FlyoutHeader>-->
 
-    <TabBar>
+    <TabBar x:Name="ShellTabBar">
         <Tab Title="{Binding [Overview], Source={x:Static res:Translator.Instance}}">
             <Tab.Icon>
                 <FontImageSource FontFamily="{OnPlatform Android=MaterialIcons.ttf#}" Glyph="{x:Static g:Symbols.Overview}" />
