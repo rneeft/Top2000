@@ -13,5 +13,7 @@
         public static string Menu => "\xe5d2";
 
         public static string FilterList => "\xe152";
+
+        public static string Clock => "\xe192";
     }
 }

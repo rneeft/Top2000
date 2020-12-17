@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:Chroomsoft.Top2000.Apps.Overview"
-             x:Class="Chroomsoft.Top2000.Apps.Overview.View"
              xmlns:g="clr-namespace:Chroomsoft.Top2000.Apps.Common"
+             xmlns:overview="clr-namespace:Chroomsoft.Top2000.Apps.Overview"
+             x:Class="Chroomsoft.Top2000.Apps.Overview.Position.View"
              Title="{Binding Path=SelectedEdition.Year, Mode=OneWay}"
              BackgroundColor="{DynamicResource PageBackgroundColor}">
     <ContentPage.Resources>
         <ResourceDictionary>
-            <local:EditionPlayTimeConverter x:Key="EditionPlayTimeConverter" />
+            <overview:EditionPlayTimeConverter x:Key="EditionPlayTimeConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -37,7 +37,7 @@
     </Shell.TitleView>
 
     <ContentPage.Content>
-        <Grid >
+        <Grid>
             <CollectionView x:Name="listings"
                             ItemsSource="{Binding Listings}"
                             VerticalOptions="FillAndExpand"
@@ -106,9 +106,6 @@
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
-                <!--<Grid.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="CloseFlyoutClick" />
-                </Grid.GestureRecognizers>-->
             </Grid>
         </Grid>
     </ContentPage.Content>

@@ -3,35 +3,12 @@
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:g="clr-namespace:Chroomsoft.Top2000.Apps.Common"
        xmlns:local="clr-namespace:Chroomsoft.Top2000.Apps.NavigationShell"
-       xmlns:overview="clr-namespace:Chroomsoft.Top2000.Apps.Overview"
+       xmlns:position="clr-namespace:Chroomsoft.Top2000.Apps.Overview.Position"
+       xmlns:dates="clr-namespace:Chroomsoft.Top2000.Apps.Overview.Date"
        xmlns:searching="clr-namespace:Chroomsoft.Top2000.Apps.Searching"
        xmlns:settings="clr-namespace:Chroomsoft.Top2000.Apps.Settings"
        xmlns:res="clr-namespace:Chroomsoft.Top2000.Apps.Globalisation"
-       x:Class="Chroomsoft.Top2000.Apps.NavigationShell.View"
-   >
-
-    <Shell.Resources>
-        <local:EditionPlayTimeConverter x:Key="EditionPlayTimeConverter" />
-        <local:SplitConverter x:Key="SplitConverter" />
-    </Shell.Resources>
-
-    <!--<Shell.FlyoutHeader>
-        <CollectionView ItemsSource="{Binding Editions}"
-                        SelectedItem="{Binding SelectedEdition, Mode=TwoWay}"
-                        SelectionMode="Single">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <StackLayout>
-                        <Label Text="{Binding Year}" Margin="20,2,0,0"
-                               Style="{StaticResource MediumLabelStyle}" />
-                        <Label Text="{Binding Converter={StaticResource EditionPlayTimeConverter}}"
-                               Opacity="0.75"
-                               Margin="20,-10,0,7" Style="{StaticResource SmallLabelStyle}" />
-                    </StackLayout>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-    </Shell.FlyoutHeader>-->
+       x:Class="Chroomsoft.Top2000.Apps.NavigationShell.View">
 
     <TabBar x:Name="ShellTabBar">
         <Tab Title="{Binding [Overview], Source={x:Static res:Translator.Instance}}">
@@ -40,11 +17,15 @@
             </Tab.Icon>
             <ShellContent Title="{Binding [Position], Source={x:Static res:Translator.Instance}}"
                           IsVisible="True"
-                          ContentTemplate="{DataTemplate overview:View}" />
+                          ContentTemplate="{DataTemplate position:View}" />
+        </Tab>
 
-            <ShellContent Title="{Binding [Date], Source={x:Static res:Translator.Instance}}"
-                          x:Name="DateContent" IsEnabled="False"
-                          ContentTemplate="{DataTemplate settings:About}" />
+        <Tab Title="{Binding [ViewByDate], Source={x:Static res:Translator.Instance}}">
+            <Tab.Icon>
+                <FontImageSource FontFamily="{OnPlatform Android=MaterialIcons.ttf#}" Glyph="{x:Static g:Symbols.Clock}" />
+            </Tab.Icon>
+
+            <ShellContent ContentTemplate="{DataTemplate dates:View}" />
         </Tab>
 
         <Tab Title="{Binding [Search], Source={x:Static res:Translator.Instance}}">

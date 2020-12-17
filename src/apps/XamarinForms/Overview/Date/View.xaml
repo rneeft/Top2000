@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:g="clr-namespace:Chroomsoft.Top2000.Apps.Common"
+             xmlns:local="clr-namespace:Chroomsoft.Top2000.Apps.Overview.Date"
+             xmlns:overview="clr-namespace:Chroomsoft.Top2000.Apps.Overview"
+             x:Class="Chroomsoft.Top2000.Apps.Overview.Date.View"
+             BackgroundColor="{DynamicResource PageBackgroundColor}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <overview:EditionPlayTimeConverter x:Key="EditionPlayTimeConverter" />
+            <local:DateTimeKeyToString x:Key="DateTimeKeyToString" />
+            <local:DateTimeToDateOnlyString x:Key="DateTimeToDateOnlyString" />
+            <local:DateTimeToTimeOnlyString x:Key="DateTimeToTimeOnlyString" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Clicked="OnJumpGroupButtonClick">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource Glyph="{x:Static g:Symbols.FilterList}" Color="White"
+                                 FontFamily="{OnPlatform Android=MaterialIcons.ttf#}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+
+    <Shell.TitleView>
+        <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+            <Label Margin="5,0,0,0" Text="{Binding SelectedEditionYear, Mode=OneWay}" TextColor="White" FontSize="20" VerticalTextAlignment="Center" VerticalOptions="Center" />
+        </StackLayout>
+    </Shell.TitleView>
+
+    <ContentPage.Content>
+        <Grid>
+            <CollectionView x:Name="listings"
+                            ItemsSource="{Binding Listings}"
+                            VerticalOptions="FillAndExpand"
+                            ItemSizingStrategy="MeasureAllItems"
+                            IsGrouped="True"
+                            SelectionMode="Single">
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="0,0,0,5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="80" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label Text="{Binding Position}" Style="{StaticResource MediumLabelStyle}" Margin="20,4,0,0" />
+                            <StackLayout Grid.Column="1" Spacing="0">
+                                <Label Text="{Binding Title}"  Style="{StaticResource MediumLabelStyle}" LineBreakMode="WordWrap" Margin="0,4,20,0" />
+                                <Label Text="{Binding Artist}" Opacity=".5" Style="{StaticResource SmallLabelStyle}" LineBreakMode="WordWrap" Margin="0,0,20,0" />
+                            </StackLayout>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+                <CollectionView.GroupHeaderTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+                            <Label Text="{Binding Key, Converter={StaticResource DateTimeKeyToString}}"
+                               TextColor="{StaticResource Top2000Colour}"
+                               Style="{StaticResource MediumLabelStyle}"
+                               Margin="20,5,0,0" />
+                            <BoxView Style="{StaticResource Separator}" Margin="20,-3,20,5" />
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnJumpGroupButtonClick" />
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.GroupHeaderTemplate>
+            </CollectionView>
+
+            <Grid x:Name="GroupFlyout" IsVisible="False" BackgroundColor="{DynamicResource PageBackgroundColor}">
+                <CollectionView x:Name="dates"
+                            ItemsSource="{Binding Dates}"
+                            VerticalOptions="FillAndExpand"
+                            ItemSizingStrategy="MeasureAllItems"
+                            IsGrouped="True"
+                            SelectionMode="Single"
+                                SelectionChanged="OnGroupSelected">
+
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical" Span="3" />
+                    </CollectionView.ItemsLayout>
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout>
+                                <Label HorizontalTextAlignment="Start" VerticalTextAlignment="Center" Margin="0,10"
+                                       Text="{Binding Converter={StaticResource DateTimeToTimeOnlyString}}" Style="{StaticResource MediumLabelStyle}" />
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+
+                    <CollectionView.GroupHeaderTemplate>
+                        <DataTemplate>
+                            <StackLayout>
+                                <Label Text="{Binding Key, Converter={StaticResource DateTimeToDateOnlyString}}"
+                                       Style="{StaticResource MediumLabelStyle}"
+                                       TextColor="{StaticResource Top2000Colour}" Margin="0,5,0,0" />
+                                <BoxView Style="{StaticResource Separator}" Margin="0,-3,0,0" />
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.GroupHeaderTemplate>
+                </CollectionView>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
