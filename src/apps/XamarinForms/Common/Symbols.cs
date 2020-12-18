@@ -15,5 +15,21 @@
         public static string FilterList => "\xe152";
 
         public static string Clock => "\xe192";
+
+        public static string Today => "\xe24f";
+
+        public static string Flag => "\xe153";
+
+        public static string Up => "\xe316";
+
+        public static string Down => "\xe313";
+
+        public static string BackInList => "\xe042";
+
+        public static string Minus => "\xe15b";
+
+        public static string Same => "\xe25d";
+
+        public static string Video => "xe63a";
     }
 }

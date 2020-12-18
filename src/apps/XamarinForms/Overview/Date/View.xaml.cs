@@ -22,12 +22,71 @@ namespace Chroomsoft.Top2000.Apps.Overview.Date
 
         public ViewModel ViewModel => (ViewModel)BindingContext;
 
+        private static int FirstVisibleItemIndex { get; set; }
+
+        public async Task ScrollToCorrectPositionAsync(int index, ScrollToPosition scrollToPosition = ScrollToPosition.Start)
+        {
+            var tries = 0;
+
+            while (index != FirstVisibleItemIndex && tries < 6)
+            {
+                listings.ScrollTo(index, position: scrollToPosition, animate: false);
+
+                tries++;
+
+                await Task.Delay(200);
+            }
+        }
+
+        protected override bool OnBackButtonPressed()
+        {
+            if (this.GroupFlyout.IsVisible)
+            {
+                Shell.SetTabBarIsVisible(this, true);
+                Shell.SetNavBarIsVisible(this, true);
+                this.GroupFlyout.TranslateTo(this.Width * -1, 0);
+                this.GroupFlyout.IsVisible = false;
+
+                return true;
+            }
+
+            if (this.trackInformation.IsVisible)
+            {
+                Shell.SetTabBarIsVisible(this, true);
+                Shell.SetNavBarIsVisible(this, true);
+                this.trackInformation.TranslateTo(this.Width * -1, 0);
+                this.trackInformation.IsVisible = false;
+
+                return true;
+            }
+
+            return base.OnBackButtonPressed();
+        }
+
         async protected override void OnAppearing()
         {
             base.OnAppearing();
             if (ViewModel.Listings.Count == 0)
             {
                 await ViewModel.InitialiseViewModelAsync();
+            }
+
+            await JumpWhenTop2000IsOn();
+        }
+
+        async private Task JumpWhenTop2000IsOn()
+        {
+            var first = ViewModel.Listings.First().Key;
+            var last = ViewModel.Listings.Last().Key;
+            var current = DateTime.Now;
+
+            if (current > first && current < last)
+            {
+                await JumpToSelectedDateTime(current);
+            }
+            else
+            {
+                //this.ToolbarItems.Remove(jumpToToday);
             }
         }
 
@@ -48,6 +107,80 @@ namespace Chroomsoft.Top2000.Apps.Overview.Date
             Shell.SetNavBarIsVisible(this, true);
             await GroupFlyout.TranslateTo(this.Width * -1, 0);
             this.GroupFlyout.IsVisible = false;
+
+            var item = e.CurrentSelection.ToList().FirstOrDefault();
+
+            if (item != null)
+            {
+                await JumpToSelectedDateTime((DateTime)item);
+            }
+        }
+
+        private async Task JumpToSelectedDateTime(DateTime selectedDate)
+        {
+            var tracksGrouped = ViewModel.Listings;
+            var groupsBefore = tracksGrouped.Where(x => x.Key <= selectedDate);
+            var group = groupsBefore.LastOrDefault();
+
+            if (group != null)
+            {
+                var firstGroup = group.FirstOrDefault();
+                if (firstGroup != null)
+                {
+                    var position = group.First().Position;
+                    var totalTracks = ViewModel.Listings.SelectMany(x => x).Count();
+
+                    const int ShowGroup = 1;
+                    var index = totalTracks - position + groupsBefore.Count() - ShowGroup;
+
+                    if (index < 0) index = 0;
+
+                    await ScrollToCorrectPositionAsync(index);
+                }
+            }
+        }
+
+        private void Tracks_Scrolled(object sender, ItemsViewScrolledEventArgs e)
+        {
+            FirstVisibleItemIndex = e.FirstVisibleItemIndex;
+        }
+
+        async private void OpenTodayClick(object sender, EventArgs e)
+        {
+            var currentTime = DateTime.Now;
+            var last = ViewModel.Listings.Last().Key;
+
+            if (currentTime > last)
+            {
+                currentTime = ViewModel.Listings[12].Key;
+            }
+
+            await JumpToSelectedDateTime(currentTime);
+        }
+
+        async private void OnListingSelected(object sender, SelectionChangedEventArgs e)
+        {
+            if (ViewModel.SelectedListing is null) return;
+
+            var infoTask = trackInformation.LoadTrackDetailsAsync(ViewModel.SelectedListing.TrackId, CloseTrackInformation);
+
+            Shell.SetNavBarIsVisible(this, false);
+            Shell.SetTabBarIsVisible(this, false);
+
+            await trackInformation.TranslateTo(this.Width * -1, 0, 0);
+
+            trackInformation.IsVisible = true;
+            await trackInformation.TranslateTo(0, 0);
+
+            await infoTask;
+        }
+
+        private async Task CloseTrackInformation()
+        {
+            Shell.SetTabBarIsVisible(this, true);
+            Shell.SetNavBarIsVisible(this, true);
+            await this.trackInformation.TranslateTo(this.Width * -1, 0);
+            this.trackInformation.IsVisible = false;
         }
     }
 

@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Grid xmlns="http://xamarin.com/schemas/2014/forms"
+      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+      xmlns:local="clr-namespace:Chroomsoft.Top2000.Apps.TrackInformation"
+      xmlns:g="clr-namespace:Chroomsoft.Top2000.Apps.Common"
+      xmlns:forms="clr-namespace:Xamarin.Forms"
+      x:Class="Chroomsoft.Top2000.Apps.TrackInformation.View"
+      xmlns:res="clr-namespace:Chroomsoft.Top2000.Apps.Globalisation"
+      BackgroundColor="{DynamicResource PageBackgroundColor}">
+
+    <Grid.Resources>
+        <ResourceDictionary>
+            <local:StatusToColourConverter x:Key="StatusToColourConverter" />
+            <local:StatusToSymbolConverter x:Key="StatusToSymbolConverter" />
+            <local:OffsetToStringConverter x:Key="OffsetToStringConverter" />
+            <local:PositionToStringConverter x:Key="PositionToStringConverter" />
+            <local:TrackPlayTimeToLongDateConverter x:Key="TrackPlayTimeToLongDateConverter" />
+        </ResourceDictionary>
+    </Grid.Resources>
+
+    <Grid.RowDefinitions>
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+
+    <Grid HeightRequest="55" Padding="10,0" BackgroundColor="{StaticResource Top2000Colour}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <StackLayout Orientation="Horizontal">
+            <ImageButton Clicked="OnCloseButtonClick" BackgroundColor="Transparent">
+                <ImageButton.Source>
+                    <FontImageSource Glyph="{x:Static g:Symbols.Back}"
+                                     FontFamily="{OnPlatform Android=MaterialIcons.ttf#}" />
+                </ImageButton.Source>
+            </ImageButton>
+        </StackLayout>
+
+        <StackLayout Orientation="Horizontal" Grid.Column="1">
+            <ImageButton Clicked="OnViewVideoClick" BackgroundColor="Transparent">
+                <ImageButton.Source>
+                    <FontImageSource Glyph="{x:Static g:Symbols.Video}"
+                                     FontFamily="{OnPlatform Android=MaterialIcons.ttf#}" />
+                </ImageButton.Source>
+            </ImageButton>
+        </StackLayout>
+    </Grid>
+
+    <StackLayout  Margin="15,0" Grid.Row="1">
+        <Label Text="{Binding Title}"  FontSize="24" Margin="0,5,0,0" />
+
+        <forms:WrapLayout Orientation="Horizontal">
+            <Label Text="{Binding Artist}" Style="{StaticResource MediumLabelStyle}"  TextColor="{StaticResource Top2000Colour}" />
+            <Label Text="{Binding Year, StringFormat='({0})'}" Style="{StaticResource MediumLabelStyle}" TextColor="{StaticResource Top2000Colour}" />
+        </forms:WrapLayout>
+
+        <BoxView Style="{StaticResource Separator}" />
+    </StackLayout>
+
+    <ScrollView Grid.Row="2">
+        <StackLayout Margin="15,0">
+
+            <Label Text="{Binding [Appearances], Source={x:Static res:Translator.Instance}}" FontSize="14" FontAttributes="Bold" Margin="0,10,0,0" />
+            <CollectionView x:Name="positions" ItemsSource="{Binding Listings}"
+                            ItemSizingStrategy="MeasureFirstItem"
+                            ItemsLayout="HorizontalList"
+                            SelectionMode="None" HeightRequest="74" BackgroundColor="White">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+
+                        <Grid WidthRequest="80">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="22" />
+                                <RowDefinition Height="16" />
+                                <RowDefinition Height="22" />
+                                <RowDefinition Height="22" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+
+                            <Label Text="{Binding Edition}" Grid.ColumnSpan="2" Grid.RowSpan="2" HorizontalOptions="Start" Style="{StaticResource MediumLabelStyle}" />
+
+                            <Label Text="{Binding Status, Converter={StaticResource StatusToSymbolConverter}}"
+                                   FontFamily="{OnPlatform Android=MaterialIcons.ttf#}"
+                                   TextColor="{Binding Status, Converter={StaticResource StatusToColourConverter}}"
+                                   Grid.Row="1" FontSize="15" Grid.RowSpan="2" HorizontalOptions="Start" />
+
+                            <Label Text="{Binding Offset, Converter={StaticResource OffsetToStringConverter}}"
+                                   Style="{StaticResource SmallLabelStyle}"
+                                          Opacity="0.5" Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" HorizontalOptions="Start"
+                                          Margin="3,0,0,0" />
+
+                            <Label Text="{Binding Position, Converter={StaticResource PositionToStringConverter}}"
+                                   Grid.ColumnSpan="2" FontSize="20" Grid.Row="2" Grid.RowSpan="2" HorizontalOptions="Start" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <StackLayout Spacing="25" Orientation="Horizontal" Margin="0,20,0,10">
+                <StackLayout>
+                    <Label Text="{Binding [SinceRelease], Source={x:Static res:Translator.Instance}}" HorizontalOptions="CenterAndExpand"  FontSize="14" FontAttributes="Bold" />
+                    <Grid>
+                        <local:ProgressRing RingThickness="10"
+                                            Progress="{Binding AppearancesPossiblePercentage}"
+                                            BackgroundColor="White"
+                                            RingBaseColor="#CCCCCC"
+                                            RingProgressColor="{StaticResource Top2000Colour}"
+                                            HeightRequest="100" WidthRequest="100"
+                                            HorizontalOptions="Start" />
+
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
+                            <Label FontSize="20" Text="{Binding Appearances}" />
+                            <Label FontSize="20" Text="/" />
+                            <Label FontSize="20" Text="{Binding AppearancesPossible}" />
+                        </StackLayout>
+                    </Grid>
+                </StackLayout>
+
+                <StackLayout>
+                    <Label Text="{Binding [InTop2000], Source={x:Static res:Translator.Instance}}" HorizontalOptions="CenterAndExpand" FontSize="14" FontAttributes="Bold" />
+                    <Grid>
+                        <local:ProgressRing RingThickness="10" Progress="{Binding TotalTop2000Percentage}"
+                                            BackgroundColor="White"
+                                            RingBaseColor="#CCCCCC"
+                                            RingProgressColor="{StaticResource Top2000Colour}"
+                                            HeightRequest="100" WidthRequest="100"
+                                            HorizontalOptions="Start" />
+
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
+                            <Label FontSize="20" Text="{Binding Appearances}" />
+                            <Label FontSize="20" Text="/" />
+                            <Label FontSize="20" Text="{Binding Listings.Count}" />
+                        </StackLayout>
+                    </Grid>
+                </StackLayout>
+            </StackLayout>
+
+            <forms:WrapLayout Spacing="10" Orientation="Horizontal" Margin="0,10,0,0">
+
+                <StackLayout>
+                    <Label Text="{Binding [RecordHigh], Source={x:Static res:Translator.Instance}}" FontSize="14" FontAttributes="Bold" />
+                    <StackLayout Orientation="Horizontal" Margin="-1,-12,0,0">
+                        <Label Text="{Binding Highest.OffSet}" FontSize="40"   VerticalOptions="Start" HorizontalTextAlignment="End" />
+                        <Label Text="{Binding Highest.Edition, StringFormat='({0})'}" Margin="-5,0,0,7" VerticalOptions="End" />
+                    </StackLayout>
+                </StackLayout>
+
+                <StackLayout>
+                    <Label Text="{Binding [RecordLow], Source={x:Static res:Translator.Instance}}" FontSize="14" FontAttributes="Bold" />
+                    <StackLayout Orientation="Horizontal" Margin="-1,-12,0,0">
+                        <Label Text="{Binding Lowest.Position}" FontSize="40"   VerticalOptions="Start" HorizontalTextAlignment="End" />
+                        <Label Text="{Binding Lowest.Edition, StringFormat='({0})'}" Margin="-5,0,0,7" VerticalOptions="End" />
+                    </StackLayout>
+                </StackLayout>
+
+                <StackLayout>
+                    <Label Text="{Binding [LastPosition], Source={x:Static res:Translator.Instance}}" FontSize="14" FontAttributes="Bold" />
+                    <StackLayout Orientation="Horizontal" Margin="-1,-12,0,0">
+                        <Label Text="{Binding Latest.Position}" FontSize="40"   VerticalOptions="Start" HorizontalTextAlignment="End" />
+                        <Label Text="{Binding Latest.Edition, StringFormat='({0})'}" Margin="-5,0,0,7" VerticalOptions="End" />
+                    </StackLayout>
+                </StackLayout>
+            </forms:WrapLayout>
+
+            <Label Text="{Binding [LatestPlayTime], Source={x:Static res:Translator.Instance}}"
+                   IsVisible="{Binding IsLatestListed}"  Margin="0,10,0,0" FontSize="14" FontAttributes="Bold" />
+            <Label Text="{Binding Latest.LocalUtcDateAndTime, Converter={StaticResource TrackPlayTimeToLongDateConverter}}"
+                   IsVisible="{Binding IsLatestListed}" FontSize="20" />
+        </StackLayout>
+    </ScrollView>
+</Grid>

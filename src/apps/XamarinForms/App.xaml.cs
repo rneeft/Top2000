@@ -1,22 +1,18 @@
 ﻿using Chroomsoft.Top2000.Data.ClientDatabase;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Globalization;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Chroomsoft.Top2000.Apps.XamarinForms
 {
-    public class FactoryFor<TView> : RouteFactorFor<TView> where TView : notnull
-    {
-        public override Element GetOrCreate() => (App.GetService<TView>() as Element)
-            ?? throw new InvalidOperationException("TView must of Element type");
-    }
-
-    public abstract class RouteFactorFor<TView> : RouteFactory where TView : notnull
-    { }
-
     public partial class App : Application
     {
+        public static readonly IFormatProvider DateTimeFormatProvider = DateTimeFormatInfo.InvariantInfo;
+
+        public static readonly IFormatProvider NumberFormatProvider = NumberFormatInfo.InvariantInfo;
+
         private static IServiceProvider? serviceProvider;
 
         public App()

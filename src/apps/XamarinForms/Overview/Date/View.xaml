@@ -4,6 +4,7 @@
              xmlns:g="clr-namespace:Chroomsoft.Top2000.Apps.Common"
              xmlns:local="clr-namespace:Chroomsoft.Top2000.Apps.Overview.Date"
              xmlns:overview="clr-namespace:Chroomsoft.Top2000.Apps.Overview"
+             xmlns:trackInformation="clr-namespace:Chroomsoft.Top2000.Apps.TrackInformation"
              x:Class="Chroomsoft.Top2000.Apps.Overview.Date.View"
              BackgroundColor="{DynamicResource PageBackgroundColor}">
     <ContentPage.Resources>
@@ -22,6 +23,12 @@
                                  FontFamily="{OnPlatform Android=MaterialIcons.ttf#}" />
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
+        <ToolbarItem x:Name="jumpToToday" Clicked="OpenTodayClick">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource Glyph="{x:Static g:Symbols.Today}" Color="White"
+                                 FontFamily="{OnPlatform Android=MaterialIcons.ttf#}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
     </ContentPage.ToolbarItems>
 
     <Shell.TitleView>
@@ -37,6 +44,9 @@
                             VerticalOptions="FillAndExpand"
                             ItemSizingStrategy="MeasureAllItems"
                             IsGrouped="True"
+                            Scrolled="Tracks_Scrolled"
+                            SelectionChanged="OnListingSelected"
+                            SelectedItem="{Binding SelectedListing, Mode=TwoWay}"
                             SelectionMode="Single">
 
                 <CollectionView.ItemTemplate>
@@ -72,8 +82,11 @@
                 </CollectionView.GroupHeaderTemplate>
             </CollectionView>
 
+            <trackInformation:View x:Name="trackInformation" IsVisible="False" />
+
             <Grid x:Name="GroupFlyout" IsVisible="False" BackgroundColor="{DynamicResource PageBackgroundColor}">
                 <CollectionView x:Name="dates"
+                                Margin="10"
                             ItemsSource="{Binding Dates}"
                             VerticalOptions="FillAndExpand"
                             ItemSizingStrategy="MeasureAllItems"

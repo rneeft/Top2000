@@ -76,7 +76,7 @@
     <EmbeddedResource Update="Themes\Light.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="YearSelector\View.xaml">
+    <EmbeddedResource Update="TrackInformation\View.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
