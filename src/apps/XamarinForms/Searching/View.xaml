@@ -1,13 +1,121 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Chroomsoft.Top2000.Apps.Searching"
              x:Class="Chroomsoft.Top2000.Apps.Searching.View"
-             Title="Search">
+             xmlns:trackInformation="clr-namespace:Chroomsoft.Top2000.Apps.TrackInformation"
+             xmlns:res="clr-namespace:Chroomsoft.Top2000.Apps.Globalisation"
+             BackgroundColor="{DynamicResource PageBackgroundColor}">
+    <Shell.SearchHandler>
+        <local:TracksSearchHandler Placeholder="{Binding [SearchTop2000], Source={x:Static res:Translator.Instance}}" />
+    </Shell.SearchHandler>
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Search!"
-                VerticalOptions="CenterAndExpand"
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <StackLayout Orientation="Horizontal" Margin="20,4">
+                <StackLayout Orientation="Horizontal" BackgroundColor="#D6D7D7">
+                    <Label Text="{Binding [GroupByHeader], Source={x:Static res:Translator.Instance}}" Margin="7,11,0,7" FontAttributes="Bold" />
+                    <Label Text=":" Margin="-5,11"  FontAttributes="Bold" />
+                    <Label Text="{Binding GroupBy.Name}" Margin="0,11,7,0" FontAttributes="Bold" />
+
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnGroupByButtonClick" />
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" BackgroundColor="#D6D7D7">
+                    <Label Text="{Binding [SortByHeader], Source={x:Static res:Translator.Instance}}" Margin="7,11,0,7" FontAttributes="Bold" />
+                    <Label Text=":" Margin="-5,11" FontAttributes="Bold" />
+                    <Label Text="{Binding SortBy.Name}" Margin="0,11,7,0" FontAttributes="Bold" />
+
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnSortByButtonClick" />
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+            </StackLayout>
+
+            <CollectionView x:Name="listingsGrouped"
+                            Grid.Row="1"
+                            ItemsSource="{Binding Results}"
+                            SelectedItem="{Binding SelectedTrack, Mode=TwoWay}"
+                            IsVisible="{Binding IsGrouped}"
+                            IsGrouped="True"
+                            SelectionMode="Single">
+
+                <CollectionView.GroupHeaderTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+                            <Label Text="{Binding Key}"
+                                   TextColor="{StaticResource Top2000Colour}"
+                                   Style="{StaticResource MediumLabelStyle}"
+                                   Margin="20,5,0,0" />
+                            <BoxView Style="{StaticResource Separator}" Margin="20,-3,20,5" />
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.GroupHeaderTemplate>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="0,0,0,5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="80" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label Text="{Binding RecordedYear}" Style="{StaticResource MediumLabelStyle}" Margin="20,4,0,0" />
+                            <StackLayout Grid.Column="1" Spacing="0">
+                                <Label Text="{Binding Title}"  Style="{StaticResource MediumLabelStyle}" LineBreakMode="WordWrap" Margin="0,4,20,0" />
+                                <Label Text="{Binding Artist}" Opacity=".5" Style="{StaticResource SmallLabelStyle}" LineBreakMode="WordWrap" Margin="0,0,20,0" />
+                            </StackLayout>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+                <CollectionView.EmptyViewTemplate>
+                    <DataTemplate>
+                        <Label Text="{Binding [ResultNotFound], Source={x:Static res:Translator.Instance}}" />
+                    </DataTemplate>
+                </CollectionView.EmptyViewTemplate>
+            </CollectionView>
+
+            <CollectionView x:Name="listingsFlat"
+                            Grid.Row="1"
+                            ItemsSource="{Binding ResultsFlat}"
+                            SelectedItem="{Binding SelectedTrack, Mode=TwoWay}"
+                            IsVisible="{Binding IsFlat}"
+                            IsGrouped="False"
+                            SelectionChanged="OnListingSelected"
+                            SelectionMode="Single">
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="0,0,0,5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="80" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label Text="{Binding RecordedYear}" Style="{StaticResource MediumLabelStyle}" Margin="20,4,0,0" />
+                            <StackLayout Grid.Column="1" Spacing="0">
+                                <Label Text="{Binding Title}"  Style="{StaticResource MediumLabelStyle}" LineBreakMode="WordWrap" Margin="0,4,20,0" />
+                                <Label Text="{Binding Artist}" Opacity=".5" Style="{StaticResource SmallLabelStyle}" LineBreakMode="WordWrap" Margin="0,0,20,0" />
+                            </StackLayout>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+                <CollectionView.EmptyViewTemplate>
+                    <DataTemplate>
+                        <Label Text="{Binding [ResultNotFound], Source={x:Static res:Translator.Instance}}" />
+                    </DataTemplate>
+                </CollectionView.EmptyViewTemplate>
+            </CollectionView>
+
+            <trackInformation:View x:Name="trackInformation" IsVisible="False" Grid.RowSpan="2" />
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

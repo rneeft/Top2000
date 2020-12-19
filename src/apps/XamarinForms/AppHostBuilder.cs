@@ -38,6 +38,7 @@ namespace Chroomsoft.Top2000.Apps
                 .AddTransient<Overview.Position.ViewModel>()
                 .AddTransient<Overview.Date.ViewModel>()
                 .AddTransient<TrackInformation.ViewModel>()
+                .AddTransient<Searching.ViewModel>()
                 .AddSingleton<ICulture>(new SupportedCulture("nl"))
                 .AddSingleton<ICulture>(new SupportedCulture("en"))
                 .AddSingleton<ICulture>(new SupportedCulture("fr"))
