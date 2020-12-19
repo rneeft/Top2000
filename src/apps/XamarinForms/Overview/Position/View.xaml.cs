@@ -1,6 +1,7 @@
 ﻿using Chroomsoft.Top2000.Apps.Globalisation;
 using Chroomsoft.Top2000.Apps.XamarinForms;
 using System.Linq;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -24,6 +25,27 @@ namespace Chroomsoft.Top2000.Apps.Overview.Position
             {
                 await ViewModel.InitialiseViewModelAsync();
             }
+        }
+
+        protected override bool OnBackButtonPressed()
+        {
+            if (this.EditionsFlyout.IsVisible)
+            {
+                Shell.SetTabBarIsVisible(this, true);
+                Shell.SetNavBarIsVisible(this, true);
+                this.EditionsFlyout.TranslateTo(this.Width * -1, 0);
+                this.EditionsFlyout.IsVisible = false;
+
+                return true;
+            }
+
+            if (this.trackInformation.IsVisible)
+            {
+                CloseTrackInformationAsync();
+                return true;
+            }
+
+            return base.OnBackButtonPressed();
         }
 
         async private void OnSelectYearButtonClick(object sender, System.EventArgs e)
@@ -81,6 +103,33 @@ namespace Chroomsoft.Top2000.Apps.Overview.Position
             await loadingTask;
 
             JumpIntoList(ViewModel.Listings.First().Key);
+        }
+
+        async private void OnListingSelected(object sender, SelectionChangedEventArgs e)
+        {
+            if (ViewModel.SelectedListing is null) return;
+
+            var infoTask = trackInformation.LoadTrackDetailsAsync(ViewModel.SelectedListing.TrackId, CloseTrackInformationAsync);
+
+            Shell.SetNavBarIsVisible(this, false);
+            Shell.SetTabBarIsVisible(this, false);
+
+            await trackInformation.TranslateTo(this.Width * -1, 0, 0);
+
+            trackInformation.IsVisible = true;
+            await trackInformation.TranslateTo(0, 0);
+
+            await infoTask;
+        }
+
+        private async Task CloseTrackInformationAsync()
+        {
+            ViewModel.SelectedListing = null;
+
+            Shell.SetTabBarIsVisible(this, true);
+            Shell.SetNavBarIsVisible(this, true);
+            await this.trackInformation.TranslateTo(this.Width * -1, 0);
+            this.trackInformation.IsVisible = false;
         }
     }
 }

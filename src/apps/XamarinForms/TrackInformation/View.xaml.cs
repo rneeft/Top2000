@@ -23,6 +23,8 @@ namespace Chroomsoft.Top2000.Apps.TrackInformation
         public Task LoadTrackDetailsAsync(int trackId, Func<Task> onClose)
         {
             this.OnClose = onClose;
+            positions.ScrollTo(0);
+
             return ViewModel.LoadTrackDetailsAsync(trackId);
         }
 

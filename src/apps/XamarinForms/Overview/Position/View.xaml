@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:g="clr-namespace:Chroomsoft.Top2000.Apps.Common"
              xmlns:overview="clr-namespace:Chroomsoft.Top2000.Apps.Overview"
+             xmlns:trackInformation="clr-namespace:Chroomsoft.Top2000.Apps.TrackInformation"
              x:Class="Chroomsoft.Top2000.Apps.Overview.Position.View"
              Title="{Binding Path=SelectedEdition.Year, Mode=OneWay}"
              BackgroundColor="{DynamicResource PageBackgroundColor}">
@@ -40,9 +41,11 @@
         <Grid>
             <CollectionView x:Name="listings"
                             ItemsSource="{Binding Listings}"
+                            SelectedItem="{Binding SelectedListing}"
                             VerticalOptions="FillAndExpand"
                             ItemSizingStrategy="MeasureAllItems"
                             IsGrouped="True"
+                            SelectionChanged="OnListingSelected"
                             SelectionMode="Single">
 
                 <CollectionView.ItemTemplate>
@@ -77,6 +80,8 @@
                     </DataTemplate>
                 </CollectionView.GroupHeaderTemplate>
             </CollectionView>
+
+            <trackInformation:View x:Name="trackInformation" IsVisible="False" />
 
             <Grid x:Name="EditionsFlyout" IsVisible="False" BackgroundColor="{DynamicResource PageBackgroundColor}">
                 <CollectionView ItemsSource="{Binding Editions}"

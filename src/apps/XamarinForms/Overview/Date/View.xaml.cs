@@ -52,11 +52,7 @@ namespace Chroomsoft.Top2000.Apps.Overview.Date
 
             if (this.trackInformation.IsVisible)
             {
-                Shell.SetTabBarIsVisible(this, true);
-                Shell.SetNavBarIsVisible(this, true);
-                this.trackInformation.TranslateTo(this.Width * -1, 0);
-                this.trackInformation.IsVisible = false;
-
+                CloseTrackInformationAsync();
                 return true;
             }
 
@@ -162,7 +158,7 @@ namespace Chroomsoft.Top2000.Apps.Overview.Date
         {
             if (ViewModel.SelectedListing is null) return;
 
-            var infoTask = trackInformation.LoadTrackDetailsAsync(ViewModel.SelectedListing.TrackId, CloseTrackInformation);
+            var infoTask = trackInformation.LoadTrackDetailsAsync(ViewModel.SelectedListing.TrackId, CloseTrackInformationAsync);
 
             Shell.SetNavBarIsVisible(this, false);
             Shell.SetTabBarIsVisible(this, false);
@@ -175,8 +171,10 @@ namespace Chroomsoft.Top2000.Apps.Overview.Date
             await infoTask;
         }
 
-        private async Task CloseTrackInformation()
+        private async Task CloseTrackInformationAsync()
         {
+            ViewModel.SelectedListing = null;
+
             Shell.SetTabBarIsVisible(this, true);
             Shell.SetNavBarIsVisible(this, true);
             await this.trackInformation.TranslateTo(this.Width * -1, 0);
