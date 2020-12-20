@@ -23,7 +23,7 @@
                 <FontImageSource FontFamily="{OnPlatform Android=MaterialIcons.ttf#}" Glyph="{x:Static g:Symbols.Clock}" />
             </Tab.Icon>
 
-            <ShellContent ContentTemplate="{DataTemplate dates:View}" />
+            <ShellContent Route="ViewByDate" ContentTemplate="{DataTemplate dates:View}" />
         </Tab>
 
         <Tab x:Name="SearchTab" Title="{Binding [Search], Source={x:Static res:Translator.Instance}}">
