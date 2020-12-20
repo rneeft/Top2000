@@ -2,6 +2,10 @@
 {
     public static class Symbols
     {
+        public static string RadioButtonOpen => "\xe836";
+
+        public static string RadioButtonChecked => "\xe837";
+
         public static string Overview => "\xe242";
 
         public static string Search => "\xe8b6";

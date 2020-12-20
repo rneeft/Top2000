@@ -1,4 +1,5 @@
 ﻿using Chroomsoft.Top2000.Apps.Globalisation;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading;
@@ -9,20 +10,25 @@ namespace XamarinForms.Droid.Globalisation
     public class LocalisationService : ILocalisationService
     {
         public const string CulturePreferenceName = "Culture";
-        private readonly ICulture[] cultures;
+        private readonly IEnumerable<ICulture> cultures;
+        private ICulture activeCulture;
 
-        public LocalisationService(ICulture[] cultures)
+        public LocalisationService(IEnumerable<ICulture> cultures)
         {
             this.cultures = cultures;
+            this.activeCulture = cultures.Single(x => x.Name == "nl");
         }
 
-        public ICulture GetCurrentCulture() => FindCulture(Thread.CurrentThread.CurrentCulture.Name);
+        public ICulture GetCurrentCulture() => activeCulture;
 
         public void SetCulture(ICulture cultureInfo)
         {
+
             if (cultureInfo != GetCurrentCulture())
             {
                 Preferences.Set(CulturePreferenceName, cultureInfo.Name);
+
+                activeCulture = cultureInfo;
 
                 Thread.CurrentThread.CurrentCulture = new CultureInfo(cultureInfo.Name);
                 Thread.CurrentThread.CurrentUICulture = new CultureInfo(cultureInfo.Name);
@@ -36,9 +42,9 @@ namespace XamarinForms.Droid.Globalisation
             if (Preferences.ContainsKey(CulturePreferenceName))
             {
                 var name = Preferences.Get(CulturePreferenceName, "nl");
-                var culture = FindCulture(name);
+                activeCulture = FindCulture(name);
 
-                SetCulture(culture);
+                SetCulture(activeCulture);
             }
         }
 

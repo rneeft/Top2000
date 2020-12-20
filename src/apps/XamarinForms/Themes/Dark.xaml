@@ -7,6 +7,7 @@
     <Color x:Key="NavigationBarColor">#1F1F1F</Color>
     <Color x:Key="SeparatorColor">White</Color>
     <Color x:Key="PrimaryColor">White</Color>
+
     <Color x:Key="SecondaryColor">White</Color>
     <Color x:Key="PrimaryTextColor">White</Color>
     <Color x:Key="SecondaryTextColor">White</Color>
@@ -15,5 +16,9 @@
     <Color x:Key="TabBarBackgroundColor">#1F1F1F</Color>
     <Color x:Key="TabBarUnselectedColor">#B4B4B4</Color>
     <Color x:Key="TabBarSelectedColor">White</Color>
+
+    <Color x:Key="RingBaseColor">White</Color>
+    <Color x:Key="ButtonBackgroundColor">Gray</Color>
+    <Color x:Key="TextColor">White</Color>
     <Color x:Key="ShellForegroundColor">#DA161C</Color>
 </ResourceDictionary>

@@ -18,5 +18,16 @@ namespace Chroomsoft.Top2000.Apps.Settings
 
             WebViewer.Source = source;
         }
+
+        protected override bool OnBackButtonPressed()
+        {
+            if (this.WebViewer.CanGoBack)
+            {
+                this.WebViewer.GoBack();
+                return true;
+            }
+
+            return base.OnBackButtonPressed();
+        }
     }
 }

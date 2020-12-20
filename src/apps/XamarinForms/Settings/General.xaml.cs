@@ -1,4 +1,8 @@
-﻿using Chroomsoft.Top2000.Apps.Globalisation;
+﻿using Chroomsoft.Top2000.Apps.Common;
+using Chroomsoft.Top2000.Apps.Globalisation;
+using Chroomsoft.Top2000.Apps.XamarinForms;
+using System.Collections.Generic;
+using System.Linq;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -7,45 +11,89 @@ namespace Chroomsoft.Top2000.Apps.Settings
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class General : ContentPage
     {
-        private string? darkThemeText;
-        private string? lightThemeText;
+        private readonly ILocalisationService localisationService;
+        private readonly IEnumerable<ICulture> cultures;
 
         public General()
         {
             InitializeComponent();
+
+            localisationService = App.GetService<ILocalisationService>();
+            cultures = App.GetService<IEnumerable<ICulture>>();
         }
 
         protected override void OnAppearing()
         {
-            darkThemeText = Translator.Instance["DarkTheme"];
-            lightThemeText = Translator.Instance["LightTheme"];
+            var currentCulture = localisationService.GetCurrentCulture();
 
-            ThemePicker.Items.Add(darkThemeText);
-            ThemePicker.Items.Add(lightThemeText);
+            switch (currentCulture.Name)
+            {
+                case "nl":
+                    SetRadioButtons(this.nl);
+                    break;
 
-            
+                case "en":
+                    SetRadioButtons(this.en);
+                    break;
+
+                case "fr":
+                    SetRadioButtons(this.fr);
+                    break;
+
+                default:
+                    break;
+            }
         }
 
-        private void OnThemeChanged(object sender, System.EventArgs e)
+        private void OnUseDarkModeSwitchToggled(object sender, ToggledEventArgs e)
         {
-            if (darkThemeText is null || lightThemeText is null) return;
-
             var mergedDictionaries = Application.Current.Resources.MergedDictionaries;
             if (mergedDictionaries != null)
             {
                 mergedDictionaries.Clear();
 
-                switch (ThemePicker.SelectedIndex)
+                if (e.Value)
                 {
-                    case 0:
-                        mergedDictionaries.Add(new Themes.Dark());
-                        break;
-
-                    default:
-                        mergedDictionaries.Add(new Themes.Light());
-                        break;
+                    mergedDictionaries.Add(new Themes.Dark());
+                }
+                else
+                {
+                    mergedDictionaries.Add(new Themes.Light());
                 }
             }
+        }
+
+        private void ShowInDutch(object sender, System.EventArgs e)
+        {
+            SetRadioButtons(this.nl);
+            SetCulture("nl");
+        }
+
+        private void ShowInEnglish(object sender, System.EventArgs e)
+        {
+            SetRadioButtons(this.en);
+            SetCulture("en");
+        }
+
+        private void ShowInFrench(object sender, System.EventArgs e)
+        {
+            SetRadioButtons(this.fr);
+            SetCulture("fr");
+        }
+
+        private void SetRadioButtons(Label active)
+        {
+            this.en.Text = Symbols.RadioButtonOpen;
+            this.nl.Text = Symbols.RadioButtonOpen;
+            this.fr.Text = Symbols.RadioButtonOpen;
+
+            active.Text = Symbols.RadioButtonChecked;
+        }
+
+        private void SetCulture(string name)
+        {
+            localisationService.SetCulture(cultures.Single(x => x.Name == name));
+            ((NavigationShell.View)NavigationShell.View.Current).SetTitles();
         }
     }
 }

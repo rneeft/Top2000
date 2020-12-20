@@ -12,7 +12,11 @@ namespace Chroomsoft.Top2000.Apps.Globalisation
         {
             get
             {
-                return AppResources.ResourceManager.GetString(text, AppResources.Culture);
+                var value = AppResources.ResourceManager.GetString(text, AppResources.Culture);
+
+                return string.IsNullOrWhiteSpace(value)
+                    ? "%" + text + "%"
+                    : value;
             }
         }
 

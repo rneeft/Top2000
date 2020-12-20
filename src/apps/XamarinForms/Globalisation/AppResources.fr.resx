@@ -477,6 +477,9 @@
   <data name="UpdateAvailableHeader" xml:space="preserve">
     <value>Mise à jour de la liste Top 2000 disponible</value>
   </data>
+  <data name="UseDarkTheme" xml:space="preserve">
+    <value>Utiliser le thème Sombre</value>
+  </data>
   <data name="ViewByDate" xml:space="preserve">
     <value>Voir par date</value>
   </data>

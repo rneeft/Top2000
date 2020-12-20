@@ -621,6 +621,15 @@ namespace Chroomsoft.Top2000.Apps.Globalisation {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Gebruik het donker thema.
+        /// </summary>
+        internal static string UseDarkTheme {
+            get {
+                return ResourceManager.GetString("UseDarkTheme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bekijk per datum.
         /// </summary>
         internal static string ViewByDate {

@@ -32,11 +32,16 @@ namespace Chroomsoft.Top2000.Apps.Searching
                 ?? throw new NotImplementedException($"Display text for sort option '{sort.GetType()}' was not defined.");
         }
 
-        async protected override void OnAppearing()
+        protected override void OnAppearing()
         {
             base.OnAppearing();
             ViewModel.OnActivate(this);
-            ViewModel.IsFlat = true;
+
+            if (string.IsNullOrWhiteSpace(ViewModel.QueryText))
+            {
+                ViewModel.IsFlat = true;
+
+            }
         }
 
         protected override bool OnBackButtonPressed()

@@ -3,9 +3,11 @@ using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
 using Chroomsoft.Top2000.Apps;
+using Chroomsoft.Top2000.Apps.Globalisation;
 using Chroomsoft.Top2000.Apps.XamarinForms;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using XamarinForms.Droid.Globalisation;
 
 namespace XamarinForms.Droid
 {
@@ -30,19 +32,18 @@ namespace XamarinForms.Droid
 
             base.OnCreate(savedInstanceState);
 
+            Xamarin.Forms.Forms.SetFlags("RadioButton_Experimental");
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
 
-#pragma warning disable CA2007 // Consider calling ConfigureAwait on the awaited task
             await App.EnsureDatabaseIsCreatedAsync();
-#pragma warning restore CA2007 // Consider calling ConfigureAwait on the awaited task
 
             LoadApplication(new App());
         }
 
         private void PlatformServices(HostBuilderContext ctx, IServiceCollection services)
         {
-            // blah
+            services.AddSingleton<ILocalisationService, LocalisationService>();
         }
     }
 }
