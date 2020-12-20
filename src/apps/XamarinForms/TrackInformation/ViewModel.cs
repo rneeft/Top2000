@@ -28,13 +28,19 @@ namespace Chroomsoft.Top2000.Apps.TrackInformation
             set { SetPropertyValue(value); }
         }
 
-        public int RecordedYear
+        public string ArtistWithYear
         {
-            get { return GetPropertyValue<int>(); }
+            get { return GetPropertyValue<string>(); }
             set { SetPropertyValue(value); }
         }
 
         public ObservableList<ListingInformation> Listings { get; }
+
+        public int TotalListings
+        {
+            get { return GetPropertyValue<int>(); }
+            set { SetPropertyValue(value); }
+        }
 
         public ListingInformation Highest
         {
@@ -95,8 +101,8 @@ namespace Chroomsoft.Top2000.Apps.TrackInformation
             var track = await mediator.Send(new TrackInformationRequest(trackId));
 
             Title = track.Title;
+            ArtistWithYear = $"{track.Artist} ({track.RecordedYear})";
             Artist = track.Artist;
-            RecordedYear = track.RecordedYear;
             Highest = track.Highest;
             Lowest = track.Lowest;
             Latest = track.Latest;
@@ -108,6 +114,7 @@ namespace Chroomsoft.Top2000.Apps.TrackInformation
             Listings.ClearAddRange(track.Listings);
             AppearancesPossiblePercentage = (Appearances / (double)AppearancesPossible);
             TotalTop2000Percentage = (Appearances / (double)Listings.Count);
+            TotalListings = Listings.Count;
         }
     }
 }

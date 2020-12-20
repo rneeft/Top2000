@@ -28,7 +28,6 @@ namespace Chroomsoft.Top2000.Apps.Settings
         protected override void OnAppearing()
         {
             var currentCulture = localisationService.GetCurrentCulture();
-
             switch (currentCulture.Name)
             {
                 case "nl":

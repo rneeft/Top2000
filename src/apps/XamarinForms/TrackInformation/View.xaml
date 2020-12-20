@@ -50,11 +50,7 @@
 
     <StackLayout  Margin="15,0" Grid.Row="1">
         <Label Text="{Binding Title}" Style="{StaticResource MediumLabelStyle}"  FontSize="24" />
-
-        <forms:WrapLayout Orientation="Horizontal">
-            <Label Text="{Binding Artist}" Style="{StaticResource MediumLabelStyle}"  TextColor="{StaticResource Top2000Colour}" />
-            <Label Text="{Binding Year, StringFormat='({0})'}" Style="{StaticResource MediumLabelStyle}" TextColor="{StaticResource Top2000Colour}" />
-        </forms:WrapLayout>
+        <Label Text="{Binding ArtistWithYear}" Style="{StaticResource MediumLabelStyle}"  TextColor="{StaticResource Top2000Colour}" />
 
         <BoxView Style="{StaticResource Separator}" />
     </StackLayout>
@@ -63,53 +59,53 @@
         <StackLayout Margin="15,0">
 
             <Label Text="{Binding [Appearances], Source={x:Static res:Translator.Instance}}" Style="{StaticResource SmallLabelStyle}" FontAttributes="Bold" Margin="0,5,0,0" />
-            <CollectionView x:Name="positions" ItemsSource="{Binding Listings}"
-                            ItemSizingStrategy="MeasureFirstItem"
-                            ItemsLayout="HorizontalList"
-                            SelectionMode="None" HeightRequest="70">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
 
-                        <Grid WidthRequest="80" RowSpacing="1">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="22" />
-                                <RowDefinition Height="20" />
-                                <RowDefinition Height="22" />
-                            </Grid.RowDefinitions>
+            <ScrollView Orientation="Horizontal" x:Name="positionsScroll">
+                <StackLayout BindableLayout.ItemsSource="{Binding Listings}" Orientation="Horizontal">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
 
-                            <Label Text="{Binding Edition}" HorizontalOptions="Start" Style="{StaticResource MediumLabelStyle}" />
+                            <Grid RowSpacing="1" Margin="0,0,20,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
 
-                            <StackLayout Grid.Row="1" Orientation="Horizontal">
+                                <Label Text="{Binding Edition}" HorizontalOptions="Start" Style="{StaticResource MediumLabelStyle}" />
 
-                                <Label Text="{Binding Status, Converter={StaticResource StatusToSymbolConverter}}"
-                                       TextColor="{Binding Status, Converter={StaticResource StatusToColourConverter}}"
-                                       Style="{StaticResource MediumLabelStyle}"
-                                       FontFamily="{OnPlatform Android=MaterialIcons.ttf#}"
-                                       HorizontalOptions="Start" />
+                                <StackLayout Grid.Row="1" Orientation="Horizontal">
 
-                                <Label Text="{Binding Offset, Converter={StaticResource OffsetToStringConverter}}"
-                                       Style="{StaticResource SmallLabelStyle}"
-                                       Opacity="0.5" />
-                            </StackLayout>
+                                    <Label Text="{Binding Status, Converter={StaticResource StatusToSymbolConverter}}"
+                                               TextColor="{Binding Status, Converter={StaticResource StatusToColourConverter}}"
+                                               Style="{StaticResource MediumLabelStyle}"
+                                               FontFamily="{OnPlatform Android=MaterialIcons.ttf#}"
+                                               HorizontalOptions="Start" />
 
-                            <Label Text="{Binding Position, Converter={StaticResource PositionToStringConverter}, TargetNullValue=-}"
-                                   Style="{StaticResource MediumLabelStyle}"
-                                   Grid.Row="2" HorizontalOptions="Start" VerticalOptions="Start" />
-                        </Grid>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+                                    <Label Text="{Binding Offset, Converter={StaticResource OffsetToStringConverter}}"
+                                               Style="{StaticResource SmallLabelStyle}"
+                                               Opacity="0.5" />
+                                </StackLayout>
+
+                                <Label Text="{Binding Position, Converter={StaticResource PositionToStringConverter}, TargetNullValue=-}"
+                                           Style="{StaticResource MediumLabelStyle}"
+                                           Grid.Row="2" />
+                            </Grid>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+            </ScrollView>
 
             <StackLayout Spacing="25" Orientation="Horizontal" Margin="0,20,0,10">
                 <StackLayout>
-                    <Label Text="{Binding [SinceRelease], Source={x:Static res:Translator.Instance}}" HorizontalOptions="CenterAndExpand"  FontSize="14" FontAttributes="Bold" />
+                    <Label Text="{Binding [SinceRelease], Source={x:Static res:Translator.Instance}}" HorizontalOptions="CenterAndExpand"  Style="{StaticResource SmallLabelStyle}" FontAttributes="Bold" />
                     <Grid>
                         <local:ProgressRing RingThickness="10"
                                             Progress="{Binding AppearancesPossiblePercentage}"
                                             RingBaseColor="{DynamicResource RingBaseColor}"
                                             RingProgressColor="{StaticResource Top2000Colour}"
                                             HeightRequest="100" WidthRequest="100"
-                                            HorizontalOptions="Start" />
+                                            HorizontalOptions="Center" />
 
                         <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
                             <Label Style="{StaticResource MediumLabelStyle}" Text="{Binding Appearances}" />
@@ -120,18 +116,18 @@
                 </StackLayout>
 
                 <StackLayout>
-                    <Label Text="{Binding [InTop2000], Source={x:Static res:Translator.Instance}}" HorizontalOptions="CenterAndExpand" FontSize="14" FontAttributes="Bold" />
+                    <Label Text="{Binding [InTop2000], Source={x:Static res:Translator.Instance}}" HorizontalOptions="CenterAndExpand" Style="{StaticResource SmallLabelStyle}" FontAttributes="Bold" />
                     <Grid>
                         <local:ProgressRing RingThickness="10" Progress="{Binding TotalTop2000Percentage}"
                                             RingBaseColor="{DynamicResource RingBaseColor}"
                                             RingProgressColor="{StaticResource Top2000Colour}"
                                             HeightRequest="100" WidthRequest="100"
-                                            HorizontalOptions="Start" />
+                                            HorizontalOptions="Center" />
 
                         <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
                             <Label Style="{StaticResource MediumLabelStyle}" Text="{Binding Appearances}" />
                             <Label Style="{StaticResource MediumLabelStyle}" Text="/" />
-                            <Label Style="{StaticResource MediumLabelStyle}" Text="{Binding Listings.Count}" />
+                            <Label Style="{StaticResource MediumLabelStyle}" Text="{Binding TotalListings}" />
                         </StackLayout>
                     </Grid>
                 </StackLayout>
@@ -143,7 +139,7 @@
                     <Label Text="{Binding [RecordHigh], Source={x:Static res:Translator.Instance}}" Style="{StaticResource SmallLabelStyle}" FontAttributes="Bold" />
                     <StackLayout Orientation="Horizontal" Margin="-1,-12,0,0">
                         <Label Text="{Binding Highest.Position}" FontSize="40" Style="{StaticResource MediumLabelStyle}"  VerticalOptions="Start" HorizontalTextAlignment="End" />
-                        <Label Text="{Binding Highest.Edition, StringFormat='({0})'}" Margin="-5,0,0,7" VerticalOptions="End" />
+                        <Label Text="{Binding Highest.Edition, StringFormat='({0})'}" Margin="-5,0,0,7" Style="{StaticResource SmallLabelStyle}" VerticalOptions="End" />
                     </StackLayout>
                 </StackLayout>
 
@@ -151,7 +147,7 @@
                     <Label Text="{Binding [RecordLow], Source={x:Static res:Translator.Instance}}" Style="{StaticResource SmallLabelStyle}" FontAttributes="Bold" />
                     <StackLayout Orientation="Horizontal" Margin="-1,-12,0,0">
                         <Label Text="{Binding Lowest.Position}" FontSize="40" Style="{StaticResource MediumLabelStyle}"   VerticalOptions="Start" HorizontalTextAlignment="End" />
-                        <Label Text="{Binding Lowest.Edition, StringFormat='({0})'}" Margin="-5,0,0,7" VerticalOptions="End" />
+                        <Label Text="{Binding Lowest.Edition, StringFormat='({0})'}" Margin="-5,0,0,7" Style="{StaticResource SmallLabelStyle}"  VerticalOptions="End" />
                     </StackLayout>
                 </StackLayout>
 
@@ -159,7 +155,7 @@
                     <Label Text="{Binding [LastPosition], Source={x:Static res:Translator.Instance}}" Style="{StaticResource SmallLabelStyle}" FontAttributes="Bold" />
                     <StackLayout Orientation="Horizontal" Margin="-1,-12,0,0">
                         <Label Text="{Binding Latest.Position}" FontSize="40" Style="{StaticResource MediumLabelStyle}" VerticalOptions="Start" HorizontalTextAlignment="End" />
-                        <Label Text="{Binding Latest.Edition, StringFormat='({0})'}" Margin="-5,0,0,7" VerticalOptions="End" />
+                        <Label Text="{Binding Latest.Edition, StringFormat='({0})'}" Margin="-5,0,0,7" Style="{StaticResource SmallLabelStyle}"  VerticalOptions="End" />
                     </StackLayout>
                 </StackLayout>
             </forms:WrapLayout>

@@ -23,7 +23,10 @@ namespace Chroomsoft.Top2000.Apps.XamarinForms
             SetCulture();
             SetTheme();
 
-            MainPage = GetService<NavigationShell.View>();
+            var navigationShell = GetService<NavigationShell.View>();
+            MainPage = navigationShell;
+
+            navigationShell.SetTitles();
         }
 
         public static IServiceProvider ServiceProvider

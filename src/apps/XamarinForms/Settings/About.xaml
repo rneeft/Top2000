@@ -5,7 +5,7 @@
              xmlns:forms="clr-namespace:Xamarin.Forms"
              xmlns:res="clr-namespace:Chroomsoft.Top2000.Apps.Globalisation"
              BackgroundColor="{DynamicResource PageBackgroundColor}"
-             Title="{Binding [SettingAbout], Source={x:Static res:Translator.Instance}}">
+             Title="{Binding [SettingsAbout], Source={x:Static res:Translator.Instance}}">
     <ContentPage.Content>
         <ScrollView>
             <StackLayout Margin="15,10">
@@ -50,7 +50,7 @@
                     </Label>
                 </forms:WrapLayout>
 
-                <Label Text="{Binding [Disclaimer], Source={x:Static res:Translator.Instance}}" Style="{StaticResource LargeLabelStyle}" FontAttributes="Bold" />
+                <Label Text="{Binding [Disclaimer], Source={x:Static res:Translator.Instance}}" Style="{StaticResource MediumLabelStyle}" FontAttributes="Bold" />
                 <Label Text="{Binding [DisclaimerText], Source={x:Static res:Translator.Instance}}" Style="{StaticResource SmallLabelStyle}" />
                 <Label Text="{Binding [Copyright], Source={x:Static res:Translator.Instance}}" Style="{StaticResource SmallLabelStyle}" />
             </StackLayout>
