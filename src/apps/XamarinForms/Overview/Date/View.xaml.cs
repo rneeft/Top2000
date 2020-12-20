@@ -1,8 +1,4 @@
-﻿using Chroomsoft.Top2000.Apps.Common;
-using Chroomsoft.Top2000.Apps.XamarinForms;
-using Chroomsoft.Top2000.Features.AllEditions;
-using Chroomsoft.Top2000.Features.AllListingsOfEdition;
-using MediatR;
+﻿using Chroomsoft.Top2000.Apps.XamarinForms;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -82,7 +78,7 @@ namespace Chroomsoft.Top2000.Apps.Overview.Date
             }
             else
             {
-                //this.ToolbarItems.Remove(jumpToToday);
+                this.ToolbarItems.Remove(jumpToToday);
             }
         }
 
@@ -99,16 +95,15 @@ namespace Chroomsoft.Top2000.Apps.Overview.Date
 
         async private void OnGroupSelected(object sender, SelectionChangedEventArgs e)
         {
-            Shell.SetTabBarIsVisible(this, true);
-            Shell.SetNavBarIsVisible(this, true);
-            await GroupFlyout.TranslateTo(this.Width * -1, 0);
-            this.GroupFlyout.IsVisible = false;
-
-            var item = e.CurrentSelection.ToList().FirstOrDefault();
-
-            if (item != null)
+            if (dates.SelectedItem is DateTime date)
             {
-                await JumpToSelectedDateTime((DateTime)item);
+                Shell.SetTabBarIsVisible(this, true);
+                Shell.SetNavBarIsVisible(this, true);
+                await GroupFlyout.TranslateTo(this.Width * -1, 0);
+                this.GroupFlyout.IsVisible = false;
+
+                await JumpToSelectedDateTime(date);
+                dates.SelectedItem = null;
             }
         }
 
@@ -143,15 +138,7 @@ namespace Chroomsoft.Top2000.Apps.Overview.Date
 
         async private void OpenTodayClick(object sender, EventArgs e)
         {
-            var currentTime = DateTime.Now;
-            var last = ViewModel.Listings.Last().Key;
-
-            if (currentTime > last)
-            {
-                currentTime = ViewModel.Listings[12].Key;
-            }
-
-            await JumpToSelectedDateTime(currentTime);
+            await JumpToSelectedDateTime(DateTime.Now);
         }
 
         async private void OnListingSelected(object sender, SelectionChangedEventArgs e)
@@ -180,60 +167,5 @@ namespace Chroomsoft.Top2000.Apps.Overview.Date
             await this.trackInformation.TranslateTo(this.Width * -1, 0);
             this.trackInformation.IsVisible = false;
         }
-    }
-
-    public class ViewModel : ObservableBase
-    {
-        private readonly IMediator mediator;
-
-        public ViewModel(IMediator mediator)
-        {
-            this.mediator = mediator;
-            this.Listings = new ObservableGroupedList<DateTime, TrackListing>();
-            this.Dates = new ObservableGroupedList<DateTime, DateTime>();
-        }
-
-        public ObservableGroupedList<DateTime, TrackListing> Listings { get; }
-
-        public ObservableGroupedList<DateTime, DateTime> Dates { get; }
-
-        public int SelectedEditionYear
-        {
-            get { return GetPropertyValue<int>(); }
-            set { SetPropertyValue(value); }
-        }
-
-        public TrackListing? SelectedListing
-        {
-            get { return GetPropertyValue<TrackListing?>(); }
-            set { SetPropertyValue(value); }
-        }
-
-        public static DateTime LocalPlayDateAndTime(TrackListing listing) => listing.LocalPlayDateAndTime;
-
-        public async Task InitialiseViewModelAsync()
-        {
-            var editions = await mediator.Send(new AllEditionsRequest());
-            SelectedEditionYear = editions.First().Year;
-
-            await LoadAllListingsAsync();
-        }
-
-        public async Task LoadAllListingsAsync()
-        {
-            var tracks = await mediator.Send(new AllListingsOfEditionRequest(SelectedEditionYear));
-            var listings = tracks
-                .OrderByDescending(x => x.Position)
-                .GroupBy(LocalPlayDateAndTime);
-
-            var dates = listings
-                .Select(x => x.Key)
-                .GroupBy(LocalPlayDate);
-
-            Listings.ClearAddRange(listings);
-            Dates.ClearAddRange(dates);
-        }
-
-        private DateTime LocalPlayDate(DateTime arg) => arg.Date;
     }
 }

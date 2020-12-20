@@ -87,11 +87,10 @@
             <Grid x:Name="GroupFlyout" IsVisible="False" BackgroundColor="{DynamicResource PageBackgroundColor}">
                 <CollectionView x:Name="dates"
                                 Margin="10"
-                            ItemsSource="{Binding Dates}"
-                            VerticalOptions="FillAndExpand"
-                            ItemSizingStrategy="MeasureAllItems"
-                            IsGrouped="True"
-                            SelectionMode="Single"
+                                ItemsSource="{Binding Dates}"
+                                VerticalOptions="FillAndExpand"
+                                IsGrouped="True"
+                                SelectionMode="Single"
                                 SelectionChanged="OnGroupSelected">
 
                     <CollectionView.ItemsLayout>
@@ -111,7 +110,7 @@
                         <DataTemplate>
                             <StackLayout>
                                 <Label Text="{Binding Key, Converter={StaticResource DateTimeToDateOnlyString}}"
-                                       Style="{StaticResource MediumLabelStyle}"
+                                       Style="{StaticResource SmallLabelStyle}"
                                        TextColor="{StaticResource Top2000Colour}" Margin="0,5,0,0" />
                                 <BoxView Style="{StaticResource Separator}" Margin="0,-3,0,0" />
                             </StackLayout>
