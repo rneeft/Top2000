@@ -504,6 +504,42 @@ namespace Chroomsoft.Top2000.Apps.Globalisation {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Instellingen - Over.
+        /// </summary>
+        internal static string SettingsAbout {
+            get {
+                return ResourceManager.GetString("SettingsAbout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Instellingen - Algemeen.
+        /// </summary>
+        internal static string SettingsGeneral {
+            get {
+                return ResourceManager.GetString("SettingsGeneral", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Instellingen - Privacy.
+        /// </summary>
+        internal static string SettingsPrivacy {
+            get {
+                return ResourceManager.GetString("SettingsPrivacy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Instellingen - Third Party.
+        /// </summary>
+        internal static string SettingsThirdParty {
+            get {
+                return ResourceManager.GetString("SettingsThirdParty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Toon huidige tijd.
         /// </summary>
         internal static string ShowCurrentGroup {
@@ -648,7 +684,7 @@ namespace Chroomsoft.Top2000.Apps.Globalisation {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to De Top 2000 is jaarlijks radioprogramma van Radio 2. Het wordt uitgezonden vanaf 8 uur op Eerste Kerstdag tot oudjaarsnacht.  .
+        ///   Looks up a localized string similar to De Top 2000 is jaarlijks radioprogramma van Radio 2. Het wordt uitgezonden vanaf middennacht op Eerste Kerstdag tot oudjaarsnacht.  .
         /// </summary>
         internal static string WhatIsTop2000 {
             get {

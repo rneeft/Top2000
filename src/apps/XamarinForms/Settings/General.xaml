@@ -5,7 +5,7 @@
              x:Class="Chroomsoft.Top2000.Apps.Settings.General"
              xmlns:res="clr-namespace:Chroomsoft.Top2000.Apps.Globalisation"
              BackgroundColor="{DynamicResource PageBackgroundColor}"
-             Title="{Binding [Settings], Source={x:Static res:Translator.Instance}}">
+             Title="{Binding [SettingsGeneral], Source={x:Static res:Translator.Instance}}">
     <ContentPage.Content>
         <StackLayout Margin="20,15">
             <Label Text="{Binding [ThemeMode], Source={x:Static res:Translator.Instance}}"

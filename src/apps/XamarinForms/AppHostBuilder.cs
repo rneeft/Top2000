@@ -1,5 +1,6 @@
 ﻿using Chroomsoft.Top2000.Apps.Common.Behavior;
 using Chroomsoft.Top2000.Apps.Globalisation;
+using Chroomsoft.Top2000.Apps.Themes;
 using Chroomsoft.Top2000.Data.ClientDatabase;
 using Chroomsoft.Top2000.Features;
 using MediatR;
@@ -33,6 +34,7 @@ namespace Chroomsoft.Top2000.Apps
             services
                 .AddClientDatabase(new DirectoryInfo(FileSystem.AppDataDirectory), baseUrl)
                 .AddFeatures()
+                .AddSingleton<IThemeService, ThemeService>()
                 .AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>))
                 .AddSingleton<NavigationShell.View>()
                 .AddTransient<Overview.Position.ViewModel>()

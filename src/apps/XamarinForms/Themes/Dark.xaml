@@ -3,22 +3,22 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Chroomsoft.Top2000.Apps.Themes.Dark">
 
-    <Color x:Key="PageBackgroundColor">Black</Color>
-    <Color x:Key="NavigationBarColor">#1F1F1F</Color>
-    <Color x:Key="SeparatorColor">White</Color>
-    <Color x:Key="PrimaryColor">White</Color>
+    <Color x:Key="PageBackgroundColor">#333333</Color>
+    <Color x:Key="NavigationBarColor">#DA161C</Color>
+    <Color x:Key="SeparatorColor">WhiteSmoke</Color>
+    <Color x:Key="PrimaryColor">WhiteSmoke</Color>
 
-    <Color x:Key="SecondaryColor">White</Color>
-    <Color x:Key="PrimaryTextColor">White</Color>
-    <Color x:Key="SecondaryTextColor">White</Color>
+    <Color x:Key="SecondaryColor">WhiteSmoke</Color>
+    <Color x:Key="PrimaryTextColor">WhiteSmoke</Color>
+    <Color x:Key="SecondaryTextColor">WhiteSmoke</Color>
     <Color x:Key="TertiaryTextColor">WhiteSmoke</Color>
     <Color x:Key="TransparentColor">Transparent</Color>
     <Color x:Key="TabBarBackgroundColor">#1F1F1F</Color>
     <Color x:Key="TabBarUnselectedColor">#B4B4B4</Color>
-    <Color x:Key="TabBarSelectedColor">White</Color>
+    <Color x:Key="TabBarSelectedColor">#DA161C</Color>
 
-    <Color x:Key="RingBaseColor">White</Color>
+    <Color x:Key="RingBaseColor">WhiteSmoke</Color>
     <Color x:Key="ButtonBackgroundColor">Gray</Color>
-    <Color x:Key="TextColor">White</Color>
-    <Color x:Key="ShellForegroundColor">#DA161C</Color>
+    <Color x:Key="TextColor">WhiteSmoke</Color>
+    <Color x:Key="ShellForegroundColor">White</Color>
 </ResourceDictionary>

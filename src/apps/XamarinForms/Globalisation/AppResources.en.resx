@@ -440,6 +440,18 @@
   <data name="Settings" xml:space="preserve">
     <value>Settings</value>
   </data>
+  <data name="SettingsAbout" xml:space="preserve">
+    <value>Settings - About</value>
+  </data>
+  <data name="SettingsGeneral" xml:space="preserve">
+    <value>Settings - General</value>
+  </data>
+  <data name="SettingsPrivacy" xml:space="preserve">
+    <value>Settings - Privacy</value>
+  </data>
+  <data name="SettingsThirdParty" xml:space="preserve">
+    <value>Settings - Third Party</value>
+  </data>
   <data name="ShowCurrentGroup" xml:space="preserve">
     <value>Show current time</value>
   </data>
@@ -489,7 +501,7 @@
     <value>Visit the Official NPO Top 2000 Web site at:</value>
   </data>
   <data name="WhatIsTop2000" xml:space="preserve">
-    <value>The Top 2000 is an annual broadcasting program of the Dutch radio station Radio 2. The show begins broadcasting at 8 AM on Christmas Days and continues until midnight of New Year's Eve (CET Time).</value>
+    <value>The Top 2000 is an annual broadcasting program of the Dutch radio station Radio 2. The show begins broadcasting at midnight on Christmas Days and continues until midnight of New Year's Eve (CET Time).</value>
   </data>
   <data name="Year" xml:space="preserve">
     <value>Year</value>

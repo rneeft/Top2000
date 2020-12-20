@@ -438,6 +438,18 @@
   <data name="Settings" xml:space="preserve">
     <value>Paramètres</value>
   </data>
+  <data name="SettingsAbout" xml:space="preserve">
+    <value>Paramètres - Propos</value>
+  </data>
+  <data name="SettingsGeneral" xml:space="preserve">
+    <value>Paramètres - Général</value>
+  </data>
+  <data name="SettingsPrivacy" xml:space="preserve">
+    <value>Paramètres - Confidentialité</value>
+  </data>
+  <data name="SettingsThirdParty" xml:space="preserve">
+    <value>Paramètres - Third Party</value>
+  </data>
   <data name="ShowCurrentGroup" xml:space="preserve">
     <value>Afficher l'heure exacte</value>
   </data>

@@ -1,5 +1,6 @@
 ﻿using Chroomsoft.Top2000.Apps.Common;
 using Chroomsoft.Top2000.Apps.Globalisation;
+using Chroomsoft.Top2000.Apps.Themes;
 using Chroomsoft.Top2000.Apps.XamarinForms;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,7 @@ namespace Chroomsoft.Top2000.Apps.Settings
     public partial class General : ContentPage
     {
         private readonly ILocalisationService localisationService;
+        private readonly IThemeService themeService;
         private readonly IEnumerable<ICulture> cultures;
 
         public General()
@@ -19,6 +21,7 @@ namespace Chroomsoft.Top2000.Apps.Settings
             InitializeComponent();
 
             localisationService = App.GetService<ILocalisationService>();
+            themeService = App.GetService<IThemeService>();
             cultures = App.GetService<IEnumerable<ICulture>>();
         }
 
@@ -43,23 +46,23 @@ namespace Chroomsoft.Top2000.Apps.Settings
                 default:
                     break;
             }
+
+            var currentTheme = themeService.CurrentThemeName;
+            if (currentTheme == Dark.ThemeName)
+            {
+                useDarkModeSwitch.IsToggled = true;
+            }
         }
 
         private void OnUseDarkModeSwitchToggled(object sender, ToggledEventArgs e)
         {
-            var mergedDictionaries = Application.Current.Resources.MergedDictionaries;
-            if (mergedDictionaries != null)
+            if (e.Value)
             {
-                mergedDictionaries.Clear();
-
-                if (e.Value)
-                {
-                    mergedDictionaries.Add(new Themes.Dark());
-                }
-                else
-                {
-                    mergedDictionaries.Add(new Themes.Light());
-                }
+                themeService.SetTheme(Dark.ThemeName);
+            }
+            else
+            {
+                themeService.SetTheme(Light.ThemeName);
             }
         }
 

@@ -420,6 +420,18 @@
   <data name="Settings" xml:space="preserve">
     <value>Instellingen</value>
   </data>
+  <data name="SettingsAbout" xml:space="preserve">
+    <value>Instellingen - Over</value>
+  </data>
+  <data name="SettingsGeneral" xml:space="preserve">
+    <value>Instellingen - Algemeen</value>
+  </data>
+  <data name="SettingsPrivacy" xml:space="preserve">
+    <value>Instellingen - Privacy</value>
+  </data>
+  <data name="SettingsThirdParty" xml:space="preserve">
+    <value>Instellingen - Third Party</value>
+  </data>
   <data name="ShowCurrentGroup" xml:space="preserve">
     <value>Toon huidige tijd</value>
   </data>
@@ -469,7 +481,7 @@
     <value>Bezoek de officele NPO Top 2000 website op:</value>
   </data>
   <data name="WhatIsTop2000" xml:space="preserve">
-    <value>De Top 2000 is jaarlijks radioprogramma van Radio 2. Het wordt uitgezonden vanaf 8 uur op Eerste Kerstdag tot oudjaarsnacht.  </value>
+    <value>De Top 2000 is jaarlijks radioprogramma van Radio 2. Het wordt uitgezonden vanaf middennacht op Eerste Kerstdag tot oudjaarsnacht.  </value>
   </data>
   <data name="Year" xml:space="preserve">
     <value>Jaar</value>

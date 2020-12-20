@@ -1,4 +1,5 @@
 ﻿using Chroomsoft.Top2000.Apps.Globalisation;
+using Chroomsoft.Top2000.Apps.Themes;
 using Chroomsoft.Top2000.Data.ClientDatabase;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -20,6 +21,7 @@ namespace Chroomsoft.Top2000.Apps.XamarinForms
         {
             InitializeComponent();
             SetCulture();
+            SetTheme();
 
             MainPage = GetService<NavigationShell.View>();
         }
@@ -63,6 +65,12 @@ namespace Chroomsoft.Top2000.Apps.XamarinForms
         {
             var localisationService = App.GetService<ILocalisationService>();
             localisationService.SetCultureFromSetting();
+        }
+
+        private void SetTheme()
+        {
+            var themeService = GetService<IThemeService>();
+            themeService.SetThemeFromSetting();
         }
 
         //private static async Task CheckForOnlineUpdates()
