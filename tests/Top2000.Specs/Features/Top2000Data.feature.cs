@@ -164,13 +164,13 @@ testRunner.Then("the listing table contains 10 or 2000 for the last edition rang
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("The playtime of each track is either the same to the last track of increment by o" +
+        [TechTalk.SpecRun.ScenarioAttribute("The playtime of each track is either the same to the last track or increment by o" +
             "ne hour", SourceLine=16)]
-        public virtual void ThePlaytimeOfEachTrackIsEitherTheSameToTheLastTrackOfIncrementByOneHour()
+        public virtual void ThePlaytimeOfEachTrackIsEitherTheSameToTheLastTrackOrIncrementByOneHour()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("The playtime of each track is either the same to the last track of increment by o" +
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("The playtime of each track is either the same to the last track or increment by o" +
                     "ne hour", null, tagsOfScenario, argumentsOfScenario);
 #line 17
 this.ScenarioInitialize(scenarioInfo);

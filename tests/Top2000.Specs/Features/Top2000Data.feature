@@ -14,7 +14,7 @@ Given all data scripts
 When the client database is created
 Then the listing table contains 10 or 2000 for the last edition ranging from 1 to 10/2000
 
-Scenario: The playtime of each track is either the same to the last track of increment by one hour
+Scenario: The playtime of each track is either the same to the last track or increment by one hour
 Given all data scripts
 When the client database is created
 Then for each track in the listing table the PlayDateAndTime is the same to the previous track or has incremented by one hour
