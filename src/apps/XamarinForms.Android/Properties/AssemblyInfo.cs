@@ -1,8 +1,6 @@
 ﻿using Android.App;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using Xamarin.Forms;
-using XamarinForms.Droid.Common;
 
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
@@ -29,4 +27,3 @@ using XamarinForms.Droid.Common;
 // Add some common permissions, these can be removed if not needed
 [assembly: UsesPermission(Android.Manifest.Permission.Internet)]
 [assembly: UsesPermission(Android.Manifest.Permission.WriteExternalStorage)]
-[assembly: ExportRenderer(typeof(NavigationPage), typeof(CustomNavigationPageRenderer))]

@@ -38,15 +38,12 @@ namespace XamarinForms.Droid.Globalisation
 
         public void SetCultureFromSetting()
         {
-            if (Preferences.ContainsKey(CulturePreferenceName))
-            {
-                var name = Preferences.Get(CulturePreferenceName, "nl");
-                activeCulture = FindCulture(name);
-                Thread.CurrentThread.CurrentCulture = new CultureInfo(name);
-                Thread.CurrentThread.CurrentUICulture = new CultureInfo(name);
+            var name = Preferences.Get(CulturePreferenceName, "nl");
+            activeCulture = FindCulture(name);
+            Thread.CurrentThread.CurrentCulture = new CultureInfo(name);
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(name);
 
-                Translator.Instance.Invalidate();
-            }
+            Translator.Instance.Invalidate();
         }
 
         private ICulture FindCulture(string name)
