@@ -60,7 +60,7 @@
 
             <Label Text="{Binding [Appearances], Source={x:Static res:Translator.Instance}}" Style="{StaticResource SmallLabelStyle}" FontAttributes="Bold" Margin="0,5,0,0" />
 
-            <ScrollView Orientation="Horizontal" x:Name="positionsScroll">
+            <ScrollView Orientation="Horizontal" x:Name="positionsScroll" HorizontalScrollBarVisibility="Never">
                 <StackLayout BindableLayout.ItemsSource="{Binding Listings}" Orientation="Horizontal">
                     <BindableLayout.ItemTemplate>
                         <DataTemplate>

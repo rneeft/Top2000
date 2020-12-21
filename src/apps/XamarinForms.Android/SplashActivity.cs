@@ -34,10 +34,9 @@ namespace XamarinForms.Droid
             App.ServiceProvider = AppHostBuilder.CreateServices(PlatformServices);
             App.EnsureDatabaseIsCreatedAsync().GetAwaiter().GetResult();
 
-            Xamarin.Forms.Forms.SetFlags("RadioButton_Experimental");
+            Xamarin.Forms.Forms.SetFlags("Brush_Experimental");
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
-
             App = new App();
 
             StartActivity(typeof(MainActivity));

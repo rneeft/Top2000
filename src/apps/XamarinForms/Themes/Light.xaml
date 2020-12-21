@@ -3,20 +3,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Chroomsoft.Top2000.Apps.Themes.Light">
 
-    <Color x:Key="PageBackgroundColor">White</Color>
+    <Color x:Key="PageBackgroundColor">#F7F7F7</Color>
+    <Color x:Key="SelectedItemBackgroundColor">#E5E5E5</Color>
     <Color x:Key="NavigationBarColor">#DA161C</Color>
-    <Color x:Key="SeparatorColor">Gray</Color>
-    <Color x:Key="PrimaryColor" >White</Color>
-    <Color x:Key="SecondaryColor">Black</Color>
-    <Color x:Key="PrimaryTextColor">Gray</Color>
-    <Color x:Key="SecondaryTextColor">White</Color>
-    <Color x:Key="TertiaryTextColor">Gray</Color>
-    <Color x:Key="TransparentColor">Transparent</Color>
+    <Color x:Key="SeparatorColor">#737373</Color>
+
     <Color x:Key="TabBarBackgroundColor">#F2F2F2</Color>
-    <Color x:Key="TabBarUnselectedColor">Black</Color>
+    <Color x:Key="TabBarUnselectedColor">#717171</Color>
     <Color x:Key="TabBarSelectedColor">#DA161C</Color>
+
     <Color x:Key="ShellForegroundColor">White</Color>
-    <Color x:Key="ButtonBackgroundColor">#D6D7D7</Color>
+    <Color x:Key="ButtonBackgroundColor">#DA161C</Color>
+    <Color x:Key="ButtonTextColor">White</Color>
     <Color x:Key="RingBaseColor">#CCC</Color>
-    <Color x:Key="TextColor">#757575</Color>
+    <Color x:Key="TextColor">#717171</Color>
 </ResourceDictionary>

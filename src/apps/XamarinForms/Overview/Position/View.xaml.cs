@@ -149,5 +149,13 @@ namespace Chroomsoft.Top2000.Apps.Overview.Position
             await this.trackInformation.TranslateTo(this.Width * -1, 0);
             this.trackInformation.IsVisible = false;
         }
+
+        async private void OnCloseButtonClick(object sender, EventArgs e)
+        {
+            Shell.SetTabBarIsVisible(this, true);
+            Shell.SetNavBarIsVisible(this, true);
+            await EditionsFlyout.TranslateTo(this.Width * -1, 0);
+            this.EditionsFlyout.IsVisible = false;
+        }
     }
 }

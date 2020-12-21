@@ -585,6 +585,15 @@ namespace Chroomsoft.Top2000.Apps.Globalisation {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string String1 {
+            get {
+                return ResourceManager.GetString("String1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Gebruik systeem instellingen.
         /// </summary>
         internal static string SystemTheme {

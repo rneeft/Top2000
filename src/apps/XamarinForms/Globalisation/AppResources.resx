@@ -447,6 +447,9 @@
   <data name="SortByHeader" xml:space="preserve">
     <value>Sorteer op</value>
   </data>
+  <data name="String1" xml:space="preserve">
+    <value />
+  </data>
   <data name="SystemTheme" xml:space="preserve">
     <value>Gebruik systeem instellingen</value>
   </data>

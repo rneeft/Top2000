@@ -9,6 +9,24 @@
     <Shell.SearchHandler>
         <local:TracksSearchHandler Placeholder="{Binding [SearchTop2000], Source={x:Static res:Translator.Instance}}" />
     </Shell.SearchHandler>
+
+    <ContentPage.Resources>
+        <Style TargetType="Grid">
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal" />
+                        <VisualState x:Name="Selected">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" Value="{DynamicResource SelectedItemBackgroundColor}" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+    </ContentPage.Resources>
+
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
@@ -16,11 +34,11 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <StackLayout Orientation="Horizontal" Margin="20,10">
+            <StackLayout Orientation="Horizontal" Margin="15,10">
                 <StackLayout Orientation="Horizontal" BackgroundColor="{DynamicResource ButtonBackgroundColor}">
-                    <Label Text="{Binding [GroupByHeader], Source={x:Static res:Translator.Instance}}" Margin="7,11,0,7" FontAttributes="Bold" TextColor="{DynamicResource TextColor}" />
-                    <Label Text=":" Margin="-5,11"  FontAttributes="Bold" TextColor="{DynamicResource TextColor}" />
-                    <Label Text="{Binding GroupBy.Name}" Margin="0,11,7,0" FontAttributes="Bold" TextColor="{DynamicResource TextColor}" />
+                    <Label Text="{Binding [GroupByHeader], Source={x:Static res:Translator.Instance}}" Margin="7,11,0,7" FontAttributes="Bold" TextColor="{DynamicResource ButtonTextColor}" />
+                    <Label Text=":" Margin="-5,11"  FontAttributes="Bold" TextColor="{DynamicResource ButtonTextColor}" />
+                    <Label Text="{Binding GroupBy.Name}" Margin="0,11,7,0" FontAttributes="Bold" TextColor="{DynamicResource ButtonTextColor}" />
 
                     <StackLayout.GestureRecognizers>
                         <TapGestureRecognizer Tapped="OnGroupByButtonClick" />
@@ -28,9 +46,9 @@
                 </StackLayout>
 
                 <StackLayout Orientation="Horizontal" BackgroundColor="{DynamicResource ButtonBackgroundColor}">
-                    <Label Text="{Binding [SortByHeader], Source={x:Static res:Translator.Instance}}" Margin="7,11,0,7" FontAttributes="Bold" TextColor="{DynamicResource TextColor}" />
-                    <Label Text=":" Margin="-5,11" FontAttributes="Bold" TextColor="{DynamicResource TextColor}" />
-                    <Label Text="{Binding SortBy.Name}" Margin="0,11,7,0" FontAttributes="Bold" TextColor="{DynamicResource TextColor}" />
+                    <Label Text="{Binding [SortByHeader], Source={x:Static res:Translator.Instance}}" Margin="7,11,0,7" FontAttributes="Bold" TextColor="{DynamicResource ButtonTextColor}" />
+                    <Label Text=":" Margin="-5,11" FontAttributes="Bold" TextColor="{DynamicResource ButtonTextColor}" />
+                    <Label Text="{Binding SortBy.Name}" Margin="0,11,7,0" FontAttributes="Bold" TextColor="{DynamicResource ButtonTextColor}" />
 
                     <StackLayout.GestureRecognizers>
                         <TapGestureRecognizer Tapped="OnSortByButtonClick" />
