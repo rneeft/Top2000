@@ -76,6 +76,7 @@ namespace Chroomsoft.Top2000.Specs.Features
         {
             var sql = App.ServiceProvider.GetService<SQLiteAsyncConnection>();
             var listings = (await sql.Table<Listing>().Where(x => x.Edition > 2015).ToListAsync())
+                .OrderBy(x => x.Position)
                 .GroupBy(x => x.Edition)
                 .OrderBy(x => x.Key)
                 .ToList();

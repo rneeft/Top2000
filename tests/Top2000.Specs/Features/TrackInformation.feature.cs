@@ -567,10 +567,10 @@ testRunner.When("the track information feature is executed for TrackId 3966", ((
 testRunner.Then("the title is \"Hello\" from \'Adele\' which is recorded in the year 2015", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
 #line 88
-testRunner.And("it could have been on the Top2000 for 5 times", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("it could have been on the Top2000 for 6 times", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 89
-testRunner.And("it it listed for 5 times", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("it it listed for 6 times", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -696,7 +696,7 @@ testRunner.When("the track information feature is executed for TrackId 1496", ((
 testRunner.Then("the title is \"Imagine\" from \'John Lennon\' which is recorded in the year 1971", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
 #line 104
-testRunner.And("the Lastest position is number 29 in 2019", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("the Lastest position is number 26 in 2020", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();
