@@ -30,6 +30,7 @@
             Canvas.ZIndex="0"
             IsPaneOpen="True"
             PaneDisplayMode="LeftCompact"
+            IsBackButtonVisible="Collapsed"
             IsTitleBarAutoPaddingEnabled="False"
             AlwaysShowHeader="False"
             ItemInvoked="OnNavigationViewItemInvoked">

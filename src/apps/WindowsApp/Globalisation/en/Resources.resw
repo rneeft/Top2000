@@ -311,6 +311,9 @@
   <data name="FirstPosition.Text" xml:space="preserve">
     <value>First Position</value>
   </data>
+  <data name="GeneralPivot.Header" xml:space="preserve">
+    <value>General</value>
+  </data>
   <data name="GroupBy.Text" xml:space="preserve">
     <value>Group by</value>
   </data>
@@ -371,8 +374,8 @@
     view the privacy statements of the third-party companies below:
 &lt;/p&gt;
 &lt;ul&gt;
-    &lt;li&gt;&lt;a href="https://privacy.microsoft.com/en-us/privacystatement"&gt;https://privacy.microsoft.com/en-us/privacystatement&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href="https://policies.google.com/privacy?hl=en"&gt;https://policies.google.com/privacy?hl=en&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;https://privacy.microsoft.com/en-us/privacystatement&lt;/li&gt;
+    &lt;li&gt;https://policies.google.com/privacy?hl=en&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3&gt;Changes to this privacy statement&lt;/h3&gt;
@@ -383,7 +386,7 @@
 &lt;/p&gt;
 &lt;h3&gt;Contact me&lt;/h3&gt;
 &lt;p&gt;
-    For any queries you can contact me at &lt;a href="mailto:rick@chroomsoft.nl"&gt;rick@chroomsoft.nl&lt;/a&gt;
+    For any queries you can contact me at rick@chroomsoft.nl
 &lt;/p&gt;
 &lt;/body&gt;
 &lt;/html&gt;</value>
