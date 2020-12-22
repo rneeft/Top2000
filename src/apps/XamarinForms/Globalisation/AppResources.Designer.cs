@@ -230,7 +230,7 @@ namespace Chroomsoft.Top2000.Apps.Globalisation {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Groeperen op.
+        ///   Looks up a localized string similar to Groeperen op:.
         /// </summary>
         internal static string GroupByHeader {
             get {
@@ -576,7 +576,7 @@ namespace Chroomsoft.Top2000.Apps.Globalisation {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sorteer op.
+        ///   Looks up a localized string similar to Sorteer op:.
         /// </summary>
         internal static string SortByHeader {
             get {

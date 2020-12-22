@@ -309,7 +309,7 @@
     <value>Grouper par: {0}</value>
   </data>
   <data name="GroupByHeader" xml:space="preserve">
-    <value>Grouper par</value>
+    <value>Grouper par:</value>
   </data>
   <data name="InTop2000" xml:space="preserve">
     <value>Dans le Top 2000</value>
@@ -463,7 +463,7 @@
     <value>Trier par: {0}</value>
   </data>
   <data name="SortByHeader" xml:space="preserve">
-    <value>Trier par</value>
+    <value>Trier par:</value>
   </data>
   <data name="SystemTheme" xml:space="preserve">
     <value>Utiliser la Paramètre du système</value>
