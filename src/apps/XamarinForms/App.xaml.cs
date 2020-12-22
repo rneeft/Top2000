@@ -1,6 +1,9 @@
 ﻿using Chroomsoft.Top2000.Apps.Globalisation;
 using Chroomsoft.Top2000.Apps.Themes;
 using Chroomsoft.Top2000.Data.ClientDatabase;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Globalization;
@@ -54,6 +57,7 @@ namespace Chroomsoft.Top2000.Apps.XamarinForms
 
         protected override void OnStart()
         {
+            AppCenter.Start("89fbeb5b-5ec9-4456-86c7-214421330f73", typeof(Analytics), typeof(Crashes));
         }
 
         protected override void OnSleep()

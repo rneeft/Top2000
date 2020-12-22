@@ -5,6 +5,7 @@
     <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
     <AssemblyName>Chroomsoft.Top2000.Apps.XamarinForms</AssemblyName>
     <RootNamespace>Chroomsoft.Top2000.Apps</RootNamespace>
+    <NeutralLanguage>nl</NeutralLanguage>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
