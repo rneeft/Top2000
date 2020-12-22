@@ -73,20 +73,20 @@
                 <controls:WrapPanel>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock x:Uid="ToContact" Text="%To contact:%" VerticalAlignment="Center" />
-                        <HyperlinkButton x:Name="MailTo" Content="mailto:rick@chroomsoft.nl" Margin="5,0" />
+                        <HyperlinkButton x:Name="MailTo" Content="mailto:rick@chroomsoft.nl" Margin="5,0" Click="OnEmailClick" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock x:Uid="OrVisitFacebook" Text="%or visit Facebook at%"  VerticalAlignment="Center" />
-                        <HyperlinkButton x:Name="Facebook" Content="https://www.facebook.com/Top2000App/" Margin="5,0" />
+                        <HyperlinkButton x:Name="Facebook" Content="https://www.facebook.com/Top2000App/" Margin="5,0" Click="OnFacebookClick" />
                     </StackPanel>
                 </controls:WrapPanel>
 
                 <StackPanel Orientation="Horizontal" Margin="0,-10,0,0">
                     <TextBlock x:Uid="VisitTop2000Site" Text="%Visit the Official NPO Top 2000 Web site at:%" VerticalAlignment="Center" />
-                    <HyperlinkButton x:Name="VisitTop2000Site" Content="http://www.nporadio2.nl/top2000" Margin="5,0" />
+                    <HyperlinkButton x:Name="VisitTop2000Site" Content="http://www.nporadio2.nl/top2000" Margin="5,0" Click="OnVisitTop2000SiteClick" />
                 </StackPanel>
 
-                <Button x:Name="Feedback" x:Uid="Feedback" Content="%Send Feedback%" />
+                <Button x:Name="Feedback" x:Uid="Feedback" Content="%Send Feedback%" Click="OnFeedbackClick" />
 
                 <TextBlock x:Uid="Disclaimer" Text="%Disclaimer%" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0,30,0,0" />
                 <TextBlock x:Uid="DisclaimerText" Text="%THIS IS NOT AN OFFICAL APP FROM THE NEDERLANDSE PUBLIEKE OMROEP (DUTCH PUBLIC BROADCASTING [AGENCY]). THE INFORMATION OF THIS APP IS PROVIDED 'AS IS' WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.%"

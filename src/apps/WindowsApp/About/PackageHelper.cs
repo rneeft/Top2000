@@ -17,7 +17,6 @@ namespace Chroomsoft.Top2000.WindowsApp.About
 
         public static void RequestFeedback()
         {
-            // RN
         }
     }
 }

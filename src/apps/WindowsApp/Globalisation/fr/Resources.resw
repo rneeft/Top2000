@@ -370,8 +370,8 @@
 &lt;/p&gt;
 &lt;p&gt; L'application utilise des composants tiers qui collectent ces informations. Vous pouvez  consulter les déclarations de confidentialité des sociétés tierces ci-dessous:&lt;/p&gt;
 &lt;ul&gt;
-    &lt;li&gt;&lt;a href="https://privacy.microsoft.com/fr-fr/privacystatement"&gt;https://privacy.microsoft.com/fr-fr/privacystatement&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href="https://policies.google.com/privacy?hl=fr"&gt;https://policies.google.com/privacy?hl=fr&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;https://privacy.microsoft.com/fr-fr/privacystatement&lt;/li&gt;
+    &lt;li&gt;https://policies.google.com/privacy?hl=fr&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3&gt;Des changements à cette déclaration de confidentialité&lt;/h3&gt;
@@ -382,7 +382,7 @@
 &lt;/p&gt;
 &lt;h3&gt;Contactez moi&lt;/h3&gt;
 &lt;p&gt;
-    Pour toutes questions, vous pouvez me contacter à:&lt;a href="mailto:rick@chroomsoft.nl"&gt;rick@chroomsoft.nl&lt;/a&gt;
+    Pour toutes questions, vous pouvez me contacter à:rick@chroomsoft.nl
 &lt;/p&gt;
 &lt;/body&gt;
 &lt;/html&gt;</value>
