@@ -28,6 +28,8 @@ steps:
       solution: '**\*.sln'
       platform: 'x86'
       configuration: 'Release'
+      msbuildArgs:  '/p:AppxBundle=Never
+                     /p:AppxPackageSigningEnabled=false'
 
   - task: VSTest@2
     displayName: 'Test - Unittests'
