@@ -1,0 +1,300 @@
+﻿<Page
+    x:Class="Chroomsoft.Top2000.WindowsApp.TrackInformation.View"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="using:System"
+    xmlns:local="using:Chroomsoft.Top2000.WindowsApp.TrackInformation"
+    xmlns:features="using:Chroomsoft.Top2000.Features.TrackInformation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.Resources>
+        <Style x:Key="ArtistTextBlockStyle" TargetType="TextBlock" BasedOn="{StaticResource TitleTextBlockStyle}">
+            <Setter Property="Foreground" Value="{StaticResource SystemAccentColor}" />
+        </Style>
+        <Style x:Key="RoundedHoverButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="{ThemeResource ButtonForeground}" />
+            <Setter Property="BorderBrush" Value="{ThemeResource ButtonBorderBrush}" />
+            <Setter Property="BorderThickness" Value="{ThemeResource ButtonBorderThemeThickness}" />
+            <Setter Property="Padding" Value="8,4,8,4" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}" />
+            <Setter Property="FontWeight" Value="Normal" />
+            <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}" />
+            <Setter Property="UseSystemFocusVisuals" Value="True" />
+            <Setter Property="Height" Value="28" />
+            <Setter Property="Width" Value="28" />
+            <Setter Property="FocusVisualMargin" Value="-3" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid x:Name="RootGrid" Background="{TemplateBinding Background}">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal">
+                                        <Storyboard>
+                                            <PointerUpThemeAnimation Storyboard.TargetName="RootGrid" />
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="PointerOver">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="EllipsePresenter" Storyboard.TargetProperty="Stroke">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonBorderBrushPointerOver}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonForegroundPointerOver}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <PointerUpThemeAnimation Storyboard.TargetName="RootGrid" />
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="EllipsePresenter" Storyboard.TargetProperty="Stroke">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonForegroundPressed}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonForegroundPressed}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <PointerDownThemeAnimation Storyboard.TargetName="RootGrid" />
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonForegroundDisabled}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Ellipse x:Name="EllipsePresenter"  Stretch="Uniform"
+                              StrokeThickness="2" Stroke="{ThemeResource ButtonBorderBrush }" />
+
+                            <ContentPresenter x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw"
+                                       ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}"
+                                       ContentTransitions="{TemplateBinding ContentTransitions}"
+                                       HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                       Padding="{TemplateBinding Padding}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="RoundedHoverButtonTextStyle" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Segoe MDL2 Assets" />
+            <Setter Property="Margin" Value="-1,0,0,0" />
+            <Setter Property="FontSize" Value="11" />
+        </Style>
+        <Style x:Key="LeftRoundedHoverButtonTextStyle" TargetType="TextBlock" BasedOn="{StaticResource RoundedHoverButtonTextStyle}">
+            <Setter Property="Text" Value="&#xE016;" />
+        </Style>
+        <Style x:Key="RightRoundedHoverButtonTextStyle" TargetType="TextBlock" BasedOn="{StaticResource RoundedHoverButtonTextStyle}">
+            <Setter Property="Text" Value="&#xE017;" />
+        </Style>
+        <Style TargetType="controls:RadialProgressBar">
+            <Setter Property="Width" Value="100" />
+            <Setter Property="Height" Value="100" />
+            <Setter Property="VerticalAlignment" Value="Stretch" />
+            <Setter Property="Margin" Value="0,10,0,0" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="Thickness" Value="10" />
+            <Setter Property="Minimum" Value="0" />
+            <Setter Property="Foreground" Value="{StaticResource SystemAccentColor}" />
+        </Style>
+    </Page.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="101" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Margin="10,8,10,0">
+            <TextBlock Text="{x:Bind ViewModel.Title, Mode=OneWay}" Margin="0,0,60,0" TextLineBounds="Tight" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap" Style="{StaticResource SubheaderTextBlockStyle}" />
+
+            <TextBlock Text="{x:Bind sys:String.Format(x:Null, '{0} ({1})', ViewModel.Artist, ViewModel.RecordedYear), Mode=OneWay}" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"
+                       Foreground="{StaticResource SystemAccentColor}" Style="{StaticResource TitleTextBlockStyle}" Margin="0,15,0,0" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="1">
+            <Border BorderBrush="{ThemeResource LineColour}" Height="48" BorderThickness="0,1">
+                <TextBlock x:Uid="Appearances" Text="%Appearances%"
+                           Style="{StaticResource SubtitleTextBlockStyle}"
+                           Foreground="{ThemeResource SystemAccentColor}"
+                           Margin="10,-1,0,0"
+                           VerticalAlignment="Center" />
+            </Border>
+        </StackPanel>
+        <ScrollViewer HorizontalScrollMode="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="2">
+            <StackPanel>
+                <Grid Margin="0,20,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="28" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="31" />
+                    </Grid.ColumnDefinitions>
+
+                    <Button Style="{StaticResource RoundedHoverButtonStyle}" x:Name="GoLeftButton" Grid.Column="0"
+                    IsEnabled="False" Click="{x:Bind GoLeft}">
+                        <TextBlock Style="{StaticResource LeftRoundedHoverButtonTextStyle}" />
+                    </Button>
+
+                    <Button Style="{StaticResource RoundedHoverButtonStyle}" x:Name="GoRightButton" Grid.Column="3"
+                    Click="{x:Bind GoRight}">
+                        <TextBlock  Style="{StaticResource RightRoundedHoverButtonTextStyle}" />
+                    </Button>
+
+                    <ScrollViewer x:Name="PositionScrollViewer" Grid.Column="1"
+                          HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Hidden"
+                          VerticalScrollBarVisibility="Hidden" VerticalScrollMode="Disabled">
+                        <ListView x:Name="TrackPositions" SelectionMode="None"  ItemsSource="{x:Bind ViewModel.Listings}">
+                            <ListView.ItemTemplate>
+                                <DataTemplate x:DataType="features:ListingInformation">
+                                    <Grid Margin="-11,0,0,0" Width="60">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="20" />
+                                            <RowDefinition Height="30" />
+                                            <RowDefinition Height="20" />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="{x:Bind Edition}" Style="{StaticResource SubtitleTextBlockStyle}"
+                                   TextLineBounds="Tight" Grid.ColumnSpan="2" />
+
+                                        <TextBlock Text="{x:Bind local:Converter.ToSymbol(Status)}"
+                                           Margin="{x:Bind local:Converter.ToMargin(Status)}"
+                                           Foreground="{x:Bind local:Converter.ToSymbolColour(Status)}"
+                                           FontFamily="Segoe MDL2 Assets" Style="{StaticResource SubtitleTextBlockStyle}"
+                                           TextLineBounds="Tight"  VerticalAlignment="Center" Grid.Row="1" />
+
+                                        <TextBlock Text="{x:Bind local:Converter.MakePositive(Offset)}"
+                                   Opacity="0.5" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center"
+                                   Margin="3,0,0,0"
+                                   Style="{StaticResource BodyTextBlockStyle}" TextLineBounds="Tight" />
+
+                                        <TextBlock Text="{x:Bind local:Converter.PositionString(Position)}"
+                                   Style="{StaticResource SubtitleTextBlockStyle}" Grid.ColumnSpan="2"
+                                   TextLineBounds="Tight" Grid.Row="2" VerticalAlignment="Bottom" />
+                                    </Grid>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+
+                            <ListView.ItemContainerTransitions>
+                                <TransitionCollection />
+                            </ListView.ItemContainerTransitions>
+
+                            <ListView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <ItemsWrapGrid Orientation="Vertical" MaximumRowsOrColumns="1" />
+                                </ItemsPanelTemplate>
+                            </ListView.ItemsPanel>
+                        </ListView>
+                    </ScrollViewer>
+                </Grid>
+                <controls:WrapPanel Orientation="Horizontal" Margin="10,30,12,0">
+
+                    <Grid Margin="0,0,20,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="%Since 1997%" x:Uid="SinceRelease"
+                                   HorizontalAlignment="Center"
+                                   Style="{StaticResource BaseTextBlockStyle}" />
+
+                        <controls:RadialProgressBar Grid.Row="1"
+                            Maximum="{x:Bind ViewModel.AppearancesPossible, Mode=OneWay}"
+                            Value="{x:Bind ViewModel.Appearances, Mode=OneWay}" />
+
+                        <TextBlock Style="{StaticResource TitleTextBlockStyle}" HorizontalAlignment="Center" VerticalAlignment="Center"  Grid.Row="1"
+                            Text="{x:Bind sys:String.Format(x:Null, '{0}/{1}', ViewModel.Appearances,ViewModel.AppearancesPossible), Mode=OneWay}" />
+                    </Grid>
+
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="%In top 2000%" x:Uid="InTop2000" HorizontalAlignment="Center" Style="{StaticResource BaseTextBlockStyle}" />
+
+                        <controls:RadialProgressBar Grid.Row="1"
+                              Value="{x:Bind ViewModel.Appearances, Mode=OneWay}"
+                              Maximum="{x:Bind ViewModel.Listings.Count, Mode=OneWay}" />
+
+                        <TextBlock Style="{StaticResource TitleTextBlockStyle}" HorizontalAlignment="Center" VerticalAlignment="Center"  Grid.Row="1"
+      Text="{x:Bind sys:String.Format(x:Null, '{0}/{1}', ViewModel.Appearances, ViewModel.Listings.Count), Mode=OneWay}" />
+                    </Grid>
+                </controls:WrapPanel>
+                <controls:WrapPanel HorizontalAlignment="Left" Margin="12,50,12,0">
+
+                    <StackPanel Margin="0,0,20,30">
+                        <TextBlock x:Uid="RecordHigh" Style="{StaticResource BaseTextBlockStyle}" Opacity=".75" />
+                        <StackPanel Orientation="Horizontal"  Margin="0,5,0,0">
+                            <TextBlock Text="{x:Bind ViewModel.Highest.Position, Mode=OneWay}"  Style="{StaticResource HeaderTextBlockStyle}" VerticalAlignment="Bottom" TextLineBounds="Tight" />
+                            <TextBlock Text="{x:Bind sys:String.Format('({0})', ViewModel.Highest.Edition), Mode=OneWay}"
+                                       Opacity=".75" TextLineBounds="TrimToBaseline" VerticalAlignment="Bottom" />
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel Margin="0,0,20,30">
+                        <TextBlock x:Uid="RecordLow" Style="{StaticResource BaseTextBlockStyle}" Opacity=".75" />
+                        <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                            <TextBlock Text="{x:Bind ViewModel.Lowest.Position, Mode=OneWay}"  Style="{StaticResource HeaderTextBlockStyle}" VerticalAlignment="Bottom" TextLineBounds="Tight" />
+                            <TextBlock Text="{x:Bind sys:String.Format('({0})', ViewModel.Lowest.Edition), Mode=OneWay}"
+                                       Opacity=".75" TextLineBounds="TrimToBaseline" VerticalAlignment="Bottom" />
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel Margin="0,0,20,30">
+                        <TextBlock x:Uid="FirstPosition" Style="{StaticResource BaseTextBlockStyle}" Opacity=".75" />
+                        <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                            <TextBlock Text="{x:Bind ViewModel.First.Position, Mode=OneWay}"  Style="{StaticResource HeaderTextBlockStyle}" VerticalAlignment="Bottom" TextLineBounds="Tight" />
+                            <TextBlock Text="{x:Bind sys:String.Format('({0})', ViewModel.First.Edition), Mode=OneWay}"
+                                       Opacity=".75" TextLineBounds="TrimToBaseline" VerticalAlignment="Bottom" />
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel Margin="0,0,20,0">
+                        <TextBlock x:Uid="LastPosition" Style="{StaticResource BaseTextBlockStyle}" Opacity=".75" />
+                        <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                            <TextBlock Text="{x:Bind ViewModel.Latest.Position, Mode=OneWay}"  Style="{StaticResource HeaderTextBlockStyle}" VerticalAlignment="Bottom" TextLineBounds="Tight" />
+                            <TextBlock Text="{x:Bind sys:String.Format('({0})', ViewModel.Latest.Edition), Mode=OneWay}"
+                                       Opacity=".75" TextLineBounds="TrimToBaseline" VerticalAlignment="Bottom" />
+                        </StackPanel>
+                    </StackPanel>
+                </controls:WrapPanel>
+
+                <StackPanel  Margin="10,20,20,30" Visibility="{x:Bind ViewModel.IsLatestListed, Mode=OneWay}">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock x:Uid="LatestPlayTime" Style="{StaticResource BaseTextBlockStyle}" Opacity=".75" />
+                        <TextBlock Text="{x:Bind sys:String.Format('({0})',ViewModel.Latest.Edition), Mode=OneWay}" Style="{StaticResource BaseTextBlockStyle}" Opacity=".75" />
+                    </StackPanel>
+                    <TextBlock Text="{x:Bind local:Converter.MakeDateTimeString(ViewModel.Latest.LocalUtcDateAndTime), Mode=OneWay}"
+                               HorizontalAlignment="Left"
+                               Style="{StaticResource TitleTextBlockStyle}" VerticalAlignment="Bottom" />
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+
+        <CommandBar Grid.Row="0" Background="Transparent" DefaultLabelPosition="Right">
+            <CommandBar.PrimaryCommands>
+                <AppBarButton Icon="Cancel" x:Uid="Close" Label="Close" HorizontalAlignment="Left" Click="{x:Bind Close}" />
+            </CommandBar.PrimaryCommands>
+        </CommandBar>
+
+        <CommandBar Grid.Row="3" DefaultLabelPosition="Right">
+            <CommandBar.PrimaryCommands>
+                <AppBarButton x:Name="OpenYoutube" Label="%Youtube%" x:Uid="Youtube" Icon="Video" Click="{x:Bind OpenOnYoutube}" />
+            </CommandBar.PrimaryCommands>
+        </CommandBar>
+    </Grid>
+</Page>

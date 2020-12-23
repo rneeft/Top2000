@@ -1,0 +1,44 @@
+trigger: none
+
+pr:
+- main
+
+variables:
+- template: version.yml
+- name: product
+  value: 'TOP2000'
+
+jobs:
+- job: Build
+  pool:
+    name: At Home
+  steps:
+  - task: NuGetToolInstaller@0
+    displayName: 'Use NuGet 5.8.0'
+    inputs:
+      versionSpec: 5.8.0
+
+  - task: NuGetCommand@2
+    displayName: 'Nuget restore'
+    inputs:
+      command: 'restore'
+      restoreSolution: '**/*.sln'
+      feedsToUse: 'select'
+
+  - task: VSBuild@1
+    displayName: 'Build solution'
+    inputs:
+      solution: '**\*.sln'
+      platform: 'x86'
+      configuration: 'Release'
+
+  - task: VSTest@2
+    displayName: 'Test - Unittests'
+    inputs:
+      testSelector: 'testAssemblies'
+      codeCoverageEnabled: true
+      testAssemblyVer2: |
+        **\*Unittests.dll
+        !**\*TestAdapter.dll
+        !**\obj\**
+      searchFolder: '$(System.DefaultWorkingDirectory)'

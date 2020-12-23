@@ -1,0 +1,12 @@
+variables:
+  major: 6 # +1 when breaking changes
+  minor: 2 # +1 when adding a new feature
+  major-minor: $[format('{0}.{1}', variables['major'], variables['minor'])]
+
+  # becuse of the way UWP application are versioned the patch is an automatic incremented number
+  patch: $[counter(variables['major-minor'])]
+
+  label: '' # if filled, must start with dash '-'
+  
+  version: $[format('{0}.{1}.{2}{3}', variables['major'], variables['minor'], variables['patch'], variables['label'])]
+  uwp-version: $[format('{0}.{1}.{2}.0', variables['major'], variables['minor'], variables['patch'])]

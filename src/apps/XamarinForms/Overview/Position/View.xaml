@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:g="clr-namespace:Chroomsoft.Top2000.Apps.Common"
+             xmlns:overview="clr-namespace:Chroomsoft.Top2000.Apps.Overview"
+             xmlns:trackInformation="clr-namespace:Chroomsoft.Top2000.Apps.TrackInformation"
+             xmlns:res="clr-namespace:Chroomsoft.Top2000.Apps.Globalisation"
+             x:Class="Chroomsoft.Top2000.Apps.Overview.Position.View"
+             Title="{Binding Path=SelectedEdition.Year, Mode=OneWay}"
+             BackgroundColor="{DynamicResource PageBackgroundColor}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <overview:EditionPlayTimeConverter x:Key="EditionPlayTimeConverter" />
+
+            <Style TargetType="Grid">
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal" />
+                            <VisualState x:Name="Selected">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="{DynamicResource SelectedItemBackgroundColor}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Clicked="OnJumpGroupButtonClick">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource Glyph="{x:Static g:Symbols.FilterList}" Color="White"
+                                 FontFamily="{OnPlatform Android=MaterialIcons.ttf#}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+
+    <Shell.TitleView>
+        <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+
+            <Label Text="{x:Static g:Symbols.Menu}" FontFamily="{OnPlatform Android=MaterialIcons.ttf#}" FontSize="25"
+                   TextColor="White"
+                   VerticalOptions="Center" />
+
+            <Label Margin="5,0,0,0" Text="{Binding SelectedEditionYear, Mode=OneWay}" TextColor="White" FontSize="20" VerticalTextAlignment="Center" VerticalOptions="Center" />
+
+            <StackLayout.GestureRecognizers>
+                <TapGestureRecognizer Tapped="OnSelectYearButtonClick" />
+            </StackLayout.GestureRecognizers>
+        </StackLayout>
+    </Shell.TitleView>
+
+    <ContentPage.Content>
+        <Grid>
+            <CollectionView x:Name="listings"
+                            ItemsSource="{Binding Listings}"
+                            SelectedItem="{Binding SelectedListing}"
+                            VerticalOptions="FillAndExpand"
+                            ItemSizingStrategy="MeasureAllItems"
+                            IsGrouped="True"
+                            SelectionChanged="OnListingSelected"
+                            SelectionMode="Single">
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="0,0,0,5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="80" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label Text="{Binding Position}" Style="{StaticResource MediumLabelStyle}" Margin="20,4,0,0" />
+                            <StackLayout Grid.Column="1" Spacing="0">
+                                <Label Text="{Binding Title}"  Style="{StaticResource MediumLabelStyle}" LineBreakMode="WordWrap" Margin="0,4,20,0" />
+                                <Label Text="{Binding Artist}" Opacity=".5" Style="{StaticResource SmallLabelStyle}" LineBreakMode="WordWrap" Margin="0,0,20,0" />
+                            </StackLayout>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+                <CollectionView.GroupHeaderTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+                            <Label Text="{Binding Key}"
+                               TextColor="{StaticResource Top2000Colour}"
+                               Style="{StaticResource MediumLabelStyle}"
+                               Margin="20,5,0,0" />
+                            <BoxView Style="{StaticResource Separator}" Margin="20,-3,20,5" />
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnJumpGroupButtonClick" />
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.GroupHeaderTemplate>
+            </CollectionView>
+
+            <trackInformation:View x:Name="trackInformation" IsVisible="False" />
+
+            <Grid x:Name="EditionsFlyout" IsVisible="False" BackgroundColor="{DynamicResource PageBackgroundColor}">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+
+                    <Grid HeightRequest="55" Padding="10,0" BackgroundColor="{StaticResource Top2000Colour}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <StackLayout Orientation="Horizontal">
+                            <ImageButton Clicked="OnCloseButtonClick" BackgroundColor="Transparent">
+                                <ImageButton.Source>
+                                    <FontImageSource Glyph="{x:Static g:Symbols.Back}"
+                                     FontFamily="{OnPlatform Android=MaterialIcons.ttf#}" />
+                                </ImageButton.Source>
+                            </ImageButton>
+                            <Label Margin="5,0,0,0" Text="{Binding [SelectEdition], Source={x:Static res:Translator.Instance}}" TextColor="White" FontSize="18" VerticalTextAlignment="Center" VerticalOptions="Center" />
+
+                        </StackLayout>
+                    </Grid>
+
+
+                    <CollectionView ItemsSource="{Binding Editions}"
+                                Grid.Row="1"
+                                SelectedItem="{Binding SelectedEdition, Mode=TwoWay}"
+                                SelectionMode="Single" SelectionChanged="NewEditionSelected">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Padding="20,4">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="80" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Label Text="{Binding Year}"
+                               Style="{StaticResource MediumLabelStyle}" />
+
+                                <StackLayout Grid.Column="1" Spacing="0">
+                                    <Label Text="{Binding LocalStartDateAndTime, Converter={StaticResource EditionPlayTimeConverter}}"
+                                   Style="{StaticResource MediumLabelStyle}"
+                                   LineBreakMode="WordWrap" />
+
+                                    <Label Text="{Binding LocalEndDateAndTime, Converter={StaticResource EditionPlayTimeConverter}}" Opacity=".5"
+                                       Style="{StaticResource SmallLabelStyle}"
+                                   LineBreakMode="WordWrap" />
+                                </StackLayout>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

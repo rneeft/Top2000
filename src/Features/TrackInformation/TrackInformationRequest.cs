@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using SQLite;
-using System.Buffers;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Threading;
@@ -65,7 +64,7 @@ namespace Chroomsoft.Top2000.Features.TrackInformation
 
             public string Artist { get; set; } = string.Empty;
 
-            public int RecordedYear { get; set; }
+            public int RecordedYear { get; set; } = 1;
         }
     }
 }

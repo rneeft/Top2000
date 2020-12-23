@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,10 +12,18 @@ namespace Chroomsoft.Top2000.Data.StaticApiGenerator
         Task CreateDataFilesAsync(string location);
 
         Task CreateApiFileAsync(string location);
+
+        Task CreateVersionInformationAsync(string location, string version, string branchName, string buildNumber);
     }
 
     public class FileCreator : IFileCreator
     {
+        private static readonly JsonSerializerSettings serializerSettings = new JsonSerializerSettings()
+        {
+            Formatting = Formatting.Indented,
+            ContractResolver = new CamelCasePropertyNamesContractResolver()
+        };
+
         private readonly ILogger<FileCreator> logger;
         private readonly ITransformSqlFiles transformer;
         private readonly ITop2000AssemblyData top2000Data;
@@ -66,6 +75,43 @@ namespace Chroomsoft.Top2000.Data.StaticApiGenerator
 
                 await File.WriteAllTextAsync(fileName, json).ConfigureAwait(false);
             }
+        }
+
+        public async Task CreateVersionInformationAsync(string location, string version, string branchName, string buildNumber)
+        {
+            var shields = new[]
+            {
+                new ShieldsIO("Branch", branchName),
+                new ShieldsIO("Version", version),
+                new ShieldsIO("Build", buildNumber)
+            };
+
+            var path = Path.Combine(location, "shields");
+
+            if (!Directory.Exists(path)) Directory.CreateDirectory(path);
+
+            foreach (var shield in shields)
+            {
+                var fileName = Path.Combine(path, shield.Label + ".json");
+                var json = JsonConvert.SerializeObject(shield, serializerSettings);
+
+                await File.WriteAllTextAsync(fileName, json).ConfigureAwait(false);
+            }
+        }
+
+        private class ShieldsIO
+        {
+            public ShieldsIO(string label, string message)
+            {
+                this.Label = label;
+                Message = message;
+            }
+
+            public int SchemaVersion { get; } = 1;
+
+            public string Label { get; }
+
+            public string Message { get; }
         }
     }
 }

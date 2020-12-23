@@ -1,5 +1,5 @@
-INSERT INTO [Edition] ([Year], [StartUtcDateAndTime], [EndUtcDateAndTime]) VALUES
-(2010, '2010-12-25T11:00:00', '2010-12-31T22:59:59');
+INSERT INTO [Edition] ([Year], [StartUtcDateAndTime], [EndUtcDateAndTime], [HasPlayDateAndTime]) VALUES
+(2010, '2010-12-25T11:00:00', '2010-12-31T23:00:00', 0);
 
 INSERT INTO Track ([Id] ,[Title] ,[Artist],[RecordedYear]) VALUES
   (67,'A Night Like This','Caro Emerald',2009)

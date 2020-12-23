@@ -7,6 +7,11 @@
     <RootNamespace>Chroomsoft.Top2000.Data.LocalDb</RootNamespace>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <WarningLevel>5</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Chroomsoft.ConsoleUtilities" Version="1.0.1.1" />
     <PackageReference Include="dbup-sqlserver" Version="4.4.0" />

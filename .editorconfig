@@ -23,3 +23,4 @@ indent_size = 2
 [*.cs]
 dotnet_diagnostic.CA1062.severity = none # nullable referece types is enabled.
 dotnet_diagnostic.CA1303.severity = none # strings are not localised, only at UI level
+dotnet_diagnostic.CA1724.severity = none # Conflicting names are allowed in different namespaces

@@ -13,5 +13,7 @@ namespace Chroomsoft.Top2000.Features.AllEditions
         public DateTime StartUtcDateAndTime { get; set; }
 
         public DateTime EndUtcDateAndTime { get; set; }
+
+        public bool HasPlayDateAndTime { get; set; }
     }
 }

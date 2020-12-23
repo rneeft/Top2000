@@ -1,6 +1,5 @@
 ﻿using Chroomsoft.Top2000.Data.ClientDatabase;
-using Chroomsoft.Top2000.Features.AllEditions;
-using MediatR;
+using Chroomsoft.Top2000.Features;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -31,13 +30,13 @@ namespace Chroomsoft.Top2000.Specs
 
         private static void ConfigureServices(IServiceCollection services)
         {
+            
+
+            var baseAddress = new Uri("https://chrtop2000sadevwe.z6.web.core.windows.net/");
+
             services
-                .AddMediatR(typeof(AllEditionsRequest).Assembly)
-                .AddClientDatabase(new DirectoryInfo(Directory.GetCurrentDirectory()))
-                .AddHttpClient("top2000", c =>
-                {
-                    c.BaseAddress = new Uri("https://chrtop2000sadevwe.z6.web.core.windows.net/");
-                });
+                .AddFeatures()
+                .AddClientDatabase(new DirectoryInfo(Directory.GetCurrentDirectory()), baseAddress);
         }
     }
 }

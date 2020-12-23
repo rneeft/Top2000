@@ -1,5 +1,5 @@
-INSERT INTO [Edition] ([Year], [StartUtcDateAndTime], [EndUtcDateAndTime]) VALUES
-(2004, '2004-12-25T23:00:00', '2004-12-31T22:59:59');
+INSERT INTO [Edition] ([Year], [StartUtcDateAndTime], [EndUtcDateAndTime], [HasPlayDateAndTime]) VALUES
+(2004, '2004-12-25T23:00:00', '2004-12-31T23:00:00', 0);
 
 INSERT INTO Track ([Id] ,[Title] ,[Artist],[RecordedYear]) VALUES
   (21,'1 Nacht Alleen','Doe Maar',1983)

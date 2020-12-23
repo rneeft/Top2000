@@ -5,7 +5,8 @@ using System.Threading.Tasks;
 
 namespace Chroomsoft.Top2000.Data.StaticApiGenerator
 {
-    public class Program
+    public static class Program
+
     {
         private static async Task Main(string[] args)
         {
@@ -35,34 +36,6 @@ namespace Chroomsoft.Top2000.Data.StaticApiGenerator
             using ServiceProvider serviceProvider = services.BuildServiceProvider();
             var application = serviceProvider.GetService<IRunApplication>();
             await application.RunAsync().ConfigureAwait(false);
-        }
-    }
-
-    public interface IRunApplication
-    {
-        Task RunAsync();
-    }
-
-    public class PublishOnlyApplication : IRunApplication
-    {
-        private readonly IConfiguration configuration;
-        private readonly IFileCreator fileCreator;
-
-        public PublishOnlyApplication(IConfiguration configuration, IFileCreator fileCreator)
-        {
-            this.configuration = configuration;
-            this.fileCreator = fileCreator;
-        }
-
-        public async Task RunAsync()
-        {
-            var location = configuration.GetSection("PublishOnly:Location").Value;
-
-            await Task.WhenAll
-            (
-                fileCreator.CreateApiFileAsync(location),
-                fileCreator.CreateDataFilesAsync(location)
-            ).ConfigureAwait(false);
         }
     }
 }

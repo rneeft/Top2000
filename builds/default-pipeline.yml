@@ -1,0 +1,40 @@
+variables:
+- template: version.yml
+- name: product
+  value: 'TOP2000'
+
+trigger: 
+  - main
+
+pr: none
+  
+stages:
+- stage: Build
+  jobs:
+  - job: Build
+    pool:
+      name: At Home
+    steps:
+    - template: default/build.yml
+
+- stage: DevRelease
+  variables:
+      stage: 'DEV'
+      hostName: 'www-dev.top2000.app'
+  jobs:
+  - deployment: DevReleaseJob
+    pool:
+      name: At Home
+    environment: Dev-Stage
+    strategy: 
+      runOnce:
+        deploy:
+          steps:
+          - template: default/release.yml
+
+  - job: DevSpecifications
+    dependsOn: DevReleaseJob
+    pool:
+      name: At Home
+    steps:
+    - template: default/specrun.yml

@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Chroomsoft.Top2000.Apps.Settings.ThirdParty"
+             xmlns:res="clr-namespace:Chroomsoft.Top2000.Apps.Globalisation"
+             Title="{Binding [SettingsThirdParty], Source={x:Static res:Translator.Instance}}">
+    <ContentPage.Content>
+        <WebView x:Name="WebViewer" />
+    </ContentPage.Content>
+</ContentPage>
