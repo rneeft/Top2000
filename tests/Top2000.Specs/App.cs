@@ -30,8 +30,6 @@ namespace Chroomsoft.Top2000.Specs
 
         private static void ConfigureServices(IServiceCollection services)
         {
-            
-
             var baseAddress = new Uri("https://chrtop2000sadevwe.z6.web.core.windows.net/");
 
             services
