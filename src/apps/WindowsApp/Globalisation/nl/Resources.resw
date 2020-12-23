@@ -298,7 +298,7 @@
     <value>Datum</value>
   </data>
   <data name="DevelopedBy.Text" xml:space="preserve">
-    <value>Ontwikkeld door</value>
+    <value>Ontwikkeld door:</value>
   </data>
   <data name="Disclaimer.Text" xml:space="preserve">
     <value>Disclaimer</value>
