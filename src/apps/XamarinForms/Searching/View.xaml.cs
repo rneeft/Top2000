@@ -41,6 +41,8 @@ namespace Chroomsoft.Top2000.Apps.Searching
             {
                 ViewModel.IsFlat = true;
             }
+
+            SetTitlesForButton();
         }
 
         protected override bool OnBackButtonPressed()
@@ -105,6 +107,8 @@ namespace Chroomsoft.Top2000.Apps.Searching
 
             if (!string.IsNullOrEmpty(toGroup) && toGroup != AppResources.Cancel)
             {
+                GroupByButton.Text = $"{Translator.Instance["GroupByHeader"]} {toGroup}";
+
                 var groupBy = ViewModel.GroupByOptions.SingleOrDefault(x => x.Name == toGroup);
                 if (groupBy != null)
                 {
@@ -122,6 +126,8 @@ namespace Chroomsoft.Top2000.Apps.Searching
 
             if (!string.IsNullOrEmpty(toSort) && toSort != AppResources.Cancel)
             {
+                SortByButton.Text = $"{Translator.Instance["SortByHeader"]} {toSort}";
+
                 var sortBy = ViewModel.SortByOptions.SingleOrDefault(x => x.Name == toSort);
                 if (sortBy != null)
                 {
@@ -129,6 +135,12 @@ namespace Chroomsoft.Top2000.Apps.Searching
                     ViewModel.ReSortGroup();
                 }
             }
+        }
+
+        private void SetTitlesForButton()
+        {
+            GroupByButton.Text = $"{Translator.Instance["GroupByHeader"]} {ViewModel.GroupBy.Name}";
+            SortByButton.Text = $"{Translator.Instance["SortByHeader"]} {ViewModel.SortBy.Name}";
         }
     }
 }

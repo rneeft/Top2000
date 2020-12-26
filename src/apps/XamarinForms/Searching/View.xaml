@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:Chroomsoft.Top2000.Apps.Searching"
              x:Class="Chroomsoft.Top2000.Apps.Searching.View"
+             xmlns:forms="clr-namespace:Xamarin.Forms"
              xmlns:trackInformation="clr-namespace:Chroomsoft.Top2000.Apps.TrackInformation"
              xmlns:res="clr-namespace:Chroomsoft.Top2000.Apps.Globalisation"
              BackgroundColor="{DynamicResource PageBackgroundColor}">
@@ -34,27 +35,17 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <StackLayout Orientation="Horizontal" Margin="15,10">
-                <StackLayout Orientation="Horizontal" BackgroundColor="{DynamicResource ButtonBackgroundColor}">
-                    <Label Text="{Binding [GroupByHeader], Source={x:Static res:Translator.Instance}}" Margin="7,11,0,7" FontAttributes="Bold" TextColor="{DynamicResource ButtonTextColor}" />
-                    <Label Text=":" Margin="-5,11"  FontAttributes="Bold" TextColor="{DynamicResource ButtonTextColor}" />
-                    <Label Text="{Binding GroupBy.Name}" Margin="0,11,7,0" FontAttributes="Bold" TextColor="{DynamicResource ButtonTextColor}" />
+            <forms:WrapLayout Padding="15,10" Orientation="Horizontal">
 
-                    <StackLayout.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="OnGroupByButtonClick" />
-                    </StackLayout.GestureRecognizers>
-                </StackLayout>
+                <Button x:Name="GroupByButton" BackgroundColor="{DynamicResource ButtonBackgroundColor}" Text="{Binding [GroupByHeader], Source={x:Static res:Translator.Instance}}"
+                        TextColor="{DynamicResource ButtonTextColor}"
+                        Clicked="OnGroupByButtonClick" />
 
-                <StackLayout Orientation="Horizontal" BackgroundColor="{DynamicResource ButtonBackgroundColor}">
-                    <Label Text="{Binding [SortByHeader], Source={x:Static res:Translator.Instance}}" Margin="7,11,0,7" FontAttributes="Bold" TextColor="{DynamicResource ButtonTextColor}" />
-                    <Label Text=":" Margin="-5,11" FontAttributes="Bold" TextColor="{DynamicResource ButtonTextColor}" />
-                    <Label Text="{Binding SortBy.Name}" Margin="0,11,7,0" FontAttributes="Bold" TextColor="{DynamicResource ButtonTextColor}" />
+                <Button x:Name="SortByButton" BackgroundColor="{DynamicResource ButtonBackgroundColor}" Text="{Binding [SortByHeader], Source={x:Static res:Translator.Instance}}"
+                        TextColor="{DynamicResource ButtonTextColor}"
+                        Clicked="OnSortByButtonClick" />
 
-                    <StackLayout.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="OnSortByButtonClick" />
-                    </StackLayout.GestureRecognizers>
-                </StackLayout>
-            </StackLayout>
+            </forms:WrapLayout>
 
             <CollectionView x:Name="listingsGrouped"
                             Grid.Row="1"
