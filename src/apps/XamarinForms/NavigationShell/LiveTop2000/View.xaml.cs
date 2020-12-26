@@ -1,8 +1,9 @@
 ﻿using Chroomsoft.Top2000.Apps.Globalisation;
+
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace Chroomsoft.Top2000.Apps.NavigationShell
+namespace Chroomsoft.Top2000.Apps.NavigationShell.LiveTop2000
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class View : Shell, IMainShell
@@ -12,14 +13,14 @@ namespace Chroomsoft.Top2000.Apps.NavigationShell
             InitializeComponent();
         }
 
-        public bool IsViewForWhenTop2000IsLive => false;
+        public bool IsViewForWhenTop2000IsLive => true;
 
         public void SetTitles()
         {
             var strings = Translator.Instance;
 
             OverviewTab.Title = strings["Overview"];
-            ViewByDateTab.Title = strings["ViewByDate"];
+            ViewByDateTab.Title = "Live!";
             SearchTab.Title = strings["Search"];
             SettingsTab.Title = strings["Settings"];
 

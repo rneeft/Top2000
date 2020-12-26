@@ -332,6 +332,9 @@
   <data name="LightTheme" xml:space="preserve">
     <value>Licht</value>
   </data>
+  <data name="Live" xml:space="preserve">
+    <value>Live</value>
+  </data>
   <data name="None" xml:space="preserve">
     <value>Niks</value>
   </data>

@@ -1,4 +1,5 @@
 ﻿using Chroomsoft.Top2000.Apps.Globalisation;
+using Chroomsoft.Top2000.Apps.NavigationShell;
 using Chroomsoft.Top2000.Apps.Themes;
 using Chroomsoft.Top2000.Data.ClientDatabase;
 using Microsoft.AppCenter;
@@ -26,8 +27,10 @@ namespace Chroomsoft.Top2000.Apps.XamarinForms
             SetCulture();
             SetTheme();
 
-            var navigationShell = GetService<NavigationShell.View>();
-            MainPage = navigationShell;
+            var navigationShell = GetService<IMainShell>();
+
+            MainPage = navigationShell as Shell ??
+                throw new NotSupportedException($"{nameof(IMainShell)} must be implemented inside a Shell view");
 
             navigationShell.SetTitles();
         }
@@ -60,14 +63,6 @@ namespace Chroomsoft.Top2000.Apps.XamarinForms
             AppCenter.Start("89fbeb5b-5ec9-4456-86c7-214421330f73", typeof(Analytics), typeof(Crashes));
         }
 
-        protected override void OnSleep()
-        {
-        }
-
-        protected override void OnResume()
-        {
-        }
-
         private void SetCulture()
         {
             var localisationService = App.GetService<ILocalisationService>();
@@ -79,13 +74,5 @@ namespace Chroomsoft.Top2000.Apps.XamarinForms
             var themeService = GetService<IThemeService>();
             themeService.SetThemeFromSetting();
         }
-
-        //private static async Task CheckForOnlineUpdates()
-        //{
-        //    await Task.Delay(5 * 1000);
-
-        //    var checker = App.GetService<IOnlineUpdateChecker>();
-        //    await checker.UpdateAsync();
-        //}
     }
 }

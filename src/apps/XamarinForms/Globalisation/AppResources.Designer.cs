@@ -302,6 +302,15 @@ namespace Chroomsoft.Top2000.Apps.Globalisation {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Live.
+        /// </summary>
+        internal static string Live {
+            get {
+                return ResourceManager.GetString("Live", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Niks.
         /// </summary>
         internal static string None {

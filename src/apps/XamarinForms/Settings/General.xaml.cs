@@ -1,5 +1,6 @@
 ﻿using Chroomsoft.Top2000.Apps.Common;
 using Chroomsoft.Top2000.Apps.Globalisation;
+using Chroomsoft.Top2000.Apps.NavigationShell;
 using Chroomsoft.Top2000.Apps.Themes;
 using Chroomsoft.Top2000.Apps.XamarinForms;
 using System.Collections.Generic;
@@ -95,7 +96,7 @@ namespace Chroomsoft.Top2000.Apps.Settings
         private void SetCulture(string name)
         {
             localisationService.SetCulture(cultures.Single(x => x.Name == name));
-            ((NavigationShell.View)NavigationShell.View.Current).SetTitles();
+            App.GetService<IMainShell>().SetTitles();
         }
     }
 }
