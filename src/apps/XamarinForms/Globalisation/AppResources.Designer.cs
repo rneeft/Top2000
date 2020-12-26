@@ -284,7 +284,7 @@ namespace Chroomsoft.Top2000.Apps.Globalisation {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Laatste notering in de Top 2000 (lijst 2019).
+        ///   Looks up a localized string similar to Laatste notering in de Top 2000.
         /// </summary>
         internal static string LatestPlayTime {
             get {
