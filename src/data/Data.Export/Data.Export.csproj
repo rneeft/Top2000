@@ -5,14 +5,6 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
-  <ItemGroup>
-    <None Remove=".editorconfig" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EditorConfigFiles Include=".editorconfig" />
-  </ItemGroup>
-
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.Hosting" Version="2.2.7" />
         <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="2.2.0" />
