@@ -51,7 +51,7 @@ steps:
                   /Shields:Version=$(version)
                   /Shields:BranchName=$(Build.SourceBranchName)
                   /Shields:BuildNumber=$(Build.BuildNumber)'
-
+  
   - publish: '$(Build.ArtifactStagingDirectory)\StaticApi'
     displayName: 'Publishing StaticApi'
     artifact: StaticApi
@@ -63,6 +63,16 @@ steps:
   - publish: 'tests/Top2000.Specs/bin/Release/netcoreapp3.1/'
     displayName: Publishing Specification binaries
     artifact: Specification
+
+  - task: DotNetCoreCLI@2
+    displayName: 'Run CSV exporter'
+    inputs:
+      command: 'run'
+      projects: 'src/data/Data.Export/Data.Export.csproj'
+
+  - publish: 'src/data/Data.Export/bin/Release/netcoreapp3.1/'
+    displayName: Publishing CSV export
+    artifact: CSV
 
   - task: SonarCloudAnalyze@1
 

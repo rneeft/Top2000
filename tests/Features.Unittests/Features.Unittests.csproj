@@ -24,4 +24,8 @@
     <PackageReference Update="Moq" Version="4.14.7" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="AllTrackIds\" />
+  </ItemGroup>
+
 </Project>
