@@ -60,6 +60,7 @@ steps:
                      /p:PackageCertificatePassword="$(WindowsStorePfxPassword)"'
 
   - task: XamarinAndroid@1
+    displayName: 'Build Android App'
     inputs:
       projectFile: 'src\apps\XamarinForms.Android\XamarinForms.Android.csproj'
       outputDirectory: '$(build.artifactStagingDirectory)\Android'
@@ -68,6 +69,7 @@ steps:
       jdkOption: 'JDKVersion'
 
   - task: AndroidSigning@3
+    displayName: 'Sign Android APK'
     inputs:
       apkFiles: '$(build.artifactStagingDirectory)\Android\*.apk'
       apksignerKeystoreFile: '$(droidCert.secureFilePath)'
