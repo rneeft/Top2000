@@ -230,7 +230,7 @@ namespace Chroomsoft.Top2000.Apps.Globalisation {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Groeperen op.
+        ///   Looks up a localized string similar to Groeperen op:.
         /// </summary>
         internal static string GroupByHeader {
             get {
@@ -284,7 +284,7 @@ namespace Chroomsoft.Top2000.Apps.Globalisation {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Laatste notering in de Top 2000 (lijst 2019).
+        ///   Looks up a localized string similar to Laatste notering in de Top 2000.
         /// </summary>
         internal static string LatestPlayTime {
             get {
@@ -298,6 +298,15 @@ namespace Chroomsoft.Top2000.Apps.Globalisation {
         internal static string LightTheme {
             get {
                 return ResourceManager.GetString("LightTheme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Live.
+        /// </summary>
+        internal static string Live {
+            get {
+                return ResourceManager.GetString("Live", resourceCulture);
             }
         }
         
@@ -576,20 +585,11 @@ namespace Chroomsoft.Top2000.Apps.Globalisation {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sorteer op.
+        ///   Looks up a localized string similar to Sorteer op:.
         /// </summary>
         internal static string SortByHeader {
             get {
                 return ResourceManager.GetString("SortByHeader", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        internal static string String1 {
-            get {
-                return ResourceManager.GetString("String1", resourceCulture);
             }
         }
         
@@ -675,7 +675,7 @@ namespace Chroomsoft.Top2000.Apps.Globalisation {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Bekijk per datum.
+        ///   Looks up a localized string similar to Datum.
         /// </summary>
         internal static string ViewByDate {
             get {

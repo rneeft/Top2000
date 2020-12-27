@@ -309,7 +309,7 @@
     <value>Group by: {0}</value>
   </data>
   <data name="GroupByHeader" xml:space="preserve">
-    <value>Group by</value>
+    <value>Group by:</value>
   </data>
   <data name="InTop2000" xml:space="preserve">
     <value>In Top 2000</value>
@@ -327,10 +327,13 @@
     <value>Last Position</value>
   </data>
   <data name="LatestPlayTime" xml:space="preserve">
-    <value>Latest Top 2000 (List 2019)</value>
+    <value>Latest Top 2000</value>
   </data>
   <data name="LightTheme" xml:space="preserve">
     <value>Light</value>
+  </data>
+  <data name="Live" xml:space="preserve">
+    <value>Live</value>
   </data>
   <data name="None" xml:space="preserve">
     <value>None</value>
@@ -465,7 +468,7 @@
     <value>Sort by: {0}</value>
   </data>
   <data name="SortByHeader" xml:space="preserve">
-    <value>Sort by</value>
+    <value>Sort by:</value>
   </data>
   <data name="SystemTheme" xml:space="preserve">
     <value>Use system setting</value>
@@ -495,7 +498,7 @@
     <value>Use Dark Theme</value>
   </data>
   <data name="ViewByDate" xml:space="preserve">
-    <value>View By Date</value>
+    <value>Date</value>
   </data>
   <data name="VisitTop2000Site" xml:space="preserve">
     <value>Visit the Official NPO Top 2000 Web site at:</value>

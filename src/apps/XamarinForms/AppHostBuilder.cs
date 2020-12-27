@@ -1,5 +1,7 @@
-﻿using Chroomsoft.Top2000.Apps.Common.Behavior;
+﻿using Chroomsoft.Top2000.Apps.AskForReview;
+using Chroomsoft.Top2000.Apps.Common.Behavior;
 using Chroomsoft.Top2000.Apps.Globalisation;
+using Chroomsoft.Top2000.Apps.NavigationShell;
 using Chroomsoft.Top2000.Apps.Themes;
 using Chroomsoft.Top2000.Data.ClientDatabase;
 using Chroomsoft.Top2000.Features;
@@ -7,11 +9,12 @@ using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using System;
 using System.IO;
 using System.Reflection;
 using Xamarin.Essentials;
+using Xamarin.Essentials.Implementation;
+using Xamarin.Essentials.Interfaces;
 
 namespace Chroomsoft.Top2000.Apps
 {
@@ -23,7 +26,6 @@ namespace Chroomsoft.Top2000.Apps
                .ConfigureHostConfiguration(ConfigureConfiguration)
                .ConfigureServices(ConfigureServices)
                .ConfigureServices(PlatformServices)
-               .ConfigureLogging(ConfigureLogging)
                .Build().Services;
         }
 
@@ -36,20 +38,27 @@ namespace Chroomsoft.Top2000.Apps
                 .AddFeatures()
                 .AddSingleton<IThemeService, ThemeService>()
                 .AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>))
-                .AddSingleton<NavigationShell.View>()
                 .AddTransient<Overview.Position.ViewModel>()
                 .AddTransient<Overview.Date.ViewModel>()
                 .AddTransient<TrackInformation.ViewModel>()
                 .AddTransient<Searching.ViewModel>()
+                .AddTransient<IAskForReview, ReviewModule>()
+                .AddSingleton<IPreferences, PreferencesImplementation>()
                 .AddSingleton<ICulture>(new SupportedCulture("nl"))
                 .AddSingleton<ICulture>(new SupportedCulture("en"))
                 .AddSingleton<ICulture>(new SupportedCulture("fr"))
             ;
-        }
 
-        private static void ConfigureLogging(ILoggingBuilder builder)
-        {
-            builder.AddConsole(o => o.DisableColors = true);
+            if (IsTop2000Live())
+            {
+                services.AddSingleton<IMainShell, NavigationShell.LiveTop2000.View>();
+            }
+            else
+            {
+                services.AddSingleton<IMainShell, NavigationShell.View>();
+            }
+
+            services.Configure<AskForReviewConfiguration>(context.Configuration.GetSection(nameof(AskForReviewConfiguration)));
         }
 
         private static string SaveAppSettingsToLocalDisk()
@@ -74,6 +83,16 @@ namespace Chroomsoft.Top2000.Apps
 
             builder.AddCommandLine(new string[] { $"ContentRoot={FileSystem.AppDataDirectory}" });
             builder.AddJsonFile(fullConfig);
+        }
+
+        private static bool IsTop2000Live()
+        {
+            var first = new DateTime(2020, 12, 24, 23, 0, 0, DateTimeKind.Utc); // first day of Christmas
+            var last = new DateTime(2020, 12, 31, 23, 0, 0, DateTimeKind.Utc); // new year
+
+            var current = DateTime.UtcNow;
+
+            return (current > first && current < last);
         }
     }
 }

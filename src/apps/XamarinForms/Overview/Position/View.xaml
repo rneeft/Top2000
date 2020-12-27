@@ -19,7 +19,7 @@
                             <VisualState x:Name="Normal" />
                             <VisualState x:Name="Selected">
                                 <VisualState.Setters>
-                                    <Setter Property="BackgroundColor" Value="{DynamicResource SelectedItemBackgroundColor}" />
+                                    <Setter Property="BackgroundColor" Value="{DynamicResource PageBackgroundColor}" />
                                 </VisualState.Setters>
                             </VisualState>
                         </VisualStateGroup>
@@ -106,28 +106,25 @@
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
-
-                    <Grid HeightRequest="55" Padding="10,0" BackgroundColor="{StaticResource Top2000Colour}">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <StackLayout Orientation="Horizontal">
-                            <ImageButton Clicked="OnCloseButtonClick" BackgroundColor="Transparent">
-                                <ImageButton.Source>
-                                    <FontImageSource Glyph="{x:Static g:Symbols.Back}"
+                <Grid HeightRequest="55" Padding="10,0" BackgroundColor="{StaticResource Top2000Colour}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <StackLayout Orientation="Horizontal">
+                        <ImageButton Clicked="OnCloseButtonClick" BackgroundColor="Transparent">
+                            <ImageButton.Source>
+                                <FontImageSource Glyph="{x:Static g:Symbols.Back}"
                                      FontFamily="{OnPlatform Android=MaterialIcons.ttf#}" />
-                                </ImageButton.Source>
-                            </ImageButton>
-                            <Label Margin="5,0,0,0" Text="{Binding [SelectEdition], Source={x:Static res:Translator.Instance}}" TextColor="White" FontSize="18" VerticalTextAlignment="Center" VerticalOptions="Center" />
+                            </ImageButton.Source>
+                        </ImageButton>
+                        <Label Margin="5,0,0,0" Text="{Binding [SelectEdition], Source={x:Static res:Translator.Instance}}" TextColor="White" FontSize="18" VerticalTextAlignment="Center" VerticalOptions="Center" />
+                    </StackLayout>
+                </Grid>
 
-                        </StackLayout>
-                    </Grid>
-
-
-                    <CollectionView ItemsSource="{Binding Editions}"
+                <CollectionView x:Name="AllEditions"
+                                ItemsSource="{Binding Editions}"
                                 Grid.Row="1"
-                                SelectedItem="{Binding SelectedEdition, Mode=TwoWay}"
                                 SelectionMode="Single" SelectionChanged="NewEditionSelected">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>

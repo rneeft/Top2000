@@ -20,7 +20,7 @@
 
         public static string Clock => "\xe192";
 
-        public static string Today => "\xe24f";
+        public static string Today => "\xf217";
 
         public static string Flag => "\xe153";
 

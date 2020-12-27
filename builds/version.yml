@@ -1,4 +1,6 @@
 variables:
+  android-major: 2
+  android-updateVersion: 24
   major: 6 # +1 when breaking changes
   minor: 2 # +1 when adding a new feature
   major-minor: $[format('{0}.{1}', variables['major'], variables['minor'])]
@@ -10,3 +12,4 @@ variables:
   
   version: $[format('{0}.{1}.{2}{3}', variables['major'], variables['minor'], variables['patch'], variables['label'])]
   uwp-version: $[format('{0}.{1}.{2}.0', variables['major'], variables['minor'], variables['patch'])]
+  android-version: $[format('{0}.{1}.{2}.0', variables['android-major'], variables['minor'], variables['patch'])]

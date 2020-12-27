@@ -1,5 +1,6 @@
 ﻿using Chroomsoft.Top2000.Apps.Globalisation;
 using Chroomsoft.Top2000.Apps.XamarinForms;
+using Chroomsoft.Top2000.Features.AllEditions;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,14 +14,11 @@ namespace Chroomsoft.Top2000.Apps.Overview.Position
     {
         public View()
         {
-            FirstStart = true;
             BindingContext = App.GetService<ViewModel>();
             InitializeComponent();
         }
 
         public ViewModel ViewModel => (ViewModel)BindingContext;
-
-        public bool FirstStart { get; private set; }
 
         async protected override void OnAppearing()
         {
@@ -28,20 +26,6 @@ namespace Chroomsoft.Top2000.Apps.Overview.Position
             if (ViewModel.Editions.Count == 0)
             {
                 await ViewModel.InitialiseViewModelAsync();
-            }
-
-            if (FirstStart)
-            {
-                FirstStart = false;
-                var first = ViewModel.Editions.First().LocalStartDateAndTime;
-                var last = ViewModel.Editions.First().LocalEndDateAndTime;
-                var current = DateTime.Now;
-
-                if (current > first && current < last)
-                {
-                    await Shell.Current.GoToAsync("///ViewByDate");
-                    return;
-                }
             }
         }
 
@@ -109,20 +93,24 @@ namespace Chroomsoft.Top2000.Apps.Overview.Position
 
         async private void NewEditionSelected(object sender, SelectionChangedEventArgs e)
         {
-            if (ViewModel.SelectedEdition is null) return;
+            if (AllEditions.SelectedItem is Edition edition)
+            {
+                ViewModel.SelectedEdition = edition;
+                ViewModel.SelectedEditionYear = edition.Year;
 
-            ViewModel.SelectedEditionYear = ViewModel.SelectedEdition.Year;
+                var loadingTask = ViewModel.LoadAllListingsAsync();
 
-            var loadingTask = ViewModel.LoadAllListingsAsync();
+                Shell.SetTabBarIsVisible(this, true);
+                Shell.SetNavBarIsVisible(this, true);
+                await EditionsFlyout.TranslateTo(this.Width * -1, 0);
+                this.EditionsFlyout.IsVisible = false;
 
-            Shell.SetTabBarIsVisible(this, true);
-            Shell.SetNavBarIsVisible(this, true);
-            await EditionsFlyout.TranslateTo(this.Width * -1, 0);
-            this.EditionsFlyout.IsVisible = false;
+                await loadingTask;
 
-            await loadingTask;
+                JumpIntoList(ViewModel.Listings.First().Key);
 
-            JumpIntoList(ViewModel.Listings.First().Key);
+                AllEditions.SelectedItem = null;
+            }
         }
 
         async private void OnListingSelected(object sender, SelectionChangedEventArgs e)

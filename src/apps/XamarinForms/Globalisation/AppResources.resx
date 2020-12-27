@@ -309,7 +309,7 @@
     <value>Groeperen op: {0}</value>
   </data>
   <data name="GroupByHeader" xml:space="preserve">
-    <value>Groeperen op</value>
+    <value>Groeperen op:</value>
   </data>
   <data name="InTop2000" xml:space="preserve">
     <value>In Top 2000</value>
@@ -327,10 +327,13 @@
     <value>Laatste positie</value>
   </data>
   <data name="LatestPlayTime" xml:space="preserve">
-    <value>Laatste notering in de Top 2000 (lijst 2019)</value>
+    <value>Laatste notering in de Top 2000</value>
   </data>
   <data name="LightTheme" xml:space="preserve">
     <value>Licht</value>
+  </data>
+  <data name="Live" xml:space="preserve">
+    <value>Live</value>
   </data>
   <data name="None" xml:space="preserve">
     <value>Niks</value>
@@ -445,10 +448,7 @@
     <value>Sorteer op: {0}</value>
   </data>
   <data name="SortByHeader" xml:space="preserve">
-    <value>Sorteer op</value>
-  </data>
-  <data name="String1" xml:space="preserve">
-    <value />
+    <value>Sorteer op:</value>
   </data>
   <data name="SystemTheme" xml:space="preserve">
     <value>Gebruik systeem instellingen</value>
@@ -478,7 +478,7 @@
     <value>Gebruik het donker thema</value>
   </data>
   <data name="ViewByDate" xml:space="preserve">
-    <value>Bekijk per datum</value>
+    <value>Datum</value>
   </data>
   <data name="VisitTop2000Site" xml:space="preserve">
     <value>Bezoek de officele NPO Top 2000 website op:</value>
