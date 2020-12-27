@@ -8,7 +8,7 @@ steps:
 
   - task: DownloadSecureFile@1
     name: droidCert
-    displayName: 'Download Android certificate'
+    displayName: 'Download Android keystore'
     inputs:
       secureFile: 'top2000droid.keystore'
 
