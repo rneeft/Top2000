@@ -6,12 +6,6 @@ steps:
     inputs:
       secureFile: 'WindowsStore.pfx'
 
-  - task: DownloadSecureFile@1
-    name: droidCert
-    displayName: 'Download Android keystore'
-    inputs:
-      secureFile: 'top2000droid.keystore'
-
   - task: NuGetToolInstaller@0
     displayName: 'Use NuGet 5.8.0'
     inputs:
@@ -72,7 +66,7 @@ steps:
     displayName: 'Sign Android APK'
     inputs:
       apkFiles: '$(build.artifactStagingDirectory)\Android\*.apk'
-      apksignerKeystoreFile: '$(droidCert.secureFilePath)'
+      apksignerKeystoreFile: '8e191b4b-4535-4782-af45-3821596d483b'
       apksignerKeystorePassword: '$(AndroidPfxPassword)'
       
   - task: VSTest@2
