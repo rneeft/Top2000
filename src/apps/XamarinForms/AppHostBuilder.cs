@@ -1,4 +1,5 @@
-﻿using Chroomsoft.Top2000.Apps.Common.Behavior;
+﻿using Chroomsoft.Top2000.Apps.AskForReview;
+using Chroomsoft.Top2000.Apps.Common.Behavior;
 using Chroomsoft.Top2000.Apps.Globalisation;
 using Chroomsoft.Top2000.Apps.NavigationShell;
 using Chroomsoft.Top2000.Apps.Themes;
@@ -12,6 +13,8 @@ using System;
 using System.IO;
 using System.Reflection;
 using Xamarin.Essentials;
+using Xamarin.Essentials.Implementation;
+using Xamarin.Essentials.Interfaces;
 
 namespace Chroomsoft.Top2000.Apps
 {
@@ -39,6 +42,8 @@ namespace Chroomsoft.Top2000.Apps
                 .AddTransient<Overview.Date.ViewModel>()
                 .AddTransient<TrackInformation.ViewModel>()
                 .AddTransient<Searching.ViewModel>()
+                .AddTransient<IAskForReview, ReviewModule>()
+                .AddSingleton<IPreferences, PreferencesImplementation>()
                 .AddSingleton<ICulture>(new SupportedCulture("nl"))
                 .AddSingleton<ICulture>(new SupportedCulture("en"))
                 .AddSingleton<ICulture>(new SupportedCulture("fr"))
@@ -52,6 +57,8 @@ namespace Chroomsoft.Top2000.Apps
             {
                 services.AddSingleton<IMainShell, NavigationShell.View>();
             }
+
+            services.Configure<AskForReviewConfiguration>(context.Configuration.GetSection(nameof(AskForReviewConfiguration)));
         }
 
         private static string SaveAppSettingsToLocalDisk()

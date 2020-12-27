@@ -5,10 +5,12 @@ using Android.OS;
 using Android.Runtime;
 using AndroidX.AppCompat.App;
 using Chroomsoft.Top2000.Apps;
+using Chroomsoft.Top2000.Apps.AskForReview;
 using Chroomsoft.Top2000.Apps.Globalisation;
 using Chroomsoft.Top2000.Apps.XamarinForms;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using XamarinForms.Droid.AskForReview;
 using XamarinForms.Droid.Globalisation;
 
 namespace XamarinForms.Droid
@@ -48,6 +50,7 @@ namespace XamarinForms.Droid
         private void PlatformServices(HostBuilderContext ctx, IServiceCollection services)
         {
             services.AddSingleton<ILocalisationService, LocalisationService>();
+            services.AddTransient<IStoreReview, StoreReviewImplementation>();
         }
     }
 }
