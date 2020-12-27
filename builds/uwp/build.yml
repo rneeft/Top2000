@@ -6,6 +6,12 @@ steps:
     inputs:
       secureFile: 'WindowsStore.pfx'
 
+  - task: DownloadSecureFile@1
+    name: signingCert
+    displayName: 'Download WindowsStore certificate'
+    inputs:
+      secureFile: 'top2000droid.keystore'
+
   - task: NuGetToolInstaller@0
     displayName: 'Use NuGet 5.8.0'
     inputs:
@@ -41,6 +47,20 @@ steps:
                      /p:PackageCertificateKeyFile="$(signingCert.secureFilePath)"
                      /p:PackageCertificatePassword="$(WindowsStorePfxPassword)"'
 
+  - task: XamarinAndroid@1
+    inputs:
+      projectFile: 'src\apps\XamarinForms.Android\XamarinForms.Android.csproj'
+      outputDirectory: '$(build.artifactStagingDirectory)\Android'
+      configuration: 'Release'
+      msbuildVersionOption: 'latest'
+      jdkOption: 'JDKVersion'
+
+  - task: AndroidSigning@3
+    inputs:
+      apkFiles: '$(build.artifactStagingDirectory)\Android\*.apk'
+      apksignerKeystoreFile: 'top2000droid'
+      apksignerKeystorePassword: '$(AndroidPfxPassword)'
+      
   - task: VSTest@2
     displayName: 'Test - Unittests'
     inputs:
@@ -55,3 +75,7 @@ steps:
   - publish: '$(build.artifactStagingDirectory)\AppxPackages'
     displayName: 'Publishing WindowsStore Artifacts'
     artifact: UWP
+
+  - publish: '$(build.artifactStagingDirectory)\Android'
+    displayName: 'Publishing WindowsStore Artifacts'
+    artifact: Android
