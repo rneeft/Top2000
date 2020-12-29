@@ -52,7 +52,9 @@
 
     <Shell.TitleView>
         <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
-            <Label Margin="5,0,0,0" Text="{Binding SelectedEditionYear, Mode=OneWay}" TextColor="White" FontSize="20" VerticalTextAlignment="Center" VerticalOptions="Center" />
+            <Label Margin="5,0,0,0" Text="{Binding SelectedEditionYear, Mode=OneWay}"
+                   AutomationId="DateViewTitleLabel"
+                   TextColor="White" FontSize="20" VerticalTextAlignment="Center" VerticalOptions="Center" />
         </StackLayout>
     </Shell.TitleView>
 
@@ -70,7 +72,7 @@
 
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Grid Margin="0,0,0,5" RowSpacing="0" >
+                        <Grid Margin="0,0,0,5" RowSpacing="0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="80" />
                                 <ColumnDefinition Width="*" />

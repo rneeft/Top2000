@@ -16,6 +16,7 @@
                 <Switch x:Name="useDarkModeSwitch"
                         Toggled="OnUseDarkModeSwitchToggled"
                         OnColor="#B2B2B2"
+                        AutomationId="UseDarkModeSwitch"
                         ThumbColor="{StaticResource Top2000Colour}" />
             </StackLayout>
 
@@ -23,7 +24,7 @@
 
             <Label Text="{Binding [LanguageHeader], Source={x:Static res:Translator.Instance}}" Style="{StaticResource SmallLabelStyle}" FontAttributes="Bold" />
 
-            <StackLayout Orientation="Horizontal"  >
+            <StackLayout Orientation="Horizontal">
                 <Label x:Name="nl" Text="{x:Static g:Symbols.FilterList}" FontFamily="{OnPlatform Android=MaterialIcons.ttf#}" FontSize="16" VerticalOptions="Center" Style="{StaticResource SmallLabelStyle}" />
                 <Image Source="Netherlands.png"  VerticalOptions="Center" />
                 <Label Style="{StaticResource SmallLabelStyle}" Text="Nederlands (Nederland)" VerticalOptions="Center" />
@@ -33,7 +34,7 @@
                 </StackLayout.GestureRecognizers>
             </StackLayout>
 
-            <StackLayout Orientation="Horizontal" >
+            <StackLayout Orientation="Horizontal">
                 <Label x:Name="en" Text="{x:Static g:Symbols.FilterList}" FontFamily="{OnPlatform Android=MaterialIcons.ttf#}" FontSize="16" VerticalOptions="Center" Style="{StaticResource SmallLabelStyle}" />
                 <Image Source="UnitedKingdom.png" VerticalOptions="Center" />
                 <Label Style="{StaticResource SmallLabelStyle}" Text="English (United Kingdom)" VerticalOptions="Center" />
@@ -43,7 +44,7 @@
                 </StackLayout.GestureRecognizers>
             </StackLayout>
 
-            <StackLayout Orientation="Horizontal"  >
+            <StackLayout Orientation="Horizontal">
                 <Label x:Name="fr" Text="{x:Static g:Symbols.FilterList}" FontFamily="{OnPlatform Android=MaterialIcons.ttf#}" FontSize="16" VerticalOptions="Center" Style="{StaticResource SmallLabelStyle}" />
                 <Image Source="France.png" VerticalOptions="Center" />
                 <Label Style="{StaticResource SmallLabelStyle}" Text="Français (France)" VerticalOptions="Center" />

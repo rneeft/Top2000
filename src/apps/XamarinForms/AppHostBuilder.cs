@@ -49,14 +49,14 @@ namespace Chroomsoft.Top2000.Apps
                 .AddSingleton<ICulture>(new SupportedCulture("fr"))
             ;
 
-            if (IsTop2000Live())
-            {
-                services.AddSingleton<IMainShell, NavigationShell.LiveTop2000.View>();
-            }
-            else
-            {
-                services.AddSingleton<IMainShell, NavigationShell.View>();
-            }
+            //if (IsTop2000Live())
+            //{
+            //    services.AddSingleton<IMainShell, NavigationShell.LiveTop2000.View>();
+            //}
+            //else
+            //{
+            services.AddSingleton<IMainShell, NavigationShell.View>();
+            //}
 
             services.Configure<AskForReviewConfiguration>(context.Configuration.GetSection(nameof(AskForReviewConfiguration)));
         }

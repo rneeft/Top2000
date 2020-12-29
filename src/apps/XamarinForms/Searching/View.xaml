@@ -8,7 +8,7 @@
              xmlns:res="clr-namespace:Chroomsoft.Top2000.Apps.Globalisation"
              BackgroundColor="{DynamicResource PageBackgroundColor}">
     <Shell.SearchHandler>
-        <local:TracksSearchHandler Placeholder="{Binding [SearchTop2000], Source={x:Static res:Translator.Instance}}" />
+        <local:TracksSearchHandler AutomationProperties.Name="SearchBox" Placeholder="{Binding [SearchTop2000], Source={x:Static res:Translator.Instance}}" />
     </Shell.SearchHandler>
 
     <ContentPage.Resources>
@@ -44,7 +44,6 @@
                 <Button x:Name="SortByButton" BackgroundColor="{DynamicResource ButtonBackgroundColor}" Text="{Binding [SortByHeader], Source={x:Static res:Translator.Instance}}"
                         TextColor="{DynamicResource ButtonTextColor}"
                         Clicked="OnSortByButtonClick" />
-
             </forms:WrapLayout>
 
             <CollectionView x:Name="listingsGrouped"

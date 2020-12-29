@@ -10,34 +10,34 @@
        x:Class="Chroomsoft.Top2000.Apps.NavigationShell.View">
 
     <TabBar x:Name="ShellTabBar">
-        <Tab x:Name="OverviewTab" Title="{Binding [Overview], Source={x:Static res:Translator.Instance}}">
+        <Tab x:Name="OverviewTab" AutomationId="OverviewTab" Title="{Binding [Overview], Source={x:Static res:Translator.Instance}}">
             <Tab.Icon>
                 <FontImageSource FontFamily="{OnPlatform Android=MaterialIcons.ttf#}" Glyph="{x:Static g:Symbols.Overview}" />
             </Tab.Icon>
             <ShellContent ContentTemplate="{DataTemplate position:View}" />
         </Tab>
 
-        <Tab x:Name="ViewByDateTab" Title="{Binding [ViewByDate], Source={x:Static res:Translator.Instance}}">
+        <Tab x:Name="ViewByDateTab" AutomationId="ViewByDateTab" Title="{Binding [ViewByDate], Source={x:Static res:Translator.Instance}}">
             <Tab.Icon>
                 <FontImageSource FontFamily="{OnPlatform Android=MaterialIcons.ttf#}" Glyph="{x:Static g:Symbols.Clock}" />
             </Tab.Icon>
 
-            <ShellContent Route="ViewByDate" ContentTemplate="{DataTemplate dates:View}" />
+            <ShellContent Route="ViewByDate" ContentTemplate="{DataTemplate dates:View}" AutomationId="ViewByDateTab" />
         </Tab>
 
-        <Tab x:Name="SearchTab" Title="{Binding [Search], Source={x:Static res:Translator.Instance}}">
+        <Tab x:Name="SearchTab" AutomationId="SearchTab" Title="{Binding [Search], Source={x:Static res:Translator.Instance}}">
             <Tab.Icon>
                 <FontImageSource FontFamily="{OnPlatform Android=MaterialIcons.ttf#}" Glyph="{x:Static g:Symbols.Search}" />
             </Tab.Icon>
-            <ShellContent ContentTemplate="{DataTemplate searching:View}" />
+            <ShellContent ContentTemplate="{DataTemplate searching:View}" AutomationId="SearchTab" />
         </Tab>
 
-        <Tab x:Name="SettingsTab" Title="{Binding [Settings], Source={x:Static res:Translator.Instance}}">
+        <Tab x:Name="SettingsTab" AutomationId="SettingTab" Title="{Binding [Settings], Source={x:Static res:Translator.Instance}}">
             <Tab.Icon>
                 <FontImageSource FontFamily="{OnPlatform Android=MaterialIcons.ttf#}" Glyph="{x:Static g:Symbols.Settings}" />
             </Tab.Icon>
             <ShellContent x:Name="GeneralTab" Title="{Binding [General], Source={x:Static res:Translator.Instance}}"
-                          ContentTemplate="{DataTemplate settings:General}" />
+                          ContentTemplate="{DataTemplate settings:General}" AutomationId="SettingTab" />
             <ShellContent x:Name="PrivacyTab" Title="{Binding [Privacy], Source={x:Static res:Translator.Instance}}"
                           ContentTemplate="{DataTemplate settings:Privacy}" />
             <ShellContent x:Name="ThirdPartyTab" Title="{Binding [ThirdParty], Source={x:Static res:Translator.Instance}}"

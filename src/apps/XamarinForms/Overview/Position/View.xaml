@@ -7,6 +7,7 @@
              xmlns:res="clr-namespace:Chroomsoft.Top2000.Apps.Globalisation"
              x:Class="Chroomsoft.Top2000.Apps.Overview.Position.View"
              Title="{Binding Path=SelectedEdition.Year, Mode=OneWay}"
+             AutomationId="PositionViewContentPage"
              BackgroundColor="{DynamicResource PageBackgroundColor}">
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -34,7 +35,7 @@
     </ContentPage.Resources>
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Clicked="OnJumpGroupButtonClick">
+        <ToolbarItem Clicked="OnJumpGroupButtonClick" AutomationId="JumpGroupToolbarItem">
             <ToolbarItem.IconImageSource>
                 <FontImageSource Glyph="{x:Static g:Symbols.FilterList}" Color="White"
                                  FontFamily="{OnPlatform Android=MaterialIcons.ttf#}" />
@@ -43,7 +44,7 @@
     </ContentPage.ToolbarItems>
 
     <Shell.TitleView>
-        <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+        <StackLayout AutomationId="SelectEditionMenu" HorizontalOptions="FillAndExpand" Orientation="Horizontal">
 
             <Label Text="{x:Static g:Symbols.Menu}" FontFamily="{OnPlatform Android=MaterialIcons.ttf#}" FontSize="25"
                    TextColor="White"
@@ -66,6 +67,7 @@
                             ItemSizingStrategy="MeasureAllItems"
                             IsGrouped="True"
                             SelectionChanged="OnListingSelected"
+                            AutomationId="ListingsCollectionView"
                             SelectionMode="Single">
 
                 <CollectionView.ItemTemplate>
@@ -142,7 +144,7 @@
                                      FontFamily="{OnPlatform Android=MaterialIcons.ttf#}" />
                             </ImageButton.Source>
                         </ImageButton>
-                        <Label Margin="5,0,0,0" Text="{Binding [SelectEdition], Source={x:Static res:Translator.Instance}}" TextColor="White" FontSize="18" VerticalTextAlignment="Center" VerticalOptions="Center" />
+                        <Label Margin="5,0,0,0" AutomationId="SelectEditionLabel" Text="{Binding [SelectEdition], Source={x:Static res:Translator.Instance}}" TextColor="White" FontSize="18" VerticalTextAlignment="Center" VerticalOptions="Center" />
                     </StackLayout>
                 </Grid>
 
