@@ -35,5 +35,7 @@
         public static string Same => "\xe25d";
 
         public static string Video => "\xe63a";
+
+        public static string New => "\xe05e";
     }
 }
