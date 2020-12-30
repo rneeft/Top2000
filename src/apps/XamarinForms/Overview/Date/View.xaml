@@ -36,7 +36,7 @@
     </ContentPage.Resources>
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Clicked="OnJumpGroupButtonClick">
+        <ToolbarItem Clicked="OnJumpGroupButtonClick" AutomationId="JumpGroupDateToolbarItem">
             <ToolbarItem.IconImageSource>
                 <FontImageSource Glyph="{x:Static g:Symbols.FilterList}" Color="White"
                                  FontFamily="{OnPlatform Android=MaterialIcons.ttf#}" />
