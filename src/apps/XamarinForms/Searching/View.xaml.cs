@@ -93,8 +93,6 @@ namespace Chroomsoft.Top2000.Apps.Searching
         private async Task CloseTrackInformationAsync()
         {
             ViewModel.SelectedTrack = null;
-            listingsFlat.SelectedItem = null;
-            listingsGrouped.SelectedItem = null;
 
             Shell.SetTabBarIsVisible(this, true);
             Shell.SetNavBarIsVisible(this, true);

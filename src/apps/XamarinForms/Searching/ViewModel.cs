@@ -59,10 +59,10 @@ namespace Chroomsoft.Top2000.Apps.Searching
             get { return GetPropertyValue<Track?>(); }
             set
             {
-                if (value != null && SelectedTrack?.Id != value?.Id)
-                {
-                    SetPropertyValue(value);
-                }
+                //if (value != null && SelectedTrack?.Id != value?.Id)
+                //{
+                SetPropertyValue(value);
+                //}
             }
         }
 
