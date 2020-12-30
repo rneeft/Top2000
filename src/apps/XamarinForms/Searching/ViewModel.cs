@@ -89,6 +89,18 @@ namespace Chroomsoft.Top2000.Apps.Searching
                 GroupBy = GroupByOptions.First();
                 SortBy = SortByOptions.First();
             }
+            else
+            {
+                foreach (var groupByOption in GroupByOptions)
+                {
+                    groupByOption.Name = nameProvider.GetNameForGroup(groupByOption.Value);
+                }
+
+                foreach (var sortByOption in SortByOptions)
+                {
+                    sortByOption.Name = nameProvider.GetNameForSort(sortByOption.Value);
+                }
+            }
         }
 
         public async Task ExceuteSearchAsync()

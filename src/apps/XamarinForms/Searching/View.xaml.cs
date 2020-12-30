@@ -39,9 +39,10 @@ namespace Chroomsoft.Top2000.Apps.Searching
 
             if (string.IsNullOrWhiteSpace(ViewModel.QueryText))
             {
-                ViewModel.IsFlat = true;
+                ViewModel.IsFlat = ViewModel.GroupBy.Value is GroupByNothing;
             }
 
+            GroupSortLayout.IsVisible = false;
             SetTitlesForButton();
         }
 
@@ -92,6 +93,8 @@ namespace Chroomsoft.Top2000.Apps.Searching
         private async Task CloseTrackInformationAsync()
         {
             ViewModel.SelectedTrack = null;
+            listingsFlat.SelectedItem = null;
+            listingsGrouped.SelectedItem = null;
 
             Shell.SetTabBarIsVisible(this, true);
             Shell.SetNavBarIsVisible(this, true);
@@ -141,6 +144,11 @@ namespace Chroomsoft.Top2000.Apps.Searching
         {
             GroupByButton.Text = $"{Translator.Instance["GroupByHeader"]} {ViewModel.GroupBy.Name}";
             SortByButton.Text = $"{Translator.Instance["SortByHeader"]} {ViewModel.SortBy.Name}";
+        }
+
+        private void ShowSortGroupLayout(object sender, EventArgs e)
+        {
+            GroupSortLayout.IsVisible = !GroupSortLayout.IsVisible;
         }
     }
 }
