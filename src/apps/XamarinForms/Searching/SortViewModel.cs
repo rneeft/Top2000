@@ -12,7 +12,7 @@ namespace Chroomsoft.Top2000.Apps.Searching
 
         public ISort Value { get; }
 
-        public string Name { get; }
+        public string Name { get; set; }
 
         public override bool Equals(object obj)
         {
