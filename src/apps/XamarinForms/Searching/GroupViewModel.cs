@@ -12,7 +12,7 @@ namespace Chroomsoft.Top2000.Apps.Searching
 
         public IGroup Value { get; }
 
-        public string Name { get; }
+        public string Name { get; set; }
 
         public override bool Equals(object obj)
         {

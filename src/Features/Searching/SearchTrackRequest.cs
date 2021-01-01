@@ -41,8 +41,9 @@ namespace Chroomsoft.Top2000.Features.Searching
             {
                 if (int.TryParse(request.QueryString, out int year))
                 {
-                    var sql = "SELECT Id, Title, Artist, RecordedYear " +
+                    var sql = "SELECT Id, Title, Artist, RecordedYear, Listing.Position AS Position " +
                         "FROM Track " +
+                        "LEFT JOIN Listing ON Track.Id = Listing.TrackId AND Listing.Edition = 2020 " +
                         "WHERE RecordedYear = ?" +
                         "LIMIT 100";
 
@@ -50,8 +51,9 @@ namespace Chroomsoft.Top2000.Features.Searching
                 }
                 else
                 {
-                    var sql = "SELECT Id, Title, Artist, RecordedYear " +
+                    var sql = "SELECT Id, Title, Artist, RecordedYear, Listing.Position AS Position " +
                         "FROM Track " +
+                        "LEFT JOIN Listing ON Track.Id = Listing.TrackId AND Listing.Edition = 2020 " +
                         "WHERE (Title LIKE ?) OR (Artist LIKE ?)" +
                         "LIMIT 100";
 
