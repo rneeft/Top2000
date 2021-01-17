@@ -21,7 +21,7 @@
                         ThumbColor="{StaticResource Top2000Colour}" />
                 <Label BindingContext="{x:Reference useDarkModeSwitch}"
                        AutomationId="IsDarkModeOn"
-                       Text="{Binding IsToggled}" TextColor="red" />
+                       Text="{Binding IsToggled}" TextColor="{DynamicResource PageBackgroundColor}" />
             </StackLayout>
 
             <BoxView Style="{StaticResource Separator}" />

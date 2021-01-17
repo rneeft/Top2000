@@ -1,5 +1,5 @@
-﻿using Xamarin.UITest;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using Xamarin.UITest;
 
 namespace Chroomsoft.Top2000.Tools.Marketing
 {
@@ -11,9 +11,9 @@ namespace Chroomsoft.Top2000.Tools.Marketing
         public Screenshot(ScreenshotSettings settings)
         {
             app = ConfigureApp.Android
-                    .InstalledApp("com.chroomsoft.top2000")
-                    .EnableLocalScreenshots()
-                    .StartApp();
+                .InstalledApp("com.chroomsoft.top2000")
+                .EnableLocalScreenshots()
+                .StartApp();
 
             this.settings = settings;
         }
