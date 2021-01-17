@@ -2,8 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:g="clr-namespace:Chroomsoft.Top2000.Apps.Common"
-             x:Class="Chroomsoft.Top2000.Apps.Settings.General"
              xmlns:res="clr-namespace:Chroomsoft.Top2000.Apps.Globalisation"
+             x:Class="Chroomsoft.Top2000.Apps.Settings.General"
              BackgroundColor="{DynamicResource PageBackgroundColor}"
              Title="{Binding [SettingsGeneral], Source={x:Static res:Translator.Instance}}">
     <ContentPage.Content>
@@ -16,8 +16,12 @@
                 <Switch x:Name="useDarkModeSwitch"
                         Toggled="OnUseDarkModeSwitchToggled"
                         OnColor="#B2B2B2"
+
                         AutomationId="UseDarkModeSwitch"
                         ThumbColor="{StaticResource Top2000Colour}" />
+                <Label BindingContext="{x:Reference useDarkModeSwitch}"
+                       AutomationId="IsDarkModeOn"
+                       Text="{Binding IsToggled}" TextColor="red" />
             </StackLayout>
 
             <BoxView Style="{StaticResource Separator}" />

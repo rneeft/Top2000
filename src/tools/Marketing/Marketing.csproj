@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net48</TargetFramework>
+    <AssemblyName>Chroomsoft.Top2000.Tools.Marketing</AssemblyName>
+    <RootNamespace>Chroomsoft.Top2000.Tools.Marketing</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Syncfusion.OfficeChartToImageConverter.WinForms" Version="18.4.0.34" />
+    <PackageReference Include="Syncfusion.Presentation.WinForms" Version="18.4.0.34" />
+    <PackageReference Include="Xamarin.UITest" Version="3.0.12" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="template.pptx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
