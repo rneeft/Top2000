@@ -1,7 +1,7 @@
 steps:
 
   - task: DownloadSecureFile@1
-    name: signingCert
+    name: upwCert
     displayName: 'Download WindowsStore certificate'
     inputs:
       secureFile: 'WindowsStore.pfx'
@@ -26,6 +26,18 @@ steps:
       VersionRegex: '(0|[1-9][0-9]{0,3}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])(\.(0|[1-9][0-9]{0,3}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])){3}'
       OutputVersion: 'OutputedVersion'
 
+  - task: VersionAndroidManifest@2
+    inputs:
+      Path: 'src\apps\XamarinForms.Android\Properties'
+      VersionNumber: '$(android-version)'
+      VersionNameFormat: '{1}.{2}.{3}'
+      Injectversioncode: false
+      VersionCodeFormat: '$(android-updateVersion)'
+      Injectversion: false
+      VersionRegex: '\d+\.\d+\.\d+'
+      FilenamePattern: 'AndroidManifest.xml'
+      OutputVersion: 'OutputedVersion'
+
   - task: VSBuild@1
     displayName: 'Build solution'
     inputs:
@@ -38,9 +50,25 @@ steps:
                      /p:UapAppxPackageBuildMode=StoreUpload
                      /p:AppxPackageSigningEnabled=true
                      /p:PackageCertificateThumbprint="" 
-                     /p:PackageCertificateKeyFile="$(signingCert.secureFilePath)"
+                     /p:PackageCertificateKeyFile="$(upwCert.secureFilePath)"
                      /p:PackageCertificatePassword="$(WindowsStorePfxPassword)"'
 
+  - task: XamarinAndroid@1
+    displayName: 'Build Android App'
+    inputs:
+      projectFile: 'src\apps\XamarinForms.Android\XamarinForms.Android.csproj'
+      outputDirectory: '$(build.artifactStagingDirectory)\Android'
+      configuration: 'Release'
+      msbuildVersionOption: 'latest'
+      jdkOption: 'JDKVersion'
+
+  - task: AndroidSigning@3
+    displayName: 'Sign Android APK'
+    inputs:
+      apkFiles: '$(build.artifactStagingDirectory)\Android\*.apk'
+      apksignerKeystoreFile: '8e191b4b-4535-4782-af45-3821596d483b'
+      apksignerKeystorePassword: '$(AndroidPfxPassword)'
+      
   - task: VSTest@2
     displayName: 'Test - Unittests'
     inputs:
@@ -55,3 +83,7 @@ steps:
   - publish: '$(build.artifactStagingDirectory)\AppxPackages'
     displayName: 'Publishing WindowsStore Artifacts'
     artifact: UWP
+
+  - publish: '$(build.artifactStagingDirectory)\Android'
+    displayName: 'Publishing Android Artifacts'
+    artifact: Android
