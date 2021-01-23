@@ -68,6 +68,7 @@ steps:
       apkFiles: '$(build.artifactStagingDirectory)\Android\*.apk'
       apksignerKeystoreFile: '8e191b4b-4535-4782-af45-3821596d483b'
       apksignerKeystorePassword: '$(AndroidPfxPassword)'
+      apksignerkeystoreAlias: 'top2000droid'
       
   - task: VSTest@2
     displayName: 'Test - Unittests'
