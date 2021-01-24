@@ -1,13 +1,16 @@
-name: $(version)
+name: $(major).$(minor).$(Year:yy)$(DayOfYear).(rev:rrr)
 
 trigger: none
 
 variables:
 - group: Top-2000-variable-group
 - group: shared-infra
-- template: version.yml
 - name: product
   value: 'TOP2000'
+- name: major
+  value: 6
+- name: minor
+  value: 4
 
 jobs:
 - job: Build
@@ -36,7 +39,7 @@ jobs:
     - task: VersionAPPX@2
       inputs:
         Path: '$(Build.SourcesDirectory)'
-        VersionNumber: '$(uwp-version)'
+        VersionNumber: '$(name)'
         InjectVersion: False
         VersionRegex: '(0|[1-9][0-9]{0,3}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])(\.(0|[1-9][0-9]{0,3}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])){3}'
         OutputVersion: 'OutputedVersion'
@@ -45,9 +48,9 @@ jobs:
       inputs:
         Path: 'src\apps\XamarinForms.Android\Properties'
         VersionNameFormat: '{1}.{2}.{3}.{4}'
-        VersionNumber: '$(version)'
+        VersionNumber: '$(name)'
         VersionCodeFormat: '{1}{2}{3}{4}'
-        VersionCode: '$(version)'
+        VersionCode: '$(name)'
         Injectversioncode: false
         Injectversion: false
         VersionRegex: '\d+\.\d+\.\d+'
