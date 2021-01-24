@@ -101,7 +101,7 @@ jobs:
     - task: CopyFiles@2
       inputs:
         SourceFolder: '$(build.artifactStagingDirectory)\Android'
-        Contents: '.apk'
+        Contents: '*.apk'
         TargetFolder: '$(build.artifactStagingDirectory)\AndroidApks'
         flattenFolders: true
 
