@@ -1,0 +1,101 @@
+trigger: none
+
+variables:
+- template: version.yml
+- name: product
+  value: 'TOP2000'
+
+jobs:
+- job: Build
+  pool:
+     name: uwp-agent
+  steps:
+
+    - task: DownloadSecureFile@1
+      name: upwCert
+      displayName: 'Download WindowsStore certificate'
+      inputs:
+        secureFile: 'WindowsStore.pfx'
+
+    - task: NuGetToolInstaller@0
+      displayName: 'Use NuGet 5.8.0'
+      inputs:
+        versionSpec: 5.8.0
+
+    - task: NuGetCommand@2
+      displayName: 'Nuget restore'
+      inputs:
+        command: 'restore'
+        restoreSolution: '**/*.sln'
+        feedsToUse: 'select'
+
+    - task: VersionAPPX@2
+      inputs:
+        Path: '$(Build.SourcesDirectory)'
+        VersionNumber: '$(uwp-version)'
+        InjectVersion: False
+        VersionRegex: '(0|[1-9][0-9]{0,3}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])(\.(0|[1-9][0-9]{0,3}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])){3}'
+        OutputVersion: 'OutputedVersion'
+
+    - task: VersionAndroidManifest@2
+      inputs:
+        Path: 'src\apps\XamarinForms.Android\Properties'
+        VersionNumber: '$(android-version)'
+        VersionNameFormat: '{1}.{2}.{3}'
+        Injectversioncode: false
+        VersionCodeFormat: '$(android-updateVersion)'
+        Injectversion: false
+        VersionRegex: '\d+\.\d+\.\d+'
+        FilenamePattern: 'AndroidManifest.xml'
+        OutputVersion: 'OutputedVersion'
+
+    - task: VSBuild@1
+      displayName: 'Build solution'
+      inputs:
+        solution: '**\*.sln'
+        platform: 'x86'
+        configuration: 'Release'
+        msbuildArgs:  '/p:AppxBundlePlatforms="x86|x64|ARM"
+                      /p:AppxPackageDir="$(build.artifactStagingDirectory)\AppxPackages\\"
+                      /p:AppxBundle=Always 
+                      /p:UapAppxPackageBuildMode=StoreUpload
+                      /p:AppxPackageSigningEnabled=true
+                      /p:PackageCertificateThumbprint="" 
+                      /p:PackageCertificateKeyFile="$(upwCert.secureFilePath)"
+                      /p:PackageCertificatePassword="$(WindowsStorePfxPassword)"'
+
+    - task: XamarinAndroid@1
+      displayName: 'Build Android App'
+      inputs:
+        projectFile: 'src\apps\XamarinForms.Android\XamarinForms.Android.csproj'
+        outputDirectory: '$(build.artifactStagingDirectory)\Android'
+        configuration: 'Release'
+        msbuildVersionOption: 'latest'
+        jdkOption: 'JDKVersion'
+
+    - task: AndroidSigning@3
+      displayName: 'Sign Android APK'
+      inputs:
+        apkFiles: '$(build.artifactStagingDirectory)\Android\*.apk'
+        apksignerKeystoreFile: '8e191b4b-4535-4782-af45-3821596d483b'
+        apksignerKeystorePassword: '$(AndroidPfxPassword)'
+        apksignerkeystoreAlias: 'top2000droid'
+        
+    - task: VSTest@2
+      displayName: 'Test - Unittests'
+      inputs:
+        testSelector: 'testAssemblies'
+        codeCoverageEnabled: true
+        testAssemblyVer2: |
+          **\*Unittests.dll
+          !**\*TestAdapter.dll
+          !**\obj\**
+        searchFolder: '$(System.DefaultWorkingDirectory)'
+
+    - publish: '$(build.artifactStagingDirectory)\AppxPackages'
+      displayName: 'Publishing WindowsStore Artifacts'
+      artifact: UWP
+
+    - publish: '$(build.artifactStagingDirectory)\Android'
+      displayName: 'Publishing Android Artifacts'
+      artifact: Android
