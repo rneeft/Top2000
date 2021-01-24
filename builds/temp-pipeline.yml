@@ -108,3 +108,13 @@ jobs:
     - publish: '$(build.artifactStagingDirectory)\AndroidApks'
       displayName: 'Publishing Android Artifacts'
       artifact: Android
+
+# release.yml
+    - task: AppCenterDistribute@3
+      inputs:
+        serverEndpoint: 'AppCenter'
+        appSlug: 'Chroomsoft/Top-2000-Android'
+        appFile: '$(build.artifactStagingDirectory)\AndroidApks\com.chroomsoft.top2000.apk'
+        releaseNotesOption: 'input'
+        releaseNotesInput: 'Automation'
+        destinationType: 'groups'
