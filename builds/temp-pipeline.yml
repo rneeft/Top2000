@@ -1,3 +1,5 @@
+name: $(version)
+
 trigger: none
 
 variables:
@@ -42,10 +44,11 @@ jobs:
     - task: VersionAndroidManifest@2
       inputs:
         Path: 'src\apps\XamarinForms.Android\Properties'
-        VersionNumber: '$(android-version)'
-        VersionNameFormat: '{1}.{2}.{3}'
+        VersionNameFormat: '{1}.{2}.{3}.{4}'
+        VersionNumber: '$(version)'
+        VersionCodeFormat: '{1}{2}{3}{4}'
+        VersionCode: '$(version)'
         Injectversioncode: false
-        VersionCodeFormat: '$(android-updateVersion)'
         Injectversion: false
         VersionRegex: '\d+\.\d+\.\d+'
         FilenamePattern: 'AndroidManifest.xml'
