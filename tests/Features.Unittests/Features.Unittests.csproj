@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Update="Moq" Version="4.14.7" />
+    <PackageReference Update="Moq" Version="4.16.0" />
   </ItemGroup>
 
   <ItemGroup>

@@ -17,6 +17,7 @@ namespace Chroomsoft.Top2000.WindowsApp.About
 
         public static void RequestFeedback()
         {
+            // not implemented yet, don't bug use with this yet.
         }
     }
 }
