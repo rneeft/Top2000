@@ -1,4 +1,4 @@
-name: $(major).$(minor).$(Year:yy)$(DayOfYear).(rev:rrr)
+name: $(major).$(minor).$(Year:yy)$(DayOfYear).$(rev:rrr)
 
 trigger: none
 
