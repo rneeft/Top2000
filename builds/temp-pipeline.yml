@@ -53,7 +53,7 @@ jobs:
         VersionCode: '$(Build.BuildNumber)'
         Injectversioncode: false
         Injectversion: false
-        VersionRegex: '\d+\.\d+\.\d+'
+        VersionRegex: '\d+\.\d+\.\d+.\d+'
         FilenamePattern: 'AndroidManifest.xml'
         OutputVersion: 'OutputedVersion'
 
