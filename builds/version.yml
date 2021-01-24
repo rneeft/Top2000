@@ -1,15 +1,12 @@
 variables:
-  android-major: 2
-  android-updateVersion: 30
   major: 6 # +1 when breaking changes
   minor: 3 # +1 when adding a new feature
-  major-minor: $[format('{0}.{1}', variables['major'], variables['minor'])]
-
+  version: ($major).$(minor).$(Year:yy)$(DayOfYear).$(rev:rrr)
+    
   # becuse of the way UWP application are versioned the patch is an automatic incremented number
-  patch: $[counter(variables['major-minor'])]
+  #patch: $[counter(variables['major-minor'])]
 
-  label: '' # if filled, must start with dash '-'
+  #label: '' # if filled, must start with dash '-'
   
-  version: $[format('{0}.{1}.{2}{3}', variables['major'], variables['minor'], variables['patch'], variables['label'])]
-  uwp-version: $[format('{0}.{1}.{2}.0', variables['major'], variables['minor'], variables['patch'])]
-  android-version: $[format('{0}.{1}.{2}.0', variables['android-major'], variables['minor'], variables['patch'])]
+ # version: $[format('{0}.{1}.{2}{3}', variables['major'], variables['minor'], variables['patch'], variables['label'])]
+  # uwp-version: $[format('{0}.{1}.{2}.0', variables['major'], variables['minor'], variables['patch'])]
