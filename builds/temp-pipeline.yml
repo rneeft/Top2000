@@ -49,8 +49,7 @@ jobs:
         Path: 'src\apps\XamarinForms.Android\Properties'
         VersionNameFormat: '{1}.{2}.{3}.{4}'
         VersionNumber: '$(Build.BuildNumber)'
-        VersionCodeFormat: '{1}{2}{3}{4}'
-        VersionCode: '$(Build.BuildNumber)'
+        VersionCode: '$(versionCode)'
         Injectversioncode: false
         Injectversion: false
         VersionRegex: '\d+\.\d+\.\d+\.\d+'
