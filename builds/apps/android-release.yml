@@ -9,7 +9,7 @@ steps:
     inputs:
       serverEndpoint: 'AppCenter'
       appSlug: 'Chroomsoft/Top-2000-Android'
-      appFile: '$(Pipeline.Workspace)\AndroidApks\com.chroomsoft.top2000.apk'
+      appFile: '$(Pipeline.Workspace)\Android\com.chroomsoft.top2000.apk'
       releaseNotesOption: 'input'
       releaseNotesInput: 'Automation'
       destinationType: 'groups'
