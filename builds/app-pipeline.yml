@@ -9,6 +9,8 @@ variables:
   value: 4
 - name: product
   value: 'TOP2000'
+- name: uwp-version
+  value: $(major).$(minor).$[counter($(major).$(minor))]
 
 trigger: none
 pr: none
