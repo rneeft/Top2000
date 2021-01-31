@@ -3,7 +3,6 @@ name: $(major).$(minor).$(Year:yy)$(DayOfYear).$(rev:rr)
 variables:
 - group: Top-2000-variable-group
 - group: shared-infra
-- template: version.yml
 - name: major
   value: 6
 - name: minor
