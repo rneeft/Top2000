@@ -2,12 +2,8 @@ variables:
   major: 6 # +1 when breaking changes
   minor: 3 # +1 when adding a new feature
   versionCode: $(Year:yy)$(DayOfYear)$(rev:rrr)
-    version: $[format('{0}.{1}.{2}.{3}',variables['major'], variables['minor'], $(Year:yy)$(DayOfYear), $(rev:rrr))]
-
   version: $[format('{0}.{1}.{2}.{3}',variables['major'], variables['minor'], $(Year:yy)$(DayOfYear), $(rev:rrr))]
   
-//21 031
-
   # becuse of the way UWP application are versioned the patch is an automatic incremented number
   #patch: $[counter(variables['major-minor'])]
 
