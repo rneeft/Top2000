@@ -1,0 +1,15 @@
+steps:
+
+  - download: current
+    displayName: Download Android files
+    artifact: Android
+
+  - task: AppCenterDistribute@3
+    displayName: Upload Android to AppCenter
+    inputs:
+      serverEndpoint: 'AppCenter'
+      appSlug: 'Chroomsoft/Top-2000-Android'
+      appFile: '$(Pipeline.Workspace)\AndroidApks\com.chroomsoft.top2000.apk'
+      releaseNotesOption: 'input'
+      releaseNotesInput: 'Automation'
+      destinationType: 'groups'

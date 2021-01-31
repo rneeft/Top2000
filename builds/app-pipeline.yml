@@ -1,7 +1,13 @@
+name: $(major).$(minor).$(Year:yy)$(DayOfYear).$(rev:rr)
+
 variables:
 - group: Top-2000-variable-group
 - group: shared-infra
 - template: version.yml
+- name: major
+  value: 6
+- name: minor
+  value: 4
 - name: product
   value: 'TOP2000'
 
@@ -29,7 +35,7 @@ stages:
     pool:
       name: uwp-agent
     steps:
-    - template: uwp/build.yml
+    - template: app/build.yml
 
 - stage: AgentShutdown
   dependsOn: Build
@@ -51,8 +57,13 @@ stages:
 - stage: Release
   dependsOn: Build
   jobs:
-  - job: Release
+  - job: ReleaseUWP
     pool:
       name: At Home
     steps:
-    - template: uwp/release.yml
+    - template: app/uwp-release.yml
+  - job: ReleaseAndroid
+    pool:
+      name: At Home
+    steps:
+    - template: app/android-release.yml
