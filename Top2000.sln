@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30011.22
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31808.319
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{5DF4C2E7-56BB-4EFD-BBA1-2E4FB7284A63}"
 EndProject
@@ -52,7 +52,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XamarinForms", "src\apps\Xa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XamarinForms.Android", "src\apps\XamarinForms.Android\XamarinForms.Android.csproj", "{BDFA10B4-F3FA-4A2B-8B89-46C7B82C5F0E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data.Export", "src\data\Data.Export\Data.Export.csproj", "{04E430DE-2396-4C15-B8CB-5C347ACEDBC3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data.Export", "src\data\Data.Export\Data.Export.csproj", "{04E430DE-2396-4C15-B8CB-5C347ACEDBC3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "web", "web", "{39F609A4-2159-4268-A383-6BA837E9C315}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web.StaticWebContentGenerator", "src\web\Web.StaticWebContentGenerator\Web.StaticWebContentGenerator.csproj", "{BF6C0F8F-2305-4FD9-B5EE-D5AC5B807D26}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -518,6 +522,34 @@ Global
 		{04E430DE-2396-4C15-B8CB-5C347ACEDBC3}.Release|x64.Build.0 = Release|Any CPU
 		{04E430DE-2396-4C15-B8CB-5C347ACEDBC3}.Release|x86.ActiveCfg = Release|Any CPU
 		{04E430DE-2396-4C15-B8CB-5C347ACEDBC3}.Release|x86.Build.0 = Release|Any CPU
+		{BF6C0F8F-2305-4FD9-B5EE-D5AC5B807D26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF6C0F8F-2305-4FD9-B5EE-D5AC5B807D26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF6C0F8F-2305-4FD9-B5EE-D5AC5B807D26}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{BF6C0F8F-2305-4FD9-B5EE-D5AC5B807D26}.Debug|ARM.Build.0 = Debug|Any CPU
+		{BF6C0F8F-2305-4FD9-B5EE-D5AC5B807D26}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{BF6C0F8F-2305-4FD9-B5EE-D5AC5B807D26}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{BF6C0F8F-2305-4FD9-B5EE-D5AC5B807D26}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{BF6C0F8F-2305-4FD9-B5EE-D5AC5B807D26}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{BF6C0F8F-2305-4FD9-B5EE-D5AC5B807D26}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{BF6C0F8F-2305-4FD9-B5EE-D5AC5B807D26}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{BF6C0F8F-2305-4FD9-B5EE-D5AC5B807D26}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{BF6C0F8F-2305-4FD9-B5EE-D5AC5B807D26}.Debug|x64.Build.0 = Debug|Any CPU
+		{BF6C0F8F-2305-4FD9-B5EE-D5AC5B807D26}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{BF6C0F8F-2305-4FD9-B5EE-D5AC5B807D26}.Debug|x86.Build.0 = Debug|Any CPU
+		{BF6C0F8F-2305-4FD9-B5EE-D5AC5B807D26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF6C0F8F-2305-4FD9-B5EE-D5AC5B807D26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF6C0F8F-2305-4FD9-B5EE-D5AC5B807D26}.Release|ARM.ActiveCfg = Release|Any CPU
+		{BF6C0F8F-2305-4FD9-B5EE-D5AC5B807D26}.Release|ARM.Build.0 = Release|Any CPU
+		{BF6C0F8F-2305-4FD9-B5EE-D5AC5B807D26}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{BF6C0F8F-2305-4FD9-B5EE-D5AC5B807D26}.Release|ARM64.Build.0 = Release|Any CPU
+		{BF6C0F8F-2305-4FD9-B5EE-D5AC5B807D26}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{BF6C0F8F-2305-4FD9-B5EE-D5AC5B807D26}.Release|iPhone.Build.0 = Release|Any CPU
+		{BF6C0F8F-2305-4FD9-B5EE-D5AC5B807D26}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{BF6C0F8F-2305-4FD9-B5EE-D5AC5B807D26}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{BF6C0F8F-2305-4FD9-B5EE-D5AC5B807D26}.Release|x64.ActiveCfg = Release|Any CPU
+		{BF6C0F8F-2305-4FD9-B5EE-D5AC5B807D26}.Release|x64.Build.0 = Release|Any CPU
+		{BF6C0F8F-2305-4FD9-B5EE-D5AC5B807D26}.Release|x86.ActiveCfg = Release|Any CPU
+		{BF6C0F8F-2305-4FD9-B5EE-D5AC5B807D26}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -541,6 +573,8 @@ Global
 		{79822AFE-BC23-430B-BAA5-B3E391593805} = {CAF58F84-2057-44BB-AAA0-D1919125A96C}
 		{BDFA10B4-F3FA-4A2B-8B89-46C7B82C5F0E} = {CAF58F84-2057-44BB-AAA0-D1919125A96C}
 		{04E430DE-2396-4C15-B8CB-5C347ACEDBC3} = {CCA4681D-E5EB-488C-AD38-CC7CE437D471}
+		{39F609A4-2159-4268-A383-6BA837E9C315} = {5DF4C2E7-56BB-4EFD-BBA1-2E4FB7284A63}
+		{BF6C0F8F-2305-4FD9-B5EE-D5AC5B807D26} = {39F609A4-2159-4268-A383-6BA837E9C315}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9B875394-7186-4C6A-8A48-144CEA8EA867}
