@@ -1,6 +1,7 @@
 steps:
 
   - task: SonarCloudPrepare@1
+    enabled: false
     inputs:
       SonarCloud: 'SonarCloud'
       organization: 'chroomsoft'
@@ -75,7 +76,9 @@ steps:
     artifact: CSV
 
   - task: SonarCloudAnalyze@1
+    enabled: false
 
   - task: SonarCloudPublish@1
+    enabled: false
     inputs:
       pollingTimeoutSec: '300'
