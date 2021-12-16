@@ -1,5 +1,4 @@
 steps:
-
   - task: SonarCloudPrepare@1
     enabled: false
     inputs:
