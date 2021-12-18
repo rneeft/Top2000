@@ -87,10 +87,10 @@ namespace Chroomsoft.Top2000.Apps
 
         private static bool IsTop2000Live()
         {
-            var first = new DateTime(2020, 12, 24, 23, 0, 0, DateTimeKind.Utc); // first day of Christmas
-            var last = new DateTime(2020, 12, 31, 23, 0, 0, DateTimeKind.Utc); // new year
-
             var current = DateTime.UtcNow;
+
+            var first = new DateTime(current.Year, 12, 24, 23, 0, 0, DateTimeKind.Utc); // first day of Christmas
+            var last = new DateTime(current.Year, 12, 31, 23, 0, 0, DateTimeKind.Utc); // new year
 
             return (current > first && current < last);
         }
