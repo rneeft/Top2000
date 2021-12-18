@@ -62,8 +62,8 @@ namespace Chroomsoft.Top2000.Specs.Features
             track.AppearancesPossible.Should().Be(expected);
         }
 
-        [Then(@"it it listed for (.*) times")]
-        public void ThenItItListedForTimes(int expected)
+        [Then(@"is it listed for (.*) times")]
+        public void ThenIsItListedForTimes(int expected)
         {
             track.Appearances.Should().Be(expected);
         }

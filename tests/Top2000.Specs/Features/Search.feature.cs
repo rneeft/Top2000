@@ -100,61 +100,7 @@ this.ScenarioInitialize(scenarioInfo);
 testRunner.Given("All data scripts", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 5
-testRunner.When("searching for Coaster", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line hidden
-                TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
-                            "Id",
-                            "Title",
-                            "Artist",
-                            "Recorded Year"});
-                table5.AddRow(new string[] {
-                            "4444",
-                            "Roller Coaster",
-                            "Danny Vera",
-                            "2019"});
-                table5.AddRow(new string[] {
-                            "3567",
-                            "Yakety yak",
-                            "Coasters",
-                            "1958"});
-#line 6
-testRunner.Then("the following tracks are found:", ((string)(null)), table5, "Then ");
-#line hidden
-            }
-            this.ScenarioCleanup();
-        }
-        
-        [TechTalk.SpecRun.ScenarioAttribute("Tracks can be searching by artist", SourceLine=10)]
-        public virtual void TracksCanBeSearchingByArtist()
-        {
-            string[] tagsOfScenario = ((string[])(null));
-            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Tracks can be searching by artist", null, tagsOfScenario, argumentsOfScenario);
-#line 11
-this.ScenarioInitialize(scenarioInfo);
-#line hidden
-            bool isScenarioIgnored = default(bool);
-            bool isFeatureIgnored = default(bool);
-            if ((tagsOfScenario != null))
-            {
-                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((this._featureTags != null))
-            {
-                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((isScenarioIgnored || isFeatureIgnored))
-            {
-                testRunner.SkipScenario();
-            }
-            else
-            {
-                this.ScenarioStart();
-#line 12
-testRunner.Given("All data scripts", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line hidden
-#line 13
-testRunner.When("searching for Soleil", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+testRunner.When("searching for Piano", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
                 TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
                             "Id",
@@ -162,24 +108,34 @@ testRunner.When("searching for Soleil", ((string)(null)), ((TechTalk.SpecFlow.Ta
                             "Artist",
                             "Recorded Year"});
                 table6.AddRow(new string[] {
-                            "119",
-                            "Alegria",
-                            "Cirque du Soleil",
-                            "1997"});
-#line 14
+                            "2134",
+                            "My old piano",
+                            "Diana Ross",
+                            "1980"});
+                table6.AddRow(new string[] {
+                            "2358",
+                            "Piano Man",
+                            "Billy Joel",
+                            "1974"});
+                table6.AddRow(new string[] {
+                            "3558",
+                            "Worn Down Piano",
+                            "Mark & Clark Band",
+                            "1977"});
+#line 6
 testRunner.Then("the following tracks are found:", ((string)(null)), table6, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Track can be searched by their full RecordedYear", SourceLine=17)]
-        public virtual void TrackCanBeSearchedByTheirFullRecordedYear()
+        [TechTalk.SpecRun.ScenarioAttribute("Tracks can be searching by artist", SourceLine=11)]
+        public virtual void TracksCanBeSearchingByArtist()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Track can be searched by their full RecordedYear", null, tagsOfScenario, argumentsOfScenario);
-#line 18
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Tracks can be searching by artist", null, tagsOfScenario, argumentsOfScenario);
+#line 12
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -199,11 +155,11 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 19
+#line 13
 testRunner.Given("All data scripts", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 20
-testRunner.When("searching for 1954", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 14
+testRunner.When("searching for Soleil", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
                 TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
                             "Id",
@@ -211,24 +167,24 @@ testRunner.When("searching for 1954", ((string)(null)), ((TechTalk.SpecFlow.Tabl
                             "Artist",
                             "Recorded Year"});
                 table7.AddRow(new string[] {
-                            "3468",
-                            "White Christmas",
-                            "Bing Crosby",
-                            "1954"});
-#line 21
+                            "119",
+                            "Alegria",
+                            "Cirque du Soleil",
+                            "1997"});
+#line 15
 testRunner.Then("the following tracks are found:", ((string)(null)), table7, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Searching track by their RecordedYear are only found by searching the full year", SourceLine=24)]
-        public virtual void SearchingTrackByTheirRecordedYearAreOnlyFoundBySearchingTheFullYear()
+        [TechTalk.SpecRun.ScenarioAttribute("Track can be searched by their full RecordedYear", SourceLine=18)]
+        public virtual void TrackCanBeSearchedByTheirFullRecordedYear()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Searching track by their RecordedYear are only found by searching the full year", null, tagsOfScenario, argumentsOfScenario);
-#line 25
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Track can be searched by their full RecordedYear", null, tagsOfScenario, argumentsOfScenario);
+#line 19
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -248,26 +204,75 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 26
+#line 20
 testRunner.Given("All data scripts", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
+#line 21
+testRunner.When("searching for 1954", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+                TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Id",
+                            "Title",
+                            "Artist",
+                            "Recorded Year"});
+                table8.AddRow(new string[] {
+                            "3468",
+                            "White Christmas",
+                            "Bing Crosby",
+                            "1954"});
+#line 22
+testRunner.Then("the following tracks are found:", ((string)(null)), table8, "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [TechTalk.SpecRun.ScenarioAttribute("Searching track by their RecordedYear are only found by searching the full year", SourceLine=25)]
+        public virtual void SearchingTrackByTheirRecordedYearAreOnlyFoundBySearchingTheFullYear()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Searching track by their RecordedYear are only found by searching the full year", null, tagsOfScenario, argumentsOfScenario);
+#line 26
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
 #line 27
-testRunner.When("searching for 54", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+testRunner.Given("All data scripts", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 28
+testRunner.When("searching for 54", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 29
 testRunner.Then("the track White Christmas is not found", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Searching will have a result cap of 100", SourceLine=29)]
+        [TechTalk.SpecRun.ScenarioAttribute("Searching will have a result cap of 100", SourceLine=30)]
         public virtual void SearchingWillHaveAResultCapOf100()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Searching will have a result cap of 100", null, tagsOfScenario, argumentsOfScenario);
-#line 30
+#line 31
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -287,26 +292,26 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 31
+#line 32
 testRunner.Given("All data scripts", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 32
+#line 33
 testRunner.When("searching for a", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 33
+#line 34
 testRunner.Then("the results contain 100 items", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("An empty search querty give zero results", SourceLine=34)]
+        [TechTalk.SpecRun.ScenarioAttribute("An empty search querty give zero results", SourceLine=35)]
         public virtual void AnEmptySearchQuertyGiveZeroResults()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("An empty search querty give zero results", null, tagsOfScenario, argumentsOfScenario);
-#line 35
+#line 36
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -326,13 +331,13 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 36
+#line 37
 testRunner.Given("All data scripts", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 37
+#line 38
 testRunner.When("searching without a query", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 38
+#line 39
 testRunner.Then("the results contain 0 items", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }

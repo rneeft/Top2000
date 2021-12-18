@@ -414,6 +414,54 @@ testRunner.Then("the UTC Statdate is as follow:", ((string)(null)), table4, "The
             }
             this.ScenarioCleanup();
         }
+        
+        [TechTalk.SpecRun.ScenarioAttribute("As from 2020 the Top2000 starts at the start of boxing day (CET)", SourceLine=61)]
+        public virtual void AsFrom2020TheTop2000StartsAtTheStartOfBoxingDayCET()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("As from 2020 the Top2000 starts at the start of boxing day (CET)", null, tagsOfScenario, argumentsOfScenario);
+#line 62
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 63
+testRunner.Given("All data scripts", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 64
+testRunner.When("the feature is executed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+                TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Year",
+                            "UTC Startdate"});
+                table5.AddRow(new string[] {
+                            "2020",
+                            "2020-12-24T23:00:00"});
+                table5.AddRow(new string[] {
+                            "2021",
+                            "2021-12-24T23:00:00"});
+#line 65
+testRunner.Then("the UTC Statdate is as follow:", ((string)(null)), table5, "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore
