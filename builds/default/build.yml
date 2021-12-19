@@ -65,12 +65,14 @@ steps:
     artifact: Specification
 
   - task: DotNetCoreCLI@2
+    enabled: false
     displayName: 'Run CSV exporter'
     inputs:
       command: 'run'
       projects: 'src/data/Data.Export/Data.Export.csproj'
 
   - publish: 'src/data/Data.Export/bin/Release/netcoreapp3.1/'
+    enabled: false
     displayName: Publishing CSV export
     artifact: CSV
 
