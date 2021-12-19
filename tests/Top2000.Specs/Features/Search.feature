@@ -2,11 +2,12 @@
 
 Scenario: Track can be searching by title
 Given All data scripts
-When searching for Coaster
+When searching for Piano
 Then the following tracks are found:
-| Id   | Title          | Artist     | Recorded Year |
-| 4444 | Roller Coaster | Danny Vera | 2019          |
-| 3567 | Yakety yak     | Coasters   | 1958          |
+| Id   | Title           | Artist            | Recorded Year |
+| 2134 | My old piano    | Diana Ross        | 1980          |
+| 2358 | Piano Man       | Billy Joel        | 1974          |
+| 3558 | Worn Down Piano | Mark & Clark Band | 1977          |
 
 Scenario: Tracks can be searching by artist
 Given All data scripts

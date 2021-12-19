@@ -58,3 +58,11 @@ When the feature is executed
 Then the UTC Statdate is as follow:
 | Year | UTC Startdate       |
 | 2019 | 2019-12-25T07:00:00 |
+
+Scenario: As from 2020 the Top2000 starts at the start of boxing day (CET)
+Given All data scripts
+When the feature is executed
+Then the UTC Statdate is as follow:
+| Year | UTC Startdate       |
+| 2020 | 2020-12-24T23:00:00 |
+| 2021 | 2021-12-24T23:00:00 |

@@ -42,7 +42,9 @@ namespace Chroomsoft.Top2000.Specs.Features
         public void DeleteClientDatabase()
         {
             if (File.Exists(App.DatabasePath))
+            {
                 File.Delete(App.DatabasePath);
+            }
         }
 
         [AfterScenario]

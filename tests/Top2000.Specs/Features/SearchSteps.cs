@@ -38,11 +38,40 @@ namespace Chroomsoft.Top2000.Specs.Features
         [Then(@"the following tracks are found:")]
         public void ThenTracksAreFoundWithTheFollowingDetails(Table table)
         {
-            var expected = table.CreateSet<Track>();
-            var actual = result.SelectMany(x => x)
+            var expected = table
+                .CreateSet<Track>()
+                .Select(x => new TrackForAssertion
+                {
+                    Id = x.Id,
+                    Title = x.Title,
+                    Artist = x.Artist,
+                    RecordedYear = x.RecordedYear,
+                })
+                .ToList();
+
+            var actual = result
+                .SelectMany(x => x)
+                .Select(x => new TrackForAssertion
+                {
+                    Id = x.Id,
+                    Title = x.Title,
+                    Artist = x.Artist,
+                    RecordedYear = x.RecordedYear,
+                })
                 .ToList();
 
             actual.Should().BeEquivalentTo(expected);
+        }
+
+        public class TrackForAssertion
+        {
+            public int Id { get; set; }
+
+            public string Title { get; set; } = string.Empty;
+
+            public string Artist { get; set; } = string.Empty;
+
+            public int RecordedYear { get; set; }
         }
 
         [Then(@"the track (.*) is not found")]

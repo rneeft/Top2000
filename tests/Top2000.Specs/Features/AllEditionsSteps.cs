@@ -18,12 +18,12 @@ namespace Chroomsoft.Top2000.Specs.Features
         private ImmutableSortedSet<Edition> editions;
 
         [Given(@"All data scripts")]
-        public async Task GivenAllDataScripts()
+        public Task GivenAllDataScripts()
         {
             var assemblySource = App.ServiceProvider.GetService<Top2000AssemblyDataSource>();
             var update = App.ServiceProvider.GetService<IUpdateClientDatabase>();
 
-            await update.RunAsync(assemblySource);
+            return update.RunAsync(assemblySource);
         }
 
         [When(@"the feature is executed")]
