@@ -132,15 +132,16 @@ namespace Data.Export
 
             Encoding utf8WithoutBom = new UTF8Encoding(encoderShouldEmitUTF8Identifier: false);
 
+            Directory.CreateDirectory("export");
 
             Console.WriteLine("Export editions.csv");
-            await File.WriteAllLinesAsync("editions.csv", editions, utf8WithoutBom);
+            await File.WriteAllLinesAsync("export/editions.csv", editions, utf8WithoutBom);
 
             Console.WriteLine("Export tracks.csv");
-            await File.WriteAllLinesAsync("tracks.csv", tracks, utf8WithoutBom);
+            await File.WriteAllLinesAsync("export/tracks.csv", tracks, utf8WithoutBom);
 
             Console.WriteLine("Export listings.csv");
-            await File.WriteAllLinesAsync("listings.csv", possList, utf8WithoutBom);
+            await File.WriteAllLinesAsync("export/listings.csv", possList, utf8WithoutBom);
         }
 
         private static string Replace(string input)
