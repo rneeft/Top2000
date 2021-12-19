@@ -34,16 +34,6 @@ jobs:
       msbuildArgs:  '/p:AppxBundle=Never
                      /p:AppxPackageSigningEnabled=false'
 
-  - task: DotNetCoreCLI@2
-    displayName: 'Run CSV exporter'
-    inputs:
-      command: 'run'
-      projects: 'src/data/Data.Export/Data.Export.csproj'
-
-  - publish: 'export'
-    displayName: Publishing CSV export
-    artifact: CSV
-
   - task: VSTest@2
     displayName: 'Test - Unittests'
     inputs:
