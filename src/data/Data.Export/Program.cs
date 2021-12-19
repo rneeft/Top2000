@@ -63,6 +63,8 @@ namespace Data.Export
 
             await EnsureDatabaseIsCreatedAsync();
 
+
+
             var tracks = new List<string>()
             {
                 "Id,Title,Artist,Year,HighPosition,HighEdition,LowPosition,LowEdition,FirstPosition,FirstEdition,LastPosition,LastEdition,LastPlayTime,Appearances,AppearancesPositions"
@@ -143,6 +145,9 @@ namespace Data.Export
                 .Replace("à", "a", StringComparison.InvariantCulture)
                 .Replace("ã", "a", StringComparison.InvariantCulture)
                 .Replace("â", "a", StringComparison.InvariantCulture)
+                .Replace("å", "a", StringComparison.InvariantCulture)
+                
+                .Replace("Å", "A", StringComparison.InvariantCulture)
 
                 .Replace("ê", "e", StringComparison.InvariantCulture)
                 .Replace("ë", "e", StringComparison.InvariantCulture)
