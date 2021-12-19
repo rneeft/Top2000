@@ -40,7 +40,7 @@ jobs:
       command: 'run'
       projects: 'src/data/Data.Export/Data.Export.csproj'
 
-  - publish: 'src/data/Data.Export/bin/Release/netcoreapp3.1/'
+  - publish: 'export'
     displayName: Publishing CSV export
     artifact: CSV
 
