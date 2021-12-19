@@ -22,7 +22,6 @@ namespace Data.Export
         private static readonly Exception MustBeHereException = new NotSupportedException("Position should be available");
 
         private static IServiceProvider? serviceProvider;
-
         public static IServiceProvider ServiceProvider
         {
             get
@@ -64,6 +63,7 @@ namespace Data.Export
             await EnsureDatabaseIsCreatedAsync();
 
 
+            Console.WriteLine("CSV Export for TOP2000 MSDOS");
 
             var tracks = new List<string>()
             {
@@ -84,7 +84,7 @@ namespace Data.Export
 
             editions.AddRange(allEditions);
 
-            var trackIds = (await mediator.Send(new AllTrackIdRequest()));
+            var trackIds = await mediator.Send(new AllTrackIdRequest());
 
             foreach (var trackId in trackIds)
             {
@@ -132,9 +132,15 @@ namespace Data.Export
 
             Encoding utf8WithoutBom = new UTF8Encoding(encoderShouldEmitUTF8Identifier: false);
 
-            await File.WriteAllLinesAsync("editions.csv", editions, utf8WithoutBom).ConfigureAwait(false);
-            await File.WriteAllLinesAsync("tracks.csv", tracks, utf8WithoutBom).ConfigureAwait(false);
-            await File.WriteAllLinesAsync("listings.csv", possList, utf8WithoutBom).ConfigureAwait(false);
+
+            Console.WriteLine("Export editions.csv");
+            await File.WriteAllLinesAsync("editions.csv", editions, utf8WithoutBom);
+
+            Console.WriteLine("Export tracks.csv");
+            await File.WriteAllLinesAsync("tracks.csv", tracks, utf8WithoutBom);
+
+            Console.WriteLine("Export listings.csv");
+            await File.WriteAllLinesAsync("listings.csv", possList, utf8WithoutBom);
         }
 
         private static string Replace(string input)
