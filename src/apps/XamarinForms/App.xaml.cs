@@ -58,6 +58,22 @@ namespace Chroomsoft.Top2000.Apps.XamarinForms
             return databaseGen.RunAsync(top2000);
         }
 
+        public static async Task CheckForOnlineUpdates()
+        {
+            try
+            {
+                await Task.Delay(3_1000);
+                var databasGen = GetService<IUpdateClientDatabase>();
+                var onlineStore = GetService<OnlineDataSource>();
+
+                await databasGen.RunAsync(onlineStore);
+            }
+            catch
+            {
+                // I don't want a crash here, just continue. 
+            }
+        }
+
         protected override void OnStart()
         {
             AppCenter.Start("89fbeb5b-5ec9-4456-86c7-214421330f73", typeof(Analytics), typeof(Crashes));
