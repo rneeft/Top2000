@@ -13,7 +13,7 @@ stages:
   jobs:
   - job: Build
     pool:
-      name: uwp-agent
+      vmImage: 'windows-latest'
     steps:
     - template: default/build.yml
 
@@ -24,7 +24,7 @@ stages:
   jobs:
   - deployment: DevReleaseJob
     pool:
-      name: uwp-agent
+      vmImage: 'windows-latest'
     environment: Dev-Stage
     strategy: 
       runOnce:
@@ -35,6 +35,6 @@ stages:
   - job: DevSpecifications
     dependsOn: DevReleaseJob
     pool:
-      name: uwp-agent
+      vmImage: 'windows-latest'
     steps:
     - template: default/specrun.yml

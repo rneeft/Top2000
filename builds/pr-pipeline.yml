@@ -11,7 +11,7 @@ variables:
 jobs:
 - job: Build
   pool:
-    name: uwp-agent
+    vmImage: 'windows-latest'
   steps:
   - task: NuGetToolInstaller@0
     displayName: 'Use NuGet 5.8.0'
