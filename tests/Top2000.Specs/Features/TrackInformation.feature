@@ -87,8 +87,8 @@ And the following years are listed as 'Unchanged'
 Scenario: 'Since release' is the statistic that shows how many times the tracks could have been listed
 When the track information feature is executed for TrackId 3966
 Then the title is "Hello" from 'Adele' which is recorded in the year 2015
-And it could have been on the Top2000 for 7 times
-And is it listed for 7 times
+And it could have been on the Top2000 for 8 times
+And is it listed for 8 times
 
 Scenario: Record high shows the highest listing for the track
 When the track information feature is executed for TrackId 1496
@@ -103,7 +103,7 @@ And the record low is number 41 in 2009
 Scenario: Last postion shows the position of latest edition where the track was listed
 When the track information feature is executed for TrackId 1496
 Then the title is "Imagine" from 'John Lennon' which is recorded in the year 1971
-And the Lastest position is number 34 in 2021
+And the Lastest position is number 52 in 2022
 
 Scenario: First position shows the position of the first edition where the track was listed
 When the track information feature is executed for TrackId 1496

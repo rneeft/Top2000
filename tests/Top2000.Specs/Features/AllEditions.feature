@@ -66,3 +66,4 @@ Then the UTC Statdate is as follow:
 | Year | UTC Startdate       |
 | 2020 | 2020-12-24T23:00:00 |
 | 2021 | 2021-12-24T23:00:00 |
+| 2022 | 2022-12-24T23:00:00 |
