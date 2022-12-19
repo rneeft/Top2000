@@ -98,7 +98,7 @@ And the record high is number 1 on 2015
 Scenario: Record low shows the lowest listing for the track
 When the track information feature is executed for TrackId 1496
 Then the title is "Imagine" from 'John Lennon' which is recorded in the year 1971
-And the record low is number 41 in 2009
+And the record low is number 52 in 2022
 
 Scenario: Last postion shows the position of latest edition where the track was listed
 When the track information feature is executed for TrackId 1496

@@ -456,6 +456,9 @@ testRunner.When("the feature is executed", ((string)(null)), ((TechTalk.SpecFlow
                 table5.AddRow(new string[] {
                             "2021",
                             "2021-12-24T23:00:00"});
+                table5.AddRow(new string[] {
+                            "2022",
+                            "2022-12-24T23:00:00"});
 #line 65
 testRunner.Then("the UTC Statdate is as follow:", ((string)(null)), table5, "Then ");
 #line hidden

@@ -28,6 +28,20 @@ namespace Chroomsoft.Top2000.Data.ClientDatabase.Tests
             sourceMock = new Mock<ISource>();
         }
 
+        [TestMethod]
+        public async Task AllFileCanBeExcuteInTheDatabaseAsync()
+        {
+            var top2000Data = new Top2000Data();
+            var dataSource = new Top2000AssemblyDataSource(top2000Data);
+            await sut.RunAsync(dataSource);
+
+            var totalFiles = top2000Data.GetAllSqlFiles();
+
+            var journals = await connection.QueryAsync<Journal>("SELECT ScriptName FROM Journal");
+
+            journals.Should().HaveCount(totalFiles.Count);
+        }
+
         [TestCleanup]
         public async Task TestCleanup()
         {
