@@ -8,24 +8,28 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.9" />
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.1.9" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.0" />
-    <PackageReference Include="MSTest.TestAdapter" Version="2.1.2" />
-    <PackageReference Include="MSTest.TestFramework" Version="2.1.2" />
-    <PackageReference Include="coverlet.collector" Version="1.3.0">
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.4.1" />
+    <PackageReference Include="MSTest.TestAdapter" Version="3.0.0" />
+    <PackageReference Include="MSTest.TestFramework" Version="3.0.0" />
+    <PackageReference Include="coverlet.collector" Version="3.2.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="SpecFlow" Version="3.4.31" />
-    <PackageReference Include="SpecFlow.Tools.MsBuild.Generation" Version="3.4.31" />
-    <PackageReference Include="SpecRun.SpecFlow" Version="3.4.51" />
+    <PackageReference Include="SpecFlow" Version="3.9.74" />
+    <PackageReference Include="SpecFlow.Tools.MsBuild.Generation" Version="3.9.74" />
+    <PackageReference Include="SpecRun.SpecFlow" Version="3.9.31" />
   </ItemGroup>
 
   <ItemGroup>
       <ProjectReference Include="..\..\src\data\Data.ClientDatabase\Data.ClientDatabase.csproj" />
       <ProjectReference Include="..\..\src\Features\Features.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Update="FluentAssertions" Version="6.8.0" />
   </ItemGroup>
 
 </Project>
