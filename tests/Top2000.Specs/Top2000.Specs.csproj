@@ -1,19 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
     <IsPackable>false</IsPackable>
     <AssemblyName>Chroomsoft.Top2000.Specs</AssemblyName>
     <RootNamespace>Chroomsoft.Top2000.Specs</RootNamespace>
   </PropertyGroup>
-
-  <ItemGroup>
-    <CustomAdditionalCompileInputs Remove="Features\ClientDatabase.feature.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <UpToDateCheckBuild Remove="Features\ClientDatabase.feature.cs" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
