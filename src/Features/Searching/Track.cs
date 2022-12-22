@@ -12,6 +12,6 @@
 
         public int? Position { get; set; }
 
-        public string PositionIn2020 => $"2021: {Position?.ToString() ?? "-"}";
+        public string PositionIn2020 => $"2022: {Position?.ToString() ?? "-"}";
     }
 }
