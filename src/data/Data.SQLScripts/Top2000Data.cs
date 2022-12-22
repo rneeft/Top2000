@@ -1,5 +1,4 @@
-﻿using MoreLinq;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -32,12 +31,12 @@ namespace Chroomsoft.Top2000.Data
 
         public Assembly DataAssembly => typeof(Top2000Data).Assembly;
 
-        public Task<string> GetScriptContentAsync(string fileName)
+        public async Task<string> GetScriptContentAsync(string fileName)
         {
             using var stream = DataAssembly.GetManifestResourceStream(prefix + fileName) ?? throw new FileNotFoundException($"Unable to find {fileName} in {DataAssembly.GetName()}");
             using var reader = new StreamReader(stream, Encoding.UTF8);
 
-            return reader.ReadToEndAsync();
+            return await reader.ReadToEndAsync();
         }
 
         public Stream GetScriptStream(string fileName)

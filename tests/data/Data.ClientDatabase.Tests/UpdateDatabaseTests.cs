@@ -1,11 +1,6 @@
-﻿using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using SQLite;
-using System.Collections.Immutable;
+﻿using SQLite;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Chroomsoft.Top2000.Data.ClientDatabase.Tests
 {
@@ -13,15 +8,16 @@ namespace Chroomsoft.Top2000.Data.ClientDatabase.Tests
     public class UpdateDatabaseTests
     {
         private const string DatabaseFileName = "unittest.db";
-        private SQLiteAsyncConnection connection;
-        private UpdateDatabase sut;
-        private Mock<ISource> sourceMock;
+        private readonly SQLiteAsyncConnection connection;
+        private readonly UpdateDatabase sut;
+        private readonly Mock<ISource> sourceMock;
 
-        [TestInitialize]
-        public void TestInitialize()
+        public UpdateDatabaseTests()
         {
             if (File.Exists(DatabaseFileName))
+            {
                 File.Delete(DatabaseFileName);
+            }
 
             connection = new SQLiteAsyncConnection("unittest.db");
             sut = new UpdateDatabase(connection);
@@ -105,7 +101,10 @@ namespace Chroomsoft.Top2000.Data.ClientDatabase.Tests
 
                 Assert.Fail("Could should have throw exception");
             }
-            catch { }
+            catch
+            {
+                // skipping for testing purposes
+            }
 
             var expected = new[] { "000-First.sql" };
             var actuals = (await connection.Table<Journal>().ToListAsync())

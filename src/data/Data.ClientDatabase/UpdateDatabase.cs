@@ -1,55 +1,54 @@
-﻿using SQLite;
-using System.Collections.Immutable;
-using System.Linq;
-using System.Threading.Tasks;
+﻿namespace Chroomsoft.Top2000.Data.ClientDatabase;
 
-namespace Chroomsoft.Top2000.Data.ClientDatabase
+public interface IUpdateClientDatabase
 {
-    public interface IUpdateClientDatabase
+    Task RunAsync(ISource source);
+}
+
+public sealed class UpdateDatabase : IUpdateClientDatabase
+{
+    private readonly SQLiteAsyncConnection connection;
+
+    public UpdateDatabase(SQLiteAsyncConnection connection)
     {
-        Task RunAsync(ISource source);
+        this.connection = connection;
     }
 
-    public class UpdateDatabase : IUpdateClientDatabase
+    public async Task RunAsync(ISource source)
     {
-        private readonly SQLiteAsyncConnection connection;
+        var journals = await AllJournalsAsync();
+        var executableScripts = await source.ExecutableScriptsAsync(journals);
 
-        public UpdateDatabase(SQLiteAsyncConnection connection)
+        foreach (var scriptName in executableScripts)
         {
-            this.connection = connection;
+            var script = await source.ScriptContentsAsync(scriptName);
+            await ExecuteScriptAsync(script);
         }
+    }
 
-        public async Task RunAsync(ISource source)
+    private Task ExecuteScriptAsync(SqlScript script)
+    {
+        return connection.RunInTransactionAsync(connection =>
         {
-            var journals = await AllJournalsAsync().ConfigureAwait(false);
-            var executableScripts = await source.ExecutableScriptsAsync(journals).ConfigureAwait(false);
+            var sections = script.SqlSections();
 
-            foreach (var scriptName in executableScripts)
+            foreach (var section in sections)
             {
-                var script = await source.ScriptContentsAsync(scriptName).ConfigureAwait(false);
-                await ExecuteScriptAsync(script).ConfigureAwait(false);
+                connection.Execute(section);
             }
-        }
 
-        private Task ExecuteScriptAsync(SqlScript script)
-        {
-            return connection.RunInTransactionAsync(connection =>
-            {
-                var sections = script.SqlSections();
+            connection.Insert(new Journal { ScriptName = script.ScriptName });
+        });
+    }
 
-                foreach (var section in sections)
-                    connection.Execute(section);
+    private async Task<ImmutableSortedSet<string>> AllJournalsAsync()
+    {
+        await connection.CreateTableAsync<Journal>();
 
-                connection.Insert(new Journal { ScriptName = script.ScriptName });
-            });
-        }
+        var journals = await connection.Table<Journal>().ToListAsync();
 
-        private async Task<ImmutableSortedSet<string>> AllJournalsAsync()
-        {
-            await connection.CreateTableAsync<Journal>().ConfigureAwait(false);
-            return (await connection.Table<Journal>().ToListAsync().ConfigureAwait(false))
-                .Select(x => x.ScriptName)
-                .ToImmutableSortedSet();
-        }
+        return journals
+            .Select(x => x.ScriptName)
+            .ToImmutableSortedSet();
     }
 }

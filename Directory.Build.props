@@ -1,12 +1,12 @@
 <Project>
+  
   <PropertyGroup>
-    <LangVersion>8.0</LangVersion>
     <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
+  
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
       <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
   </PropertyGroup>
-  <ItemGroup>
-  </ItemGroup>
 </Project>                                                      
