@@ -2,7 +2,7 @@
 
 namespace Chroomsoft.Top2000.Features.AllEditions
 {
-    public class Edition
+    public sealed class Edition
     {
         public int Year { get; set; }
 
