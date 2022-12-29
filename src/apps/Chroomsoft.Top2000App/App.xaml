@@ -1,0 +1,28 @@
+﻿<?xml version = "1.0" encoding = "UTF-8" ?>
+<Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Chroomsoft.Top2000App"
+             xmlns:page="clr-namespace:Chroomsoft.Top2000App.Pages"
+             xmlns:converters="clr-namespace:Chroomsoft.Top2000App.Converters"
+             x:Class="Chroomsoft.Top2000App.App">
+    <Application.Resources>
+        <ResourceDictionary>
+            <converters:EditionPlayTimeConverter x:Key="EditionPlayTimeConverter" />
+            <converters:DeltaToStringConverter x:Key="DeltaToStringConverter" />
+            <converters:DeltaToSymbolColour x:Key="DeltaToSymbolColour" />
+            <converters:DeltaToSymbolConverter x:Key="DeltaToSymbolConverter" />
+            <converters:TrackListingSymbolFontSizeConverter x:Key="TrackListingSymbolFontSizeConverter" />
+            
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
+                <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+
+    <Application.MainPage>
+        <Shell>
+            <ShellContent ContentTemplate="{DataTemplate page:PositionsOverviewView}"/>
+        </Shell>
+    </Application.MainPage>
+</Application>

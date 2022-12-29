@@ -36,6 +36,7 @@ namespace Chroomsoft.Top2000.Apps
             services
                 .AddClientDatabase(new DirectoryInfo(FileSystem.AppDataDirectory), baseUrl)
                 .AddFeatures()
+
                 .AddSingleton<IThemeService, ThemeService>()
                 .AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>))
                 .AddTransient<Overview.Position.ViewModel>()

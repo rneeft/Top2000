@@ -62,7 +62,7 @@ namespace Chroomsoft.Top2000.Apps.XamarinForms
         {
             try
             {
-                await Task.Delay(3_1000);
+                await Task.Delay(3_000);
                 var databasGen = GetService<IUpdateClientDatabase>();
                 var onlineStore = GetService<OnlineDataSource>();
 

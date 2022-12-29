@@ -2,7 +2,7 @@
 
 public interface IAllListingsOfEdition
 {
-    Task<ImmutableHashSet<TrackListing>> ListingForEdition(Edition edition);
+    Task<ImmutableHashSet<TrackListing>> ListingForEditionAsync(Edition edition);
 }
 
 public sealed class AllListingsOfEdition : IAllListingsOfEdition
@@ -14,7 +14,7 @@ public sealed class AllListingsOfEdition : IAllListingsOfEdition
         this.connection = connection;
     }
 
-    public async Task<ImmutableHashSet<TrackListing>> ListingForEdition(Edition edition)
+    public async Task<ImmutableHashSet<TrackListing>> ListingForEditionAsync(Edition edition)
     {
         var sql =
           "SELECT Listing.TrackId, Listing.Position, (p.Position - Listing.Position) AS Delta, Listing.PlayUtcDateAndTime, Title, Artist " +
@@ -25,7 +25,6 @@ public sealed class AllListingsOfEdition : IAllListingsOfEdition
         var previousEdition = edition.Year - 1;
         var tracklisting = await connection.QueryAsync<TrackListing>(sql, previousEdition, edition.Year);
 
-        return tracklisting
-            .ToImmutableHashSet(new TrackListingComparer());
+        return tracklisting.ToImmutableHashSet(new TrackListingComparer());
     }
 }

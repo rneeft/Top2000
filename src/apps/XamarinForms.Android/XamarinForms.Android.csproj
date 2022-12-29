@@ -94,10 +94,8 @@
     <Compile Include="TrackInformation\ProgressRingRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidAsset Include="Assets\MaterialIcons.ttf" />
     <None Include=".editorconfig" />
     <None Include="Resources\AboutResources.txt" />
-    <None Include="Assets\AboutAssets.txt" />
     <None Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
   <ItemGroup>
