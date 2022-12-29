@@ -10,8 +10,8 @@ namespace Features.Unittests.TrackInformation
         [TestMethod]
         public void Listings_with_same_edition_compare_as_zero()
         {
-            var listing1 = new ListingInformation { Edition = 2018 };
-            var listing2 = new ListingInformation { Edition = 2018 };
+            var listing1 = new Listing { Edition = 2018 };
+            var listing2 = new Listing { Edition = 2018 };
 
             var sut = new ListingInformationDescendingComparer();
 
@@ -21,8 +21,8 @@ namespace Features.Unittests.TrackInformation
         [TestMethod]
         public void Listings_with_higher_edition_compare_as_minus_zero()
         {
-            var listing1 = new ListingInformation { Edition = 2018 };
-            var listing2 = new ListingInformation { Edition = 2019 };
+            var listing1 = new Listing { Edition = 2018 };
+            var listing2 = new Listing { Edition = 2019 };
 
             var sut = new ListingInformationDescendingComparer();
 
@@ -32,8 +32,8 @@ namespace Features.Unittests.TrackInformation
         [TestMethod]
         public void Edition_with_lower_year_compare_as_plus_zero()
         {
-            var listing1 = new ListingInformation { Edition = 2001 };
-            var listing2 = new ListingInformation { Edition = 2000 };
+            var listing1 = new Listing { Edition = 2001 };
+            var listing2 = new Listing { Edition = 2000 };
 
             var sut = new ListingInformationDescendingComparer();
 

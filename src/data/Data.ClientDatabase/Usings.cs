@@ -1,4 +1,6 @@
-﻿global using Chroomsoft.Top2000.Data.ClientDatabase.Sources;
+﻿global using Chroomsoft.Top2000.Data.ClientDatabase.Model;
+global using Chroomsoft.Top2000.Data.ClientDatabase.Sources;
+global using Microsoft.Extensions.DependencyInjection;
 global using SQLite;
 global using System;
 global using System.Collections.Generic;

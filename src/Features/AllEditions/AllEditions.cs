@@ -1,6 +1,11 @@
-﻿namespace Chroomsoft.Top2000.Features.AllEditions;
+﻿namespace Chroomsoft.Top2000.Features.Editions;
 
-public sealed class AllEditions
+public interface IAllEditions
+{
+    Task<ImmutableSortedSet<Edition>> Editions();
+}
+
+public sealed class AllEditions : IAllEditions
 {
     private readonly SQLiteAsyncConnection connection;
 

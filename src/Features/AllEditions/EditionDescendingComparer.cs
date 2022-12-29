@@ -1,12 +1,11 @@
-﻿using System.Collections.Generic;
+﻿namespace Chroomsoft.Top2000.Features;
 
-namespace Chroomsoft.Top2000.Features.AllEditions
+public sealed class EditionDescendingComparer : Comparer<Edition>
 {
-    public class EditionDescendingComparer : Comparer<Edition>
+    public override int Compare(Edition? x, Edition? y)
     {
-        public override int Compare(Edition x, Edition y)
-        {
-            return y.Year - x.Year;
-        }
+        var result = y?.Year - x?.Year;
+
+        return result.GetValueOrDefault(0);
     }
 }

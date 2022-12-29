@@ -1,4 +1,4 @@
-﻿namespace Chroomsoft.Top2000.Data.ClientDatabase;
+﻿namespace Chroomsoft.Top2000.Data.ClientDatabase.Model;
 
 public sealed class Journal
 {
@@ -9,4 +9,6 @@ public sealed class Journal
 
     [PrimaryKey]
     public string ScriptName { get; set; }
+
+    public int Version => int.Parse(ScriptName.Split('-')[0]);
 }

@@ -1,44 +1,24 @@
-﻿using System.Collections.Immutable;
-using System.Linq;
+﻿namespace Chroomsoft.Top2000.Features.TrackInformation;
 
-namespace Chroomsoft.Top2000.Features.TrackInformation
+public sealed class TrackDetails
 {
-    public class TrackDetails
-    {
-        public TrackDetails(string title, string artist, int recordedYear, ImmutableSortedSet<ListingInformation> listings)
-        {
-            this.Title = title;
-            this.Artist = artist;
-            this.RecordedYear = recordedYear;
-            this.Listings = listings;
-        }
+    public required string Title { get; init; }
 
-        public string Title { get; }
+    public required string Artist { get; init;  }
 
-        public string Artist { get; }
+    public required int RecordedYear { get; init; }
 
-        public int RecordedYear { get; }
+    public required ImmutableSortedSet<Listing> Listings { get; init; }
 
-        public ImmutableSortedSet<ListingInformation> Listings { get; }
+    public required Listing Highest { get; init; }
 
-        public ListingInformation Highest => Listings
-            .Where(x => x.Position.HasValue)
-            .OrderBy(x => x.Position)
-            .ThenBy(x => x.Edition)
-            .First();
+    public required Listing Lowest { get; init; }
 
-        public ListingInformation Lowest => Listings
-            .Where(x => x.Position.HasValue)
-            .OrderBy(x => x.Position)
-            .ThenBy(x => x.Edition)
-            .Last();
+    public required Listing First { get; init; }
 
-        public ListingInformation First => Listings.Single(x => x.Status == ListingStatus.New);
+    public required Listing Latest { get; init; }
 
-        public ListingInformation Latest => Listings.First(x => x.Position.HasValue);
+    public required int Appearances { get; init; }
 
-        public int Appearances => Listings.Count(x => x.Position.HasValue);
-
-        public int AppearancesPossible => Listings.Count(x => x.Status != ListingStatus.NotAvailable);
-    }
+    public required int AppearancesPossible { get; init; }
 }

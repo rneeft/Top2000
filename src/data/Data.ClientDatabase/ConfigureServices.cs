@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-
-namespace Chroomsoft.Top2000.Data.ClientDatabase;
+﻿namespace Chroomsoft.Top2000.Data.ClientDatabase;
 
 public static class ConfigureServices
 {
@@ -16,6 +14,7 @@ public static class ConfigureServices
             .AddTransient<Top2000AssemblyDataSource>()
             .AddTransient<IUpdateClientDatabase, UpdateDatabase>()
             .AddTransient<ITop2000AssemblyData, Top2000Data>()
+            .AddTransient<IDatbaseInfo, DatabaseInfo>()
             .AddTransient<SQLiteAsyncConnection>(f =>
             {
                 var databasePath = Path.Combine(appDataDirectory.FullName, clientDatabaseName);
@@ -30,6 +29,7 @@ public static class ConfigureServices
             .AddTransient<Top2000AssemblyDataSource>()
             .AddTransient<IUpdateClientDatabase, UpdateDatabase>()
             .AddTransient<ITop2000AssemblyData, Top2000Data>()
+            .AddTransient<IDatbaseInfo, DatabaseInfo>()
             .AddTransient<SQLiteAsyncConnection>(f =>
             {
                 var databasePath = Path.Combine(appDataDirectory.FullName, clientDatabaseName);

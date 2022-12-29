@@ -1,4 +1,6 @@
-﻿using Chroomsoft.Top2000.Features.Searching;
+﻿using Chroomsoft.Top2000.Features.Groupings;
+using Chroomsoft.Top2000.Features.Searching;
+using Chroomsoft.Top2000.Features.Sortings;
 using FluentAssertions;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;

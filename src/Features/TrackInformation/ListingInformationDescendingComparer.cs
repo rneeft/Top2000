@@ -1,12 +1,14 @@
-﻿using System.Collections.Generic;
+﻿namespace Chroomsoft.Top2000.Features.TrackInformation;
 
-namespace Chroomsoft.Top2000.Features.TrackInformation
+public sealed class ListingInformationDescendingComparer : Comparer<Listing>
 {
-    public class ListingInformationDescendingComparer : Comparer<ListingInformation>
+    public override int Compare(Listing? x, Listing? y)
     {
-        public override int Compare(ListingInformation x, ListingInformation y)
+        if (x is null || y is null)
         {
-            return y.Edition - x.Edition;
+            return 0;
         }
+
+        return y.Edition - x.Edition;
     }
 }

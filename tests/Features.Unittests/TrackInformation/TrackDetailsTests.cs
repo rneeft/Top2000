@@ -9,27 +9,27 @@ namespace Features.Unittests.TrackInformation
     [TestClass]
     public class TrackDetailsTests
     {
-        private ListingInformation listing1999;
-        private ListingInformation listing2000;
-        private ListingInformation listing2001;
-        private ListingInformation listing2002;
-        private ListingInformation listing2003;
-        private ListingInformation listing2004;
-        private ListingInformation listing2005;
+        private Listing listing1999;
+        private Listing listing2000;
+        private Listing listing2001;
+        private Listing listing2002;
+        private Listing listing2003;
+        private Listing listing2004;
+        private Listing listing2005;
         private TrackDetails sut;
 
         [TestInitialize]
         public void TestInitialize()
         {
-            listing1999 = new ListingInformation { Edition = 1999, Status = ListingStatus.NotAvailable };
-            listing2000 = new ListingInformation { Edition = 2000, Position = 10, Status = ListingStatus.New };
-            listing2001 = new ListingInformation { Edition = 2001, Position = 2, Status = ListingStatus.Increased };
-            listing2002 = new ListingInformation { Edition = 2002, Position = 2, Status = ListingStatus.Unchanged };
-            listing2003 = new ListingInformation { Edition = 2003, Position = 10, Status = ListingStatus.Decreased };
-            listing2004 = new ListingInformation { Edition = 2004, Position = 9, Status = ListingStatus.Increased };
-            listing2005 = new ListingInformation { Edition = 2005, Status = ListingStatus.NotListed };
+            listing1999 = new Listing { Edition = 1999, Status = ListingStatus.NotAvailable };
+            listing2000 = new Listing { Edition = 2000, Position = 10, Status = ListingStatus.New };
+            listing2001 = new Listing { Edition = 2001, Position = 2, Status = ListingStatus.Increased };
+            listing2002 = new Listing { Edition = 2002, Position = 2, Status = ListingStatus.Unchanged };
+            listing2003 = new Listing { Edition = 2003, Position = 10, Status = ListingStatus.Decreased };
+            listing2004 = new Listing { Edition = 2004, Position = 9, Status = ListingStatus.Increased };
+            listing2005 = new Listing { Edition = 2005, Status = ListingStatus.NotListed };
 
-            var set = new List<ListingInformation>
+            var set = new List<Listing>
             {
                 listing1999,
                 listing2000,

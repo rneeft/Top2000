@@ -1,4 +1,5 @@
-﻿global using Chroomsoft.Top2000.Data.ClientDatabase.Sources;
+﻿global using Chroomsoft.Top2000.Data.ClientDatabase.Models;
+global using Chroomsoft.Top2000.Data.ClientDatabase.Sources;
 global using FluentAssertions;
 global using FluentAssertions.Execution;
 global using Microsoft.VisualStudio.TestTools.UnitTesting;

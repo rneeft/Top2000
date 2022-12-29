@@ -1,4 +1,13 @@
-﻿global using SQLite;
+﻿global using Chroomsoft.Top2000.Data.ClientDatabase.Models;
+global using SQLite;
+global using System.Collections.Generic;
 global using System.Collections.Immutable;
+global using System.Linq;
 global using System.Threading;
 global using System.Threading.Tasks;
+global using Chroomsoft.Top2000.Features.Searching;
+global using System;
+global using Chroomsoft.Top2000.Features.Editions;
+global using System.Collections.ObjectModel;
+global using Chroomsoft.Top2000.Features.Groupings;
+global using Chroomsoft.Top2000.Features.Sortings;

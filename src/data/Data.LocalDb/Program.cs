@@ -13,11 +13,11 @@ namespace Chroomsoft.Top2000.Data.LocalDb
                 .SqlDatabase(connectionString);
 
             var upgrader = DeployChanges.To
-                                .SqlDatabase(connectionString)
-                                .WithScriptEmbeddedInDataLibrary()
-                                .WithTransactionPerScript()
-                                .LogToConsole()
-                                .Build();
+                .SqlDatabase(connectionString)
+                .WithScriptEmbeddedInDataLibrary()
+                .WithTransactionPerScript()
+                .LogToConsole()
+                .Build();
 
             var result = upgrader.PerformUpgrade();
 
