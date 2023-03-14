@@ -4,6 +4,161 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
+
+    <Color x:Key="Top2000Colour">#DA161C</Color>
+
+    <Color x:Key="DarkPageBackgroundColor">#333333</Color>
+    <Color x:Key="DarkSelectedItemBackgroundColor">#454545</Color>
+    <Color x:Key="DarkNavigationBarColor">#DA161C</Color>
+    <Color x:Key="DarkSeparatorColor">#737373</Color>
+    <Color x:Key="DarkTabBarBackgroundColor">#3B3B3B</Color>
+    <Color x:Key="DarkTabBarUnselectedColor">White</Color>
+    <Color x:Key="DarkTabBarSelectedColor">#DA161C</Color>
+    <Color x:Key="DarkButtonBackgroundColor">#DA161C</Color>
+    <Color x:Key="DarkButtonTextColor">White</Color>
+    <Color x:Key="DarkRingBaseColor">WhiteSmoke</Color>
+    <Color x:Key="DarkTextColor">White</Color>
+    
+    <Color x:Key="DarkShellBackgroundColor">#1E1E1E</Color>
+    <Color x:Key="DarkShellForegroundColor">White</Color>
+    <Color x:Key="DarkTrackOverviewColor">#151515</Color>
+
+
+    <Color x:Key="LightPageBackgroundColor">#F7F7F7</Color>
+    <Color x:Key="LightSelectedItemBackgroundColor">#E5E5E5</Color>
+    <Color x:Key="LightNavigationBarColor">#DA161C</Color>
+    <Color x:Key="LightSeparatorColor">#737373</Color>
+    <Color x:Key="LightTabBarBackgroundColor">#F2F2F2</Color>
+    <Color x:Key="LightTabBarUnselectedColor">#717171</Color>
+    <Color x:Key="LightTabBarSelectedColor">#DA161C</Color>
+    <Color x:Key="LightButtonBackgroundColor">#DA161C</Color>
+    <Color x:Key="LightButtonTextColor">#737373</Color>
+    <Color x:Key="LightRingBaseColor">#CCC</Color>
+    <Color x:Key="LightTextColor">#717171</Color>
+
+    <Color x:Key="LightShellBackgroundColor">#F3F3F3</Color>
+    <Color x:Key="LightShellForegroundColor">Black</Color>
+    <Color x:Key="LightTrackOverviewColor">#ECECEC</Color>
+
+
+
+    <SolidColorBrush x:Key="ShellBackgroundColor" Color="{AppThemeBinding Dark={StaticResource DarkShellBackgroundColor}, Light={StaticResource LightShellBackgroundColor}}" />
+    <SolidColorBrush x:Key="TrackOverviewColor" Color="{AppThemeBinding Dark={StaticResource DarkTrackOverviewColor}, Light={StaticResource LightTrackOverviewColor}}" />
+
+    <SolidColorBrush x:Key="PageBackgroundColor" Color="{AppThemeBinding Dark={StaticResource DarkPageBackgroundColor}, Light={StaticResource LightPageBackgroundColor}}" />
+    <SolidColorBrush x:Key="SelectedItemBackgroundColor" Color="{AppThemeBinding Dark={StaticResource DarkSelectedItemBackgroundColor}, Light={StaticResource LightSelectedItemBackgroundColor}}" />
+    <SolidColorBrush x:Key="NavigationBarColor" Color="{AppThemeBinding Dark={StaticResource DarkNavigationBarColor}, Light={StaticResource LightNavigationBarColor}}" />
+    <SolidColorBrush x:Key="SeparatorColor" Color="{AppThemeBinding Dark={StaticResource DarkSeparatorColor}, Light={StaticResource LightSeparatorColor}}" />
+    <SolidColorBrush x:Key="TabBarBackgroundColor" Color="{AppThemeBinding Dark={StaticResource DarkTabBarBackgroundColor}, Light={StaticResource LightTabBarBackgroundColor}}" />
+    <SolidColorBrush x:Key="TabBarUnselectedColor" Color="{AppThemeBinding Dark={StaticResource DarkTabBarUnselectedColor}, Light={StaticResource LightTabBarUnselectedColor}}" />
+    <SolidColorBrush x:Key="TabBarSelectedColor" Color="{AppThemeBinding Dark={StaticResource DarkTabBarSelectedColor}, Light={StaticResource LightTabBarSelectedColor}}" />
+    <SolidColorBrush x:Key="ShellForegroundColor" Color="{AppThemeBinding Dark={StaticResource DarkShellForegroundColor}, Light={StaticResource LightShellForegroundColor}}" />
+    <SolidColorBrush x:Key="ButtonBackgroundColor" Color="{AppThemeBinding Dark={StaticResource DarkButtonBackgroundColor}, Light={StaticResource LightButtonBackgroundColor}}" />
+    <SolidColorBrush x:Key="ButtonTextColor" Color="{AppThemeBinding Dark={StaticResource DarkButtonTextColor}, Light={StaticResource LightButtonTextColor}}" />
+    <SolidColorBrush x:Key="RingBaseColor" Color="{AppThemeBinding Dark={StaticResource DarkRingBaseColor}, Light={StaticResource LightRingBaseColor}}" />
+    <SolidColorBrush x:Key="TextColor" Color="{AppThemeBinding Dark={StaticResource DarkTextColor}, Light={StaticResource LightTextColor}}" />
+
+    <Style x:Key="BaseStyle" TargetType="Element">
+        <Setter Property="Shell.FlyoutBackgroundColor" Value="{StaticResource NavigationBarColor}"/>
+        <Setter Property="Shell.BackgroundColor" Value="{StaticResource ShellBackgroundColor}" />
+        <Setter Property="Shell.ForegroundColor" Value="{StaticResource ShellForegroundColor}" />
+        <Setter Property="Shell.TitleColor" Value="{StaticResource TextColor}" />
+        <Setter Property="Shell.NavBarHasShadow" Value="True"/>
+    
+        <!--<Setter Property="Shell.DisabledColor"
+                Value="#B4000000" />
+            <Setter Property="Shell.UnselectedColor"
+                Value="#CC0000" />-->
+    </Style>
+
+    <Style BasedOn="{StaticResource BaseStyle}"
+           ApplyToDerivedTypes="True"
+           TargetType="ShellItem" />
+
+
+    <Style TargetType="TabBar">
+        <Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource TabBarBackgroundColor}" />
+        <Setter Property="Shell.TabBarTitleColor" Value="{StaticResource TextColor}" />
+    </Style>
+
+    <Style TargetType="NavigationPage" ApplyToDerivedTypes="True">
+        <Setter Property="BackgroundColor" Value="{StaticResource PageBackgroundColor}" />
+        <Setter Property="BarBackgroundColor" Value="{StaticResource TabBarBackgroundColor}" />
+        <Setter Property="BarTextColor" Value="{StaticResource TextColor}" />
+    </Style>
+
+    <Style x:Key="LargeLabelStyle" TargetType="Label">
+        <Setter Property="FontSize" Value="30" />
+    </Style>
+
+    <Style x:Key="MediumLabelStyle" TargetType="Label">
+        <Setter Property="LineBreakMode" Value="WordWrap" />
+        <Setter Property="FontSize" Value="20" />
+    </Style>
+
+    <Style x:Key="SmallLabelStyle" TargetType="Label">
+        <Setter Property="LineBreakMode" Value="WordWrap" />
+        <Setter Property="FontSize" Value="15" />
+    </Style>
+
+    <Style x:Key="Separator" TargetType="BoxView">
+        <Setter Property="HeightRequest" Value="1" />
+        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+        <Setter Property="Color" Value="{StaticResource SeparatorColor}" />
+        <Setter Property="Margin" Value="0, 5, 0, 5" />
+        <Setter Property="Opacity" Value="0.5" />
+    </Style>
+
+    <!--<Style x:Key="BaseStyle" TargetType="Element">
+        <Setter Property="Shell.FlyoutBackgroundColor"
+                Value="{StaticResource Black}"/>
+        <Setter Property="Shell.BackgroundColor"
+                Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray950}}" />
+        <Setter Property="Shell.ForegroundColor"
+                Value="{StaticResource Top2000Colour}" />
+        <Setter Property="Shell.TitleColor"
+                Value="{AppThemeBinding Light={StaticResource Gray500},  Dark={StaticResource White}}" />
+        --><!--<Setter Property="Shell.DisabledColor"
+                Value="#B4000000" />
+            <Setter Property="Shell.UnselectedColor"
+                Value="#CC0000" />--><!--
+        <Setter Property="Shell.NavBarHasShadow"
+                Value="True"/>
+    </Style>
+
+
+    <Style BasedOn="{StaticResource BaseStyle}"
+           ApplyToDerivedTypes="True"
+           TargetType="ShellItem" />
+
+
+    <Style TargetType="TabBar">
+        <Setter Property="Shell.TabBarBackgroundColor"
+                Value="{AppThemeBinding 
+                                    Light={StaticResource Gray500}, 
+                                    Dark={StaticResource Gray950}}" />
+        <Setter Property="Shell.TabBarTitleColor"
+                Value="{AppThemeBinding 
+                            Light={StaticResource Gray950}, 
+                            Dark={StaticResource White}}" />
+        --><!--<Setter Property="Shell.TabBarUnselectedColor"
+                Value="{StaticResource TabOff}" />
+        <Setter Property="Shell.TabBarForegroundColor"
+                Value="{StaticResource Accent}" />--><!--
+    </Style>
+
+    <Style TargetType="NavigationPage" ApplyToDerivedTypes="True">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding 
+            Light={StaticResource Gray500},
+            Dark={StaticResource Black}}"/>
+        <Setter Property="BarBackgroundColor" Value="{AppThemeBinding 
+            Light={StaticResource Gray500},
+            Dark={StaticResource Black}}"/>
+        <Setter Property="BarTextColor" Value="{AppThemeBinding 
+                                                Light={StaticResource Gray950}, 
+                                                Dark={StaticResource White}}"/>
+    </Style>
+
     <Style x:Key="LargeLabelStyle" TargetType="Label">
         <Setter Property="FontSize" Value="30" />
     </Style>
@@ -398,7 +553,7 @@
         <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}" />
     </Style>
 
-    <Style TargetType="Shell" ApplyToDerivedTypes="True">
+    --><!--<Style TargetType="Shell" ApplyToDerivedTypes="True">
         <Setter Property="Shell.BackgroundColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Gray950}}" />
         <Setter Property="Shell.ForegroundColor" Value="{OnPlatform WinUI={StaticResource Primary}, Default={StaticResource White}}" />
         <Setter Property="Shell.TitleColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource White}}" />
@@ -409,19 +564,19 @@
         <Setter Property="Shell.TabBarForegroundColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}" />
         <Setter Property="Shell.TabBarTitleColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}" />
         <Setter Property="Shell.TabBarUnselectedColor" Value="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray200}}" />
-    </Style>
+    </Style>-->
 
-    <Style TargetType="NavigationPage">
+    <!--<Style TargetType="NavigationPage">
         <Setter Property="BarBackgroundColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Gray950}}" />
         <Setter Property="BarTextColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource White}}" />
         <Setter Property="IconColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource White}}" />
-    </Style>
+    </Style>-->
 
-    <Style TargetType="TabbedPage">
+    <!--<Style TargetType="TabbedPage">
         <Setter Property="BarBackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray950}}" />
         <Setter Property="BarTextColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}" />
         <Setter Property="UnselectedTabColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray950}}" />
         <Setter Property="SelectedTabColor" Value="{AppThemeBinding Light={StaticResource Gray950}, Dark={StaticResource Gray200}}" />
-    </Style>
+    </Style>-->
 
 </ResourceDictionary>

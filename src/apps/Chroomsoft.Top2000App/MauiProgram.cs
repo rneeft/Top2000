@@ -16,9 +16,16 @@ public static class MauiProgram
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 fonts.AddFont("MaterialIcons.ttf", "MaterialIcons");
             });
+        builder.ConfigureLifecycleEvents(lifecycle => {
+#if WINDOWS
+            lifecycle.AddWindows(windows => windows.OnWindowCreated((del) => {
+                del.ExtendsContentIntoTitleBar = true;
+            }));
+#endif
+        });
 
 #if DEBUG
-		builder.Logging.AddDebug();
+        builder.Logging.AddDebug();
 #endif
 
         var services = builder.Services;
@@ -50,7 +57,7 @@ public static class MauiProgram
 
 }
 
-public class MyWindow : Microsoft.Maui.Controls.Window
+public class MyWindow : Window
 {
     private readonly IUpdateClientDatabase databaseGenerator;
     private readonly Top2000AssemblyDataSource assemblyDataSource;

@@ -5,9 +5,9 @@
              Title="PositionsOverviewView"
              Loaded="OnLoaded"
              >
-    <Grid>
+    <Grid Background="{StaticResource TrackOverviewColor}">
 
-        <CollectionView ItemsSource="{Binding Listings}" IsGrouped="True">
+        <CollectionView ItemsSource="{Binding Listings}" IsGrouped="True" >
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Grid Margin="0,0,0,5" RowSpacing="0">
@@ -32,7 +32,7 @@
                                    TextColor="{Binding Converter={StaticResource DeltaToSymbolColour}}" />
 
                                 <Label Style="{StaticResource SmallLabelStyle}"
-                                    FontSize="{Binding Converter={StaticResource TrackListingSymbolFontSizeConverter}}"
+                                   FontSize="{Binding Converter={StaticResource TrackListingSymbolFontSizeConverter}}"
                                    FontFamily="MaterialIcons"
                                    Text="{Binding Converter={StaticResource DeltaToSymbolConverter}}"
                                    TextColor="{Binding Converter={StaticResource DeltaToSymbolColour}}" />

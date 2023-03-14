@@ -1,6 +1,7 @@
 ﻿<?xml version = "1.0" encoding = "UTF-8" ?>
 <Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:c="clr-namespace:Chroomsoft.Top2000App.Common"
              xmlns:local="clr-namespace:Chroomsoft.Top2000App"
              xmlns:page="clr-namespace:Chroomsoft.Top2000App.Pages"
              xmlns:converters="clr-namespace:Chroomsoft.Top2000App.Converters"
@@ -14,15 +15,69 @@
             <converters:TrackListingSymbolFontSizeConverter x:Key="TrackListingSymbolFontSizeConverter" />
             
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
 
     <Application.MainPage>
-        <Shell>
-            <ShellContent ContentTemplate="{DataTemplate page:PositionsOverviewView}"/>
+        <Shell Background="{StaticResource ShellBackgroundColor}">
+
+            <!-- bug in MAUI .net 7 -->
+            <!--FlyoutBehavior="{OnIdiom Phone=Disabled, Default=Locked}"-->
+            
+            
+            <!--<Shell.FlyoutFooter>
+                <FontImageSource FontFamily="MaterialIcons" Glyph="{Static c:Symbols.Settings}" Color="Pink"/>
+            </Shell.FlyoutFooter>-->
+
+            <!--<Shell.FlyoutFooterTemplate>
+                <DataTemplate>
+                    <Grid RowDefinitions="68">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                        </Grid.GestureRecognizers>
+                        <Image Source="{Binding FlyoutIcon}"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Center"
+                               HeightRequest="38"
+                               WidthRequest="38"
+                               />
+                    </Grid>
+                </DataTemplate>
+
+            </Shell.FlyoutFooterTemplate>-->
+
+            <!-- Desktop/Tablet-->
+            <FlyoutItem Title="Overview">
+                <FlyoutItem.FlyoutIcon>
+                    <FontImageSource FontFamily="MaterialIcons" Glyph="{Static c:Symbols.Overview}" />
+                </FlyoutItem.FlyoutIcon>
+                <ShellContent ContentTemplate="{DataTemplate page:PositionsOverviewView}" />
+            </FlyoutItem>
+
+            <FlyoutItem Title="Settings">
+                <FlyoutItem.FlyoutIcon>
+                    <FontImageSource FontFamily="MaterialIcons" Glyph="{Static c:Symbols.Settings}" />
+                </FlyoutItem.FlyoutIcon>
+                <ShellContent ContentTemplate="{DataTemplate page:PositionsOverviewView}" />
+            </FlyoutItem>
+
+
+            <!--<Shell.ItemTemplate>
+                <DataTemplate>
+                    <Grid WidthRequest="44" HeightRequest="68"
+                          ColumnDefinitions="44" RowDefinitions="68">
+                        <Image Source="{Binding FlyoutIcon}"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Center"
+                               HeightRequest="38"
+                               WidthRequest="38"
+                               />
+                    </Grid>
+                </DataTemplate>
+
+            </Shell.ItemTemplate>-->
         </Shell>
     </Application.MainPage>
 </Application>
