@@ -1,17 +1,18 @@
-﻿using FluentAssertions;
-using FluentAssertions.Execution;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using Moq.Protected;
-using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Immutable;
 using System.Net;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using Chroomsoft.Top2000.Data.ClientDatabase.Sources;
+using FluentAssertions;
+using FluentAssertions.Execution;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
+using Moq.Protected;
+using Newtonsoft.Json;
 
-namespace Chroomsoft.Top2000.Data.ClientDatabase.Tests
+namespace Chroomsoft.Top2000.Data.ClientDatabase.Tests.Soruces
 {
     [TestClass]
     public class OnlineDataSourceTests
@@ -43,7 +44,7 @@ namespace Chroomsoft.Top2000.Data.ClientDatabase.Tests
         {
             var journals = Create.ImmutableSortedSetFrom("001-Script.sql");
 
-            using var response = new HttpResponseMessage { StatusCode = System.Net.HttpStatusCode.BadRequest, Content = new StringContent("ERROR") };
+            using var response = new HttpResponseMessage { StatusCode = HttpStatusCode.BadRequest, Content = new StringContent("ERROR") };
             using var httpClient = SetupMocksWithResponse(response);
             factory.Setup(x => x.CreateClient("top2000")).Returns(httpClient);
             var scripts = await sut.ExecutableScriptsAsync(journals);
@@ -115,30 +116,3 @@ namespace Chroomsoft.Top2000.Data.ClientDatabase.Tests
         }
     }
 }
-
-//var messageMock = new Mock<HttpMessageHandler>();
-
-//settingsMock.Setup(x => x.ToestemmingsregisterManagementUri).Returns(new Uri("https://localhost:1986/ToestemmingsprofielManagement/"));
-//            messageMock.Protected()
-//                .Setup<Task<HttpResponseMessage>>("SendAsync", ItExpr.IsAny<HttpRequestMessage>(), ItExpr.IsAny<CancellationToken>())
-//                .ReturnsAsync(new HttpResponseMessage { StatusCode = System.Net.HttpStatusCode.OK, Content = new StringContent(string.Empty) })
-//                .Verifiable();
-
-//var httpClient = new HttpClient(messageMock.Object);
-//factoryMock.Setup(x => x.CreateClient("LeeftijdcategorieeenScheduledTask")).Returns(httpClient);
-//var sut = new LeeftijdcategorieeenScheduledTask(logger, factoryMock.Object, settingsMock.Object);
-
-//await sut.DoWorkAsync();
-
-//var expectedUri = new Uri("https://localhost:1986/ToestemmingsprofielManagement/VerwerkIncorrecteLeeftijdscategorieen");
-
-//messageMock.Protected()
-//                .Verify(
-//                    "SendAsync",
-//                    Times.Once(),
-//                    ItExpr.Is<HttpRequestMessage>(req =>
-//                       req.Method == HttpMethod.Post &&
-//                       req.RequestUri == expectedUri
-//                    ),
-//                    ItExpr.IsAny<CancellationToken>()
-//                );

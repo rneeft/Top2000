@@ -1,11 +1,12 @@
-﻿using FluentAssertions;
+﻿using Chroomsoft.Top2000.Data.ClientDatabase.Sources;
+using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 
-namespace Chroomsoft.Top2000.Data.ClientDatabase.Tests
+namespace Chroomsoft.Top2000.Data.ClientDatabase.Tests.Soruces
 {
     [TestClass]
     public class Top2000AssemblyDataSourceTests
