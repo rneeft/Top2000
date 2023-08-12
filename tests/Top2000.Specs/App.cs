@@ -1,13 +1,4 @@
-﻿using Chroomsoft.Top2000.Data.ClientDatabase;
-using Chroomsoft.Top2000.Features;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.IO;
-using TechTalk.SpecFlow;
-
-[assembly: TestCategory("SkipWhenLiveUnitTesting")]
+﻿[assembly: TestCategory("SkipWhenLiveUnitTesting")]
 
 namespace Chroomsoft.Top2000.Specs
 {

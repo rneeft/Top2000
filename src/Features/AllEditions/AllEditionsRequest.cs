@@ -1,28 +1,22 @@
-﻿using MediatR;
-using SQLite;
-using System.Collections.Immutable;
-using System.Threading;
-using System.Threading.Tasks;
+﻿namespace Chroomsoft.Top2000.Features.AllEditions;
 
-namespace Chroomsoft.Top2000.Features.AllEditions
+public sealed class AllEditionsRequest : IRequest<ImmutableSortedSet<Edition>>
 {
-    public class AllEditionsRequest : IRequest<ImmutableSortedSet<Edition>>
+}
+
+public sealed class AllEditionsRequestHandler : IRequestHandler<AllEditionsRequest, ImmutableSortedSet<Edition>>
+{
+    private readonly SQLiteAsyncConnection connection;
+
+    public AllEditionsRequestHandler(SQLiteAsyncConnection connection)
     {
+        this.connection = connection;
     }
 
-    public class AllEditionsRequestHandler : IRequestHandler<AllEditionsRequest, ImmutableSortedSet<Edition>>
+    public async Task<ImmutableSortedSet<Edition>> Handle(AllEditionsRequest request, CancellationToken cancellationToken)
     {
-        private readonly SQLiteAsyncConnection connection;
+        var editions = await connection.Table<Edition>().ToListAsync();
 
-        public AllEditionsRequestHandler(SQLiteAsyncConnection connection)
-        {
-            this.connection = connection;
-        }
-
-        public async Task<ImmutableSortedSet<Edition>> Handle(AllEditionsRequest request, CancellationToken cancellationToken)
-        {
-            return (await connection.Table<Edition>().ToListAsync().ConfigureAwait(false))
-                .ToImmutableSortedSet(new EditionDescendingComparer());
-        }
+        return editions.ToImmutableSortedSet(new EditionDescendingComparer());
     }
 }

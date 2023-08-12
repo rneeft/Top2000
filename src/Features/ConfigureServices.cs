@@ -1,5 +1,4 @@
 ﻿using Chroomsoft.Top2000.Features.Searching;
-using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Chroomsoft.Top2000.Features
@@ -9,7 +8,10 @@ namespace Chroomsoft.Top2000.Features
         public static IServiceCollection AddFeatures(this IServiceCollection services)
         {
             return services
-                .AddMediatR(typeof(ConfigureServices).Assembly)
+                .AddMediatR(configuration =>
+                {
+                    configuration.RegisterServicesFromAssembly(typeof(ConfigureServices).Assembly);
+                })
                 .AddSingleton<ISort, SortByTitle>()
                 .AddSingleton<ISort, SortByArtist>()
                 .AddSingleton<ISort, SortByRecordedYear>()

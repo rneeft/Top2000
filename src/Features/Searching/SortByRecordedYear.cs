@@ -1,11 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿namespace Chroomsoft.Top2000.Features.Searching;
 
-namespace Chroomsoft.Top2000.Features.Searching
+public sealed class SortByRecordedYear : ISort
 {
-    public class SortByRecordedYear : ISort
-    {
-        public IOrderedEnumerable<Track> Sort(IEnumerable<Track> tracks)
-            => tracks.OrderBy(x => x.RecordedYear);
-    }
+    public IOrderedEnumerable<Track> Sort(IEnumerable<Track> tracks)
+        => tracks.OrderBy(x => x.RecordedYear);
 }
