@@ -8,15 +8,9 @@ public sealed class ListingInformation
 
     public DateTime? PlayUtcDateAndTime { get; set; }
 
-    public DateTime? LocalUtcDateAndTime
-    {
-        get
-        {
-            return PlayUtcDateAndTime is null
-                ? null
-                : DateTime.SpecifyKind((DateTime)PlayUtcDateAndTime, DateTimeKind.Utc).ToLocalTime();
-        }
-    }
+    public DateTime? LocalUtcDateAndTime => PlayUtcDateAndTime is null 
+        ? null
+        : DateTime.SpecifyKind((DateTime)PlayUtcDateAndTime, DateTimeKind.Utc).ToLocalTime();
 
     public int? Offset { get; set; }
 

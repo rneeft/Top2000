@@ -13,7 +13,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.gitattributes = .gitattributes
 		.gitignore = .gitignore
 		CodeMaid.config = CodeMaid.config
-		Directory.Build.props = Directory.Build.props
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "apps", "apps", "{CAF58F84-2057-44BB-AAA0-D1919125A96C}"
@@ -51,6 +50,11 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XamarinForms.Android", "src\apps\XamarinForms.Android\XamarinForms.Android.csproj", "{BDFA10B4-F3FA-4A2B-8B89-46C7B82C5F0E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Top2000Maui", "src\apps\Top2000Maui\Top2000Maui.csproj", "{A6838B0E-ED76-464D-9F34-08A7962E92BA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{3DE8293E-78C5-4D1C-8C97-688F12209A28}"
+	ProjectSection(SolutionItems) = preProject
+		src\Directory.Build.props = src\Directory.Build.props
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -524,6 +528,7 @@ Global
 		{79822AFE-BC23-430B-BAA5-B3E391593805} = {CAF58F84-2057-44BB-AAA0-D1919125A96C}
 		{BDFA10B4-F3FA-4A2B-8B89-46C7B82C5F0E} = {CAF58F84-2057-44BB-AAA0-D1919125A96C}
 		{A6838B0E-ED76-464D-9F34-08A7962E92BA} = {CAF58F84-2057-44BB-AAA0-D1919125A96C}
+		{3DE8293E-78C5-4D1C-8C97-688F12209A28} = {C4979A62-554D-4CE4-99BE-DC525134754B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9B875394-7186-4C6A-8A48-144CEA8EA867}

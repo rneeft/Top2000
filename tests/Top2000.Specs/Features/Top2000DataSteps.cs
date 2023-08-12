@@ -43,7 +43,7 @@ public class Top2000DataSteps
 
         var expected = Enumerable.Range(1, 2000);
 
-        for (int i = 0; i < lists.Count - 2; i++)
+        for (var i = 0; i < lists.Count - 2; i++)
         {
             var yearPositions = lists[i].Select(x => x.Position).OrderBy(x => x);
             yearPositions.Should().BeEquivalentTo(expected);

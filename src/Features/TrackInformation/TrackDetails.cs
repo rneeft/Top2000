@@ -2,13 +2,13 @@
 
 public sealed class TrackDetails
 {
-    public string Title { get; init; }
+    public required string Title { get; init; }
 
-    public string Artist { get; init; }
+    public required string Artist { get; init; }
 
-    public int RecordedYear { get; init; }
+    public required int RecordedYear { get; init; }
 
-    public ImmutableSortedSet<ListingInformation> Listings { get; init; }
+    public required ImmutableSortedSet<ListingInformation> Listings { get; init; }
 
     public ListingInformation Highest => Listings
         .Where(x => x.Position.HasValue)

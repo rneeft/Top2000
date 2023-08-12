@@ -4,20 +4,13 @@ namespace Chroomsoft.Top2000.Features.Searching;
 
 public sealed class SearchTrackRequest : IRequest<ReadOnlyCollection<IGrouping<string, Track>>>
 {
-    public SearchTrackRequest(string queryString, ISort sorting, IGroup group, int lastEdition)
-    {
-        this.QueryString = queryString;
-        this.Sorting = sorting;
-        this.Grouping = group;
-        this.LastEdition = lastEdition;
-    }
+    public required string QueryString { get; init; }
 
-    public string QueryString { get; }
+    public required ISort Sorting { get; set; }
 
-    public ISort Sorting { get; set; }
+    public required IGroup Grouping { get; set; }
 
-    public IGroup Grouping { get; set; }
-    public int LastEdition { get; }
+    public required int LastEdition { get; init; }
 }
 
 public sealed class SearchTrackRequestHandler : IRequestHandler<SearchTrackRequest, ReadOnlyCollection<IGrouping<string, Track>>>

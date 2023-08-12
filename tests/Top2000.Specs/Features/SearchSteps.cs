@@ -21,7 +21,13 @@ public class SearchSteps
     public async Task WhenSearchingFor(string queryString)
     {
         var mediator = App.ServiceProvider.GetService<IMediator>();
-        var request = new SearchTrackRequest(queryString, sorting, grouping, lastEdition);
+        var request = new SearchTrackRequest
+        {
+            QueryString = queryString,
+            Sorting = sorting,
+            Grouping = grouping,
+            LastEdition = lastEdition
+        };
 
         result = await mediator.Send(request);
     }
@@ -30,7 +36,13 @@ public class SearchSteps
     public async Task WhenSearchingWithoutAQuery()
     {
         var mediator = App.ServiceProvider.GetService<IMediator>();
-        var request = new SearchTrackRequest(string.Empty, sorting, grouping, lastEdition);
+        var request = new SearchTrackRequest
+        {
+            QueryString = string.Empty,
+            Sorting = sorting,
+            Grouping = grouping,
+            LastEdition = lastEdition
+        };
 
         result = await mediator.Send(request);
     }
