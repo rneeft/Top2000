@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
     <AssemblyName>Chroomsoft.Top2000.Data.LocalDb</AssemblyName>
     <RootNamespace>Chroomsoft.Top2000.Data.LocalDb</RootNamespace>
   </PropertyGroup>
@@ -14,7 +14,7 @@
 
   <ItemGroup>
     <PackageReference Include="Chroomsoft.ConsoleUtilities" Version="1.0.1.1" />
-    <PackageReference Include="dbup-sqlserver" Version="4.4.0" />
+    <PackageReference Include="dbup-sqlserver" Version="5.0.8" />
   </ItemGroup>
 
     <ItemGroup>
