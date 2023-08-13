@@ -6,6 +6,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:Chroomsoft.Top2000.Apps"
     xmlns:res="clr-namespace:Chroomsoft.Top2000.Apps.Globalisation"
+    xmlns:obp="clr-namespace:Chroomsoft.Top2000.Apps.Overview.ByPosition"
     Shell.FlyoutBehavior="Flyout"
     Loaded="Shell_Loaded">
 
@@ -15,8 +16,8 @@
         </FlyoutItem.FlyoutIcon>
         <ShellContent
             Title="{Binding [Overview], Source={x:Static res:Translator.Instance}}"
-            ContentTemplate="{DataTemplate local:MainPage}"
-            Route="OnePage" />
+            ContentTemplate="{DataTemplate obp:OverviewByPositionPage}"
+            Route="OverviewByPositionPage" />
     </FlyoutItem>
 
     <FlyoutItem Title="{Binding [ViewByDate], Source={x:Static res:Translator.Instance}}">

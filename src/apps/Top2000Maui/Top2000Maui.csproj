@@ -54,11 +54,14 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Maui" Version="5.3.0" />
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <ProjectReference Include="..\..\data\Data.ClientDatabase\Data.ClientDatabase.csproj" />
+	  <ProjectReference Include="..\..\Features\Features.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -74,6 +77,16 @@
 	    <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
 	    <Generator>ResXFileCodeGenerator</Generator>
 	  </EmbeddedResource>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Overview\ByDate\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="Overview\ByPosition\OverviewByPositionPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 
 </Project>

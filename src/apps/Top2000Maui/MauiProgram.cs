@@ -1,4 +1,8 @@
-﻿namespace Chroomsoft.Top2000.Apps;
+﻿using Chroomsoft.Top2000.Apps.Overview.ByPosition;
+using Chroomsoft.Top2000.Features;
+using CommunityToolkit.Maui;
+
+namespace Chroomsoft.Top2000.Apps;
 
 public static class MauiProgram
 {
@@ -7,6 +11,7 @@ public static class MauiProgram
         var builder = MauiApp.CreateBuilder();
         builder
             .UseMauiApp<App>()
+            .UseMauiCommunityToolkit()
             .ConfigureFonts(fonts =>
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -21,8 +26,12 @@ public static class MauiProgram
             .AddSingleton<ICulture>(new SupportedCulture("en"))
             .AddSingleton<ICulture>(new SupportedCulture("fr"));
 
+        builder.Services.AddTransientWithShellRoute<OverviewByPositionPage, OverviewByPositionViewModel>(nameof(OverviewByPositionPage));
+
         var baseUrl = new Uri("https://www-dev.top2000.app");
-        builder.Services.AddClientDatabase(new DirectoryInfo(FileSystem.AppDataDirectory), baseUrl);
+        builder.Services
+            .AddClientDatabase(new DirectoryInfo(FileSystem.AppDataDirectory), baseUrl)
+            .AddFeatures();
 
 #if DEBUG
         builder.Logging.AddDebug();
