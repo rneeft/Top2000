@@ -1,6 +1,6 @@
 ﻿using Chroomsoft.Top2000.Features.AllListingsOfEdition;
 
-namespace Chroomsoft.Top2000.Apps.Overview;
+namespace Chroomsoft.Top2000.Apps.Views.Overview;
 
 public class DeltaToSymbolColour : ValueConverterBase<TrackListing, Color>
 {
@@ -14,19 +14,13 @@ public class DeltaToSymbolColour : ValueConverterBase<TrackListing, Color>
         var value = track.Delta;
 
         if (!value.HasValue)
-        {
             return YellowColour;
-        }
 
         if (value.Value > 0)
-        {
             return GreenColour;
-        }
 
         if (value.Value < 0)
-        {
             return RedColour;
-        }
 
         return GreyColour;
     }

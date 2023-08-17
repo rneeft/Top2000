@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Chroomsoft.Top2000.Apps.Overview.ByPosition.OverviewByPositionPage"
-             xmlns:overview="clr-namespace:Chroomsoft.Top2000.Apps.Overview"
+             x:Class="Chroomsoft.Top2000.Apps.Views.Overview.ByPosition.OverviewByPositionPage"
+             xmlns:overview="clr-namespace:Chroomsoft.Top2000.Apps.Views.Overview"
              Title="OverviewByPositionPage">
     <ContentPage.Resources>
         <overview:EditionPlayTimeConverter x:Key="EditionPlayTimeConverter" />
@@ -13,43 +13,48 @@
     </ContentPage.Resources>
 
     <Grid>
-        <CollectionView x:Name="listings"
+        <CollectionView
                     ItemsSource="{Binding Listings}"
                     SelectedItem="{Binding SelectedListing}"
                     VerticalOptions="FillAndExpand"
                     ItemSizingStrategy="MeasureAllItems"
-                    IsGrouped="True"
                     SelectionChanged="OnListingSelected"
+                    IsGrouped="True"
                     SelectionMode="Single">
+            <CollectionView.GroupHeaderTemplate>
+                <DataTemplate>
+                    <Grid BackgroundColor="Yellow">
+                        <Label Text="{Binding Key}" TextColor="{StaticResource Top2000Colour}"
+                               Style="{StaticResource MediumLabelStyle}" Margin="5,5,0,0" />
+                        <BoxView Style="{StaticResource Separator}" Margin="5,-3,20,5" />
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnJumpGroupButtonClick" />
+                        </Grid.GestureRecognizers>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.GroupHeaderTemplate>
 
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Grid Margin="0,0,0,5" RowSpacing="0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="80" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
+                    <Grid Margin="0,0,0,5" RowSpacing="0" ColumnDefinitions="80, *">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
 
                         <StackLayout Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Spacing="0">
-
                             <Label Text="{Binding Position}" Style="{StaticResource MediumLabelStyle}" Margin="20,0,0,0" />
-
                             <Grid Margin="20,0,0,0">
-
                                 <Label Margin="13,0,0,0" Style="{StaticResource SmallLabelStyle}"
-                            FontSize="{Binding Converter={StaticResource TrackListingSymbolFontSizeConverter}}"
-                           Text="{Binding Delta, Converter={StaticResource DeltaToStringConverter}}"
-                           TextColor="{Binding Converter={StaticResource DeltaToSymbolColour}}" />
+                                       FontSize="{Binding Converter={StaticResource TrackListingSymbolFontSizeConverter}}"
+                                       Text="{Binding Delta, Converter={StaticResource DeltaToStringConverter}}"
+                                       TextColor="{Binding Converter={StaticResource DeltaToSymbolColour}}" />
 
                                 <Label Style="{StaticResource SmallLabelStyle}"
-                            FontSize="{Binding Converter={StaticResource TrackListingSymbolFontSizeConverter}}"
-                            FontFamily="MaterialIcons"
-                           Text="{Binding Converter={StaticResource DeltaToSymbolConverter}}"
-                           TextColor="{Binding Converter={StaticResource DeltaToSymbolColour}}" />
+                                       FontSize="{Binding Converter={StaticResource TrackListingSymbolFontSizeConverter}}"
+                                       FontFamily="MaterialIcons"
+                                       Text="{Binding Converter={StaticResource DeltaToSymbolConverter}}"
+                                       TextColor="{Binding Converter={StaticResource DeltaToSymbolColour}}" />
                             </Grid>
                         </StackLayout>
 
@@ -58,21 +63,6 @@
                     </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
-
-            <CollectionView.GroupHeaderTemplate>
-                <DataTemplate>
-                    <StackLayout>
-                        <Label Text="{Binding Key}"
-                       TextColor="{StaticResource Top2000Colour}"
-                       Style="{StaticResource MediumLabelStyle}"
-                       Margin="20,5,0,0" />
-                        <BoxView Style="{StaticResource Separator}" Margin="20,-3,20,5" />
-                        <StackLayout.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="OnJumpGroupButtonClick" />
-                        </StackLayout.GestureRecognizers>
-                    </StackLayout>
-                </DataTemplate>
-            </CollectionView.GroupHeaderTemplate>
         </CollectionView>
     </Grid>
 </ContentPage>

@@ -1,4 +1,4 @@
-﻿namespace Chroomsoft.Top2000.Apps.Overview;
+﻿namespace Chroomsoft.Top2000.Apps.Views.Overview;
 
 public class EditionPlayTimeConverter : ValueConverterBase<DateTime, string>
 {

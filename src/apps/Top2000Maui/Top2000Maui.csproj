@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net7.0-ios;net7.0-maccatalyst;net7.0-android33.0</TargetFrameworks>
+		<TargetFrameworks>net7.0-android33.0</TargetFrameworks>
 		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net7.0-windows10.0.19041.0</TargetFrameworks>
 		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
 		<!-- <TargetFrameworks>$(TargetFrameworks);net7.0-tizen</TargetFrameworks> -->
@@ -52,8 +52,9 @@
 	<ItemGroup>
 	  <None Remove="Resources\Fonts\MaterialIcons.ttf" />
 	</ItemGroup>
-
-	<ItemGroup>
+    
+    <ItemGroup>
+        <PackageReference Include="SQLitePCLRaw.provider.dynamic_cdecl" Version="2.1.5" />
 		<PackageReference Include="CommunityToolkit.Maui" Version="5.3.0" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
@@ -80,11 +81,14 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Overview\ByDate\" />
+	  <Folder Include="Views\Overview\ByDate\" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Overview\ByPosition\OverviewByPositionPage.xaml">
+	  <MauiXaml Update="Views\Overview\ByPosition\OverviewByPositionPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\TrackInformation\TrackInformationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

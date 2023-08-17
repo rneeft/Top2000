@@ -1,4 +1,5 @@
-﻿using Chroomsoft.Top2000.Apps.Overview.ByPosition;
+﻿using Chroomsoft.Top2000.Apps.Views.Overview.ByPosition;
+using Chroomsoft.Top2000.Apps.Views.TrackInformation;
 using Chroomsoft.Top2000.Features;
 using CommunityToolkit.Maui;
 
@@ -26,7 +27,10 @@ public static class MauiProgram
             .AddSingleton<ICulture>(new SupportedCulture("en"))
             .AddSingleton<ICulture>(new SupportedCulture("fr"));
 
-        builder.Services.AddTransientWithShellRoute<OverviewByPositionPage, OverviewByPositionViewModel>(nameof(OverviewByPositionPage));
+        builder.Services
+            .AddTransientWithShellRoute<OverviewByPositionPage, OverviewByPositionViewModel>(nameof(OverviewByPositionPage))
+            .AddTransientWithShellRoute<TrackInformationPage, TrackInformationViewModel>(nameof(TrackInformationPage))
+            ;
 
         var baseUrl = new Uri("https://www-dev.top2000.app");
         builder.Services

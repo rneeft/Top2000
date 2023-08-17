@@ -32,7 +32,7 @@ public abstract class ValueConverterBase<TIn, TOut, TParam> : IValueConverter
 
     public virtual TIn ConvertBack(TOut value, TParam param)
     {
-        throw new NotImplementedException();
+        return default;
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

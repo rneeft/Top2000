@@ -2,8 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:g="clr-namespace:Chroomsoft.Top2000.Apps.Common"
-             xmlns:local="clr-namespace:Chroomsoft.Top2000.Apps.Overview.Date"
              xmlns:overview="clr-namespace:Chroomsoft.Top2000.Apps.Overview"
+             xmlns:local="clr-namespace:Chroomsoft.Top2000.Apps.Overview.Date"
              xmlns:trackInformation="clr-namespace:Chroomsoft.Top2000.Apps.TrackInformation"
              x:Class="Chroomsoft.Top2000.Apps.Overview.Date.View"
              BackgroundColor="{DynamicResource PageBackgroundColor}">
@@ -13,6 +13,7 @@
             <local:DateTimeKeyToString x:Key="DateTimeKeyToString" />
             <local:DateTimeToDateOnlyString x:Key="DateTimeToDateOnlyString" />
             <local:DateTimeToTimeOnlyString x:Key="DateTimeToTimeOnlyString" />
+
             <overview:DeltaToStringConverter x:Key="DeltaToStringConverter" />
             <overview:DeltaToSymbolColour x:Key="DeltaToSymbolColour" />
             <overview:DeltaToSymbolConverter x:Key="DeltaToSymbolConverter" />
@@ -62,15 +63,14 @@
                             ItemsSource="{Binding Listings}"
                             VerticalOptions="FillAndExpand"
                             ItemSizingStrategy="MeasureAllItems"
-                            IsGrouped="True"
+                            IsGrouped="true"
                             Scrolled="Tracks_Scrolled"
                             SelectionChanged="OnListingSelected"
                             SelectedItem="{Binding SelectedListing, Mode=TwoWay}"
                             SelectionMode="Single">
-
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Grid Margin="0,0,0,5" RowSpacing="0" >
+                        <Grid Margin="0,0,0,5" RowSpacing="0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="80" />
                                 <ColumnDefinition Width="*" />

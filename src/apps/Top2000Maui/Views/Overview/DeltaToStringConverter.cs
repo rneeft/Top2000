@@ -1,4 +1,4 @@
-﻿namespace Chroomsoft.Top2000.Apps.Overview;
+﻿namespace Chroomsoft.Top2000.Apps.Views.Overview;
 
 public sealed class DeltaToStringConverter : ValueConverterBase<int?, string>
 {

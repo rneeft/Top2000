@@ -1,8 +1,6 @@
 ﻿using Chroomsoft.Top2000.Features.AllEditions;
-using Chroomsoft.Top2000.Features.AllListingsOfEdition;
-using MediatR;
 
-namespace Chroomsoft.Top2000.Apps.Overview.ByPosition;
+namespace Chroomsoft.Top2000.Apps.Views.Overview.ByPosition;
 
 public sealed partial class OverviewByPositionViewModel : ObservableObject
 {
