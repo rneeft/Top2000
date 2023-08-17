@@ -302,6 +302,9 @@
   <data name="Feedback" xml:space="preserve">
     <value>Feedback</value>
   </data>
+  <data name="FirstPosition" xml:space="preserve">
+    <value>Eerste positie</value>
+  </data>
   <data name="General" xml:space="preserve">
     <value>Algemeen</value>
   </data>

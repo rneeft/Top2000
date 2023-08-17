@@ -302,6 +302,9 @@
   <data name="Feedback" xml:space="preserve">
     <value>Retour d'information</value>
   </data>
+  <data name="FirstPosition" xml:space="preserve">
+    <value>%FRENCH%</value>
+  </data>
   <data name="General" xml:space="preserve">
     <value>Général</value>
   </data>

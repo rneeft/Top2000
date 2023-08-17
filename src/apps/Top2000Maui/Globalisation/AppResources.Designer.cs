@@ -212,6 +212,15 @@ namespace Chroomsoft.Top2000.Apps.Globalisation {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Eerste positie.
+        /// </summary>
+        internal static string FirstPosition {
+            get {
+                return ResourceManager.GetString("FirstPosition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Algemeen.
         /// </summary>
         internal static string General {

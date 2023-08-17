@@ -38,8 +38,4 @@ public partial class OverviewByPositionPage : ContentPage
     private void OnJumpGroupButtonClick(object sender, TappedEventArgs e)
     {
     }
-
-    private void CollectionView_ChildAdded(object sender, ElementEventArgs e)
-    {
-    }
 }

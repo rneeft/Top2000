@@ -21,7 +21,6 @@
             ItemSizingStrategy="MeasureAllItems"
             SelectionChanged="OnListingSelected"
             IsGrouped="True"
-            ChildAdded="CollectionView_ChildAdded"
             SelectionMode="Single">
             <CollectionView.GroupHeaderTemplate>
                 <DataTemplate>

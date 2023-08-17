@@ -8,6 +8,8 @@
 
     <Color x:Key="Top2000Colour">#DA161C</Color>
 
+    <Color x:Key="RingBaseColor">WhiteSmoke</Color>
+
     <Color x:Key="Primary">#DA161C</Color>
     <Color x:Key="Secondary">#DA161C</Color>
     <Color x:Key="Tertiary">#DA161C</Color>
