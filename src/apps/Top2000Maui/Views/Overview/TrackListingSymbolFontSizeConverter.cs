@@ -1,16 +1,14 @@
 ﻿namespace Chroomsoft.Top2000.Apps.Views.Overview;
 
-public class TrackListingSymbolFontSizeConverter : ValueConverterBase<TrackListing, int>
+public class TrackListingSymbolFontSizeConverter : ValueConverterBase<int?, double>
 {
-    public override int Convert(TrackListing track)
+    public override double Convert(int? value)
     {
-        var value = track.Delta;
-
         if (value is null || !value.HasValue || value.Value == 0)
         {
-            return 20;
+            return 20.0;
         }
 
-        return 11;
+        return 11.0;
     }
 }

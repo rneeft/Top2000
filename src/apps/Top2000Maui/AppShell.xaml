@@ -7,8 +7,7 @@
     xmlns:local="clr-namespace:Chroomsoft.Top2000.Apps"
     xmlns:res="clr-namespace:Chroomsoft.Top2000.Apps.Globalisation"
     xmlns:obp="clr-namespace:Chroomsoft.Top2000.Apps.Views.Overview.ByPosition"
-    Shell.FlyoutBehavior="Flyout"
-    Loaded="Shell_Loaded">
+    Shell.FlyoutBehavior="Flyout">
 
     <FlyoutItem Title="{Binding [Overview], Source={x:Static res:Translator.Instance}}">
         <FlyoutItem.FlyoutIcon>
@@ -26,7 +25,7 @@
         </FlyoutItem.FlyoutIcon>
         <ShellContent
             Title="{Binding [ViewByDate], Source={x:Static res:Translator.Instance}}"
-            ContentTemplate="{DataTemplate local:MainPage}"
+            ContentTemplate="{DataTemplate obp:OverviewByPositionPage}"
             Route="OnePage" />
     </FlyoutItem>
 </Shell>

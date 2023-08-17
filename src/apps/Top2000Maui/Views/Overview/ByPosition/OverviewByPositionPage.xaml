@@ -14,23 +14,25 @@
 
     <Grid>
         <CollectionView
-                    ItemsSource="{Binding Listings}"
-                    SelectedItem="{Binding SelectedListing}"
-                    VerticalOptions="FillAndExpand"
-                    ItemSizingStrategy="MeasureAllItems"
-                    SelectionChanged="OnListingSelected"
-                    IsGrouped="True"
-                    SelectionMode="Single">
+            ItemsSource="{Binding Listings}"
+            SelectedItem="{Binding SelectedListing}"
+            VerticalOptions="FillAndExpand"
+            HorizontalOptions="FillAndExpand"
+            ItemSizingStrategy="MeasureAllItems"
+            SelectionChanged="OnListingSelected"
+            IsGrouped="True"
+            ChildAdded="CollectionView_ChildAdded"
+            SelectionMode="Single">
             <CollectionView.GroupHeaderTemplate>
                 <DataTemplate>
-                    <Grid BackgroundColor="Yellow">
+                    <StackLayout WidthRequest="10000">
                         <Label Text="{Binding Key}" TextColor="{StaticResource Top2000Colour}"
                                Style="{StaticResource MediumLabelStyle}" Margin="5,5,0,0" />
                         <BoxView Style="{StaticResource Separator}" Margin="5,-3,20,5" />
-                        <Grid.GestureRecognizers>
+                        <StackLayout.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnJumpGroupButtonClick" />
-                        </Grid.GestureRecognizers>
-                    </Grid>
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
                 </DataTemplate>
             </CollectionView.GroupHeaderTemplate>
 
@@ -46,12 +48,12 @@
                             <Label Text="{Binding Position}" Style="{StaticResource MediumLabelStyle}" Margin="20,0,0,0" />
                             <Grid Margin="20,0,0,0">
                                 <Label Margin="13,0,0,0" Style="{StaticResource SmallLabelStyle}"
-                                       FontSize="{Binding Converter={StaticResource TrackListingSymbolFontSizeConverter}}"
+                                       FontSize="{Binding Delta, TargetNullValue=0.0,  Converter={StaticResource TrackListingSymbolFontSizeConverter}}"
                                        Text="{Binding Delta, Converter={StaticResource DeltaToStringConverter}}"
                                        TextColor="{Binding Converter={StaticResource DeltaToSymbolColour}}" />
 
                                 <Label Style="{StaticResource SmallLabelStyle}"
-                                       FontSize="{Binding Converter={StaticResource TrackListingSymbolFontSizeConverter}}"
+                                       FontSize="{Binding Delta, TargetNullValue=0.0, Converter={StaticResource TrackListingSymbolFontSizeConverter}}"
                                        FontFamily="MaterialIcons"
                                        Text="{Binding Converter={StaticResource DeltaToSymbolConverter}}"
                                        TextColor="{Binding Converter={StaticResource DeltaToSymbolColour}}" />
