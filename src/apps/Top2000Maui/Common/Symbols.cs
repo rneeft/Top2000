@@ -18,6 +18,8 @@ public static class Symbols
 
     public static string FilterList => "\xe152";
 
+    public static string Jump => "\xe0b5";
+
     public static string Clock => "\xe192";
 
     public static string Today => "\xf217";
@@ -39,4 +41,8 @@ public static class Symbols
     public static string New => "\xe05e";
 
     public static string Options => "\xe429";
+
+    public static string ArrowCircleLeft => "\xe314";
+
+    public static string ArrowCircleRight => "\xe315";
 }

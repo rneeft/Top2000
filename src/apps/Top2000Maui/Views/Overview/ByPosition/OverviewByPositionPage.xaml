@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Chroomsoft.Top2000.Apps.Views.Overview.ByPosition.OverviewByPositionPage"
              xmlns:overview="clr-namespace:Chroomsoft.Top2000.Apps.Views.Overview"
+              xmlns:g="clr-namespace:Chroomsoft.Top2000.Apps.Common"
              Title="OverviewByPositionPage">
     <ContentPage.Resources>
         <overview:EditionPlayTimeConverter x:Key="EditionPlayTimeConverter" />
@@ -12,8 +13,17 @@
         <overview:TrackListingSymbolFontSizeConverter x:Key="TrackListingSymbolFontSizeConverter" />
     </ContentPage.Resources>
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Clicked="OnJumpGroupButtonClick">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource Glyph="{x:Static g:Symbols.Jump}" Color="White"
+                 FontFamily="MaterialIcons" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+
     <Grid>
-        <CollectionView
+        <CollectionView x:Name="listings"
             ItemsSource="{Binding Listings}"
             SelectedItem="{Binding SelectedListing}"
             VerticalOptions="FillAndExpand"

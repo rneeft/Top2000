@@ -1,11 +1,4 @@
-﻿using Chroomsoft.Top2000.Apps.Globalisation;
-using Chroomsoft.Top2000.Apps.XamarinForms;
-using Chroomsoft.Top2000.Features.AllEditions;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
+﻿using Chroomsoft.Top2000.Apps.XamarinForms;
 
 namespace Chroomsoft.Top2000.Apps.Overview.Position
 {
@@ -20,7 +13,7 @@ namespace Chroomsoft.Top2000.Apps.Overview.Position
 
         public ViewModel ViewModel => (ViewModel)BindingContext;
 
-        async protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
             if (ViewModel.Editions.Count == 0)
@@ -52,7 +45,7 @@ namespace Chroomsoft.Top2000.Apps.Overview.Position
             return base.OnBackButtonPressed();
         }
 
-        async private void OnSelectYearButtonClick(object sender, System.EventArgs e)
+        private async void OnSelectYearButtonClick(object sender, System.EventArgs e)
         {
             Shell.SetNavBarIsVisible(this, false);
             Shell.SetTabBarIsVisible(this, false);
@@ -63,7 +56,7 @@ namespace Chroomsoft.Top2000.Apps.Overview.Position
             await EditionsFlyout.TranslateTo(0, 0);
         }
 
-        async private void OnJumpGroupButtonClick(object sender, System.EventArgs e)
+        private async void OnJumpGroupButtonClick(object sender, System.EventArgs e)
         {
             var groups = ViewModel.Listings.Select(x => x.Key)
                                          .ToArray();
@@ -76,22 +69,7 @@ namespace Chroomsoft.Top2000.Apps.Overview.Position
             }
         }
 
-        private void JumpIntoList(string groupElected)
-        {
-            var groupIndex = ViewModel.Listings.FindIndex(x => x.Key == groupElected);
-            var group = ViewModel.Listings.Single(x => x.Key == groupElected);
-
-            var position = group.First().Position;
-
-            const int ShowGroup = 1;
-            var index = position + groupIndex - ShowGroup;
-
-            if (index < 0) index = 0;
-
-            listings.ScrollTo(index, position: ScrollToPosition.Start, animate: false);
-        }
-
-        async private void NewEditionSelected(object sender, SelectionChangedEventArgs e)
+        private async void NewEditionSelected(object sender, SelectionChangedEventArgs e)
         {
             if (AllEditions.SelectedItem is Edition edition)
             {
@@ -113,7 +91,7 @@ namespace Chroomsoft.Top2000.Apps.Overview.Position
             }
         }
 
-        async private void OnListingSelected(object sender, SelectionChangedEventArgs e)
+        private async void OnListingSelected(object sender, SelectionChangedEventArgs e)
         {
             if (ViewModel.SelectedListing is null) return;
 
@@ -140,7 +118,7 @@ namespace Chroomsoft.Top2000.Apps.Overview.Position
             this.trackInformation.IsVisible = false;
         }
 
-        async private void OnCloseButtonClick(object sender, EventArgs e)
+        private async void OnCloseButtonClick(object sender, EventArgs e)
         {
             Shell.SetTabBarIsVisible(this, true);
             Shell.SetNavBarIsVisible(this, true);

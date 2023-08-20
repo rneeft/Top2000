@@ -1,6 +1,4 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Chroomsoft.Top2000.Data.Unittests;
@@ -28,6 +26,25 @@ public class Top2000DataTests
         foreach (var (name, content) in files)
         {
             content.Should().NotBeNullOrWhiteSpace($"The file '{name}' does not have content");
+        }
+    }
+
+    [TestMethod]
+    public async Task AllPrefxesAreIncrementsOfOne()
+    {
+        var fileVersions = sut
+            .GetAllSqlFiles()
+
+            .Order()
+            .ToArray();
+
+        for (var i = 1; i < fileVersions.Length; i++)
+        {
+            var currentFilePrefix = int.Parse(fileVersions[i].Split('-')[0]);
+            var previousFilePrefix = int.Parse(fileVersions[i - 1].Split('-')[0]);
+
+            currentFilePrefix.Should().Be(previousFilePrefix + 1,
+                $"File {fileVersions[i]} has incorrent prefix. Expected {previousFilePrefix + 1} but found {currentFilePrefix}");
         }
     }
 

@@ -28,15 +28,6 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Clicked="OnJumpGroupButtonClick">
-            <ToolbarItem.IconImageSource>
-                <FontImageSource Glyph="{x:Static g:Symbols.FilterList}" Color="White"
-                                 FontFamily="{OnPlatform Android=MaterialIcons.ttf#}" />
-            </ToolbarItem.IconImageSource>
-        </ToolbarItem>
-    </ContentPage.ToolbarItems>
-
     <Shell.TitleView>
         <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
 
@@ -54,9 +45,6 @@
 
     <ContentPage.Content>
         <Grid>
-
-            <trackInformation:View x:Name="trackInformation" IsVisible="False" />
-
             <Grid x:Name="EditionsFlyout" IsVisible="False" BackgroundColor="{DynamicResource PageBackgroundColor}">
 
                 <Grid.RowDefinitions>

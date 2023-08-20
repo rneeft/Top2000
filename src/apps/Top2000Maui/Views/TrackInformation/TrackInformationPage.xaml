@@ -67,41 +67,58 @@
 
                 <Label Text="{Binding [Appearances], Source={x:Static res:Translator.Instance}}" Style="{StaticResource SmallLabelStyle}" FontAttributes="Bold" Margin="0,5,0,0" />
 
-                <ScrollView Orientation="Horizontal" x:Name="positionsScroll" HorizontalScrollBarVisibility="Never">
-                    <StackLayout BindableLayout.ItemsSource="{Binding Listings}" Orientation="Horizontal">
-                        <BindableLayout.ItemTemplate>
-                            <DataTemplate>
+                <Grid ColumnDefinitions="{OnPlatform WinUI='50,*,50', Android='*'}">
+                    <Button Text="{x:Static g:Symbols.ArrowCircleLeft}" HorizontalOptions="Start" WidthRequest="40" BorderWidth="2"
+                            Padding="5,10,5,10"
+                            Margin="0,5,0,0"
+                            FontFamily="MaterialIcons"
+                            FontSize="40"
+                            BackgroundColor="Transparent"
+                            IsVisible="{OnPlatform WinUI=True, Android=False}" />
+                    <ScrollView Orientation="Horizontal" x:Name="positionsScroll" HorizontalScrollBarVisibility="Never" Grid.Column="1">
+                        <StackLayout BindableLayout.ItemsSource="{Binding Listings}" Orientation="Horizontal">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
 
-                                <Grid RowSpacing="1" Margin="0,0,20,0">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                    </Grid.RowDefinitions>
+                                    <Grid RowSpacing="1" Margin="0,0,20,0">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
 
-                                    <Label Text="{Binding Edition}" HorizontalOptions="Start" Style="{StaticResource MediumLabelStyle}" />
+                                        <Label Text="{Binding Edition}" HorizontalOptions="Start" Style="{StaticResource MediumLabelStyle}" />
 
-                                    <StackLayout Grid.Row="1" Orientation="Horizontal">
+                                        <StackLayout Grid.Row="1" Orientation="Horizontal">
 
-                                        <Label Text="{Binding Status, Converter={StaticResource StatusToSymbolConverter}}"
-                                               TextColor="{Binding Status, Converter={StaticResource StatusToColourConverter}}"
-                                               Style="{StaticResource MediumLabelStyle}"
-                                               FontFamily="MaterialIcons"
-                                               HorizontalOptions="Start" />
+                                            <Label Text="{Binding Status, Converter={StaticResource StatusToSymbolConverter}}"
+                                 TextColor="{Binding Status, Converter={StaticResource StatusToColourConverter}}"
+                                 Style="{StaticResource MediumLabelStyle}"
+                                 FontFamily="MaterialIcons"
+                                 HorizontalOptions="Start" />
 
-                                        <Label Text="{Binding Offset, Converter={StaticResource OffsetToStringConverter}}"
-                                               Style="{StaticResource SmallLabelStyle}"
-                                               Opacity="0.5" />
-                                    </StackLayout>
+                                            <Label Text="{Binding Offset, Converter={StaticResource OffsetToStringConverter}}"
+                                 Style="{StaticResource SmallLabelStyle}"
+                                 Opacity="0.5" />
+                                        </StackLayout>
 
-                                    <Label Text="{Binding Position, Converter={StaticResource PositionToStringConverter}, TargetNullValue=-}"
-                                           Style="{StaticResource MediumLabelStyle}"
-                                           Grid.Row="2" />
-                                </Grid>
-                            </DataTemplate>
-                        </BindableLayout.ItemTemplate>
-                    </StackLayout>
-                </ScrollView>
+                                        <Label Text="{Binding Position, Converter={StaticResource PositionToStringConverter}, TargetNullValue=-}"
+                             Style="{StaticResource MediumLabelStyle}"
+                             Grid.Row="2" />
+                                    </Grid>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </StackLayout>
+                    </ScrollView>
+                    <Button Text="{x:Static g:Symbols.ArrowCircleRight}" HorizontalOptions="Start" WidthRequest="40" BorderWidth="2"
+                            Grid.Column="2"
+                            Padding="5,10,5,10"
+                            Margin="0,5,0,0"
+                            FontFamily="MaterialIcons"
+                            FontSize="40"
+                            BackgroundColor="Transparent"
+                            IsVisible="{OnPlatform WinUI=True, Android=False}" />                
+                </Grid>
 
                 <StackLayout Spacing="25" Orientation="Horizontal" Margin="0,20,0,10">
                     <StackLayout>
