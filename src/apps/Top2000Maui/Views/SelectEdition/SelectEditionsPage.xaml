@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Chroomsoft.Top2000.Apps.Views.SelectEdition.SelectEditionsPage"
+             xmlns:res="clr-namespace:Chroomsoft.Top2000.Apps.Globalisation"
+             Title="{Binding [SelectEdition], Source={x:Static res:Translator.Instance}}">
+    <Grid>
+        <CollectionView x:Name="allEditions"
+                ItemsSource="{Binding Editions}"
+                Grid.Row="1"
+                SelectionMode="Single" SelectionChanged="NewEditionSelected">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="20,4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Label Text="{Binding Year}" Style="{StaticResource MediumLabelStyle}" />
+
+                        <StackLayout Grid.Column="1" Spacing="0">
+                            <Label Text="{Binding LocalStartDateAndTime, Converter={StaticResource EditionPlayTimeConverter}}"
+                                   Style="{StaticResource MediumLabelStyle}"
+                                   LineBreakMode="WordWrap" />
+
+                            <Label Text="{Binding LocalEndDateAndTime, Converter={StaticResource EditionPlayTimeConverter}}" Opacity=".5"
+                                   Style="{StaticResource SmallLabelStyle}"
+                                   LineBreakMode="WordWrap" />
+                        </StackLayout>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>

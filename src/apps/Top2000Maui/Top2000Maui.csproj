@@ -89,6 +89,9 @@
 	  <MauiXaml Update="Views\Overview\ByPosition\OverviewByPositionPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\SelectEdition\SelectEditionsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\TrackInformation\TrackInformationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

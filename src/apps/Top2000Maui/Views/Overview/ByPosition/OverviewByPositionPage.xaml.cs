@@ -1,3 +1,4 @@
+using Chroomsoft.Top2000.Apps.Views.SelectEdition;
 using Chroomsoft.Top2000.Apps.Views.TrackInformation;
 using Chroomsoft.Top2000.Data.ClientDatabase.Sources;
 
@@ -7,23 +8,34 @@ public partial class OverviewByPositionPage : ContentPage
 {
     private readonly IUpdateClientDatabase updateClientDatabase;
     private readonly Top2000AssemblyDataSource top2000AssemblyData;
+    private readonly EditionOnView editionOnView;
     private bool isInitialise;
 
-    public OverviewByPositionPage(OverviewByPositionViewModel viewModel, IUpdateClientDatabase updateClientDatabase, Top2000AssemblyDataSource top2000AssemblyData)
+    public OverviewByPositionPage(OverviewByPositionViewModel viewModel, IUpdateClientDatabase updateClientDatabase, Top2000AssemblyDataSource top2000AssemblyData, EditionOnView editionOnView)
     {
         this.BindingContext = viewModel;
         InitializeComponent();
         this.updateClientDatabase = updateClientDatabase;
         this.top2000AssemblyData = top2000AssemblyData;
+        this.editionOnView = editionOnView;
     }
 
     protected override async void OnAppearing()
     {
+        var viewModel = (OverviewByPositionViewModel)BindingContext;
+
         if (!isInitialise)
         {
             await updateClientDatabase.RunAsync(top2000AssemblyData);
-            await ((OverviewByPositionViewModel)BindingContext).InitialiseViewModelAsync();
+            await viewModel.InitialiseViewModelAsync();
             isInitialise = true;
+        }
+        else
+        {
+            if (editionOnView.SelectedEdition is not null && editionOnView.SelectedEdition?.Year != viewModel.SelectedEditionYear)
+            {
+                await viewModel.InitialiseViewModelAsync(editionOnView.SelectedEdition!);
+            }
         }
     }
 
@@ -71,5 +83,11 @@ public partial class OverviewByPositionPage : ContentPage
         }
 
         listings.ScrollTo(index, position: ScrollToPosition.Start, animate: false);
+    }
+
+    private async void OnSelectYearButtonClick(object sender, TappedEventArgs e)
+    {
+        var dict = new Dictionary<string, object>();
+        await Shell.Current.GoToAsync(nameof(SelectEditionsPage), animate: true, dict);
     }
 }

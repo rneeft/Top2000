@@ -7,9 +7,27 @@
     xmlns:local="clr-namespace:Chroomsoft.Top2000.Apps"
     xmlns:res="clr-namespace:Chroomsoft.Top2000.Apps.Globalisation"
     xmlns:obp="clr-namespace:Chroomsoft.Top2000.Apps.Views.Overview.ByPosition"
-    Shell.FlyoutBehavior="Flyout">
+    Shell.FlyoutBehavior="{OnPlatform WinUI='Flyout', Android='Disabled'}">
 
-    <FlyoutItem Title="{Binding [Overview], Source={x:Static res:Translator.Instance}}">
+    <TabBar IsVisible="{OnPlatform Android=True, WinUI=False}">
+        <Tab Title="{Binding [Overview], Source={x:Static res:Translator.Instance}}">
+            <Tab.FlyoutIcon>
+                <FontImageSource FontFamily="MaterialIcons" Glyph="{x:Static g:Symbols.Overview}" />
+            </Tab.FlyoutIcon>
+        </Tab>
+        <ShellContent ContentTemplate="{DataTemplate obp:OverviewByPositionPage}" />
+
+        <!--<Tab Title="{Binding [ViewByDate], Source={x:Static res:Translator.Instance}}">
+            <Tab.FlyoutIcon>
+                <FontImageSource FontFamily="MaterialIcons" Glyph="{x:Static g:Symbols.Overview}" />
+            </Tab.FlyoutIcon>
+        </Tab>-->
+        <!--<ShellContent ContentTemplate="{DataTemplate obp:OverviewByPositionPage}"
+                      Route="OverviewByPositionPage" />-->
+    </TabBar>
+
+    <FlyoutItem IsVisible="{OnPlatform Android=False, WinUI=True}"
+                Title="{Binding [Overview], Source={x:Static res:Translator.Instance}}">
         <FlyoutItem.FlyoutIcon>
             <FontImageSource FontFamily="MaterialIcons" Glyph="{x:Static g:Symbols.Overview}" />
         </FlyoutItem.FlyoutIcon>
@@ -19,7 +37,8 @@
             Route="OverviewByPositionPage" />
     </FlyoutItem>
 
-    <FlyoutItem Title="{Binding [ViewByDate], Source={x:Static res:Translator.Instance}}">
+    <FlyoutItem  IsVisible="{OnPlatform Android=False, WinUI=True}"
+        Title="{Binding [ViewByDate], Source={x:Static res:Translator.Instance}}">
         <FlyoutItem.FlyoutIcon>
             <FontImageSource FontFamily="MaterialIcons" Glyph="{x:Static g:Symbols.Clock}" />
         </FlyoutItem.FlyoutIcon>

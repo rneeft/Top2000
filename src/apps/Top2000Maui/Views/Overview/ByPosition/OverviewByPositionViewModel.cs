@@ -44,7 +44,14 @@ public sealed partial class OverviewByPositionViewModel : ObservableObject
         var editions = await mediator.Send(new AllEditionsRequest());
         SelectedEdition = editions.First();
         SelectedEditionYear = SelectedEdition.Year;
-        Editions.ClearAddRange(editions);
+
+        await LoadAllListingsAsync();
+    }
+
+    public async Task InitialiseViewModelAsync(Edition edition)
+    {
+        SelectedEdition = edition;
+        SelectedEditionYear = SelectedEdition.Year;
 
         await LoadAllListingsAsync();
     }

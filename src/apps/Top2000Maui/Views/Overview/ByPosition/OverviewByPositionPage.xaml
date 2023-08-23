@@ -4,7 +4,22 @@
              x:Class="Chroomsoft.Top2000.Apps.Views.Overview.ByPosition.OverviewByPositionPage"
              xmlns:overview="clr-namespace:Chroomsoft.Top2000.Apps.Views.Overview"
               xmlns:g="clr-namespace:Chroomsoft.Top2000.Apps.Common"
-             Title="OverviewByPositionPage">
+             >
+    <Shell.TitleView>
+        <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+
+            <Label Text="{x:Static g:Symbols.Menu}" FontFamily="MaterialIcons" FontSize="25"
+                   TextColor="White"
+                   VerticalOptions="Center" />
+
+            <Label Margin="5,0,0,0" Text="{Binding SelectedEditionYear, Mode=OneWay}" TextColor="White" FontSize="20" VerticalTextAlignment="Center" VerticalOptions="Center" />
+
+            <StackLayout.GestureRecognizers>
+                <TapGestureRecognizer Tapped="OnSelectYearButtonClick" />
+            </StackLayout.GestureRecognizers>
+        </StackLayout>
+    </Shell.TitleView>
+    
     <ContentPage.Resources>
         <overview:EditionPlayTimeConverter x:Key="EditionPlayTimeConverter" />
         <overview:DeltaToStringConverter x:Key="DeltaToStringConverter" />
@@ -20,6 +35,7 @@
                  FontFamily="MaterialIcons" />
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
+        
     </ContentPage.ToolbarItems>
 
     <Grid>
@@ -34,10 +50,10 @@
             SelectionMode="Single">
             <CollectionView.GroupHeaderTemplate>
                 <DataTemplate>
-                    <StackLayout WidthRequest="10000">
+                    <StackLayout WidthRequest="{OnPlatform WinUI='10000'}" HorizontalOptions="{OnPlatform WinUI='Start'}">
                         <Label Text="{Binding Key}" TextColor="{StaticResource Top2000Colour}"
-                               Style="{StaticResource MediumLabelStyle}" Margin="5,5,0,0" />
-                        <BoxView Style="{StaticResource Separator}" Margin="5,-3,20,5" />
+                               Style="{StaticResource MediumLabelStyle}" Margin="20,5,0,0" />
+                        <BoxView Style="{StaticResource Separator}" Margin="20,-3,20,5" />
                         <StackLayout.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnJumpGroupButtonClick" />
                         </StackLayout.GestureRecognizers>
