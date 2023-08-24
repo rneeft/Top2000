@@ -7,6 +7,7 @@
     xmlns:local="clr-namespace:Chroomsoft.Top2000.Apps"
     xmlns:res="clr-namespace:Chroomsoft.Top2000.Apps.Globalisation"
     xmlns:obp="clr-namespace:Chroomsoft.Top2000.Apps.Views.Overview.ByPosition"
+    xmlns:obd="clr-namespace:Chroomsoft.Top2000.Apps.Views.Overview.ByDate"
     Shell.FlyoutBehavior="{OnPlatform WinUI='Flyout', Android='Disabled'}">
 
     <TabBar IsVisible="{OnPlatform Android=True, WinUI=False}">
@@ -17,13 +18,12 @@
         </Tab>
         <ShellContent ContentTemplate="{DataTemplate obp:OverviewByPositionPage}" />
 
-        <!--<Tab Title="{Binding [ViewByDate], Source={x:Static res:Translator.Instance}}">
+        <Tab Title="{Binding [ViewByDate], Source={x:Static res:Translator.Instance}}">
             <Tab.FlyoutIcon>
-                <FontImageSource FontFamily="MaterialIcons" Glyph="{x:Static g:Symbols.Overview}" />
+                <FontImageSource FontFamily="MaterialIcons" Glyph="{x:Static g:Symbols.Clock}" />
             </Tab.FlyoutIcon>
-        </Tab>-->
-        <!--<ShellContent ContentTemplate="{DataTemplate obp:OverviewByPositionPage}"
-                      Route="OverviewByPositionPage" />-->
+        </Tab>
+        <ShellContent ContentTemplate="{DataTemplate obd:OverviewByDatePage}" />
     </TabBar>
 
     <FlyoutItem IsVisible="{OnPlatform Android=False, WinUI=True}"
@@ -33,8 +33,7 @@
         </FlyoutItem.FlyoutIcon>
         <ShellContent
             Title="{Binding [Overview], Source={x:Static res:Translator.Instance}}"
-            ContentTemplate="{DataTemplate obp:OverviewByPositionPage}"
-            Route="OverviewByPositionPage" />
+            ContentTemplate="{DataTemplate obp:OverviewByPositionPage}" />
     </FlyoutItem>
 
     <FlyoutItem  IsVisible="{OnPlatform Android=False, WinUI=True}"
@@ -44,7 +43,6 @@
         </FlyoutItem.FlyoutIcon>
         <ShellContent
             Title="{Binding [ViewByDate], Source={x:Static res:Translator.Instance}}"
-            ContentTemplate="{DataTemplate obp:OverviewByPositionPage}"
-            Route="OnePage" />
+            ContentTemplate="{DataTemplate obd:OverviewByDatePage}" />
     </FlyoutItem>
 </Shell>

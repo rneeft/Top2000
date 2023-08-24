@@ -1,4 +1,6 @@
-﻿using Chroomsoft.Top2000.Apps.Views.Overview.ByPosition;
+﻿using Chroomsoft.Top2000.Apps.Views.Overview.ByDate;
+using Chroomsoft.Top2000.Apps.Views.Overview.ByDate.SelectDateTimeGroup;
+using Chroomsoft.Top2000.Apps.Views.Overview.ByPosition;
 using Chroomsoft.Top2000.Apps.Views.SelectEdition;
 using Chroomsoft.Top2000.Apps.Views.TrackInformation;
 using Chroomsoft.Top2000.Features;
@@ -35,6 +37,8 @@ public static class MauiProgram
             .AddTransientWithShellRoute<OverviewByPositionPage, OverviewByPositionViewModel>(nameof(OverviewByPositionPage))
             .AddTransientWithShellRoute<TrackInformationPage, TrackInformationViewModel>(nameof(TrackInformationPage))
             .AddTransientWithShellRoute<SelectEditionsPage, SelectEditionsViewModel>(nameof(SelectEditionsPage))
+            .AddTransientWithShellRoute<OverviewByDatePage, OverviewByDateViewModel>(nameof(OverviewByDatePage))
+            .AddTransientWithShellRoute<SelectDateTimeGroupPage, SelectDateTimeGroupViewModel>(nameof(SelectDateTimeGroupPage))
             ;
 
         var baseUrl = new Uri("https://www-dev.top2000.app");

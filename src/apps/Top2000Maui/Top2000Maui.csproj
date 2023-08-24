@@ -82,10 +82,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Views\Overview\ByDate\" />
-	</ItemGroup>
-
-	<ItemGroup>
+	  <MauiXaml Update="Views\Overview\ByDate\OverviewByDatePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Overview\ByDate\SelectDateTimeGroup\SelectDateTimeGroupPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Overview\ByPosition\OverviewByPositionPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -95,6 +97,10 @@
 	  <MauiXaml Update="Views\TrackInformation\TrackInformationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Views\Search\" />
 	</ItemGroup>
 
 </Project>

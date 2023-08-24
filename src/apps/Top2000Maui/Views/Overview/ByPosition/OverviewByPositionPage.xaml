@@ -3,8 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Chroomsoft.Top2000.Apps.Views.Overview.ByPosition.OverviewByPositionPage"
              xmlns:overview="clr-namespace:Chroomsoft.Top2000.Apps.Views.Overview"
-              xmlns:g="clr-namespace:Chroomsoft.Top2000.Apps.Common"
-             >
+              xmlns:g="clr-namespace:Chroomsoft.Top2000.Apps.Common">
     <Shell.TitleView>
         <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
 
@@ -19,7 +18,7 @@
             </StackLayout.GestureRecognizers>
         </StackLayout>
     </Shell.TitleView>
-    
+
     <ContentPage.Resources>
         <overview:EditionPlayTimeConverter x:Key="EditionPlayTimeConverter" />
         <overview:DeltaToStringConverter x:Key="DeltaToStringConverter" />
@@ -35,7 +34,6 @@
                  FontFamily="MaterialIcons" />
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
-        
     </ContentPage.ToolbarItems>
 
     <Grid>
@@ -50,7 +48,7 @@
             SelectionMode="Single">
             <CollectionView.GroupHeaderTemplate>
                 <DataTemplate>
-                    <StackLayout WidthRequest="{OnPlatform WinUI='10000'}" HorizontalOptions="{OnPlatform WinUI='Start'}">
+                    <StackLayout>
                         <Label Text="{Binding Key}" TextColor="{StaticResource Top2000Colour}"
                                Style="{StaticResource MediumLabelStyle}" Margin="20,5,0,0" />
                         <BoxView Style="{StaticResource Separator}" Margin="20,-3,20,5" />

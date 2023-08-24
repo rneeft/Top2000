@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Chroomsoft.Top2000.Apps.Views.Overview.ByDate.SelectDateTimeGroup.SelectDateTimeGroupPage"
+             xmlns:local="clr-namespace:Chroomsoft.Top2000.Apps.Views.Overview.ByDate.SelectDateTimeGroup"
+             Shell.NavBarIsVisible="False" Shell.TabBarIsVisible="False">
+
+    <ContentPage.Resources>
+        <local:DateTimeKeyToString x:Key="DateTimeKeyToString" />
+        <local:DateTimeToDateOnlyString x:Key="DateTimeToDateOnlyString" />
+        <local:DateTimeToTimeOnlyString x:Key="DateTimeToTimeOnlyString" />
+    </ContentPage.Resources>
+
+    <CollectionView Margin="10"
+                    ItemsSource="{Binding Dates}"
+                    VerticalOptions="FillAndExpand"
+                    IsGrouped="True"
+                    SelectionMode="Single"
+                    SelectionChanged="OnGroupSelected">
+
+        <CollectionView.ItemsLayout>
+            <GridItemsLayout Orientation="Vertical" Span="3" />
+        </CollectionView.ItemsLayout>
+
+        <CollectionView.ItemTemplate>
+            <DataTemplate>
+                <StackLayout>
+                    <Label HorizontalTextAlignment="Start" VerticalTextAlignment="Center" Margin="0,10"
+                           Text="{Binding Converter={StaticResource DateTimeToTimeOnlyString}}" Style="{StaticResource SmallLabelStyle}" />
+                </StackLayout>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+
+        <CollectionView.GroupHeaderTemplate>
+            <DataTemplate>
+                <StackLayout>
+                    <Label Text="{Binding Key, Converter={StaticResource DateTimeToDateOnlyString}}"
+                           Style="{StaticResource SmallLabelStyle}"
+                           TextColor="{StaticResource Top2000Colour}" Margin="0,5,0,0" />
+                    <BoxView Style="{StaticResource Separator}" Margin="0,-3,0,0" />
+                </StackLayout>
+            </DataTemplate>
+        </CollectionView.GroupHeaderTemplate>
+    </CollectionView>
+</ContentPage>
