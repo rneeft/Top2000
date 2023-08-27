@@ -3,31 +3,31 @@
 public sealed partial class TrackInformationViewModel : ObservableObject, IQueryAttributable
 {
     [ObservableProperty]
-    public string artistWithYear;
+    public string artistWithYear = string.Empty;
 
     private readonly IMediator mediator;
     private int trackId;
 
     [ObservableProperty]
-    private string title;
+    private string title = string.Empty;
 
     [ObservableProperty]
-    private string artist;
+    private string artist = string.Empty;
 
     [ObservableProperty]
     private int totalListings;
 
     [ObservableProperty]
-    private ListingInformation highest;
+    private ListingInformation? highest;
 
     [ObservableProperty]
-    private ListingInformation lowest;
+    private ListingInformation? lowest;
 
     [ObservableProperty]
-    private ListingInformation latest;
+    private ListingInformation? latest;
 
     [ObservableProperty]
-    private ListingInformation first;
+    private ListingInformation? first;
 
     [ObservableProperty]
     private int appearances;
@@ -52,6 +52,19 @@ public sealed partial class TrackInformationViewModel : ObservableObject, IQuery
 
     public ObservableRangeCollection<ListingInformation> Listings { get; }
 
+    public static Task NavigateAsync(int trackId, string title, string artist)
+    {
+        var parameters = new Dictionary<string, object>
+        {
+            { "Title", title  },
+            { "Artist", artist },
+            { "TrackId", trackId },
+        };
+
+        return Shell.Current.GoToAsync(nameof(TrackInformationPage), animate: true, parameters);
+    }
+
+    [RelayCommand]
     public async Task LoadTrackDetailsAsync()
     {
         var track = await mediator.Send(new TrackInformationRequest(trackId));
@@ -74,9 +87,9 @@ public sealed partial class TrackInformationViewModel : ObservableObject, IQuery
 
     public void ApplyQueryAttributes(IDictionary<string, object> query)
     {
-        var trackListing = (TrackListing)query["TrackListing"];
-        trackId = trackListing.TrackId;
-        Title = trackListing.Title;
-        Artist = trackListing.Artist;
+        trackId = (int)query["TrackId"];
+        Title = (string)query["Title"];
+        Artist = (string)query["Artist"];
+        ArtistWithYear = (string)query["Artist"];
     }
 }

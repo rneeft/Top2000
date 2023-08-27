@@ -61,14 +61,15 @@ public partial class OverviewByDatePage : ContentPage, IQueryAttributable
         }
         else
         {
-            //this.ToolbarItems.Remove(jumpToToday);
+            this.ToolbarItems.Remove(jumpToToday);
         }
     }
 
     private async Task JumpToSelectedDateTime(DateTime selectedDate)
     {
-        var tracksGrouped = ViewModel.Listings;
-        var groupsBefore = tracksGrouped.Where(x => x.Key <= selectedDate);
+        var groupsBefore = ViewModel
+            .Listings
+            .Where(x => x.Key <= selectedDate);
         var group = groupsBefore.LastOrDefault();
 
         if (group is not null)
@@ -103,16 +104,17 @@ public partial class OverviewByDatePage : ContentPage, IQueryAttributable
     {
         if (e.CurrentSelection.Count == 1)
         {
-            var dict = new Dictionary<string, object>
-            {
-                {  "TrackListing", (TrackListing)e.CurrentSelection[0] }
-            };
-
-            await Shell.Current.GoToAsync(nameof(TrackInformationPage), animate: true, dict);
+            var track = (TrackListing)e.CurrentSelection[0];
+            await TrackInformationViewModel.NavigateAsync(track.TrackId, track.Title, track.Artist);
+            listings.SelectedItem = null;
         }
     }
 
-    private async void OnJumpGroupButtonClick(object sender, TappedEventArgs e)
+    private async void OnJumpGroupButtonClick(object sender, EventArgs e) => await NavigateSelectDateTimeGroupPage();
+
+    private async void OnGroupHeaderClick(object sender, TappedEventArgs e) => await NavigateSelectDateTimeGroupPage();
+
+    private async Task NavigateSelectDateTimeGroupPage()
     {
         var dict = new Dictionary<string, object>
         {

@@ -52,5 +52,5 @@ public sealed partial class OverviewByDateViewModel : ObservableObject
         Dates.ClearAddRange(dates);
     }
 
-    private DateTime LocalPlayDate(DateTime arg) => arg.Date;
+    private static DateTime LocalPlayDate(DateTime arg) => arg.Date;
 }

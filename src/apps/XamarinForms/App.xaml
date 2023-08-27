@@ -7,14 +7,6 @@
 
             <ResourceDictionary Source="Themes/Light.xaml" />
 
-            <Style TargetType="TabBar">
-                <Setter Property="Shell.BackgroundColor" Value="{DynamicResource NavigationBarColor}" />
-                <Setter Property="Shell.TabBarBackgroundColor" Value="{DynamicResource TabBarBackgroundColor}" />
-                <Setter Property="Shell.TabBarUnselectedColor" Value="{DynamicResource TabBarUnselectedColor}" />
-                <Setter Property="Shell.TabBarTitleColor" Value="{DynamicResource TabBarSelectedColor}" />
-                <Setter Property="Shell.ForegroundColor" Value="{DynamicResource ShellForegroundColor}" />
-            </Style>
-
             <Style TargetType="NavigationPage">
                 <Setter Property="BarBackgroundColor" Value="{DynamicResource NavigationBarColor}" />
                 <Setter Property="BarTextColor" Value="{DynamicResource ShellForegroundColor}" />

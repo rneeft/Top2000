@@ -1,6 +1,6 @@
 ﻿using Chroomsoft.Top2000.Features.AllEditions;
 
-namespace Chroomsoft.Top2000.Apps.Views.SelectEdition;
+namespace Chroomsoft.Top2000.Apps.Views.Overview.ByPosition.SelectEdition;
 
 public sealed partial class SelectEditionsViewModel : ObservableObject
 {

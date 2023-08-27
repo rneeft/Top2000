@@ -3,10 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Chroomsoft.Top2000.Apps.Views.Overview.ByDate.SelectDateTimeGroup.SelectDateTimeGroupPage"
              xmlns:local="clr-namespace:Chroomsoft.Top2000.Apps.Views.Overview.ByDate.SelectDateTimeGroup"
+                          xmlns:byDate="clr-namespace:Chroomsoft.Top2000.Apps.Views.Overview.ByDate"
              Shell.NavBarIsVisible="False" Shell.TabBarIsVisible="False">
 
     <ContentPage.Resources>
-        <local:DateTimeKeyToString x:Key="DateTimeKeyToString" />
         <local:DateTimeToDateOnlyString x:Key="DateTimeToDateOnlyString" />
         <local:DateTimeToTimeOnlyString x:Key="DateTimeToTimeOnlyString" />
     </ContentPage.Resources>

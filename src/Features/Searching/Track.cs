@@ -10,7 +10,9 @@ public sealed class Track
 
     public int RecordedYear { get; set; }
 
+    public string LastEdition { get; set; } = string.Empty;
+
     public int? Position { get; set; }
 
-    public string LastPosition => $"{Position?.ToString() ?? "-"}";
+    public string LastPosition => $"{LastEdition}: {Position?.ToString() ?? "-"}";
 }

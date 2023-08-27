@@ -4,6 +4,6 @@ public sealed class GroupByNothing : IGroup
 {
     public IEnumerable<IGrouping<string, Track>> Group(IEnumerable<Track> tracks)
     {
-        return tracks.GroupBy(x => "" + tracks.Count());
+        return tracks.GroupBy(x => string.Empty);
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Chroomsoft.Top2000.Apps.Views.Overview.ByDate.SelectDateTimeGroup;
+﻿namespace Chroomsoft.Top2000.Apps.Views.Overview.ByDate;
 
 public class DateTimeKeyToString : ValueConverterBase<DateTime, string>
 {

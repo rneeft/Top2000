@@ -3,8 +3,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Chroomsoft.Top2000.Apps.Views.Overview.ByPosition.OverviewByPositionPage"
              xmlns:overview="clr-namespace:Chroomsoft.Top2000.Apps.Views.Overview"
-              xmlns:g="clr-namespace:Chroomsoft.Top2000.Apps.Common">
-    <Shell.TitleView>
+              xmlns:g="clr-namespace:Chroomsoft.Top2000.Apps.Common"
+             Title="Top2000 App"
+             >
+    <ContentPage.Resources>
+        <overview:EditionPlayTimeConverter x:Key="EditionPlayTimeConverter" />
+        <overview:DeltaToStringConverter x:Key="DeltaToStringConverter" />
+        <overview:DeltaToSymbolColour x:Key="DeltaToSymbolColour" />
+        <overview:DeltaToSymbolConverter x:Key="DeltaToSymbolConverter" />
+        <overview:TrackListingSymbolFontSizeConverter x:Key="TrackListingSymbolFontSizeConverter" />
+    </ContentPage.Resources>
+
+    <!--<Shell.TitleView>
         <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
 
             <Label Text="{x:Static g:Symbols.Menu}" FontFamily="MaterialIcons" FontSize="25"
@@ -17,15 +27,7 @@
                 <TapGestureRecognizer Tapped="OnSelectYearButtonClick" />
             </StackLayout.GestureRecognizers>
         </StackLayout>
-    </Shell.TitleView>
-
-    <ContentPage.Resources>
-        <overview:EditionPlayTimeConverter x:Key="EditionPlayTimeConverter" />
-        <overview:DeltaToStringConverter x:Key="DeltaToStringConverter" />
-        <overview:DeltaToSymbolColour x:Key="DeltaToSymbolColour" />
-        <overview:DeltaToSymbolConverter x:Key="DeltaToSymbolConverter" />
-        <overview:TrackListingSymbolFontSizeConverter x:Key="TrackListingSymbolFontSizeConverter" />
-    </ContentPage.Resources>
+    </Shell.TitleView>-->
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Clicked="OnJumpGroupButtonClick">
@@ -38,19 +40,19 @@
 
     <Grid>
         <CollectionView x:Name="listings"
-            ItemsSource="{Binding Listings}"
-            SelectedItem="{Binding SelectedListing}"
-            VerticalOptions="FillAndExpand"
-            HorizontalOptions="FillAndExpand"
-            ItemSizingStrategy="MeasureAllItems"
-            SelectionChanged="OnListingSelected"
-            IsGrouped="True"
-            SelectionMode="Single">
+        ItemsSource="{Binding Listings}"
+        SelectedItem="{Binding SelectedListing}"
+        VerticalOptions="FillAndExpand"
+        HorizontalOptions="FillAndExpand"
+        ItemSizingStrategy="MeasureAllItems"
+        SelectionChanged="OnListingSelected"
+        IsGrouped="True"
+        SelectionMode="Single">
             <CollectionView.GroupHeaderTemplate>
                 <DataTemplate>
                     <StackLayout>
                         <Label Text="{Binding Key}" TextColor="{StaticResource Top2000Colour}"
-                               Style="{StaticResource MediumLabelStyle}" Margin="20,5,0,0" />
+                            Style="{StaticResource MediumLabelStyle}" Margin="20,5,0,0" />
                         <BoxView Style="{StaticResource Separator}" Margin="20,-3,20,5" />
                         <StackLayout.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnJumpGroupButtonClick" />
@@ -71,15 +73,15 @@
                             <Label Text="{Binding Position}" Style="{StaticResource MediumLabelStyle}" Margin="20,0,0,0" />
                             <Grid Margin="20,0,0,0">
                                 <Label Margin="13,0,0,0" Style="{StaticResource SmallLabelStyle}"
-                                       FontSize="{Binding Delta, TargetNullValue=0.0,  Converter={StaticResource TrackListingSymbolFontSizeConverter}}"
-                                       Text="{Binding Delta, Converter={StaticResource DeltaToStringConverter}}"
-                                       TextColor="{Binding Converter={StaticResource DeltaToSymbolColour}}" />
+                                    FontSize="{Binding Delta, TargetNullValue=0.0,  Converter={StaticResource TrackListingSymbolFontSizeConverter}}"
+                                    Text="{Binding Delta, Converter={StaticResource DeltaToStringConverter}}"
+                                    TextColor="{Binding Converter={StaticResource DeltaToSymbolColour}}" />
 
                                 <Label Style="{StaticResource SmallLabelStyle}"
-                                       FontSize="{Binding Delta, TargetNullValue=0.0, Converter={StaticResource TrackListingSymbolFontSizeConverter}}"
-                                       FontFamily="MaterialIcons"
-                                       Text="{Binding Converter={StaticResource DeltaToSymbolConverter}}"
-                                       TextColor="{Binding Converter={StaticResource DeltaToSymbolColour}}" />
+                                    FontSize="{Binding Delta, TargetNullValue=0.0, Converter={StaticResource TrackListingSymbolFontSizeConverter}}"
+                                    FontFamily="MaterialIcons"
+                                    Text="{Binding Converter={StaticResource DeltaToSymbolConverter}}"
+                                    TextColor="{Binding Converter={StaticResource DeltaToSymbolColour}}" />
                             </Grid>
                         </StackLayout>
 
