@@ -1,4 +1,5 @@
-﻿using Chroomsoft.Top2000.Features.AllEditions;
+﻿using Chroomsoft.Top2000.Apps.Views.TrackInformation;
+using Chroomsoft.Top2000.Features.AllEditions;
 
 namespace Chroomsoft.Top2000.Apps.Views.Overview.ByPosition;
 
@@ -33,6 +34,19 @@ public sealed partial class OverviewByPositionViewModel : ObservableObject
         var max = min + GroupSize;
 
         return $"{min} - {max}";
+    }
+
+    [RelayCommand]
+    public async Task ToggleFavoritesAsync(TrackListing listing)
+    {
+        listing.IsFavorite = !listing.IsFavorite;
+        await Task.Delay(1);
+    }
+
+    [RelayCommand]
+    public async Task NavigateToTrackListingAsync(TrackListing track)
+    {
+        await TrackInformationViewModel.NavigateAsync(track.TrackId, track.Title, track.Artist);
     }
 
     [RelayCommand]

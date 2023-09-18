@@ -8,6 +8,7 @@ public static class Symbols
 
     public static string Overview => "\xe242";
 
+    public static string Favorite => "\xe838";
     public static string Search => "\xe8b6";
 
     public static string Back => "\xe5c4";

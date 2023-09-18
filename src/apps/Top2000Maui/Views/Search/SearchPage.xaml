@@ -4,8 +4,8 @@
              x:Class="Chroomsoft.Top2000.Apps.Views.Search.SearchPage"
              xmlns:res="clr-namespace:Chroomsoft.Top2000.Apps.Globalisation"
              xmlns:g="clr-namespace:Chroomsoft.Top2000.Apps.Common"
-             xmlns:local="clr-namespace:Chroomsoft.Top2000.Apps.Views.Search">
-
+             xmlns:local="clr-namespace:Chroomsoft.Top2000.Apps.Views.Search"
+             Shell.TabBarIsVisible="False">
     <ContentPage.Resources>
         <Style TargetType="Grid">
             <Setter Property="VisualStateManager.VisualStateGroups">

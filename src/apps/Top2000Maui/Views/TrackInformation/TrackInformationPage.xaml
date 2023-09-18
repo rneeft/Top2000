@@ -5,7 +5,9 @@
              xmlns:g="clr-namespace:Chroomsoft.Top2000.Apps.Common"
              xmlns:converters="clr-namespace:Chroomsoft.Top2000.Apps.Views.TrackInformation.Converters"
              xmlns:progressBar="clr-namespace:Syncfusion.Maui.ProgressBar;assembly=Syncfusion.Maui.ProgressBar"
-             xmlns:res="clr-namespace:Chroomsoft.Top2000.Apps.Globalisation">
+             xmlns:res="clr-namespace:Chroomsoft.Top2000.Apps.Globalisation"
+             Shell.TabBarIsVisible="False"
+             >
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:StatusToColourConverter x:Key="StatusToColourConverter" />

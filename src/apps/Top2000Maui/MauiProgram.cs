@@ -27,6 +27,13 @@ public static class MauiProgram
             })
             ;
 
+#if ANDROID
+        builder.ConfigureMauiHandlers((handlers) =>
+        {
+            handlers.AddHandler(typeof(Shell), typeof(Chroomsoft.Top2000.Apps.Platforms.Android.MyShellRenderer));
+        });
+#endif
+
         builder.Services
             .AddSingleton<ILocalisationService, LocalisationService>()
             .AddSingleton<ICulture>(new SupportedCulture("nl"))

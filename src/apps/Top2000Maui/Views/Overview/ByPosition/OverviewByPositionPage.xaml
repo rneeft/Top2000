@@ -3,9 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Chroomsoft.Top2000.Apps.Views.Overview.ByPosition.OverviewByPositionPage"
              xmlns:overview="clr-namespace:Chroomsoft.Top2000.Apps.Views.Overview"
-                    xmlns:res="clr-namespace:Chroomsoft.Top2000.Apps.Globalisation"
-              xmlns:g="clr-namespace:Chroomsoft.Top2000.Apps.Common"
-             Title="Top2000 App">
+             xmlns:local="clr-namespace:Chroomsoft.Top2000.Apps.Views.Overview.ByPosition"
+             xmlns:res="clr-namespace:Chroomsoft.Top2000.Apps.Globalisation"
+             xmlns:g="clr-namespace:Chroomsoft.Top2000.Apps.Common"
+             Title="{Binding SelectedEditionYear}">
     <ContentPage.Resources>
         <overview:EditionPlayTimeConverter x:Key="EditionPlayTimeConverter" />
         <overview:DeltaToStringConverter x:Key="DeltaToStringConverter" />
@@ -32,15 +33,13 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem Clicked="OnSearchButtonClick">
             <ToolbarItem.IconImageSource>
-                <FontImageSource Glyph="{x:Static g:Symbols.Search}" Color="White"
-                                 FontFamily="MaterialIcons" />
+                <FontImageSource Glyph="{x:Static g:Symbols.Search}" Color="White" FontFamily="MaterialIcons" />
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
 
         <ToolbarItem Clicked="OnJumpGroupButtonClick">
             <ToolbarItem.IconImageSource>
-                <FontImageSource Glyph="{x:Static g:Symbols.Jump}" Color="White"
-                 FontFamily="MaterialIcons" />
+                <FontImageSource Glyph="{x:Static g:Symbols.Jump}" Color="White" FontFamily="MaterialIcons" />
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
 
@@ -49,16 +48,13 @@
     </ContentPage.ToolbarItems>
 
     <Grid>
-
         <CollectionView x:Name="listings"
         ItemsSource="{Binding Listings}"
-        SelectedItem="{Binding SelectedListing}"
         VerticalOptions="FillAndExpand"
         HorizontalOptions="FillAndExpand"
         ItemSizingStrategy="MeasureAllItems"
         SelectionChanged="OnListingSelected"
-        IsGrouped="True"
-        SelectionMode="Single">
+        IsGrouped="True">
             <CollectionView.GroupHeaderTemplate>
                 <DataTemplate>
                     <StackLayout>
@@ -74,31 +70,51 @@
 
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Grid Margin="0,0,0,5" RowSpacing="0" ColumnDefinitions="80, *">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
+                    <SwipeView>
+                        <SwipeView.RightItems>
+                            <SwipeItems Mode="Execute">
+                                <SwipeItem CommandParameter="{Binding .}"
+                                           Command="{Binding Source={RelativeSource AncestorType={x:Type local:OverviewByPositionViewModel}}, Path=ToggleFavoritesCommand}">
+                                    <SwipeItem.IconImageSource>
+                                        <FontImageSource Glyph="{x:Static g:Symbols.Jump}" FontFamily="MaterialIcons" />
+                                    </SwipeItem.IconImageSource>
+                                </SwipeItem>
+                            </SwipeItems>
+                        </SwipeView.RightItems>
+                        <Grid Margin="0,0,0,5" RowSpacing="0" ColumnDefinitions="80, *, auto">
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer  CommandParameter="{Binding .}"
+                                                       Command="{Binding Source={RelativeSource AncestorType={x:Type local:OverviewByPositionViewModel}}, Path=NavigateToTrackListingCommand}" />
+                            </Grid.GestureRecognizers>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
 
-                        <StackLayout Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Spacing="0">
-                            <Label Text="{Binding Position}" Style="{StaticResource MediumLabelStyle}" Margin="20,0,0,0" />
-                            <Grid Margin="20,0,0,0">
-                                <Label Margin="13,0,0,0" Style="{StaticResource SmallLabelStyle}"
-                                    FontSize="{Binding Delta, TargetNullValue=0.0,  Converter={StaticResource TrackListingSymbolFontSizeConverter}}"
-                                    Text="{Binding Delta, Converter={StaticResource DeltaToStringConverter}}"
-                                    TextColor="{Binding Converter={StaticResource DeltaToSymbolColour}}" />
+                            <StackLayout Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Spacing="0">
+                                <Label Text="{Binding Position}" Style="{StaticResource MediumLabelStyle}" Margin="20,0,0,0" />
+                                <Grid Margin="20,0,0,0">
+                                    <Label Margin="13,0,0,0" Style="{StaticResource SmallLabelStyle}"
+                                        FontSize="{Binding Delta, TargetNullValue=0.0,  Converter={StaticResource TrackListingSymbolFontSizeConverter}}"
+                                        Text="{Binding Delta, Converter={StaticResource DeltaToStringConverter}}"
+                                        TextColor="{Binding Converter={StaticResource DeltaToSymbolColour}}" />
 
-                                <Label Style="{StaticResource SmallLabelStyle}"
-                                    FontSize="{Binding Delta, TargetNullValue=0.0, Converter={StaticResource TrackListingSymbolFontSizeConverter}}"
-                                    FontFamily="MaterialIcons"
-                                    Text="{Binding Converter={StaticResource DeltaToSymbolConverter}}"
-                                    TextColor="{Binding Converter={StaticResource DeltaToSymbolColour}}" />
-                            </Grid>
-                        </StackLayout>
+                                    <Label Style="{StaticResource SmallLabelStyle}"
+                                        FontSize="{Binding Delta, TargetNullValue=0.0, Converter={StaticResource TrackListingSymbolFontSizeConverter}}"
+                                        FontFamily="MaterialIcons"
+                                        Text="{Binding Converter={StaticResource DeltaToSymbolConverter}}"
+                                        TextColor="{Binding Converter={StaticResource DeltaToSymbolColour}}" />
+                                </Grid>
+                            </StackLayout>
 
-                        <Label Grid.Column="1" Grid.Row="0" Text="{Binding Title}"   Style="{StaticResource MediumLabelStyle}" Margin="0,0,20,0" />
-                        <Label Grid.Column="1" Grid.Row="1" Text="{Binding Artist}"  Style="{StaticResource SmallLabelStyle}"  Margin="0,0,20,0" Opacity=".5" />
-                    </Grid>
+                            <Label Grid.Column="1" Grid.Row="0" Text="{Binding Title}"   Style="{StaticResource MediumLabelStyle}" Margin="0,0,20,0" />
+                            <Label Grid.Column="1" Grid.Row="1" Text="{Binding Artist}"  Style="{StaticResource SmallLabelStyle}"  Margin="0,0,20,0" Opacity=".5" />
+
+                            <Label Grid.Column="2" Grid.RowSpan="2" Text="{x:Static g:Symbols.Favorite}"
+                                   Style="{StaticResource MediumLabelStyle}" IsVisible="{Binding IsFavorite}"
+                                   TextColor="#ffdd94" FontFamily="MaterialIcons" Margin="0,5,20,0" />
+                        </Grid>
+                    </SwipeView>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
@@ -108,7 +124,7 @@
                 BorderColor="{StaticResource Top2000Colour}" BackgroundColor="{StaticResource Top2000Colour}"
                     WidthRequest="60" Text="{Binding SelectedEditionYear}" FontSize="13" FontAttributes="Bold"
                     HeightRequest="60" Clicked="MenuButtonClicked"
-             CornerRadius="30" AbsoluteLayout.LayoutFlags="PositionProportional"  AbsoluteLayout.LayoutBounds=".95,.95,80,80">
+             CornerRadius="30" AbsoluteLayout.LayoutFlags="PositionProportional"  AbsoluteLayout.LayoutBounds=".95,.95,80,40">
                 <Button.Shadow>
                     <Shadow Brush="Black"
                 Offset="20,20"

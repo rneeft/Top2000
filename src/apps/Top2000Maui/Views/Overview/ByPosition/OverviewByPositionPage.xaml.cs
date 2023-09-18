@@ -1,11 +1,10 @@
 using Chroomsoft.Top2000.Apps.Views.Search;
-using Chroomsoft.Top2000.Apps.Views.TrackInformation;
 using Chroomsoft.Top2000.Data.ClientDatabase.Sources;
 using Chroomsoft.Top2000.Features.AllEditions;
 
 namespace Chroomsoft.Top2000.Apps.Views.Overview.ByPosition;
 
-public partial class OverviewByPositionPage : ContentPage //, IQueryAttributable
+public partial class OverviewByPositionPage : ContentPage
 {
     private readonly IUpdateClientDatabase updateClientDatabase;
     private readonly Top2000AssemblyDataSource top2000AssemblyData;
@@ -30,16 +29,6 @@ public partial class OverviewByPositionPage : ContentPage //, IQueryAttributable
             await updateClientDatabase.RunAsync(top2000AssemblyData);
             await ViewModel.InitialiseViewModelAsync();
             isInitialise = true;
-        }
-    }
-
-    private async void OnListingSelected(object sender, SelectionChangedEventArgs e)
-    {
-        if (e.CurrentSelection.Any())
-        {
-            var track = (TrackListing)e.CurrentSelection[0];
-            await TrackInformationViewModel.NavigateAsync(track.TrackId, track.Title, track.Artist);
-            listings.SelectedItem = null;
         }
     }
 

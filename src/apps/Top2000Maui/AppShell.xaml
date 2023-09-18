@@ -12,29 +12,32 @@
     Shell.FlyoutBehavior="{OnPlatform WinUI='Flyout', Android='Disabled'}">
 
     <TabBar IsVisible="{OnPlatform Android=True, WinUI=False}">
-        <!--<Tab Title="{Binding [Overview], Source={x:Static res:Translator.Instance}}">
+        <Tab Title="{Binding [Overview], Source={x:Static res:Translator.Instance}}">
             <Tab.FlyoutIcon>
-                <FontImageSource FontFamily="MaterialIcons" Glyph="{x:Static g:Symbols.Overview}" />
+                <FontImageSource FontFamily="MaterialIcons" Glyph="{x:Static g:Symbols.Overview}"  />
             </Tab.FlyoutIcon>
+            <ShellContent Title="{Binding [TheList], Source={x:Static res:Translator.Instance}}" 
+                          ContentTemplate="{DataTemplate obp:OverviewByPositionPage}" />
         </Tab>
 
         <Tab Title="{Binding [ViewByDate], Source={x:Static res:Translator.Instance}}">
             <Tab.FlyoutIcon>
                 <FontImageSource FontFamily="MaterialIcons" Glyph="{x:Static g:Symbols.Clock}" />
             </Tab.FlyoutIcon>
+            <ShellContent ContentTemplate="{DataTemplate obd:OverviewByDatePage}" />
         </Tab>
-        <ShellContent ContentTemplate="{DataTemplate obd:OverviewByDatePage}" />
 
         <Tab Title="{Binding [Search], Source={x:Static res:Translator.Instance}}">
             <Tab.FlyoutIcon>
                 <FontImageSource FontFamily="MaterialIcons" Glyph="{x:Static g:Symbols.Search}" />
             </Tab.FlyoutIcon>
         </Tab>
-        <ShellContent ContentTemplate="{DataTemplate search:SearchPage}" />-->
+        <ShellContent ContentTemplate="{DataTemplate search:SearchPage}" />
 
-        <Tab Title="Top2000 App">
-            
-            <!--<ShellContent ContentTemplate="{DataTemplate search:SearchPage}" >
+        <!--<Tab Title="Top2000 App">
+
+            -->
+        <!--<ShellContent ContentTemplate="{DataTemplate search:SearchPage}">
                 <ShellContent.FlyoutIcon>
                     <FontImageSource FontFamily="MaterialIcons" Glyph="{x:Static g:Symbols.Search}" />
                 </ShellContent.FlyoutIcon>
@@ -42,11 +45,11 @@
                     <FontImageSource FontFamily="MaterialIcons" Glyph="{x:Static g:Symbols.Search}" />
                 </ShellContent.Icon>
             </ShellContent>-->
-            <ShellContent Title="{Binding [TheList], Source={x:Static res:Translator.Instance}}"
-                          ContentTemplate="{DataTemplate obp:OverviewByPositionPage}" />
+        <!--
+
             <ShellContent Title="{Binding [ViewByDate], Source={x:Static res:Translator.Instance}}"
                           ContentTemplate="{DataTemplate obd:OverviewByDatePage}" />
-        </Tab>
+        </Tab>-->
 
         <!--<Tab x:Name="SettingsTab" Title="{Binding [Settings], Source={x:Static res:Translator.Instance}}">
             <Tab.Icon>
