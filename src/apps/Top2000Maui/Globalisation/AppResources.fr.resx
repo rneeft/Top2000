@@ -477,6 +477,9 @@
   <data name="TestedBy" xml:space="preserve">
     <value>Tester par Bhavna Devi Ruttun</value>
   </data>
+  <data name="TheList" xml:space="preserve">
+    <value>Le Liste</value>
+  </data>
   <data name="ThemeMode" xml:space="preserve">
     <value>Mode de thème</value>
   </data>

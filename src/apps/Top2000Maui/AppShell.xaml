@@ -33,15 +33,16 @@
         <ShellContent ContentTemplate="{DataTemplate search:SearchPage}" />-->
 
         <Tab Title="Top2000 App">
-            <ShellContent ContentTemplate="{DataTemplate search:SearchPage}" Title="">
+            
+            <!--<ShellContent ContentTemplate="{DataTemplate search:SearchPage}" >
                 <ShellContent.FlyoutIcon>
                     <FontImageSource FontFamily="MaterialIcons" Glyph="{x:Static g:Symbols.Search}" />
                 </ShellContent.FlyoutIcon>
                 <ShellContent.Icon>
                     <FontImageSource FontFamily="MaterialIcons" Glyph="{x:Static g:Symbols.Search}" />
                 </ShellContent.Icon>
-            </ShellContent>
-            <ShellContent Title="{Binding [Overview], Source={x:Static res:Translator.Instance}}"
+            </ShellContent>-->
+            <ShellContent Title="{Binding [TheList], Source={x:Static res:Translator.Instance}}"
                           ContentTemplate="{DataTemplate obp:OverviewByPositionPage}" />
             <ShellContent Title="{Binding [ViewByDate], Source={x:Static res:Translator.Instance}}"
                           ContentTemplate="{DataTemplate obd:OverviewByDatePage}" />

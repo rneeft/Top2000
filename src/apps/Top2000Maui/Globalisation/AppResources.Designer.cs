@@ -621,6 +621,15 @@ namespace Chroomsoft.Top2000.Apps.Globalisation {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to De Lijst.
+        /// </summary>
+        internal static string TheList {
+            get {
+                return ResourceManager.GetString("TheList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Thema.
         /// </summary>
         internal static string ThemeMode {

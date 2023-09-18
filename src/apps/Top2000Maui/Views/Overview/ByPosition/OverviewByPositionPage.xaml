@@ -3,9 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Chroomsoft.Top2000.Apps.Views.Overview.ByPosition.OverviewByPositionPage"
              xmlns:overview="clr-namespace:Chroomsoft.Top2000.Apps.Views.Overview"
+                    xmlns:res="clr-namespace:Chroomsoft.Top2000.Apps.Globalisation"
               xmlns:g="clr-namespace:Chroomsoft.Top2000.Apps.Common"
-             Title="Top2000 App"
-             >
+             Title="Top2000 App">
     <ContentPage.Resources>
         <overview:EditionPlayTimeConverter x:Key="EditionPlayTimeConverter" />
         <overview:DeltaToStringConverter x:Key="DeltaToStringConverter" />
@@ -30,15 +30,26 @@
     </Shell.TitleView>-->
 
     <ContentPage.ToolbarItems>
+        <ToolbarItem Clicked="OnSearchButtonClick">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource Glyph="{x:Static g:Symbols.Search}" Color="White"
+                                 FontFamily="MaterialIcons" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+
         <ToolbarItem Clicked="OnJumpGroupButtonClick">
             <ToolbarItem.IconImageSource>
                 <FontImageSource Glyph="{x:Static g:Symbols.Jump}" Color="White"
                  FontFamily="MaterialIcons" />
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
+
+        <ToolbarItem Text="Pick group" Order="Secondary" />
+        <ToolbarItem Text="Group by Date" Order="Secondary" />
     </ContentPage.ToolbarItems>
 
     <Grid>
+
         <CollectionView x:Name="listings"
         ItemsSource="{Binding Listings}"
         SelectedItem="{Binding SelectedListing}"
@@ -91,5 +102,20 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+
+        <AbsoluteLayout>
+            <Button x:Name="menuButton"
+                BorderColor="{StaticResource Top2000Colour}" BackgroundColor="{StaticResource Top2000Colour}"
+                    WidthRequest="60" Text="{Binding SelectedEditionYear}" FontSize="13" FontAttributes="Bold"
+                    HeightRequest="60" Clicked="MenuButtonClicked"
+             CornerRadius="30" AbsoluteLayout.LayoutFlags="PositionProportional"  AbsoluteLayout.LayoutBounds=".95,.95,80,80">
+                <Button.Shadow>
+                    <Shadow Brush="Black"
+                Offset="20,20"
+                Radius="40"
+                Opacity="0.2" />
+                </Button.Shadow>
+            </Button>
+        </AbsoluteLayout>
     </Grid>
 </ContentPage>

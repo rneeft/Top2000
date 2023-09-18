@@ -18,7 +18,7 @@ public static class Symbols
 
     public static string FilterList => "\xe152";
 
-    public static string Jump => "\xe0b5";
+    public static string Jump => "\xe23e";
 
     public static string Clock => "\xe192";
 

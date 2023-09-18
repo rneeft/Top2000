@@ -1,37 +1,27 @@
-using Chroomsoft.Top2000.Apps.Views.Overview.ByPosition.SelectEdition;
+using Chroomsoft.Top2000.Apps.Views.Search;
 using Chroomsoft.Top2000.Apps.Views.TrackInformation;
 using Chroomsoft.Top2000.Data.ClientDatabase.Sources;
 using Chroomsoft.Top2000.Features.AllEditions;
 
 namespace Chroomsoft.Top2000.Apps.Views.Overview.ByPosition;
 
-public partial class OverviewByPositionPage : ContentPage, IQueryAttributable
+public partial class OverviewByPositionPage : ContentPage //, IQueryAttributable
 {
     private readonly IUpdateClientDatabase updateClientDatabase;
     private readonly Top2000AssemblyDataSource top2000AssemblyData;
+    private readonly IMediator mediator;
     private bool isInitialise;
 
-    public OverviewByPositionPage(OverviewByPositionViewModel viewModel, IUpdateClientDatabase updateClientDatabase, Top2000AssemblyDataSource top2000AssemblyData)
+    public OverviewByPositionPage(OverviewByPositionViewModel viewModel, IUpdateClientDatabase updateClientDatabase, Top2000AssemblyDataSource top2000AssemblyData, IMediator mediator)
     {
         this.BindingContext = viewModel;
         InitializeComponent();
         this.updateClientDatabase = updateClientDatabase;
         this.top2000AssemblyData = top2000AssemblyData;
+        this.mediator = mediator;
     }
 
     private OverviewByPositionViewModel ViewModel => (OverviewByPositionViewModel)BindingContext;
-
-    public async void ApplyQueryAttributes(IDictionary<string, object> query)
-    {
-        if (query.ContainsKey("SelectedEdition"))
-        {
-            var edition = (Edition)query["SelectedEdition"];
-            if (edition.Year != ViewModel.SelectedEditionYear)
-            {
-                await ViewModel.InitialiseViewModelAsync(edition);
-            }
-        }
-    }
 
     protected override async void OnAppearing()
     {
@@ -78,8 +68,23 @@ public partial class OverviewByPositionPage : ContentPage, IQueryAttributable
         listings.ScrollTo(index, position: ScrollToPosition.Start, animate: false);
     }
 
-    private async void OnSelectYearButtonClick(object sender, TappedEventArgs e)
+    private async void MenuButtonClicked(object sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync(nameof(SelectEditionsPage), animate: true);
+        var editions = await mediator.Send(new AllEditionsRequest());
+        var options = editions.Select(x => x.Year.ToString()).ToArray();
+        var result = await this.DisplayActionSheetAsync(AppResources.SelectEdition, AppResources.Cancel, options);
+
+        if (result.IsValid && int.TryParse(result.SelectedOption, out var newYear))
+        {
+            if (newYear != ViewModel.SelectedEditionYear)
+            {
+                await ViewModel.InitialiseViewModelAsync(newYear);
+            }
+        }
+    }
+
+    private async void OnSearchButtonClick(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync(nameof(SearchPage), animate: true);
     }
 }

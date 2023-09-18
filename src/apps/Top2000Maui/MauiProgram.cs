@@ -1,7 +1,6 @@
 ﻿using Chroomsoft.Top2000.Apps.Views.Overview.ByDate;
 using Chroomsoft.Top2000.Apps.Views.Overview.ByDate.SelectDateTimeGroup;
 using Chroomsoft.Top2000.Apps.Views.Overview.ByPosition;
-using Chroomsoft.Top2000.Apps.Views.Overview.ByPosition.SelectEdition;
 using Chroomsoft.Top2000.Apps.Views.Search;
 using Chroomsoft.Top2000.Apps.Views.TrackInformation;
 using Chroomsoft.Top2000.Features;
@@ -24,19 +23,20 @@ public static class MauiProgram
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 fonts.AddFont("MaterialIcons.ttf", "MaterialIcons");
+                fonts.AddFont("Minecraft.ttf", "Minecraft");
             })
             ;
 
         builder.Services
             .AddSingleton<ILocalisationService, LocalisationService>()
             .AddSingleton<ICulture>(new SupportedCulture("nl"))
-            .AddSingleton<ICulture>(new SupportedCulture("en"))
-            .AddSingleton<ICulture>(new SupportedCulture("fr"));
+            //   .AddSingleton<ICulture>(new SupportedCulture("en"))
+            // .AddSingleton<ICulture>(new SupportedCulture("fr"))
+            ;
 
         builder.Services
             .AddTransientWithShellRoute<OverviewByPositionPage, OverviewByPositionViewModel>(nameof(OverviewByPositionPage))
             .AddTransientWithShellRoute<TrackInformationPage, TrackInformationViewModel>(nameof(TrackInformationPage))
-            .AddTransientWithShellRoute<SelectEditionsPage, SelectEditionsViewModel>(nameof(SelectEditionsPage))
             .AddTransientWithShellRoute<OverviewByDatePage, OverviewByDateViewModel>(nameof(OverviewByDatePage))
             .AddTransientWithShellRoute<SelectDateTimeGroupPage, SelectDateTimeGroupViewModel>(nameof(SelectDateTimeGroupPage))
             .AddTransientWithShellRoute<SearchPage, SearchViewModel>(nameof(SearchPage))

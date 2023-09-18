@@ -8,9 +8,6 @@ public sealed partial class OverviewByPositionViewModel : ObservableObject
     public TrackListing? selectedListing;
 
     [ObservableProperty]
-    public Edition? selectedEdition;
-
-    [ObservableProperty]
     public int selectedEditionYear;
 
     private readonly IMediator mediator;
@@ -42,25 +39,23 @@ public sealed partial class OverviewByPositionViewModel : ObservableObject
     public async Task InitialiseViewModelAsync()
     {
         var editions = await mediator.Send(new AllEditionsRequest());
-        SelectedEdition = editions.First();
-        SelectedEditionYear = SelectedEdition.Year;
+        SelectedEditionYear = editions.First().Year;
 
         await LoadAllListingsAsync();
     }
 
-    public async Task InitialiseViewModelAsync(Edition edition)
+    public async Task InitialiseViewModelAsync(int year)
     {
-        SelectedEdition = edition;
-        SelectedEditionYear = SelectedEdition.Year;
+        SelectedEditionYear = year;
 
         await LoadAllListingsAsync();
     }
 
     public async Task LoadAllListingsAsync()
     {
-        if (SelectedEdition is null) return;
+        if (SelectedEditionYear == 0) return;
 
-        var listings = await mediator.Send(new AllListingsOfEditionRequest(SelectedEdition.Year));
+        var listings = await mediator.Send(new AllListingsOfEditionRequest(SelectedEditionYear));
 
         Listings.ClearAddRange(listings.GroupBy(Position));
 
