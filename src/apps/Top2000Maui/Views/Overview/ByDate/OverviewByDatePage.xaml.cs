@@ -105,8 +105,7 @@ public partial class OverviewByDatePage : ContentPage, IQueryAttributable
         if (e.CurrentSelection.Count == 1)
         {
             var track = (TrackListing)e.CurrentSelection[0];
-            await TrackInformationViewModel.NavigateAsync(track.TrackId, track.Title, track.Artist);
-            listings.SelectedItem = null;
+            await TrackInformationViewModel.NavigateAsync(track);
         }
     }
 

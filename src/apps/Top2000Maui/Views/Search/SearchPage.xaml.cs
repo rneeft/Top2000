@@ -53,7 +53,7 @@ public partial class SearchPage : ContentPage, ISortGroupNameProvider
         if (e.CurrentSelection.Any())
         {
             var track = (Track)e.CurrentSelection[0];
-            await TrackInformationViewModel.NavigateAsync(track.Id, track.Title, track.Artist);
+            await TrackInformationViewModel.NavigateAsync(track);
             listingsGrouped.SelectedItem = null;
         }
     }

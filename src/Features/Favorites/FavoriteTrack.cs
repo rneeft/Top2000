@@ -1,6 +1,6 @@
-﻿namespace Chroomsoft.Top2000.Features.Searching;
+﻿namespace Chroomsoft.Top2000.Features.Favorites;
 
-public sealed class Track : BaseTrack
+public sealed class FavoriteTrack : BaseTrack
 {
     public int RecordedYear { get; set; }
 

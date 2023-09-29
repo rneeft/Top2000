@@ -1,4 +1,7 @@
-﻿namespace Chroomsoft.Top2000.Apps.Views.TrackInformation;
+﻿using Chroomsoft.Top2000.Features;
+using Chroomsoft.Top2000.Features.Favorites;
+
+namespace Chroomsoft.Top2000.Apps.Views.TrackInformation;
 
 public sealed partial class TrackInformationViewModel : ObservableObject, IQueryAttributable
 {
@@ -6,6 +9,8 @@ public sealed partial class TrackInformationViewModel : ObservableObject, IQuery
     public string artistWithYear = string.Empty;
 
     private readonly IMediator mediator;
+    private readonly FavoritesHandler favoritesHandler;
+    private BaseTrack? baseTrack;
     private int trackId;
 
     [ObservableProperty]
@@ -39,29 +44,39 @@ public sealed partial class TrackInformationViewModel : ObservableObject, IQuery
     private int appearancesPossible;
 
     [ObservableProperty]
-    private double appearancesPossiblePercentage;
+    private int appearancesPossiblePercentage;
 
     [ObservableProperty]
-    private double totalTop2000Percentage;
+    private int totalTop2000Percentage;
 
-    public TrackInformationViewModel(IMediator mediator)
+    [ObservableProperty]
+    private bool isFavorite;
+
+    public TrackInformationViewModel(IMediator mediator, FavoritesHandler favoritesHandler)
     {
         this.mediator = mediator;
+        this.favoritesHandler = favoritesHandler;
         this.Listings = new();
     }
 
     public ObservableRangeCollection<ListingInformation> Listings { get; }
 
-    public static Task NavigateAsync(int trackId, string title, string artist)
+    public static Task NavigateAsync(BaseTrack baseTrack)
     {
         var parameters = new Dictionary<string, object>
         {
-            { "Title", title  },
-            { "Artist", artist },
-            { "TrackId", trackId },
+            { "Track", baseTrack  },
         };
 
         return Shell.Current.GoToAsync(nameof(TrackInformationPage), animate: true, parameters);
+    }
+
+    [RelayCommand]
+    public async Task ToggleFavoritesAsync()
+    {
+        IsFavorite = !IsFavorite;
+        baseTrack!.IsFavorite = IsFavorite;
+        await favoritesHandler.SetIsFavorite(baseTrack, (bool)baseTrack.IsFavorite);
     }
 
     [RelayCommand]
@@ -80,16 +95,19 @@ public sealed partial class TrackInformationViewModel : ObservableObject, IQuery
         AppearancesPossible = track.AppearancesPossible;
         IsLatestListed = track.Listings.First().Status != ListingStatus.NotListed;
         Listings.ClearAddRange(track.Listings);
-        AppearancesPossiblePercentage = (Appearances / (double)AppearancesPossible);
-        TotalTop2000Percentage = (Appearances / (double)Listings.Count);
+        AppearancesPossiblePercentage = (int)(Appearances / (double)AppearancesPossible) * 100;
+        TotalTop2000Percentage = (int)(Appearances / (double)Listings.Count) * 100;
         TotalListings = Listings.Count;
+        IsFavorite = baseTrack!.IsFavorite;
     }
 
     public void ApplyQueryAttributes(IDictionary<string, object> query)
     {
-        trackId = (int)query["TrackId"];
-        Title = (string)query["Title"];
-        Artist = (string)query["Artist"];
-        ArtistWithYear = (string)query["Artist"];
+        baseTrack = (BaseTrack)query["Track"];
+
+        trackId = baseTrack.Id;
+        Title = baseTrack.Title;
+        Artist = baseTrack.Artist;
+        ArtistWithYear = baseTrack.Artist;
     }
 }

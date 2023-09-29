@@ -3,11 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Chroomsoft.Top2000.Apps.Views.TrackInformation.TrackInformationPage"
              xmlns:g="clr-namespace:Chroomsoft.Top2000.Apps.Common"
+             xmlns:local="clr-namespace:Chroomsoft.Top2000.Apps.Views.TrackInformation"
              xmlns:converters="clr-namespace:Chroomsoft.Top2000.Apps.Views.TrackInformation.Converters"
-             xmlns:progressBar="clr-namespace:Syncfusion.Maui.ProgressBar;assembly=Syncfusion.Maui.ProgressBar"
-             xmlns:res="clr-namespace:Chroomsoft.Top2000.Apps.Globalisation"
-             Shell.TabBarIsVisible="False"
-             >
+    xmlns:res="clr-namespace:Chroomsoft.Top2000.Apps.Globalisation"
+             Shell.TabBarIsVisible="False">
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:StatusToColourConverter x:Key="StatusToColourConverter" />
@@ -15,10 +14,18 @@
             <converters:OffsetToStringConverter x:Key="OffsetToStringConverter" />
             <converters:PositionToStringConverter x:Key="PositionToStringConverter" />
             <converters:TrackPlayTimeToLongDateConverter x:Key="TrackPlayTimeToLongDateConverter" />
+            <converters:BooleanInvertedConverter x:Key="BooleanInvertedConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
 
     <ContentPage.ToolbarItems>
+        <local:FavoriteToolbarItem Text="{Binding [Favorites], Source={x:Static res:Translator.Instance}}" Command="{Binding ToggleFavoritesCommand}"
+                                   IsFavorite="{Binding IsFavorite}">
+            <local:FavoriteToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="MaterialIcons"  Glyph="{x:Static g:Symbols.NonFavorite}" />
+            </local:FavoriteToolbarItem.IconImageSource>
+        </local:FavoriteToolbarItem>
+
         <ToolbarItem Text="{Binding [Youtube], Source={x:Static res:Translator.Instance}}" Clicked="OnViewVideoClick">
             <ToolbarItem.IconImageSource>
                 <FontImageSource FontFamily="MaterialIcons"  Glyph="{x:Static g:Symbols.Video}" />
@@ -119,14 +126,29 @@
                             FontFamily="MaterialIcons"
                             FontSize="40"
                             BackgroundColor="Transparent"
-                            IsVisible="{OnPlatform WinUI=True, Android=False}" />                
+                            IsVisible="{OnPlatform WinUI=True, Android=False}" />
                 </Grid>
 
                 <StackLayout Spacing="25" Orientation="Horizontal" Margin="0,20,0,10">
                     <StackLayout>
                         <Label Text="{Binding [SinceRelease], Source={x:Static res:Translator.Instance}}" HorizontalOptions="CenterAndExpand"  Style="{StaticResource SmallLabelStyle}" FontAttributes="Bold" />
                         <Grid>
-                            <progressBar:SfCircularProgressBar Progress="{Binding Appearances}"
+
+                            <local:CircularProgressBar
+                                Progress="{Binding AppearancesPossiblePercentage}"
+                                ProgressColor="{StaticResource Top2000Colour}"
+                                ProgressLeftColor="{DynamicResource RingBaseColor}"
+                                Size="110"
+                                Thickness="10" />
+
+                            <!--<local:ProgressRing RingThickness="10"
+                                Progress="{Binding AppearancesPossiblePercentage}"
+                                RingBaseColor="{DynamicResource RingBaseColor}"
+                                RingProgressColor="{StaticResource Top2000Colour}"
+                                HeightRequest="110" WidthRequest="110"
+                                HorizontalOptions="Center" />-->
+
+                            <!--<progressBar:SfCircularProgressBar Progress="{Binding Appearances}"
                                                                Minimum="0"
                                                                Maximum="{Binding AppearancesPossible}"
                                                                ThicknessUnit="Pixel" ProgressThickness="10"
@@ -134,7 +156,7 @@
                                                                TrackFill="{DynamicResource RingBaseColor}"
                                                                HeightRequest="110" WidthRequest="110"
                                                                SegmentCount="{Binding AppearancesPossible}"
-                                                               HorizontalOptions="Center" />
+                                                               HorizontalOptions="Center" />-->
 
                             <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
                                 <Label Style="{StaticResource MediumLabelStyle}" Text="{Binding Appearances}" />
@@ -147,7 +169,21 @@
                     <StackLayout>
                         <Label Text="{Binding [InTop2000], Source={x:Static res:Translator.Instance}}" HorizontalOptions="CenterAndExpand" Style="{StaticResource SmallLabelStyle}" FontAttributes="Bold" />
                         <Grid>
-                            <progressBar:SfCircularProgressBar Progress="{Binding Appearances}"
+                            <!--<local:ProgressRing
+                                RingThickness="10" Progress="{Binding TotalTop2000Percentage}"
+                                RingBaseColor="{DynamicResource RingBaseColor}"
+                                RingProgressColor="{StaticResource Top2000Colour}"
+                                HeightRequest="110" WidthRequest="110"
+                                HorizontalOptions="Center" />-->
+
+                            <local:CircularProgressBar
+                                Progress="{Binding TotalTop2000Percentage}"
+                                ProgressColor="{StaticResource Top2000Colour}"
+                                ProgressLeftColor="{DynamicResource RingBaseColor}"
+                                Size="110"
+                                Thickness="10" />
+
+                            <!--<progressBar:SfCircularProgressBar Progress="{Binding Appearances}"
                                                                Minimum="0"
                                                                Maximum="{Binding TotalListings}"
                                    ThicknessUnit="Pixel" ProgressThickness="10"
@@ -155,7 +191,7 @@
                                    TrackFill="{DynamicResource RingBaseColor}"
                                    HeightRequest="110" WidthRequest="110"
                                    SegmentCount="{Binding TotalListings}"
-                                   HorizontalOptions="Center" />
+                                   HorizontalOptions="Center" />-->
 
                             <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
                                 <Label Style="{StaticResource MediumLabelStyle}" Text="{Binding Appearances}" />

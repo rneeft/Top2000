@@ -1,11 +1,7 @@
 ﻿namespace Chroomsoft.Top2000.Features.TrackInformation;
 
-public sealed class TrackDetails
+public sealed class TrackDetails : BaseTrack
 {
-    public required string Title { get; init; }
-
-    public required string Artist { get; init; }
-
     public required int RecordedYear { get; init; }
 
     public required ImmutableSortedSet<ListingInformation> Listings { get; init; }

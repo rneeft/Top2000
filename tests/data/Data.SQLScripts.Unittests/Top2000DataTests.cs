@@ -30,7 +30,7 @@ public class Top2000DataTests
     }
 
     [TestMethod]
-    public async Task AllPrefxesAreIncrementsOfOne()
+    public void AllPrefxesAreIncrementsOfOne()
     {
         var fileVersions = sut
             .GetAllSqlFiles()

@@ -13,26 +13,26 @@
 
     <TabBar IsVisible="{OnPlatform Android=True, WinUI=False}">
         <Tab Title="{Binding [Overview], Source={x:Static res:Translator.Instance}}">
-            <Tab.FlyoutIcon>
-                <FontImageSource FontFamily="MaterialIcons" Glyph="{x:Static g:Symbols.Overview}"  />
-            </Tab.FlyoutIcon>
-            <ShellContent Title="{Binding [TheList], Source={x:Static res:Translator.Instance}}" 
+            <Tab.Icon>
+                <FontImageSource FontFamily="MaterialIcons" Glyph="{x:Static g:Symbols.Overview}" />
+            </Tab.Icon>
+            <ShellContent Title="{Binding [TheList], Source={x:Static res:Translator.Instance}}"
                           ContentTemplate="{DataTemplate obp:OverviewByPositionPage}" />
         </Tab>
 
         <Tab Title="{Binding [ViewByDate], Source={x:Static res:Translator.Instance}}">
-            <Tab.FlyoutIcon>
+            <Tab.Icon>
                 <FontImageSource FontFamily="MaterialIcons" Glyph="{x:Static g:Symbols.Clock}" />
-            </Tab.FlyoutIcon>
+            </Tab.Icon>
             <ShellContent ContentTemplate="{DataTemplate obd:OverviewByDatePage}" />
         </Tab>
 
-        <Tab Title="{Binding [Search], Source={x:Static res:Translator.Instance}}">
+        <!--<Tab Title="{Binding [Search], Source={x:Static res:Translator.Instance}}">
             <Tab.FlyoutIcon>
                 <FontImageSource FontFamily="MaterialIcons" Glyph="{x:Static g:Symbols.Search}" />
             </Tab.FlyoutIcon>
         </Tab>
-        <ShellContent ContentTemplate="{DataTemplate search:SearchPage}" />
+        <ShellContent ContentTemplate="{DataTemplate search:SearchPage}" />-->
 
         <!--<Tab Title="Top2000 App">
 

@@ -49,6 +49,8 @@ public sealed class TrackInformationRequestHandler : IRequestHandler<TrackInform
 
         return new TrackDetails
         {
+            Id = request.TrackId,
+            IsFavorite = track.IsFavorite,
             Title = track.Title,
             Artist = track.Artist,
             RecordedYear = track.RecordedYear,
@@ -66,5 +68,7 @@ public sealed class TrackInformationRequestHandler : IRequestHandler<TrackInform
         public string Artist { get; set; } = string.Empty;
 
         public int RecordedYear { get; set; } = 1;
+
+        public bool IsFavorite { get; set; }
     }
 }

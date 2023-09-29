@@ -1,4 +1,5 @@
-﻿using Chroomsoft.Top2000.Features.Searching;
+﻿using Chroomsoft.Top2000.Features.Favorites;
+using Chroomsoft.Top2000.Features.Searching;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Chroomsoft.Top2000.Features
@@ -18,6 +19,7 @@ namespace Chroomsoft.Top2000.Features
                 .AddSingleton<IGroup, GroupByNothing>()
                 .AddSingleton<IGroup, GroupByArtist>()
                 .AddSingleton<IGroup, GroupByRecordedYear>()
+                .AddTransient<FavoritesHandler>()
                 ;
         }
     }

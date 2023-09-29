@@ -31,7 +31,7 @@ internal class MyToolbarAppearanceTracker : IShellToolbarAppearanceTracker
     {
         if (toolbar is not null && toolbar.OverflowIcon is not null && Platform.CurrentActivity is not null)
         {
-            toolbar.OverflowIcon.SetTint(ContextCompat.GetColor(Platform.CurrentActivity, Resource.Color.m3_ref_palette_white));
+            toolbar.OverflowIcon.SetTint(ContextCompat.GetColor(Platform.CurrentActivity, Resource.Color.white));
         }
     }
 }

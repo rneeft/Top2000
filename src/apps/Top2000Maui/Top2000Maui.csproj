@@ -50,7 +50,6 @@
 
 	<ItemGroup>
 	  <None Remove="Resources\Fonts\MaterialIcons.ttf" />
-	  <None Remove="Resources\Fonts\Minecraft.ttf" />
 	</ItemGroup>
     
     <ItemGroup>
@@ -92,6 +91,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Search\SearchPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\TrackInformation\CircularProgressBar.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\TrackInformation\TrackInformationPage.xaml">

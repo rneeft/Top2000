@@ -1,5 +1,6 @@
 ﻿using Chroomsoft.Top2000.Apps.Views.TrackInformation;
 using Chroomsoft.Top2000.Features.AllEditions;
+using Chroomsoft.Top2000.Features.Favorites;
 
 namespace Chroomsoft.Top2000.Apps.Views.Overview.ByPosition;
 
@@ -12,10 +13,12 @@ public sealed partial class OverviewByPositionViewModel : ObservableObject
     public int selectedEditionYear;
 
     private readonly IMediator mediator;
+    private readonly FavoritesHandler favoritesHandler;
 
-    public OverviewByPositionViewModel(IMediator mediator)
+    public OverviewByPositionViewModel(IMediator mediator, FavoritesHandler favoritesHandler)
     {
         this.mediator = mediator;
+        this.favoritesHandler = favoritesHandler;
         this.Editions = new();
         this.Listings = new();
     }
@@ -40,13 +43,13 @@ public sealed partial class OverviewByPositionViewModel : ObservableObject
     public async Task ToggleFavoritesAsync(TrackListing listing)
     {
         listing.IsFavorite = !listing.IsFavorite;
-        await Task.Delay(1);
+        await favoritesHandler.SetIsFavorite(listing, (bool)listing.IsFavorite);
     }
 
     [RelayCommand]
     public async Task NavigateToTrackListingAsync(TrackListing track)
     {
-        await TrackInformationViewModel.NavigateAsync(track.TrackId, track.Title, track.Artist);
+        await TrackInformationViewModel.NavigateAsync(track);
     }
 
     [RelayCommand]

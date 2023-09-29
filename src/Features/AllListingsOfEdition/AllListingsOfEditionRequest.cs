@@ -22,7 +22,7 @@ public sealed class AllListingsOfEditionRequestHandler : IRequestHandler<AllList
     public async Task<ImmutableHashSet<TrackListing>> Handle(AllListingsOfEditionRequest request, CancellationToken cancellationToken)
     {
         var sql =
-                  "SELECT Listing.TrackId, Listing.Position, (p.Position - Listing.Position) AS Delta, Listing.PlayUtcDateAndTime, Title, Artist " +
+                  "SELECT Id, Listing.Position, (p.Position - Listing.Position) AS Delta, Listing.PlayUtcDateAndTime, Title, Artist, IsFavorite " +
                   "FROM Listing JOIN Track ON Listing.TrackId = Id " +
                   "LEFT JOIN Listing as p ON p.TrackId = Id AND p.Edition = ? " +
                   $"WHERE Listing.Edition = ?";

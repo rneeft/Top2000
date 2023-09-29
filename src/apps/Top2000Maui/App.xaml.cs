@@ -8,8 +8,6 @@ public partial class App : Application
 
     public App()
     {
-        Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MjY0Nzg1N0AzMjMyMmUzMDJlMzBtRXNLaExiZGhMczArTlppemV1bXZwOXFaa3FZdHgzMERsaElCWU9wOEE0PQ==");
-
         InitializeComponent();
 
         MainPage = new AppShell();

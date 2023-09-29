@@ -76,4 +76,8 @@ public partial class OverviewByPositionPage : ContentPage
     {
         await Shell.Current.GoToAsync(nameof(SearchPage), animate: true);
     }
+
+    private void OnFavoriteSwiped(object sender, EventArgs e)
+    {
+    }
 }

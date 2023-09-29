@@ -5,7 +5,6 @@ using Chroomsoft.Top2000.Apps.Views.Search;
 using Chroomsoft.Top2000.Apps.Views.TrackInformation;
 using Chroomsoft.Top2000.Features;
 using CommunityToolkit.Maui;
-using Syncfusion.Maui.Core.Hosting;
 
 namespace Chroomsoft.Top2000.Apps;
 
@@ -17,13 +16,11 @@ public static class MauiProgram
         builder
             .UseMauiApp<App>()
             .UseMauiCommunityToolkit()
-            .ConfigureSyncfusionCore()
             .ConfigureFonts(fonts =>
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 fonts.AddFont("MaterialIcons.ttf", "MaterialIcons");
-                fonts.AddFont("Minecraft.ttf", "Minecraft");
             })
             ;
 
