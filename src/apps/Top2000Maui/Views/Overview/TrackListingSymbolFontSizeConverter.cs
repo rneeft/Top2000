@@ -12,3 +12,11 @@ public class TrackListingSymbolFontSizeConverter : ValueConverterBase<int?, doub
         return 11.0;
     }
 }
+
+public class BoolToSymbolConverter : ValueConverterBase<bool, string>
+{
+    public override string Convert(bool value)
+    {
+        return value ? Symbols.Favorite : Symbols.NonFavorite;
+    }
+}

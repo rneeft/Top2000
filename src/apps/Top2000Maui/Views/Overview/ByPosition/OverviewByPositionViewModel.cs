@@ -1,6 +1,7 @@
 ﻿using Chroomsoft.Top2000.Apps.Views.TrackInformation;
 using Chroomsoft.Top2000.Features.AllEditions;
 using Chroomsoft.Top2000.Features.Favorites;
+using CommunityToolkit.Mvvm.Messaging;
 
 namespace Chroomsoft.Top2000.Apps.Views.Overview.ByPosition;
 
@@ -21,6 +22,21 @@ public sealed partial class OverviewByPositionViewModel : ObservableObject
         this.favoritesHandler = favoritesHandler;
         this.Editions = new();
         this.Listings = new();
+
+        StrongReferenceMessenger.Default.Register<FavoriteChangedMessage>(this, (recipient, message) =>
+        {
+            if (recipient != message.Sender)
+            {
+                var item = Listings
+                    .SelectMany(x => x)
+                    .FirstOrDefault(x => x.Id == message.Value);
+
+                if (item is not null)
+                {
+                    item.IsFavorite = message.IsFavorite;
+                }
+            }
+        });
     }
 
     public ObservableRangeCollection<Edition> Editions { get; }
@@ -43,7 +59,13 @@ public sealed partial class OverviewByPositionViewModel : ObservableObject
     public async Task ToggleFavoritesAsync(TrackListing listing)
     {
         listing.IsFavorite = !listing.IsFavorite;
-        await favoritesHandler.SetIsFavorite(listing, (bool)listing.IsFavorite);
+        await favoritesHandler.SetIsFavorite(listing, listing.IsFavorite);
+
+        StrongReferenceMessenger.Default.Send(new FavoriteChangedMessage(listing.Id)
+        {
+            Sender = this,
+            IsFavorite = listing.IsFavorite,
+        });
     }
 
     [RelayCommand]

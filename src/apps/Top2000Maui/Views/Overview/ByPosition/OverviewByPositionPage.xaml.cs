@@ -54,7 +54,7 @@ public partial class OverviewByPositionPage : ContentPage
         const int ShowGroup = 1;
         var index = Math.Max(position + groupIndex - ShowGroup, 0);
 
-        listings.ScrollTo(index, position: ScrollToPosition.Start, animate: false);
+        // listings.ScrollTo(index, position: ScrollToPosition.Start, animate: false);
     }
 
     private async void MenuButtonClicked(object sender, EventArgs e)
@@ -77,7 +77,13 @@ public partial class OverviewByPositionPage : ContentPage
         await Shell.Current.GoToAsync(nameof(SearchPage), animate: true);
     }
 
-    private void OnFavoriteSwiped(object sender, EventArgs e)
+    private async void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
     {
+        var grid = (Grid)sender;
+        var old = grid.BackgroundColor;
+        grid.BackgroundColor = Colors.LightGray;
+        await Task.Delay(1000);
+        grid.BackgroundColor = old;
+
     }
 }

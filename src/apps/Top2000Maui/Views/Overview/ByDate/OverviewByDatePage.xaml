@@ -3,24 +3,21 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:g="clr-namespace:Chroomsoft.Top2000.Apps.Common"
              xmlns:overview="clr-namespace:Chroomsoft.Top2000.Apps.Views.Overview"
-             xmlns:byDate="clr-namespace:Chroomsoft.Top2000.Apps.Views.Overview.ByDate"
+             xmlns:local="clr-namespace:Chroomsoft.Top2000.Apps.Views.Overview.ByDate"
+
              x:Class="Chroomsoft.Top2000.Apps.Views.Overview.ByDate.OverviewByDatePage"
-              Title="Top2000 App">
+             xmlns:views="clr-namespace:Chroomsoft.Top2000.Apps.Views"
+             BackgroundColor="{DynamicResource PageBackgroundColor}"
+             Title="{Binding SelectedEditionYear}">
 
     <ContentPage.Resources>
-        <byDate:DateTimeKeyToString x:Key="DateTimeKeyToString" />
+        <local:DateTimeKeyToString x:Key="DateTimeKeyToString" />
         <overview:EditionPlayTimeConverter x:Key="EditionPlayTimeConverter" />
         <overview:DeltaToStringConverter x:Key="DeltaToStringConverter" />
         <overview:DeltaToSymbolColour x:Key="DeltaToSymbolColour" />
         <overview:DeltaToSymbolConverter x:Key="DeltaToSymbolConverter" />
         <overview:TrackListingSymbolFontSizeConverter x:Key="TrackListingSymbolFontSizeConverter" />
     </ContentPage.Resources>
-
-    <!--<Shell.TitleView>
-        <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
-            <Label Margin="5,0,0,0" Text="{Binding SelectedEditionYear, Mode=OneWay}" TextColor="White" FontSize="20" VerticalTextAlignment="Center" VerticalOptions="Center" />
-        </StackLayout>
-    </Shell.TitleView>-->
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Clicked="OnJumpGroupButtonClick">
@@ -43,46 +40,7 @@
                     VerticalOptions="FillAndExpand"
                     ItemSizingStrategy="MeasureAllItems"
                     IsGrouped="true"
-                    Scrolled="Tracks_Scrolled"
-                    SelectionChanged="OnListingSelected"
-                    SelectedItem="{Binding SelectedListing, Mode=TwoWay}"
-                    SelectionMode="Single">
-        <CollectionView.ItemTemplate>
-            <DataTemplate>
-                <Grid Margin="0,0,0,5" RowSpacing="0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="80" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-
-                    <StackLayout Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Spacing="0">
-
-                        <Label Text="{Binding Position}" Style="{StaticResource MediumLabelStyle}" Margin="20,0,0,0" />
-
-                        <Grid Margin="20,0,0,0">
-
-                            <Label Margin="13,0,0,0" Style="{StaticResource SmallLabelStyle}"
-                                   FontSize="{Binding Delta, TargetNullValue=0.0, Converter={StaticResource TrackListingSymbolFontSizeConverter}}"
-                                   Text="{Binding Delta, Converter={StaticResource DeltaToStringConverter}}"
-                                   TextColor="{Binding Converter={StaticResource DeltaToSymbolColour}}" />
-
-                            <Label Style="{StaticResource SmallLabelStyle}"
-                                   FontSize="{Binding Delta,TargetNullValue=0.0, Converter={StaticResource TrackListingSymbolFontSizeConverter}}"
-                                   FontFamily="MaterialIcons"
-                                   Text="{Binding Converter={StaticResource DeltaToSymbolConverter}}"
-                                   TextColor="{Binding Converter={StaticResource DeltaToSymbolColour}}" />
-                        </Grid>
-                    </StackLayout>
-
-                    <Label Grid.Column="1" Grid.Row="0" Text="{Binding Title}"   Style="{StaticResource MediumLabelStyle}" Margin="0,0,20,0" />
-                    <Label Grid.Column="1" Grid.Row="1" Text="{Binding Artist}"  Style="{StaticResource SmallLabelStyle}"  Margin="0,0,20,0" Opacity=".5" />
-                </Grid>
-            </DataTemplate>
-        </CollectionView.ItemTemplate>
+                    Scrolled="Tracks_Scrolled">
 
         <CollectionView.GroupHeaderTemplate>
             <DataTemplate>
@@ -90,13 +48,66 @@
                     <Label Text="{Binding Key, Converter={StaticResource DateTimeKeyToString}}"
                            TextColor="{StaticResource Top2000Colour}"
                            Style="{StaticResource MediumLabelStyle}"
-                           Margin="20,5,0,0" />
-                    <BoxView Style="{StaticResource Separator}" Margin="20,-3,20,5" />
+                           Margin="15,5,0,0" />
+                    <BoxView Style="{StaticResource Separator}" Margin="15,0,15,5" />
                     <StackLayout.GestureRecognizers>
                         <TapGestureRecognizer Tapped="OnGroupHeaderClick" />
                     </StackLayout.GestureRecognizers>
                 </StackLayout>
             </DataTemplate>
         </CollectionView.GroupHeaderTemplate>
+
+        <CollectionView.ItemTemplate>
+            <DataTemplate>
+                <SwipeView Threshold="100">
+                    <SwipeView.RightItems>
+                        <SwipeItems Mode="Execute">
+                            <views:FavoriteSwipeItem BackgroundColor="{StaticResource Top2000Colour}"
+                         CommandParameter="{Binding .}" IsFavorite="{Binding IsFavorite}"
+                         Command="{Binding Source={RelativeSource AncestorType={x:Type local:OverviewByDateViewModel}}, Path=ToggleFavoritesCommand}">
+                                <views:FavoriteSwipeItem.IconImageSource>
+                                    <FontImageSource Glyph="{x:Static g:Symbols.Favorite}" FontFamily="MaterialIcons"  Color="White" />
+                                </views:FavoriteSwipeItem.IconImageSource>
+                            </views:FavoriteSwipeItem>
+                        </SwipeItems>
+                    </SwipeView.RightItems>
+                    <Grid Margin="0,0,0,5" RowSpacing="0" ColumnDefinitions="80, *, auto">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer  CommandParameter="{Binding .}"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type local:OverviewByDateViewModel}}, Path=NavigateToTrackListingCommand}" />
+                        </Grid.GestureRecognizers>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <StackLayout Spacing="0">
+                            <Label Text="{Binding Position}" Style="{StaticResource MediumLabelStyle}" Margin="15,0,0,0" />
+                            <Grid Margin="15,0,0,0">
+                                <Label Margin="8,0,0,0" Style="{StaticResource SmallLabelStyle}"
+                             FontSize="{Binding Delta, TargetNullValue=0.0,  Converter={StaticResource TrackListingSymbolFontSizeConverter}}"
+                             Text="{Binding Delta, Converter={StaticResource DeltaToStringConverter}}"
+                             TextColor="{Binding Converter={StaticResource DeltaToSymbolColour}}" />
+
+                                <Label Style="{StaticResource SmallLabelStyle}"
+                             FontSize="{Binding Delta, TargetNullValue=0.0, Converter={StaticResource TrackListingSymbolFontSizeConverter}}"
+                             FontFamily="MaterialIcons"
+                             Text="{Binding Converter={StaticResource DeltaToSymbolConverter}}"
+                             TextColor="{Binding Converter={StaticResource DeltaToSymbolColour}}" />
+                            </Grid>
+                        </StackLayout>
+
+                        <StackLayout Grid.Column="1">
+                            <Label Text="{Binding Title}"   Style="{StaticResource MediumLabelStyle}" />
+                            <Label Text="{Binding Artist}"  Style="{StaticResource SmallLabelStyle}"  Opacity=".5" />
+                        </StackLayout>
+
+                        <Label Grid.Column="2" Text="{x:Static g:Symbols.Favorite}"
+                        Style="{StaticResource MediumLabelStyle}" IsVisible="{Binding IsFavorite}"
+                        TextColor="{StaticResource Top2000Colour}" FontFamily="MaterialIcons" Margin="0,5,15,0" />
+                    </Grid>
+                </SwipeView>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
     </CollectionView>
 </ContentPage>

@@ -21,13 +21,12 @@ public static class MauiProgram
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 fonts.AddFont("MaterialIcons.ttf", "MaterialIcons");
-            })
-            ;
+            });
 
 #if ANDROID
         builder.ConfigureMauiHandlers((handlers) =>
         {
-            handlers.AddHandler(typeof(Shell), typeof(Chroomsoft.Top2000.Apps.Platforms.Android.MyShellRenderer));
+            handlers.AddHandler(typeof(Shell), typeof(Platforms.Android.MyShellRenderer));
         });
 #endif
 
