@@ -28,7 +28,7 @@ namespace Chroomsoft.Top2000.Features.AllListingsOfEdition
         public async Task<ImmutableHashSet<TrackListing>> Handle(AllListingsOfEditionRequest request, CancellationToken cancellationToken)
         {
             var sql =
-                      "SELECT Listing.TrackId, Listing.Position, (p.Position - Listing.Position) AS Delta, Listing.PlayUtcDateAndTime, Title, Artist " +
+                      "SELECT TOP2000 Listing.TrackId, Listing.Position, (p.Position - Listing.Position) AS Delta, Listing.PlayUtcDateAndTime, Title, Artist " +
                       "FROM Listing JOIN Track ON Listing.TrackId = Id " +
                       "LEFT JOIN Listing as p ON p.TrackId = Id AND p.Edition = ? " +
                       $"WHERE Listing.Edition = ?";

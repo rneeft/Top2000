@@ -40,12 +40,20 @@ namespace Chroomsoft.Top2000.Apps.Overview.Position
             set { SetPropertyValue(value); }
         }
 
-        public static string Position(TrackListing listing)
+        public static string Position(TrackListing listing, int count)
         {
             const int GroupSize = 100;
 
             if (listing.Position < 100) return "1 - 100";
-            if (listing.Position >= 1900) return "1900 - 2000";
+
+            if (count > 2000)
+            {
+                if (listing.Position >= 2400) return "2400 - 2500";
+            }
+            else
+            {
+                if (listing.Position >= 1900) return "1900 - 2000";
+            }
 
             var min = listing.Position / GroupSize * GroupSize;
             var max = min + GroupSize;
@@ -68,8 +76,8 @@ namespace Chroomsoft.Top2000.Apps.Overview.Position
             if (SelectedEdition is null) return;
 
             var listings = await mediator.Send(new AllListingsOfEditionRequest(SelectedEdition.Year));
-
-            Listings.ClearAddRange(listings.GroupBy(Position));
+            var count = listings.Count;
+            Listings.ClearAddRange(listings.GroupBy(x => Position(x, count)));
 
             SelectedListing = null;
         }
