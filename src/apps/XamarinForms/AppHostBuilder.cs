@@ -134,7 +134,7 @@ namespace Chroomsoft.Top2000.Apps
 
         public static bool TryDate(DateTime current, int day)
         {
-            var first = new DateTime(current.Year, 12, day, 8, 0, 0, DateTimeKind.Utc);
+            var first = new DateTime(current.Year, 12, day, 9, 59, 0, DateTimeKind.Utc);
             var last = new DateTime(current.Year, 12, day, 18, 0, 0, DateTimeKind.Utc);
             return (current > first && current < last);
         }
