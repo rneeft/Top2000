@@ -86,6 +86,11 @@ namespace Chroomsoft.Top2000.Apps.Overview.Position
             const int ShowGroup = 1;
             var index = position + groupIndex - ShowGroup;
 
+            if (ViewModel.CountOfItems == 500)
+            {
+                index = index - 2000;
+            }
+
             if (index < 0) index = 0;
 
             listings.ScrollTo(index, position: ScrollToPosition.Start, animate: false);

@@ -121,12 +121,14 @@ testRunner.Then("except for the last edition, the listing table contains 2000 tr
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("The last edition can either have 10 or 2000 tracks", SourceLine=11)]
+        [TechTalk.SpecRun.ScenarioAttribute("The last edition can either have 10 or 2000 tracks", Description="An exception is made for the last list in 2023 since that one has an extra 500 it" +
+            "ems", SourceLine=11)]
         public virtual void TheLastEditionCanEitherHave10Or2000Tracks()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("The last edition can either have 10 or 2000 tracks", null, tagsOfScenario, argumentsOfScenario);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("The last edition can either have 10 or 2000 tracks", "An exception is made for the last list in 2023 since that one has an extra 500 it" +
+                    "ems", tagsOfScenario, argumentsOfScenario);
 #line 12
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -150,13 +152,13 @@ this.ScenarioInitialize(scenarioInfo);
 #line 3
 this.FeatureBackground();
 #line hidden
-#line 13
+#line 14
 testRunner.Given("all data scripts", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 14
+#line 15
 testRunner.When("the client database is created", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 15
+#line 16
 testRunner.Then("the listing table contains 10 or 2000 for the last edition ranging from 1 to 10/2" +
                         "000", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
@@ -165,14 +167,16 @@ testRunner.Then("the listing table contains 10 or 2000 for the last edition rang
         }
         
         [TechTalk.SpecRun.ScenarioAttribute("The playtime of each track is either the same to the last track or increment by o" +
-            "ne hour", SourceLine=16)]
+            "ne hour", Description="An exception is made for the list of 2025 since that one has 500 extra songs, \r\n2" +
+            "001-2500 beeing played on work hours only.", SourceLine=17)]
         public virtual void ThePlaytimeOfEachTrackIsEitherTheSameToTheLastTrackOrIncrementByOneHour()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("The playtime of each track is either the same to the last track or increment by o" +
-                    "ne hour", null, tagsOfScenario, argumentsOfScenario);
-#line 17
+                    "ne hour", "An exception is made for the list of 2025 since that one has 500 extra songs, \r\n2" +
+                    "001-2500 beeing played on work hours only.", tagsOfScenario, argumentsOfScenario);
+#line 18
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -195,13 +199,13 @@ this.ScenarioInitialize(scenarioInfo);
 #line 3
 this.FeatureBackground();
 #line hidden
-#line 18
+#line 21
 testRunner.Given("all data scripts", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 19
+#line 22
 testRunner.When("the client database is created", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 20
+#line 23
 testRunner.Then("for each track in the listing table the PlayDateAndTime is the same to the previo" +
                         "us track or has incremented by one hour", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
