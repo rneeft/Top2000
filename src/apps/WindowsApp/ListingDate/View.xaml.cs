@@ -96,6 +96,11 @@ namespace Chroomsoft.Top2000.WindowsApp.ListingDate
                     var totalCount = listings.Count();
                     var index = totalCount - listing.Position;
 
+                    if (Listing.Items.Count == 500)
+                    {
+                        index = totalCount - (listing.Position - 2000);
+                    }
+
                     if (Listing.Items.Count >= index)
                     {
                         Listing.SelectedIndex = index;

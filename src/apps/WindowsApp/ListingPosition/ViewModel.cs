@@ -27,12 +27,26 @@ namespace Chroomsoft.Top2000.WindowsApp.ListingPosition
             set { SetPropertyValue(value); }
         }
 
-        public static string Position(TrackListing listing)
+        public int CountOfItems
+        {
+            get { return GetPropertyValue<int>(); }
+            set { SetPropertyValue(value); }
+        }
+
+        public string Position(TrackListing listing)
         {
             const int GroupSize = 100;
 
             if (listing.Position < 100) return "1 - 100";
-            if (listing.Position >= 1900) return "1900 - 2000";
+
+            if (CountOfItems > 2000 || CountOfItems == 500)
+            {
+                if (listing.Position >= 2400) return "2400 - 2500";
+            }
+            else
+            {
+                if (listing.Position >= 1900) return "1900 - 2000";
+            }
 
             var min = listing.Position / GroupSize * GroupSize;
             var max = min + GroupSize;
@@ -43,6 +57,7 @@ namespace Chroomsoft.Top2000.WindowsApp.ListingPosition
         public async Task LoadListingForEdition(Edition edition)
         {
             var tracks = await mediator.Send(new AllListingsOfEditionRequest(edition.Year));
+            CountOfItems = tracks.Count;
             var x = tracks.GroupBy(Position);
             Listings.ClearAddRange(x);
 
