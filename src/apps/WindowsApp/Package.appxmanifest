@@ -8,10 +8,10 @@
 
   <Identity
     Name="52605Chroomsoft.nl.Top2000"
-    Publisher="CN=rickn"
-    Version="6.1.0.0" />
+    Publisher="CN=D95AA35D-D179-4CB0-ABCA-E6C1F40A082A"
+    Version="6.1.1.0" />
 
-  <mp:PhoneIdentity PhoneProductId="69e5ee63-3b4c-40cf-929e-087b8b20e568" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="f6939439-8e92-4b4d-b0c4-307a9bcea528" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>Top 2000</DisplayName>
