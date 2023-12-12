@@ -20,8 +20,8 @@ jobs:
 
   - task: JavaToolInstaller@0
     inputs:
-      versionSpec: '11.0.21+9'
-      jdkArchitectureOption: 'x86'
+      versionSpec: '11'
+      jdkArchitectureOption: 'x64'
       jdkSourceOption: 'PreInstalled'
 
   - task: NuGetCommand@2
