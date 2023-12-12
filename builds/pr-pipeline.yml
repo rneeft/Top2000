@@ -18,6 +18,12 @@ jobs:
     inputs:
       versionSpec: 6.8.0
 
+  - task: JavaToolInstaller@0
+    inputs:
+      versionSpec: '11'
+      jdkArchitectureOption: 'x86'
+      jdkSourceOption: 'PreInstalled'
+
   - task: NuGetCommand@2
     displayName: 'Nuget restore'
     inputs:
