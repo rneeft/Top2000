@@ -94,48 +94,6 @@ namespace Chroomsoft.Top2000.Apps
             var first = new DateTime(current.Year, 12, 24, 23, 0, 0, DateTimeKind.Utc); // first day of Christmas for CET in UTC time
             var last = new DateTime(current.Year, 12, 31, 23, 0, 0, DateTimeKind.Utc); // new year for CET in UTC time
 
-            if (current > first && current < last)
-            {
-                return true;
-            }
-
-            var isMonday = TryDate(current, 11);
-            if (isMonday)
-            {
-                return true;
-            }
-
-            var isTuesdayExtra500 = TryDate(current, 12);
-            if (isTuesdayExtra500)
-            {
-                return true;
-            }
-
-            var isWednesdayExtra500 = TryDate(current, 13);
-            if (isWednesdayExtra500)
-            {
-                return true;
-            }
-
-            var isThursdayExtra500 = TryDate(current, 14);
-            if (isThursdayExtra500)
-            {
-                return true;
-            }
-
-            var isFridayExtra500 = TryDate(current, 15);
-            if (isFridayExtra500)
-            {
-                return true;
-            }
-
-            return false;
-        }
-
-        public static bool TryDate(DateTime current, int day)
-        {
-            var first = new DateTime(current.Year, 12, day, 7, 55, 0, DateTimeKind.Utc);
-            var last = new DateTime(current.Year, 12, day, 18, 0, 0, DateTimeKind.Utc);
             return (current > first && current < last);
         }
     }
