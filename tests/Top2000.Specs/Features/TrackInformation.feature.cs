@@ -118,15 +118,13 @@ testRunner.Then("the title is \"L\'Été Indien\" from \'Joe Dassin\' which is r
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Tracks that are recorded after the first edition are listed as Not available", new string[] {
-                "ignore"}, SourceLine=10)]
+        [TechTalk.SpecRun.ScenarioAttribute("Tracks that are recorded after the first edition are listed as Not available", SourceLine=9)]
         public virtual void TracksThatAreRecordedAfterTheFirstEditionAreListedAsNotAvailable()
         {
-            string[] tagsOfScenario = new string[] {
-                    "ignore"};
+            string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Tracks that are recorded after the first edition are listed as Not available", null, tagsOfScenario, argumentsOfScenario);
-#line 11
+#line 10
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -148,101 +146,40 @@ this.ScenarioInitialize(scenarioInfo);
                 this.ScenarioStart();
 #line 3
 this.FeatureBackground();
+#line hidden
+#line 11
+testRunner.Given("all data scripts", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 12
-testRunner.Given("all data scripts", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.When("the track information feature is executed for TrackId 1267", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 13
-testRunner.When("the track information feature is executed for TrackId 1267", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line hidden
-#line 14
-testRunner.Then("the title is \"Hurt\" from \'Johnny Cash\' which is recorded in the year 2003", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-                TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
-                            "Edition"});
-                table9.AddRow(new string[] {
-                            "2002"});
-                table9.AddRow(new string[] {
-                            "2001"});
-                table9.AddRow(new string[] {
-                            "2000"});
-                table9.AddRow(new string[] {
-                            "1999"});
-#line 15
-testRunner.And("the following years are listed as \'NotAvailable\'", ((string)(null)), table9, "And ");
-#line hidden
-            }
-            this.ScenarioCleanup();
-        }
-        
-        [TechTalk.SpecRun.ScenarioAttribute("Track that were recorded but did not made it on the list are listed as NotListed", new string[] {
-                "ignore"}, SourceLine=22)]
-        public virtual void TrackThatWereRecordedButDidNotMadeItOnTheListAreListedAsNotListed()
-        {
-            string[] tagsOfScenario = new string[] {
-                    "ignore"};
-            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Track that were recorded but did not made it on the list are listed as NotListed", null, tagsOfScenario, argumentsOfScenario);
-#line 23
-this.ScenarioInitialize(scenarioInfo);
-#line hidden
-            bool isScenarioIgnored = default(bool);
-            bool isFeatureIgnored = default(bool);
-            if ((tagsOfScenario != null))
-            {
-                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((this._featureTags != null))
-            {
-                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((isScenarioIgnored || isFeatureIgnored))
-            {
-                testRunner.SkipScenario();
-            }
-            else
-            {
-                this.ScenarioStart();
-#line 3
-this.FeatureBackground();
-#line hidden
-#line 24
-testRunner.Given("all data scripts", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line hidden
-#line 25
-testRunner.When("the track information feature is executed for TrackId 1267", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line hidden
-#line 26
 testRunner.Then("the title is \"Hurt\" from \'Johnny Cash\' which is recorded in the year 2003", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
                 TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
                             "Edition"});
                 table10.AddRow(new string[] {
-                            "2003"});
+                            "2002"});
                 table10.AddRow(new string[] {
-                            "2004"});
+                            "2001"});
                 table10.AddRow(new string[] {
-                            "2005"});
+                            "2000"});
                 table10.AddRow(new string[] {
-                            "2006"});
-                table10.AddRow(new string[] {
-                            "2007"});
-                table10.AddRow(new string[] {
-                            "2008"});
-#line 27
-testRunner.And("the following years are listed as \'NotListed\'", ((string)(null)), table10, "And ");
+                            "1999"});
+#line 14
+testRunner.And("the following years are listed as \'NotAvailable\'", ((string)(null)), table10, "And ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("The first time a track is listed the status of the listing is New", SourceLine=35)]
-        public virtual void TheFirstTimeATrackIsListedTheStatusOfTheListingIsNew()
+        [TechTalk.SpecRun.ScenarioAttribute("Track that were recorded but did not made it on the list are listed as NotListed", SourceLine=20)]
+        public virtual void TrackThatWereRecordedButDidNotMadeItOnTheListAreListedAsNotListed()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("The first time a track is listed the status of the listing is New", null, tagsOfScenario, argumentsOfScenario);
-#line 36
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Track that were recorded but did not made it on the list are listed as NotListed", null, tagsOfScenario, argumentsOfScenario);
+#line 21
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -265,16 +202,75 @@ this.ScenarioInitialize(scenarioInfo);
 #line 3
 this.FeatureBackground();
 #line hidden
-#line 37
+#line 22
 testRunner.Given("all data scripts", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 38
+#line 23
 testRunner.When("the track information feature is executed for TrackId 1267", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 39
+#line 24
 testRunner.Then("the title is \"Hurt\" from \'Johnny Cash\' which is recorded in the year 2003", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 40
+                TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Edition"});
+                table11.AddRow(new string[] {
+                            "2003"});
+                table11.AddRow(new string[] {
+                            "2004"});
+                table11.AddRow(new string[] {
+                            "2005"});
+                table11.AddRow(new string[] {
+                            "2006"});
+                table11.AddRow(new string[] {
+                            "2007"});
+                table11.AddRow(new string[] {
+                            "2008"});
+#line 25
+testRunner.And("the following years are listed as \'NotListed\'", ((string)(null)), table11, "And ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [TechTalk.SpecRun.ScenarioAttribute("The first time a track is listed the status of the listing is New", SourceLine=33)]
+        public virtual void TheFirstTimeATrackIsListedTheStatusOfTheListingIsNew()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("The first time a track is listed the status of the listing is New", null, tagsOfScenario, argumentsOfScenario);
+#line 34
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 3
+this.FeatureBackground();
+#line hidden
+#line 35
+testRunner.Given("all data scripts", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 36
+testRunner.When("the track information feature is executed for TrackId 1267", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 37
+testRunner.Then("the title is \"Hurt\" from \'Johnny Cash\' which is recorded in the year 2003", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 38
 testRunner.And("the listing 2009 is listed as \'New\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
@@ -282,14 +278,14 @@ testRunner.And("the listing 2009 is listed as \'New\'", ((string)(null)), ((Tech
         }
         
         [TechTalk.SpecRun.ScenarioAttribute("Tracks that are listed again but was not in the previous edition the status is li" +
-            "sted as Back", SourceLine=41)]
+            "sted as Back", SourceLine=39)]
         public virtual void TracksThatAreListedAgainButWasNotInThePreviousEditionTheStatusIsListedAsBack()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Tracks that are listed again but was not in the previous edition the status is li" +
                     "sted as Back", null, tagsOfScenario, argumentsOfScenario);
-#line 42
+#line 40
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -312,13 +308,13 @@ this.ScenarioInitialize(scenarioInfo);
 #line 3
 this.FeatureBackground();
 #line hidden
-#line 43
+#line 41
 testRunner.When("the track information feature is executed for TrackId 2560", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 44
+#line 42
 testRunner.Then("the title is \"Sad But True\" from \'Metallica\' which is recorded in the year 1993", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 45
+#line 43
 testRunner.And("the listing 2011 is listed as \'Back\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
@@ -326,16 +322,14 @@ testRunner.And("the listing 2011 is listed as \'Back\'", ((string)(null)), ((Tec
         }
         
         [TechTalk.SpecRun.ScenarioAttribute("Tracks that are higher on the list than previous edition are listed are Increased" +
-            " and a offset is indicating the delta", new string[] {
-                "ignore"}, SourceLine=47)]
+            " and a offset is indicating the delta", SourceLine=44)]
         public virtual void TracksThatAreHigherOnTheListThanPreviousEditionAreListedAreIncreasedAndAOffsetIsIndicatingTheDelta()
         {
-            string[] tagsOfScenario = new string[] {
-                    "ignore"};
+            string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Tracks that are higher on the list than previous edition are listed are Increased" +
                     " and a offset is indicating the delta", null, tagsOfScenario, argumentsOfScenario);
-#line 48
+#line 45
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -358,148 +352,49 @@ this.ScenarioInitialize(scenarioInfo);
 #line 3
 this.FeatureBackground();
 #line hidden
-#line 49
+#line 46
 testRunner.When("the track information feature is executed for TrackId 1664", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 50
-testRunner.Then("the title is \"Killer Queen\" from \'Queen\' which is recorded in the year 1974", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-                TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
-                            "Edition",
-                            "Offset"});
-                table11.AddRow(new string[] {
-                            "2000",
-                            "33"});
-                table11.AddRow(new string[] {
-                            "2002",
-                            "19"});
-                table11.AddRow(new string[] {
-                            "2008",
-                            "262"});
-                table11.AddRow(new string[] {
-                            "2011",
-                            "85"});
-                table11.AddRow(new string[] {
-                            "2017",
-                            "9"});
-                table11.AddRow(new string[] {
-                            "2018",
-                            "222"});
-#line 51
-testRunner.And("the following years are listed as \'Increased\'", ((string)(null)), table11, "And ");
-#line hidden
-            }
-            this.ScenarioCleanup();
-        }
-        
-        [TechTalk.SpecRun.ScenarioAttribute("Tracks that are lower on the list than previous edition are listed are Decreased " +
-            "and a offset is indicating the delta", new string[] {
-                "ignore"}, SourceLine=60)]
-        public virtual void TracksThatAreLowerOnTheListThanPreviousEditionAreListedAreDecreasedAndAOffsetIsIndicatingTheDelta()
-        {
-            string[] tagsOfScenario = new string[] {
-                    "ignore"};
-            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Tracks that are lower on the list than previous edition are listed are Decreased " +
-                    "and a offset is indicating the delta", null, tagsOfScenario, argumentsOfScenario);
-#line 61
-this.ScenarioInitialize(scenarioInfo);
-#line hidden
-            bool isScenarioIgnored = default(bool);
-            bool isFeatureIgnored = default(bool);
-            if ((tagsOfScenario != null))
-            {
-                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((this._featureTags != null))
-            {
-                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((isScenarioIgnored || isFeatureIgnored))
-            {
-                testRunner.SkipScenario();
-            }
-            else
-            {
-                this.ScenarioStart();
-#line 3
-this.FeatureBackground();
-#line hidden
-#line 62
-testRunner.When("the track information feature is executed for TrackId 1664", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line hidden
-#line 63
+#line 47
 testRunner.Then("the title is \"Killer Queen\" from \'Queen\' which is recorded in the year 1974", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
                 TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
                             "Edition",
                             "Offset"});
                 table12.AddRow(new string[] {
-                            "2001",
-                            "27"});
+                            "2000",
+                            "33"});
                 table12.AddRow(new string[] {
-                            "2003",
-                            "1"});
+                            "2002",
+                            "19"});
                 table12.AddRow(new string[] {
-                            "2004",
-                            "30"});
+                            "2008",
+                            "262"});
                 table12.AddRow(new string[] {
-                            "2005",
-                            "45"});
+                            "2011",
+                            "85"});
                 table12.AddRow(new string[] {
-                            "2006",
-                            "27"});
+                            "2017",
+                            "9"});
                 table12.AddRow(new string[] {
-                            "2007",
-                            "255"});
-                table12.AddRow(new string[] {
-                            "2009",
-                            "7"});
-                table12.AddRow(new string[] {
-                            "2010",
-                            "76"});
-                table12.AddRow(new string[] {
-                            "2012",
-                            "13"});
-                table12.AddRow(new string[] {
-                            "2013",
-                            "27"});
-                table12.AddRow(new string[] {
-                            "2014",
-                            "18"});
-                table12.AddRow(new string[] {
-                            "2015",
-                            "10"});
-                table12.AddRow(new string[] {
-                            "2016",
-                            "3"});
-                table12.AddRow(new string[] {
-                            "2019",
-                            "18"});
-                table12.AddRow(new string[] {
-                            "2020",
-                            "25"});
-                table12.AddRow(new string[] {
-                            "2020",
-                            "38"});
-#line 64
-testRunner.And("the following years are listed as \'Decreased\'", ((string)(null)), table12, "And ");
+                            "2018",
+                            "222"});
+#line 48
+testRunner.And("the following years are listed as \'Increased\'", ((string)(null)), table12, "And ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Tracks that haven\'t change position since the previous edition are listed as Unch" +
-            "anged", new string[] {
-                "ignore"}, SourceLine=83)]
-        public virtual void TracksThatHaventChangePositionSinceThePreviousEditionAreListedAsUnchanged()
+        [TechTalk.SpecRun.ScenarioAttribute("Tracks that are lower on the list than previous edition are listed are Decreased " +
+            "and a offset is indicating the delta", SourceLine=56)]
+        public virtual void TracksThatAreLowerOnTheListThanPreviousEditionAreListedAreDecreasedAndAOffsetIsIndicatingTheDelta()
         {
-            string[] tagsOfScenario = new string[] {
-                    "ignore"};
+            string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Tracks that haven\'t change position since the previous edition are listed as Unch" +
-                    "anged", null, tagsOfScenario, argumentsOfScenario);
-#line 84
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Tracks that are lower on the list than previous edition are listed are Decreased " +
+                    "and a offset is indicating the delta", null, tagsOfScenario, argumentsOfScenario);
+#line 57
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -522,39 +417,177 @@ this.ScenarioInitialize(scenarioInfo);
 #line 3
 this.FeatureBackground();
 #line hidden
-#line 85
-testRunner.When("the track information feature is executed for TrackId 2218", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 58
+testRunner.When("the track information feature is executed for TrackId 1664", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 86
-testRunner.Then("the title is \"Nothing Else Matters\" from \'Metallica\' which is recorded in the yea" +
-                        "r 1992", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 59
+testRunner.Then("the title is \"Killer Queen\" from \'Queen\' which is recorded in the year 1974", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
                 TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
                             "Edition",
                             "Offset"});
                 table13.AddRow(new string[] {
-                            "2017",
-                            "0"});
+                            "2001",
+                            "27"});
+                table13.AddRow(new string[] {
+                            "2003",
+                            "1"});
+                table13.AddRow(new string[] {
+                            "2004",
+                            "30"});
+                table13.AddRow(new string[] {
+                            "2005",
+                            "45"});
+                table13.AddRow(new string[] {
+                            "2006",
+                            "27"});
+                table13.AddRow(new string[] {
+                            "2007",
+                            "255"});
+                table13.AddRow(new string[] {
+                            "2009",
+                            "7"});
+                table13.AddRow(new string[] {
+                            "2010",
+                            "76"});
                 table13.AddRow(new string[] {
                             "2012",
+                            "13"});
+                table13.AddRow(new string[] {
+                            "2013",
+                            "27"});
+                table13.AddRow(new string[] {
+                            "2014",
+                            "18"});
+                table13.AddRow(new string[] {
+                            "2015",
+                            "10"});
+                table13.AddRow(new string[] {
+                            "2016",
+                            "3"});
+                table13.AddRow(new string[] {
+                            "2019",
+                            "18"});
+                table13.AddRow(new string[] {
+                            "2020",
+                            "25"});
+                table13.AddRow(new string[] {
+                            "2020",
+                            "38"});
+#line 60
+testRunner.And("the following years are listed as \'Decreased\'", ((string)(null)), table13, "And ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [TechTalk.SpecRun.ScenarioAttribute("Tracks that haven\'t change position since the previous edition are listed as Unch" +
+            "anged", SourceLine=78)]
+        public virtual void TracksThatHaventChangePositionSinceThePreviousEditionAreListedAsUnchanged()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Tracks that haven\'t change position since the previous edition are listed as Unch" +
+                    "anged", null, tagsOfScenario, argumentsOfScenario);
+#line 79
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 3
+this.FeatureBackground();
+#line hidden
+#line 80
+testRunner.When("the track information feature is executed for TrackId 2218", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 81
+testRunner.Then("the title is \"Nothing Else Matters\" from \'Metallica\' which is recorded in the yea" +
+                        "r 1992", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+                TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Edition",
+                            "Offset"});
+                table14.AddRow(new string[] {
+                            "2017",
                             "0"});
-#line 87
-testRunner.And("the following years are listed as \'Unchanged\'", ((string)(null)), table13, "And ");
+                table14.AddRow(new string[] {
+                            "2012",
+                            "0"});
+#line 82
+testRunner.And("the following years are listed as \'Unchanged\'", ((string)(null)), table14, "And ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
         [TechTalk.SpecRun.ScenarioAttribute("\'Since release\' is the statistic that shows how many times the tracks could have " +
-            "been listed", new string[] {
-                "ignore"}, SourceLine=92)]
+            "been listed", SourceLine=86)]
         public virtual void SinceReleaseIsTheStatisticThatShowsHowManyTimesTheTracksCouldHaveBeenListed()
         {
-            string[] tagsOfScenario = new string[] {
-                    "ignore"};
+            string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("\'Since release\' is the statistic that shows how many times the tracks could have " +
                     "been listed", null, tagsOfScenario, argumentsOfScenario);
+#line 87
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 3
+this.FeatureBackground();
+#line hidden
+#line 88
+testRunner.When("the track information feature is executed for TrackId 3966", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 89
+testRunner.Then("the title is \"Hello\" from \'Adele\' which is recorded in the year 2015", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 90
+testRunner.And("it could have been on the Top2000 for 9 times", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 91
+testRunner.And("is it listed for 9 times", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [TechTalk.SpecRun.ScenarioAttribute("Record high shows the highest listing for the track", SourceLine=92)]
+        public virtual void RecordHighShowsTheHighestListingForTheTrack()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Record high shows the highest listing for the track", null, tagsOfScenario, argumentsOfScenario);
 #line 93
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -579,74 +612,25 @@ this.ScenarioInitialize(scenarioInfo);
 this.FeatureBackground();
 #line hidden
 #line 94
-testRunner.When("the track information feature is executed for TrackId 3966", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line hidden
-#line 95
-testRunner.Then("the title is \"Hello\" from \'Adele\' which is recorded in the year 2015", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-#line 96
-testRunner.And("it could have been on the Top2000 for 8 times", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 97
-testRunner.And("is it listed for 8 times", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-            }
-            this.ScenarioCleanup();
-        }
-        
-        [TechTalk.SpecRun.ScenarioAttribute("Record high shows the highest listing for the track", new string[] {
-                "ignore"}, SourceLine=99)]
-        public virtual void RecordHighShowsTheHighestListingForTheTrack()
-        {
-            string[] tagsOfScenario = new string[] {
-                    "ignore"};
-            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Record high shows the highest listing for the track", null, tagsOfScenario, argumentsOfScenario);
-#line 100
-this.ScenarioInitialize(scenarioInfo);
-#line hidden
-            bool isScenarioIgnored = default(bool);
-            bool isFeatureIgnored = default(bool);
-            if ((tagsOfScenario != null))
-            {
-                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((this._featureTags != null))
-            {
-                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((isScenarioIgnored || isFeatureIgnored))
-            {
-                testRunner.SkipScenario();
-            }
-            else
-            {
-                this.ScenarioStart();
-#line 3
-this.FeatureBackground();
-#line hidden
-#line 101
 testRunner.When("the track information feature is executed for TrackId 1496", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 102
+#line 95
 testRunner.Then("the title is \"Imagine\" from \'John Lennon\' which is recorded in the year 1971", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 103
+#line 96
 testRunner.And("the record high is number 1 on 2015", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Record low shows the lowest listing for the track", new string[] {
-                "ignore"}, SourceLine=105)]
+        [TechTalk.SpecRun.ScenarioAttribute("Record low shows the lowest listing for the track", SourceLine=97)]
         public virtual void RecordLowShowsTheLowestListingForTheTrack()
         {
-            string[] tagsOfScenario = new string[] {
-                    "ignore"};
+            string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Record low shows the lowest listing for the track", null, tagsOfScenario, argumentsOfScenario);
-#line 106
+#line 98
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -669,28 +653,26 @@ this.ScenarioInitialize(scenarioInfo);
 #line 3
 this.FeatureBackground();
 #line hidden
-#line 107
+#line 99
 testRunner.When("the track information feature is executed for TrackId 1496", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 108
+#line 100
 testRunner.Then("the title is \"Imagine\" from \'John Lennon\' which is recorded in the year 1971", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 109
+#line 101
 testRunner.And("the record low is number 52 in 2022", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Last postion shows the position of latest edition where the track was listed", new string[] {
-                "ignore"}, SourceLine=111)]
+        [TechTalk.SpecRun.ScenarioAttribute("Last postion shows the position of latest edition where the track was listed", SourceLine=102)]
         public virtual void LastPostionShowsThePositionOfLatestEditionWhereTheTrackWasListed()
         {
-            string[] tagsOfScenario = new string[] {
-                    "ignore"};
+            string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Last postion shows the position of latest edition where the track was listed", null, tagsOfScenario, argumentsOfScenario);
-#line 112
+#line 103
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -713,30 +695,28 @@ this.ScenarioInitialize(scenarioInfo);
 #line 3
 this.FeatureBackground();
 #line hidden
-#line 113
+#line 104
 testRunner.When("the track information feature is executed for TrackId 1496", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 114
+#line 105
 testRunner.Then("the title is \"Imagine\" from \'John Lennon\' which is recorded in the year 1971", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 115
-testRunner.And("the Lastest position is number 52 in 2022", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 106
+testRunner.And("the Lastest position is number 33 in 2023", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
         [TechTalk.SpecRun.ScenarioAttribute("First position shows the position of the first edition where the track was listed" +
-            "", new string[] {
-                "ignore"}, SourceLine=117)]
+            "", SourceLine=107)]
         public virtual void FirstPositionShowsThePositionOfTheFirstEditionWhereTheTrackWasListed()
         {
-            string[] tagsOfScenario = new string[] {
-                    "ignore"};
+            string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("First position shows the position of the first edition where the track was listed" +
                     "", null, tagsOfScenario, argumentsOfScenario);
-#line 118
+#line 108
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -759,13 +739,13 @@ this.ScenarioInitialize(scenarioInfo);
 #line 3
 this.FeatureBackground();
 #line hidden
-#line 119
+#line 109
 testRunner.When("the track information feature is executed for TrackId 1496", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 120
+#line 110
 testRunner.Then("the title is \"Imagine\" from \'John Lennon\' which is recorded in the year 1971", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 121
+#line 111
 testRunner.And("the first position is number 7 in 1999", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }

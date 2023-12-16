@@ -10,14 +10,16 @@ When the client database is created
 Then except for the last edition, the listing table contains 2000 tracks for each edition ranging from 1 to 2000
 
 Scenario: The last edition can either have 10 or 2000 tracks
-An exception is made for the last list in 2023 since that one has an extra 500 items
 Given all data scripts
 When the client database is created
 Then the listing table contains 10 or 2000 for the last edition ranging from 1 to 10/2000
 
 Scenario: The playtime of each track is either the same to the last track or increment by one hour
-An exception is made for the list of 2025 since that one has 500 extra songs, 
-2001-2500 beeing played on work hours only.
 Given all data scripts
 When the client database is created
 Then for each track in the listing table the PlayDateAndTime is the same to the previous track or has incremented by one hour
+
+Scenario: Edition 2023 has 2500 tracks
+Given All data scripts
+When the client database is created
+Then the listing table of edition 2023 has 2500 tracks

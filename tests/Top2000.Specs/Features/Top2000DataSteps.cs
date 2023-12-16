@@ -63,19 +63,33 @@ namespace Chroomsoft.Top2000.Specs.Features
         public async Task ThenThePositionsTableContainsOrForTheLastYearRangingFromTo()
         {
             var sql = App.ServiceProvider.GetService<SQLiteAsyncConnection>();
-            var list = (await sql.Table<Listing>().ToListAsync())
+            var list = (await sql.Table<Listing>().Where(x => x.Edition != 2023).ToListAsync())
                 .GroupBy(x => x.Edition)
                 .OrderBy(x => x.Key)
                 .Last();
 
-            list.Count().Should().BeOneOf(10, 2000, 500, 2500);
+            list.Count().Should().BeOneOf(10, 2000);
         }
+
+        [Then(@"the listing table of edition 2023 has 2500 tracks")]
+        public async Task ThenTheListingTableOfEditionHasTracks()
+        {
+            var sql = App.ServiceProvider.GetService<SQLiteAsyncConnection>();
+            var list = (await sql.Table<Listing>().ToListAsync())
+                .Where(x => x.Edition == 2023)
+                .GroupBy(x => x.Edition)
+                .OrderBy(x => x.Key)
+                .Last();
+
+            list.Count().Should().Be(2500);
+        }
+
 
         [Then(@"for each track in the listing table the PlayDateAndTime is the same to the previous track or has incremented by one hour")]
         public async Task ThenForEachTrackInTheListingTableThePlayDateAndTimeIsTheSameToThePreviousTrackOrHasIncrementedByOneHour()
         {
             var sql = App.ServiceProvider.GetService<SQLiteAsyncConnection>();
-            var listings = (await sql.Table<Listing>().Where(x => x.Edition > 2015).Where(x => x.Edition != 2023).ToListAsync())
+            var listings = (await sql.Table<Listing>().Where(x => x.Edition > 2015).ToListAsync())
                 .OrderBy(x => x.Position)
                 .GroupBy(x => x.Edition)
                 .OrderBy(x => x.Key)
@@ -85,7 +99,9 @@ namespace Chroomsoft.Top2000.Specs.Features
             {
                 var previous = listing.First();
 
-                foreach (var track in listing)
+                var listingForEdition = listing.Take(2000);
+
+                foreach (var track in listingForEdition)
                 {
                     var differenceInHours = previous.PlayUtcDateAndTime - track.PlayUtcDateAndTime;
 
