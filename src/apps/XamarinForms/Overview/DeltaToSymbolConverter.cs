@@ -11,6 +11,11 @@ namespace Chroomsoft.Top2000.Apps.Overview
 
             if (value is null || !value.HasValue)
             {
+                if (track.IsRecurring)
+                {
+                    return Symbols.BackInList;
+                }
+                
                 return Symbols.New;
             }
 
