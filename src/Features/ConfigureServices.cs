@@ -10,7 +10,10 @@ namespace Chroomsoft.Top2000.Features
         public static IServiceCollection AddFeatures(this IServiceCollection services)
         {
             return services
-                .AddMediatR(typeof(ConfigureServices).Assembly)
+                .AddMediatR(config => 
+                {
+                    config.RegisterServicesFromAssemblyContaining<TrackCountHolder>();
+                })
                 .AddSingleton<TrackCountHolder>()
                 .AddSingleton<ISort, SortByTitle>()
                 .AddSingleton<ISort, SortByArtist>()

@@ -16,7 +16,7 @@ namespace Features.Unittests.AllListingsOfEdition
                 PlayUtcDateAndTime = DateTime.UtcNow
             };
 
-            sut.LocalPlayDateAndTime.Should().BeCloseTo(DateTime.Now);
+            sut.LocalPlayDateAndTime.Should().BeCloseTo(DateTime.Now, TimeSpan.FromSeconds(1));
         }
     }
 }
