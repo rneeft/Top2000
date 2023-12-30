@@ -2,9 +2,6 @@
 using Chroomsoft.Top2000.Apps.NavigationShell;
 using Chroomsoft.Top2000.Apps.Themes;
 using Chroomsoft.Top2000.Data.ClientDatabase;
-using Microsoft.AppCenter;
-using Microsoft.AppCenter.Analytics;
-using Microsoft.AppCenter.Crashes;
 using System.Globalization;
 
 

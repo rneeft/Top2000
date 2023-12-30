@@ -59,10 +59,29 @@
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+        <PackageReference Include="MediatR" Version="12.2.0" />
+        <PackageReference Include="Microsoft.AppCenter.Analytics" Version="5.0.3" />
+        <PackageReference Include="Microsoft.AppCenter.Crashes" Version="5.0.3" />
+        <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Http" Version="8.0.0" />
+        <PackageReference Include="sqlite-net" Version="1.6.292" />
+        <PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.5" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <ProjectReference Include="..\maui\XamarinForms\XamarinForms.csproj" />
-	</ItemGroup>
+    <ItemGroup>
+        <EmbeddedResource Update="Globalisation\AppResources.resx">
+            <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
+            <Generator>ResXFileCodeGenerator</Generator>
+        </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\data\Data.ClientDatabase\Data.ClientDatabase.csproj" />
+        <ProjectReference Include="..\..\Features\Features.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Folder Include="Common\Behavior\" />
+    </ItemGroup>
 
 </Project>
