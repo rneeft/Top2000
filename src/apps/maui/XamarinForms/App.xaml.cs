@@ -73,7 +73,7 @@ namespace Chroomsoft.Top2000.Apps.XamarinForms
 
         protected override void OnStart()
         {
-            AppCenter.Start("89fbeb5b-5ec9-4456-86c7-214421330f73", typeof(Analytics), typeof(Crashes));
+          //  AppCenter.Start("89fbeb5b-5ec9-4456-86c7-214421330f73", typeof(Analytics), typeof(Crashes));
         }
 
         private void SetCulture()
