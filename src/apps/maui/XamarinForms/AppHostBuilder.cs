@@ -4,14 +4,9 @@ using Chroomsoft.Top2000.Apps.NavigationShell;
 using Chroomsoft.Top2000.Apps.Themes;
 using Chroomsoft.Top2000.Data.ClientDatabase;
 using Chroomsoft.Top2000.Features;
-using MediatR;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Reflection;
-using Xamarin.Essentials;
-using Xamarin.Essentials.Implementation;
-using Xamarin.Essentials.Interfaces;
 
 namespace Chroomsoft.Top2000.Apps
 {
