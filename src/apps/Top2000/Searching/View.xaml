@@ -7,8 +7,13 @@
              xmlns:trackInformation="clr-namespace:Chroomsoft.Top2000.Apps.TrackInformation"
              xmlns:res="clr-namespace:Chroomsoft.Top2000.Apps.Globalisation"
              BackgroundColor="{DynamicResource PageBackgroundColor}">
-    <Shell.SearchHandler>
-        <local:TracksSearchHandler Placeholder="{Binding [SearchTop2000], Source={x:Static res:Translator.Instance}}" />
+    <Shell.SearchHandler >
+        <local:TracksSearchHandler Placeholder="{Binding [SearchTop2000], Source={x:Static res:Translator.Instance}}" 
+                                   Keyboard="Plain">
+            <local:TracksSearchHandler.QueryIcon>
+                <FontImageSource FontFamily="MaterialIcons" Glyph="{x:Static g:Symbols.Search}" Color="{DynamicResource Top2000Colour}" />
+            </local:TracksSearchHandler.QueryIcon>
+        </local:TracksSearchHandler>
     </Shell.SearchHandler>
 
     <ContentPage.Resources>

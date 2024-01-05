@@ -14,6 +14,7 @@
                 <Setter Property="Shell.TabBarUnselectedColor" Value="{DynamicResource TabBarUnselectedColor}" />
                 <Setter Property="Shell.TabBarTitleColor" Value="{DynamicResource TabBarSelectedColor}" />
                 <Setter Property="Shell.ForegroundColor" Value="{DynamicResource ShellForegroundColor}" />
+                <Setter Property="Shell.TabBarForegroundColor" Value="{DynamicResource NavigationBarColor}" />
             </Style>
 
             <Style x:Key="Separator" TargetType="BoxView">
