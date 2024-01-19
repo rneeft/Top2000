@@ -16,16 +16,22 @@
                     <Label Text="{Binding [TestedBy], Source={x:Static res:Translator.Instance}}" Style="{StaticResource SmallLabelStyle}" />
                 </StackLayout>
 
-                <FlexLayout Direction="Column" AlignItems="Center" Margin="0,8">
+                <StackLayout Orientation="Horizontal">
+                  
+                </StackLayout>
 
-                    <Label Text="{Binding [ToContact], Source={x:Static res:Translator.Instance}}"  VerticalOptions="Center" Style="{StaticResource SmallLabelStyle}" />
-                    <Label>
+                <FlexLayout Direction="Row" AlignItems="Start" Wrap="Wrap" Margin="0,8">
+
+                    <Label Text="{Binding [ToContact], Source={x:Static res:Translator.Instance}}"  
+                           VerticalOptions="Center" Style="{StaticResource SmallLabelStyle}" 
+                           Margin="0,0,2,0" />
+                    <Label >
                         <Label.FormattedText>
                             <FormattedString>
                                 <Span Text="rick.neeft@outlook.com"
-                                      FontSize="15"
-                                  TextColor="{StaticResource Top2000Colour}"
-                                  TextDecorations="Underline" />
+                     FontSize="15"
+                     TextColor="{StaticResource Top2000Colour}"
+                     TextDecorations="Underline" />
                             </FormattedString>
                         </Label.FormattedText>
                         <Label.GestureRecognizers>
@@ -33,8 +39,8 @@
                         </Label.GestureRecognizers>
                     </Label>
 
-                    <Label Text="{Binding [OrVisitFacebook], Source={x:Static res:Translator.Instance}}" VerticalOptions="Center" Style="{StaticResource SmallLabelStyle}" />
-                    <Label>
+                    <Label Margin="0,0,2,0" Text="{Binding [OrVisitFacebook], Source={x:Static res:Translator.Instance}}" VerticalOptions="Center" Style="{StaticResource SmallLabelStyle}" />
+                    <Label Margin="0,0,2,0" >
                         <Label.FormattedText>
                             <FormattedString>
                                 <Span Text="https://www.facebook.com/Top2000App/"
