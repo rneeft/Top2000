@@ -82,6 +82,13 @@
 
     <ItemGroup>
         <Folder Include="Common\Behavior\" />
+        <Folder Include="Platforms\Android\TrackInformation\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <MauiXaml Update="TrackInformation\Controls\CircularProgressBar.xaml">
+        <Generator>MSBuild:Compile</Generator>
+      </MauiXaml>
     </ItemGroup>
 
 </Project>

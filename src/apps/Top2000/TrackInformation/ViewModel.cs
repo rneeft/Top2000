@@ -84,15 +84,15 @@ namespace Chroomsoft.Top2000.Apps.TrackInformation
             set { SetPropertyValue(value); }
         }
 
-        public double AppearancesPossiblePercentage
+        public int AppearancesPossiblePercentage
         {
-            get { return GetPropertyValue<double>(); }
+            get { return GetPropertyValue<int>(); }
             set { SetPropertyValue(value); }
         }
 
-        public double TotalTop2000Percentage
+        public int TotalTop2000Percentage
         {
-            get { return GetPropertyValue<double>(); }
+            get { return GetPropertyValue<int>(); }
             set { SetPropertyValue(value); }
         }
 
@@ -112,8 +112,9 @@ namespace Chroomsoft.Top2000.Apps.TrackInformation
             IsLatestListed = track.Listings.First().Status != ListingStatus.NotListed;
             Listings.Clear();
             Listings.ClearAddRange(track.Listings);
-            AppearancesPossiblePercentage = (Appearances / (double)AppearancesPossible);
-            TotalTop2000Percentage = (Appearances / (double)Listings.Count);
+            AppearancesPossiblePercentage = 100 * Appearances / AppearancesPossible;
+            TotalTop2000Percentage = 100 * Appearances / Listings.Count;
+
             TotalListings = Listings.Count;
         }
     }
