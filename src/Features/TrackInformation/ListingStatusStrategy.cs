@@ -1,50 +1,45 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿namespace Chroomsoft.Top2000.Features.TrackInformation;
 
-namespace Chroomsoft.Top2000.Features.TrackInformation
+public sealed class ListingStatusStrategy
 {
-    public class ListingStatusStrategy
+    private readonly int recordedYear;
+    private readonly List<ListingInformation> previous = new();
+
+    public ListingStatusStrategy(int recordedYear)
     {
-        private readonly int recordedYear;
-        private readonly List<ListingInformation> previous = new List<ListingInformation>();
+        this.recordedYear = recordedYear;
+    }
 
-        public ListingStatusStrategy(int recordedYear)
-        {
-            this.recordedYear = recordedYear;
-        }
+    public ListingStatus Determine(ListingInformation current)
+    {
+        var status = GetStatus(current);
+        previous.Add(current);
+        return status;
+    }
 
-        public ListingStatus Determine(ListingInformation current)
-        {
-            var status = GetStatus(current);
-            previous.Add(current);
-            return status;
-        }
+    private ListingStatus GetStatus(ListingInformation current)
+    {
+        if (!current.CouldBeListed(recordedYear))
+            return ListingStatus.NotAvailable;
 
-        private ListingStatus GetStatus(ListingInformation current)
-        {
-            if (!current.CouldBeListed(recordedYear))
-                return ListingStatus.NotAvailable;
+        if (!current.Position.HasValue)
+            return ListingStatus.NotListed;
 
-            if (!current.Position.HasValue)
-                return ListingStatus.NotListed;
+        if (!previous.Any(x => x.Status == ListingStatus.New))
+            return ListingStatus.New;
 
-            if (!previous.Any(x => x.Status == ListingStatus.New))
-                return ListingStatus.New;
+        if (!current.Offset.HasValue)
+            return ListingStatus.Back;
 
-            if (!current.Offset.HasValue)
-                return ListingStatus.Back;
+        if (current.Offset == 0)
+            return ListingStatus.Unchanged;
 
-            if (current.Offset == 0)
-                return ListingStatus.Unchanged;
+        if (current.Offset < 0)
+            return ListingStatus.Increased;
 
-            if (current.Offset < 0)
-                return ListingStatus.Increased;
+        if (current.Offset > 0)
+            return ListingStatus.Decreased;
 
-            if (current.Offset > 0)
-                return ListingStatus.Decreased;
-
-            throw new InvalidOperationException();
-        }
+        throw new InvalidOperationException();
     }
 }

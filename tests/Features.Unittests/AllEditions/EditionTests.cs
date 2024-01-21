@@ -1,33 +1,27 @@
 ﻿using Chroomsoft.Top2000.Features.AllEditions;
 using FluentAssertions;
+using FluentAssertions.Extensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 
 namespace Features.Unittests.AllEditions
 {
     [TestClass]
     public class EditionTests
     {
-        private Edition sut;
-
-        [TestInitialize]
-        public void TestInitialize()
-        {
-            sut = new Edition();
-        }
+        private readonly Edition sut = new();
 
         [TestMethod]
         public void LocalStartDateAndTimeTransformsTheUtc()
         {
             sut.StartUtcDateAndTime = DateTime.UtcNow;
-            sut.LocalStartDateAndTime.Should().BeCloseTo(DateTime.Now);
+            sut.LocalStartDateAndTime.Should().BeCloseTo(DateTime.Now, 1.Seconds());
         }
 
         [TestMethod]
         public void LocalEndDateAndTimeTransformsFromUtc()
         {
             sut.EndUtcDateAndTime = DateTime.UtcNow;
-            sut.LocalEndDateAndTime.Should().BeCloseTo(DateTime.Now);
+            sut.LocalEndDateAndTime.Should().BeCloseTo(DateTime.Now, 1.Seconds());
         }
     }
 }

@@ -1,9 +1,13 @@
 <Project>
+  
   <PropertyGroup>
+    <LangVersion>latest</LangVersion>
     <Nullable>disable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
+  
   <ItemGroup>
-    <PackageReference Include="FluentAssertions" Version="5.*" />
-    <PackageReference Include="Moq" Version="4.*" />
+    <PackageReference Include="FluentAssertions" Version="6.*" />
+    <PackageReference Include="Moq" Version="[4.18.4]" />
   </ItemGroup>
 </Project>

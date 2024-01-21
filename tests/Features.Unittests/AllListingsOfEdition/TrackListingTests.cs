@@ -1,7 +1,7 @@
 ﻿using Chroomsoft.Top2000.Features.AllListingsOfEdition;
 using FluentAssertions;
+using FluentAssertions.Extensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 
 namespace Features.Unittests.AllListingsOfEdition
 {
@@ -16,7 +16,7 @@ namespace Features.Unittests.AllListingsOfEdition
                 PlayUtcDateAndTime = DateTime.UtcNow
             };
 
-            sut.LocalPlayDateAndTime.Should().BeCloseTo(DateTime.Now);
+            sut.LocalPlayDateAndTime.Should().BeCloseTo(DateTime.Now, 1.Seconds());
         }
     }
 }

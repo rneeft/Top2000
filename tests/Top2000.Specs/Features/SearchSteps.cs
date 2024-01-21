@@ -1,97 +1,108 @@
-﻿using Chroomsoft.Top2000.Features.Searching;
-using FluentAssertions;
-using MediatR;
-using Microsoft.Extensions.DependencyInjection;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Threading.Tasks;
-using TechTalk.SpecFlow;
-using TechTalk.SpecFlow.Assist;
+﻿using System.Collections.ObjectModel;
+using Chroomsoft.Top2000.Features.Searching;
 
-namespace Chroomsoft.Top2000.Specs.Features
+namespace Chroomsoft.Top2000.Specs.Features;
+
+[Binding]
+public class SearchSteps
 {
-    [Binding]
-    public class SearchSteps
+    private readonly IGroup grouping = new GroupByNothing();
+    private readonly ISort sorting = new SortByTitle();
+    private ReadOnlyCollection<IGrouping<string, Track>> result;
+    private int lastEdition = 0;
+
+    [Given(@"that last edition is (.*)")]
+    public void GivenThatLastEditionIs(int lastEdition)
     {
-        private ReadOnlyCollection<IGrouping<string, Track>> result;
-        private IGroup grouping = new GroupByNothing();
-        private ISort sorting = new SortByTitle();
+        this.lastEdition = lastEdition;
+    }
 
-        [When(@"searching for (.*)")]
-        public async Task WhenSearchingFor(string queryString)
+    [When(@"searching for (.*)")]
+    public async Task WhenSearchingFor(string queryString)
+    {
+        var mediator = App.ServiceProvider.GetService<IMediator>();
+        var request = new SearchTrackRequest
         {
-            var mediator = App.ServiceProvider.GetService<IMediator>();
-            var request = new SearchTrackRequest(queryString, sorting, grouping);
+            QueryString = queryString,
+            Sorting = sorting,
+            Grouping = grouping,
+            LastEdition = lastEdition
+        };
 
-            result = await mediator.Send(request);
-        }
+        result = await mediator.Send(request);
+    }
 
-        [When(@"searching without a query")]
-        public async Task WhenSearchingWithoutAQuery()
+    [When(@"searching without a query")]
+    public async Task WhenSearchingWithoutAQuery()
+    {
+        var mediator = App.ServiceProvider.GetService<IMediator>();
+        var request = new SearchTrackRequest
         {
-            var mediator = App.ServiceProvider.GetService<IMediator>();
-            var request = new SearchTrackRequest(string.Empty, sorting, grouping);
+            QueryString = string.Empty,
+            Sorting = sorting,
+            Grouping = grouping,
+            LastEdition = lastEdition
+        };
 
-            result = await mediator.Send(request);
-        }
+        result = await mediator.Send(request);
+    }
 
-        [Then(@"the following tracks are found:")]
-        public void ThenTracksAreFoundWithTheFollowingDetails(Table table)
-        {
-            var expected = table
-                .CreateSet<Track>()
-                .Select(x => new TrackForAssertion
-                {
-                    Id = x.Id,
-                    Title = x.Title,
-                    Artist = x.Artist,
-                    RecordedYear = x.RecordedYear,
-                })
-                .ToList();
+    [Then(@"the following tracks are found:")]
+    public void ThenTracksAreFoundWithTheFollowingDetails(Table table)
+    {
+        var expected = table
+            .CreateSet<Track>()
+            .Select(x => new TrackForAssertion
+            {
+                Id = x.Id,
+                Title = x.Title,
+                Artist = x.Artist,
+                RecordedYear = x.RecordedYear,
+            })
+            .ToList();
 
-            var actual = result
-                .SelectMany(x => x)
-                .Select(x => new TrackForAssertion
-                {
-                    Id = x.Id,
-                    Title = x.Title,
-                    Artist = x.Artist,
-                    RecordedYear = x.RecordedYear,
-                })
-                .ToList();
+        var actual = result
+            .SelectMany(x => x)
+            .Select(x => new TrackForAssertion
+            {
+                Id = x.Id,
+                Title = x.Title,
+                Artist = x.Artist,
+                RecordedYear = x.RecordedYear,
+            })
+            .ToList();
 
-            actual.Should().BeEquivalentTo(expected);
-        }
+        actual.Should().BeEquivalentTo(expected);
+    }
 
-        public class TrackForAssertion
-        {
-            public int Id { get; set; }
+    [Then(@"the track (.*) is not found")]
+    public void ThenTrackIsNotFound(string title)
+    {
+        var actual = result
+            .SelectMany(x => x)
+            .Where(x => x.Title == title);
 
-            public string Title { get; set; } = string.Empty;
+        actual.Should().BeEmpty();
+    }
 
-            public string Artist { get; set; } = string.Empty;
+    [Then(@"the results contain (.*) items")]
+    public void ThenTheResultsContainItems(int count)
+    {
+        var actual = result
+            .SelectMany(x => x);
 
-            public int RecordedYear { get; set; }
-        }
+        actual.Should()
+            .HaveCount(count);
+    }
 
-        [Then(@"the track (.*) is not found")]
-        public void ThenTrackIsNotFound(string title)
-        {
-            var actual = result
-                .SelectMany(x => x)
-                .Where(x => x.Title == title);
+    public class TrackForAssertion
+    {
+        public int Id { get; set; }
 
-            actual.Should().BeEmpty();
-        }
+        public string Title { get; set; } = string.Empty;
 
-        [Then(@"the results contain (.*) items")]
-        public void ThenTheResultsContainItems(int count)
-        {
-            var actual = result
-                .SelectMany(x => x);
+        public string Artist { get; set; } = string.Empty;
 
-            actual.Should()
-                .HaveCount(count);
-        }
+        public int RecordedYear { get; set; }
     }
 }

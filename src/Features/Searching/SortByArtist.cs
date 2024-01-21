@@ -1,10 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿namespace Chroomsoft.Top2000.Features.Searching;
 
-namespace Chroomsoft.Top2000.Features.Searching
+public sealed class SortByArtist : ISort
 {
-    public class SortByArtist : ISort
-    {
-        public IOrderedEnumerable<Track> Sort(IEnumerable<Track> tracks) => tracks.OrderBy(x => x.Artist);
-    }
+    public IOrderedEnumerable<Track> Sort(IEnumerable<Track> tracks) => tracks.OrderBy(x => x.Artist);
 }

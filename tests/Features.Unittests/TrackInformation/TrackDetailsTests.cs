@@ -1,8 +1,7 @@
-﻿using Chroomsoft.Top2000.Features.TrackInformation;
+﻿using System.Collections.Immutable;
+using Chroomsoft.Top2000.Features.TrackInformation;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections.Generic;
-using System.Collections.Immutable;
 
 namespace Features.Unittests.TrackInformation
 {
@@ -40,7 +39,13 @@ namespace Features.Unittests.TrackInformation
                 listing2005
             }.ToImmutableSortedSet(new ListingInformationDescendingComparer());
 
-            sut = new TrackDetails("unit_title", "unit_artist", 2000, set);
+            sut = new TrackDetails
+            {
+                Title = "unit_title",
+                Artist = "unit_artist",
+                RecordedYear = 2000,
+                Listings = set
+            };
         }
 
         [TestMethod]
