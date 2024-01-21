@@ -14,7 +14,7 @@ namespace Chroomsoft.Top2000.Apps.Searching
 
         public string Name { get; set; }
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             return obj is SortViewModel svm && svm.Name == this.Name;
         }

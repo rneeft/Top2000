@@ -1,13 +1,10 @@
 ﻿#nullable disable
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.CompilerServices;
 
 namespace Chroomsoft.Top2000.Apps.Common
 {
-    /// <Remarks>
+    /// <remarks>
     /// All credits for the PropertyBackingDictionary goes to: http://www.codecadwallader.com/2013/04/06/inotifypropertychanged-2-of-3-without-the-backing-fields/
     /// </remarks>
     public class PropertyHelper

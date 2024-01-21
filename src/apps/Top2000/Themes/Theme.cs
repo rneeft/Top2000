@@ -34,8 +34,8 @@ namespace Chroomsoft.Top2000.Apps.Themes
 
         public void SetTheme(string name)
         {
-            var mergedDictionaries = Application.Current.Resources.MergedDictionaries;
-            if (mergedDictionaries != null)
+            var mergedDictionaries = Application.Current?.Resources?.MergedDictionaries;
+            if (mergedDictionaries is not null)
             {
                 mergedDictionaries.Clear();
                 mergedDictionaries.Add(GetThemeByName(name));
