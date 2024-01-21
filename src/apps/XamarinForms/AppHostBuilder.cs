@@ -1,5 +1,4 @@
 ﻿using Chroomsoft.Top2000.Apps.AskForReview;
-using Chroomsoft.Top2000.Apps.Common.Behavior;
 using Chroomsoft.Top2000.Apps.Globalisation;
 using Chroomsoft.Top2000.Apps.NavigationShell;
 using Chroomsoft.Top2000.Apps.Themes;
@@ -9,8 +8,6 @@ using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.IO;
 using System.Reflection;
 using Xamarin.Essentials;
 using Xamarin.Essentials.Implementation;
@@ -37,13 +34,12 @@ namespace Chroomsoft.Top2000.Apps
                 .AddClientDatabase(new DirectoryInfo(FileSystem.AppDataDirectory), baseUrl)
                 .AddFeatures()
                 .AddSingleton<IThemeService, ThemeService>()
-                .AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>))
                 .AddTransient<Overview.Position.ViewModel>()
                 .AddTransient<Overview.Date.ViewModel>()
                 .AddTransient<TrackInformation.ViewModel>()
                 .AddTransient<Searching.ViewModel>()
                 .AddTransient<IAskForReview, ReviewModule>()
-                .AddSingleton<IPreferences, PreferencesImplementation>()
+               // .AddSingleton<Xamarin.Essentials.Interfaces.IPreferences, Xamarin.Essentials.Implementation.PreferencesImplementation>()
                 .AddSingleton<ICulture>(new SupportedCulture("nl"))
                 .AddSingleton<ICulture>(new SupportedCulture("en"))
                 .AddSingleton<ICulture>(new SupportedCulture("fr"))

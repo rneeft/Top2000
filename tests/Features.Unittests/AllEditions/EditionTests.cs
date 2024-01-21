@@ -20,14 +20,14 @@ namespace Features.Unittests.AllEditions
         public void LocalStartDateAndTimeTransformsTheUtc()
         {
             sut.StartUtcDateAndTime = DateTime.UtcNow;
-            sut.LocalStartDateAndTime.Should().BeCloseTo(DateTime.Now);
+            sut.LocalStartDateAndTime.Should().BeCloseTo(DateTime.Now, TimeSpan.FromSeconds(1));
         }
 
         [TestMethod]
         public void LocalEndDateAndTimeTransformsFromUtc()
         {
             sut.EndUtcDateAndTime = DateTime.UtcNow;
-            sut.LocalEndDateAndTime.Should().BeCloseTo(DateTime.Now);
+            sut.LocalEndDateAndTime.Should().BeCloseTo(DateTime.Now, TimeSpan.FromSeconds(1));
         }
     }
 }

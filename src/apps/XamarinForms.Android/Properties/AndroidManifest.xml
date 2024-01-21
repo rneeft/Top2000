@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="33" android:versionName="2.6.0" package="com.chroomsoft.top2000" android:installLocation="auto">
-	<uses-sdk android:minSdkVersion="22" android:targetSdkVersion="31" />
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="37" android:versionName="2.9.0" package="com.chroomsoft.top2000" android:installLocation="auto">
+	<uses-sdk android:minSdkVersion="22" android:targetSdkVersion="33" />
 	<application android:label="Top 2000" android:theme="@style/MainTheme" android:icon="@mipmap/top2000iconRound"></application>
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.INTERNET" />

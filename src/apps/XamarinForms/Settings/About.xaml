@@ -23,7 +23,7 @@
                     <Label>
                         <Label.FormattedText>
                             <FormattedString>
-                                <Span Text="rick@chroomsoft.nl"
+                                <Span Text="rick.neeft@outlook.com"
                                       FontSize="15"
                                   TextColor="{StaticResource Top2000Colour}"
                                   TextDecorations="Underline" />

@@ -122,9 +122,16 @@ namespace Chroomsoft.Top2000.Apps.Overview.Date
                 {
                     var position = group.First().Position;
                     var totalTracks = ViewModel.Listings.SelectMany(x => x).Count();
+                    var groupsBeforeCount = groupsBefore.Count();
 
                     const int ShowGroup = 1;
-                    var index = totalTracks - position + groupsBefore.Count() - ShowGroup;
+                    var index = totalTracks - position + groupsBeforeCount - ShowGroup;
+
+                    if (totalTracks == 500)
+                    {
+                        index = totalTracks - (position - 2000) + groupsBeforeCount - ShowGroup;
+                    }
+
 
                     if (index < 0) index = 0;
 

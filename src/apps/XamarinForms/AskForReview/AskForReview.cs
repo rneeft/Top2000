@@ -25,7 +25,7 @@ namespace Chroomsoft.Top2000.Apps.AskForReview
 
     public class ReviewModule : IAskForReview
     {
-        private static int[] askForReviews = new[] { 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597 };
+        private static int[] askForReviews = new[] { 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597 };
         private readonly IOptions<AskForReviewConfiguration> configuration;
         private readonly IPreferences preferences;
         private readonly IStoreReview storeReview;
