@@ -1,9 +1,13 @@
-﻿namespace Chroomsoft.Top2000.Features.Searching;
+﻿using System.Collections.Generic;
+using System.Linq;
 
-public sealed class GroupByNothing : IGroup
+namespace Chroomsoft.Top2000.Features.Searching
 {
-    public IEnumerable<IGrouping<string, Track>> Group(IEnumerable<Track> tracks)
+    public class GroupByNothing : IGroup
     {
-        return tracks.GroupBy(x => string.Empty);
+        public IEnumerable<IGrouping<string, Track>> Group(IEnumerable<Track> tracks)
+        {
+            return tracks.GroupBy(x => "" + tracks.Count());
+        }
     }
 }

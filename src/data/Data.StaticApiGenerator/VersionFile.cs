@@ -1,25 +1,30 @@
-﻿namespace Chroomsoft.Top2000.Data.StaticApiGenerator;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 
-[DebuggerDisplay("{FileName}")]
-public sealed class VersionFile
+namespace Chroomsoft.Top2000.Data.StaticApiGenerator
 {
-    private readonly List<VersionFile> upgrades;
-
-    public VersionFile(string fileName)
+    [DebuggerDisplay("{FileName}")]
+    public class VersionFile
     {
-        this.Version = fileName.Split('-').First();
-        this.FileName = fileName;
-        this.upgrades = new List<VersionFile>();
-    }
+        private readonly List<VersionFile> upgrades;
 
-    public string Version { get; set; }
+        public VersionFile(string fileName)
+        {
+            this.Version = fileName.Split('-').First();
+            this.FileName = fileName;
+            this.upgrades = new List<VersionFile>();
+        }
 
-    public string FileName { get; set; }
+        public string Version { get; set; }
 
-    public IReadOnlyCollection<VersionFile> Upgrades => upgrades;
+        public string FileName { get; set; }
 
-    public void AddRange(IEnumerable<VersionFile> versionFiles)
-    {
-        upgrades.AddRange(versionFiles);
+        public IReadOnlyCollection<VersionFile> Upgrades => upgrades;
+
+        public void AddRange(IEnumerable<VersionFile> versionFiles)
+        {
+            upgrades.AddRange(versionFiles);
+        }
     }
 }

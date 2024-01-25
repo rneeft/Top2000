@@ -2,14 +2,35 @@
 <Shell xmlns="http://xamarin.com/schemas/2014/forms"
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:g="clr-namespace:Chroomsoft.Top2000.Apps.Common"
-       xmlns:res="clr-namespace:Chroomsoft.Top2000.Apps.Globalisation"
-       xmlns:dates="clr-namespace:Chroomsoft.Top2000.Apps.Overview.Date"
        xmlns:position="clr-namespace:Chroomsoft.Top2000.Apps.Overview.Position"
+       xmlns:dates="clr-namespace:Chroomsoft.Top2000.Apps.Overview.Date"
        xmlns:searching="clr-namespace:Chroomsoft.Top2000.Apps.Searching"
        xmlns:settings="clr-namespace:Chroomsoft.Top2000.Apps.Settings"
+       xmlns:res="clr-namespace:Chroomsoft.Top2000.Apps.Globalisation"
        x:Class="Chroomsoft.Top2000.Apps.NavigationShell.View">
 
     <TabBar x:Name="ShellTabBar">
+        <Tab x:Name="OverviewTab" Title="{Binding [Overview], Source={x:Static res:Translator.Instance}}">
+            <Tab.Icon>
+                <FontImageSource FontFamily="{OnPlatform Android=MaterialIcons.ttf#}" Glyph="{x:Static g:Symbols.Overview}" />
+            </Tab.Icon>
+            <ShellContent ContentTemplate="{DataTemplate position:View}" />
+        </Tab>
+
+        <Tab x:Name="ViewByDateTab" Title="{Binding [ViewByDate], Source={x:Static res:Translator.Instance}}">
+            <Tab.Icon>
+                <FontImageSource FontFamily="{OnPlatform Android=MaterialIcons.ttf#}" Glyph="{x:Static g:Symbols.Clock}" />
+            </Tab.Icon>
+
+            <ShellContent Route="ViewByDate" ContentTemplate="{DataTemplate dates:View}" />
+        </Tab>
+
+        <Tab x:Name="SearchTab" Title="{Binding [Search], Source={x:Static res:Translator.Instance}}">
+            <Tab.Icon>
+                <FontImageSource FontFamily="{OnPlatform Android=MaterialIcons.ttf#}" Glyph="{x:Static g:Symbols.Search}" />
+            </Tab.Icon>
+            <ShellContent ContentTemplate="{DataTemplate searching:View}" />
+        </Tab>
 
         <Tab x:Name="SettingsTab" Title="{Binding [Settings], Source={x:Static res:Translator.Instance}}">
             <Tab.Icon>

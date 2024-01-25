@@ -1,24 +1,31 @@
 ﻿using Chroomsoft.Top2000.Features.AllListingsOfEdition;
+using FluentAssertions;
+using MediatR;
+using Microsoft.Extensions.DependencyInjection;
+using System.Collections.Immutable;
+using System.Threading.Tasks;
+using TechTalk.SpecFlow;
 
-namespace Chroomsoft.Top2000.Specs.Features;
-
-[Binding]
-public class AllListingsOfEditionSteps
+namespace Chroomsoft.Top2000.Specs.Features
 {
-    private ImmutableHashSet<TrackListing> result;
-
-    [Then(@"an empty set is returned")]
-    public void ThenAnEmptySetIsReturned()
+    [Binding]
+    public class AllListingsOfEditionSteps
     {
-        result.Should().BeEmpty();
-    }
+        private ImmutableHashSet<TrackListing> result;
 
-    [When(@"the AllListingOfEdition feature is executed with year (.*)")]
-    public async Task WhenTheAllListingOfEditionFeatureIsExecutedWithYear(int year)
-    {
-        var request = new AllListingsOfEditionRequest(year);
-        var mediator = App.ServiceProvider.GetService<IMediator>();
+        [Then(@"an empty set is returned")]
+        public void ThenAnEmptySetIsReturned()
+        {
+            result.Should().BeEmpty();
+        }
 
-        result = await mediator.Send(request);
+        [When(@"the AllListingOfEdition feature is executed with year (.*)")]
+        public async Task WhenTheAllListingOfEditionFeatureIsExecutedWithYear(int year)
+        {
+            var request = new AllListingsOfEditionRequest(year);
+            var mediator = App.ServiceProvider.GetService<IMediator>();
+
+            result = await mediator.Send(request);
+        }
     }
 }

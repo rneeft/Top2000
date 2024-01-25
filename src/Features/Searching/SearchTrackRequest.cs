@@ -1,48 +1,70 @@
-﻿namespace Chroomsoft.Top2000.Features.Searching;
+﻿using MediatR;
+using SQLite;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
-public record SearchTrackRequest(string QueryString, int LastEdition) : IRequest<ReadOnlyCollection<Track>>;
-
-public sealed class SearchTrackRequestHandler : IRequestHandler<SearchTrackRequest, ReadOnlyCollection<Track>>
+namespace Chroomsoft.Top2000.Features.Searching
 {
-    private readonly SQLiteAsyncConnection connection;
-
-    public SearchTrackRequestHandler(SQLiteAsyncConnection connection)
+    public class SearchTrackRequest : IRequest<ReadOnlyCollection<IGrouping<string, Track>>>
     {
-        this.connection = connection;
+        public SearchTrackRequest(string queryString, ISort sorting, IGroup group)
+        {
+            QueryString = queryString;
+            this.Sorting = sorting;
+            this.Grouping = group;
+        }
+
+        public string QueryString { get; }
+
+        public ISort Sorting { get; set; }
+
+        public IGroup Grouping { get; set; }
     }
 
-    public async Task<ReadOnlyCollection<Track>> Handle(SearchTrackRequest request, CancellationToken cancellationToken)
+    public class SearchTrackRequestHandler : IRequestHandler<SearchTrackRequest, ReadOnlyCollection<IGrouping<string, Track>>>
     {
-        var results = await SearchDatabaseAsync(request.QueryString, request.LastEdition);
-        return results.AsReadOnly();
-    }
+        private readonly SQLiteAsyncConnection connection;
 
-    private Task<List<Track>> SearchDatabaseAsync(string queryString, int lastEdition)
-    {
-        return int.TryParse(queryString, out var edition)
-            ? QuearyAsEditionAsync(edition, lastEdition)
-            : QueryOnTitleAndArtist(queryString, lastEdition);
-    }
+        public SearchTrackRequestHandler(SQLiteAsyncConnection connection)
+        {
+            this.connection = connection;
+        }
 
-    private Task<List<Track>> QuearyAsEditionAsync(int recordedYear, int lastEdition)
-    {
-        var sql = "SELECT Id, Title, Artist, RecordedYear, ? AS LastEdition, Listing.Position AS Position " +
-                  "FROM Track " +
-                  "LEFT JOIN Listing ON Track.Id = Listing.TrackId AND Listing.Edition = ? " +
-                  "WHERE RecordedYear = ?" +
-                  "LIMIT 100";
+        public async Task<ReadOnlyCollection<IGrouping<string, Track>>> Handle(SearchTrackRequest request, CancellationToken cancellationToken)
+        {
+            List<Track> results = new List<Track>();
 
-        return connection.QueryAsync<Track>(sql, lastEdition, lastEdition, recordedYear);
-    }
+            if (!string.IsNullOrWhiteSpace(request.QueryString))
+            {
+                if (int.TryParse(request.QueryString, out int year))
+                {
+                    var sql = "SELECT Id, Title, Artist, RecordedYear, Listing.Position AS Position " +
+                        "FROM Track " +
+                        "LEFT JOIN Listing ON Track.Id = Listing.TrackId AND Listing.Edition = 2021 " +
+                        "WHERE RecordedYear = ?" +
+                        "LIMIT 100";
 
-    private Task<List<Track>> QueryOnTitleAndArtist(string queryString, int lastEdition)
-    {
-        var sql = "SELECT Id, Title, Artist, RecordedYear, ? AS LastEdition, Listing.Position AS Position " +
-                   "FROM Track " +
-                   "LEFT JOIN Listing ON Track.Id = Listing.TrackId AND Listing.Edition = ? " +
-                   "WHERE (Title LIKE ?) OR (Artist LIKE ?)" +
-                   "LIMIT 100";
+                    results = await connection.QueryAsync<Track>(sql, year).ConfigureAwait(false);
+                }
+                else
+                {
+                    var sql = "SELECT Id, Title, Artist, RecordedYear, Listing.Position AS Position " +
+                        "FROM Track " +
+                        "LEFT JOIN Listing ON Track.Id = Listing.TrackId AND Listing.Edition = 2021 " +
+                        "WHERE (Title LIKE ?) OR (Artist LIKE ?)" +
+                        "LIMIT 100";
 
-        return connection.QueryAsync<Track>(sql, lastEdition, lastEdition, $"%{queryString}%", $"%{queryString}%");
+                    results = await connection.QueryAsync<Track>(sql, $"%{request.QueryString}%", $"%{request.QueryString}%").ConfigureAwait(false);
+                }
+            }
+
+            var sorted = request.Sorting.Sort(results);
+            var groupedAndSorted = request.Grouping.Group(sorted).ToList();
+
+            return groupedAndSorted.AsReadOnly();
+        }
     }
 }

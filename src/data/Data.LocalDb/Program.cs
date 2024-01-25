@@ -1,25 +1,35 @@
-﻿using Chroomsoft.Top2000.Data.LocalDb;
+﻿using DbUp;
+using System;
 
-var connectionString = @"Server=(localdb)\mssqllocaldb;Database=Top2000;";
-
-EnsureDatabase.For
-    .SqlDatabase(connectionString);
-
-var upgrader = DeployChanges.To
-    .SqlDatabase(connectionString)
-    .WithScriptEmbeddedInDataLibrary()
-    .WithTransactionPerScript()
-    .LogToConsole()
-    .Build();
-
-var result = upgrader.PerformUpgrade();
-
-if (!result.Successful)
+namespace Chroomsoft.Top2000.Data.LocalDb
 {
-    ConsoleLogger.Print(result.Error.ToString(), ConsoleColor.Red, NewLine.Yes);
-    return -1;
+    public static class Program
+    {
+        private static int Main()
+        {
+            var connectionString = @"Server=(localdb)\mssqllocaldb;Database=Top2000;";
+
+            EnsureDatabase.For
+                .SqlDatabase(connectionString);
+
+            var upgrader = DeployChanges.To
+                                .SqlDatabase(connectionString)
+                                .WithScriptEmbeddedInDataLibrary()
+                                .WithTransactionPerScript()
+                                .LogToConsole()
+                                .Build();
+
+            var result = upgrader.PerformUpgrade();
+
+            if (!result.Successful)
+            {
+                ConsoleLogger.Print(result.Error.ToString(), ConsoleColor.Red, NewLine.Yes);
+                return -1;
+            }
+
+            ConsoleLogger.Print("Success!", ConsoleColor.Green, NewLine.Yes);
+
+            return 0;
+        }
+    }
 }
-
-ConsoleLogger.Print("Success!", ConsoleColor.Green, NewLine.Yes);
-
-return 0;

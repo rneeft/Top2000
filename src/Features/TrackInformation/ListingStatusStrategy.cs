@@ -1,45 +1,50 @@
-﻿namespace Chroomsoft.Top2000.Features.TrackInformation;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
-public sealed class ListingStatusStrategy
+namespace Chroomsoft.Top2000.Features.TrackInformation
 {
-    private readonly int recordedYear;
-    private readonly List<ListingInformation> previous = new();
-
-    public ListingStatusStrategy(int recordedYear)
+    public class ListingStatusStrategy
     {
-        this.recordedYear = recordedYear;
-    }
+        private readonly int recordedYear;
+        private readonly List<ListingInformation> previous = new List<ListingInformation>();
 
-    public ListingStatus Determine(ListingInformation current)
-    {
-        var status = GetStatus(current);
-        previous.Add(current);
-        return status;
-    }
+        public ListingStatusStrategy(int recordedYear)
+        {
+            this.recordedYear = recordedYear;
+        }
 
-    private ListingStatus GetStatus(ListingInformation current)
-    {
-        if (!current.CouldBeListed(recordedYear))
-            return ListingStatus.NotAvailable;
+        public ListingStatus Determine(ListingInformation current)
+        {
+            var status = GetStatus(current);
+            previous.Add(current);
+            return status;
+        }
 
-        if (!current.Position.HasValue)
-            return ListingStatus.NotListed;
+        private ListingStatus GetStatus(ListingInformation current)
+        {
+            if (!current.CouldBeListed(recordedYear))
+                return ListingStatus.NotAvailable;
 
-        if (!previous.Any(x => x.Status == ListingStatus.New))
-            return ListingStatus.New;
+            if (!current.Position.HasValue)
+                return ListingStatus.NotListed;
 
-        if (!current.Offset.HasValue)
-            return ListingStatus.Back;
+            if (!previous.Any(x => x.Status == ListingStatus.New))
+                return ListingStatus.New;
 
-        if (current.Offset == 0)
-            return ListingStatus.Unchanged;
+            if (!current.Offset.HasValue)
+                return ListingStatus.Back;
 
-        if (current.Offset < 0)
-            return ListingStatus.Increased;
+            if (current.Offset == 0)
+                return ListingStatus.Unchanged;
 
-        if (current.Offset > 0)
-            return ListingStatus.Decreased;
+            if (current.Offset < 0)
+                return ListingStatus.Increased;
 
-        throw new InvalidOperationException();
+            if (current.Offset > 0)
+                return ListingStatus.Decreased;
+
+            throw new InvalidOperationException();
+        }
     }
 }

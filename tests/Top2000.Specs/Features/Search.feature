@@ -1,8 +1,5 @@
 ﻿Feature: Search
 
-Background: 
-Given that last edition is 2022
-
 Scenario: Track can be searching by title
 Given All data scripts
 When searching for Piano

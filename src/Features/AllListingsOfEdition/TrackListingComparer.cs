@@ -1,8 +1,11 @@
-﻿namespace Chroomsoft.Top2000.Features.AllListingsOfEdition;
+﻿using System.Collections.Generic;
 
-public sealed class TrackListingComparer : IEqualityComparer<TrackListing>
+namespace Chroomsoft.Top2000.Features.AllListingsOfEdition
 {
-    public bool Equals(TrackListing? x, TrackListing? y) => x?.Position == y?.Position;
+    public class TrackListingComparer : IEqualityComparer<TrackListing>
+    {
+        public bool Equals(TrackListing x, TrackListing y) => x.Position == y.Position;
 
-    public int GetHashCode(TrackListing obj) => obj.Position.GetHashCode();
+        public int GetHashCode(TrackListing obj) => obj.Position.GetHashCode();
+    }
 }

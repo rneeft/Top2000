@@ -1,41 +1,44 @@
-﻿using Chroomsoft.Top2000.Data.ClientDatabase.Sources;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
+using SQLite;
+using System;
+using System.IO;
 
-namespace Chroomsoft.Top2000.Data.ClientDatabase;
-
-public static class ConfigureServices
+namespace Chroomsoft.Top2000.Data.ClientDatabase
 {
-    public static IServiceCollection AddClientDatabase(this IServiceCollection services, DirectoryInfo appDataDirectory, Uri apiBaseUrl, string clientDatabaseName = "Top2000v2.db")
+    public static class ConfigureServices
     {
-        services.AddHttpClient("top2000", c =>
+        public static IServiceCollection AddClientDatabase(this IServiceCollection services, DirectoryInfo appDataDirectory, Uri apiBaseUrl, string clientDatabaseName = "Top2000v2.db")
         {
-            c.BaseAddress = apiBaseUrl;
-        });
-
-        return services
-            .AddTransient<OnlineDataSource>()
-            .AddTransient<Top2000AssemblyDataSource>()
-            .AddTransient<IUpdateClientDatabase, UpdateDatabase>()
-            .AddTransient<ITop2000AssemblyData, Top2000Data>()
-            .AddTransient<SQLiteAsyncConnection>(f =>
+            services.AddHttpClient("top2000", c =>
             {
-                var databasePath = Path.Combine(appDataDirectory.FullName, clientDatabaseName);
-
-                return new SQLiteAsyncConnection(databasePath, SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.Create | SQLiteOpenFlags.SharedCache, storeDateTimeAsTicks: false);
+                c.BaseAddress = apiBaseUrl;
             });
-    }
 
-    public static IServiceCollection AddOfflineClientDatabase(this IServiceCollection services, DirectoryInfo appDataDirectory, string clientDatabaseName = "Top2000v2.db")
-    {
-        return services
-            .AddTransient<Top2000AssemblyDataSource>()
-            .AddTransient<IUpdateClientDatabase, UpdateDatabase>()
-            .AddTransient<ITop2000AssemblyData, Top2000Data>()
-            .AddTransient<SQLiteAsyncConnection>(f =>
-            {
-                var databasePath = Path.Combine(appDataDirectory.FullName, clientDatabaseName);
+            return services
+                .AddTransient<OnlineDataSource>()
+                .AddTransient<Top2000AssemblyDataSource>()
+                .AddTransient<IUpdateClientDatabase, UpdateDatabase>()
+                .AddTransient<ITop2000AssemblyData, Top2000Data>()
+                .AddTransient<SQLiteAsyncConnection>(f =>
+                {
+                    var databasePath = Path.Combine(appDataDirectory.FullName, clientDatabaseName);
 
-                return new SQLiteAsyncConnection(databasePath, SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.Create | SQLiteOpenFlags.SharedCache, storeDateTimeAsTicks: false);
-            });
+                    return new SQLiteAsyncConnection(databasePath, SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.Create | SQLiteOpenFlags.SharedCache, storeDateTimeAsTicks: false);
+                });
+        }
+
+        public static IServiceCollection AddOfflineClientDatabase(this IServiceCollection services, DirectoryInfo appDataDirectory, string clientDatabaseName = "Top2000v2.db")
+        {
+            return services
+                .AddTransient<Top2000AssemblyDataSource>()
+                .AddTransient<IUpdateClientDatabase, UpdateDatabase>()
+                .AddTransient<ITop2000AssemblyData, Top2000Data>()
+                .AddTransient<SQLiteAsyncConnection>(f =>
+                {
+                    var databasePath = Path.Combine(appDataDirectory.FullName, clientDatabaseName);
+
+                    return new SQLiteAsyncConnection(databasePath, SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.Create | SQLiteOpenFlags.SharedCache, storeDateTimeAsTicks: false);
+                });
+        }
     }
 }

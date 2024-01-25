@@ -1,1 +1,0 @@
-ALTER Table Track ADD IsFavorite bit

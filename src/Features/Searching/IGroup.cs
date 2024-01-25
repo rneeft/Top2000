@@ -1,13 +1,17 @@
-﻿namespace Chroomsoft.Top2000.Features.Searching;
+﻿using System.Collections.Generic;
+using System.Linq;
 
-public static class GroupBy
+namespace Chroomsoft.Top2000.Features.Searching
 {
-    private static readonly IGroup defaultGroup = new GroupByNothing();
+    public static class GroupBy
+    {
+        private static readonly IGroup defaultGroup = new GroupByNothing();
 
-    public static IGroup Default => defaultGroup;
-}
+        public static IGroup Default => defaultGroup;
+    }
 
-public interface IGroup
-{
-    IEnumerable<IGrouping<string, Track>> Group(IEnumerable<Track> tracks);
+    public interface IGroup
+    {
+        IEnumerable<IGrouping<string, Track>> Group(IEnumerable<Track> tracks);
+    }
 }

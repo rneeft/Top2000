@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>Chroomsoft.Top2000.Data</AssemblyName>
     <RootNamespace>Chroomsoft.Top2000.Data</RootNamespace>
   </PropertyGroup>
@@ -9,6 +9,10 @@
   <ItemGroup>
       <None Remove="sql\*.sql" />
       <EmbeddedResource Include="sql\*.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="morelinq" Version="3.3.2" />
   </ItemGroup>
   
 </Project>

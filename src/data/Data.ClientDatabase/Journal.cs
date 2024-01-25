@@ -1,12 +1,15 @@
-﻿namespace Chroomsoft.Top2000.Data.ClientDatabase;
+﻿using SQLite;
 
-public sealed class Journal
+namespace Chroomsoft.Top2000.Data.ClientDatabase
 {
-    public Journal()
+    public class Journal
     {
-        ScriptName = string.Empty;
-    }
+        public Journal()
+        {
+            ScriptName = string.Empty;
+        }
 
-    [PrimaryKey]
-    public string ScriptName { get; set; }
+        [PrimaryKey]
+        public string ScriptName { get; set; }
+    }
 }
