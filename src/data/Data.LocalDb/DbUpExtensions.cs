@@ -1,7 +1,10 @@
-﻿namespace Chroomsoft.Top2000.Data.LocalDb;
+﻿using DbUp.Builder;
 
-public static class DbUpExtensions
+namespace Chroomsoft.Top2000.Data.LocalDb
 {
-    public static UpgradeEngineBuilder WithScriptEmbeddedInDataLibrary(this UpgradeEngineBuilder builder)
-        => builder.WithScripts(new Top2000DataScriptProvider(new Top2000Data()));
+    public static class DbUpExtensions
+    {
+        public static UpgradeEngineBuilder WithScriptEmbeddedInDataLibrary(this UpgradeEngineBuilder builder)
+            => builder.WithScripts(new Top2000DataScriptProvider(new Top2000Data()));
+    }
 }

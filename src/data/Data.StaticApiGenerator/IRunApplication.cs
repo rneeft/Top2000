@@ -1,6 +1,9 @@
-﻿namespace Chroomsoft.Top2000.Data.StaticApiGenerator;
+﻿using System.Threading.Tasks;
 
-public interface IRunApplication
+namespace Chroomsoft.Top2000.Data.StaticApiGenerator
 {
-    Task RunAsync();
+    public interface IRunApplication
+    {
+        Task RunAsync();
+    }
 }

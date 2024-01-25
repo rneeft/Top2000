@@ -1,20 +1,28 @@
-﻿namespace Chroomsoft.Top2000.Features.TrackInformation;
+﻿using System;
 
-public sealed class ListingInformation
+namespace Chroomsoft.Top2000.Features.TrackInformation
 {
-    public int Edition { get; set; }
+    public class ListingInformation
+    {
+        public int Edition { get; set; }
 
-    public int? Position { get; set; }
+        public int? Position { get; set; }
 
-    public DateTime? PlayUtcDateAndTime { get; set; }
+        public DateTime? PlayUtcDateAndTime { get; set; }
 
-    public DateTime? LocalUtcDateAndTime => PlayUtcDateAndTime is null 
-        ? null
-        : DateTime.SpecifyKind((DateTime)PlayUtcDateAndTime, DateTimeKind.Utc).ToLocalTime();
+        public DateTime? LocalUtcDateAndTime
+        {
+            get
+            {
+                if (PlayUtcDateAndTime is null) return null;
+                return DateTime.SpecifyKind((DateTime)PlayUtcDateAndTime, DateTimeKind.Utc).ToLocalTime();
+            }
+        }
 
-    public int? Offset { get; set; }
+        public int? Offset { get; set; }
 
-    public ListingStatus Status { get; set; }
+        public ListingStatus Status { get; set; }
 
-    public bool CouldBeListed(int recoredYear) => recoredYear <= Edition;
+        public bool CouldBeListed(int recoredYear) => recoredYear <= Edition;
+    }
 }

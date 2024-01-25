@@ -1,12 +1,17 @@
-﻿namespace Chroomsoft.Top2000.Features.Searching;
-
-public sealed class Track : BaseTrack
+﻿namespace Chroomsoft.Top2000.Features.Searching
 {
-    public int RecordedYear { get; set; }
+    public class Track
+    {
+        public int Id { get; set; }
 
-    public string LastEdition { get; set; } = string.Empty;
+        public string Title { get; set; } = string.Empty;
 
-    public int? Position { get; set; }
+        public string Artist { get; set; } = string.Empty;
 
-    public string LastPosition => $"{LastEdition}: {Position?.ToString() ?? "-"}";
+        public int RecordedYear { get; set; }
+
+        public int? Position { get; set; }
+
+        public string PositionIn2020 => $"2022: {Position?.ToString() ?? "-"}";
+    }
 }

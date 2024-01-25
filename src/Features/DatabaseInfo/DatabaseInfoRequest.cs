@@ -1,33 +1,43 @@
-﻿namespace Chroomsoft.Top2000.Features.DatabaseInfo;
+﻿using MediatR;
+using SQLite;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
-public sealed class DatabaseInfoRequest : IRequest<int>
+namespace Chroomsoft.Top2000.Features.DatabaseInfo
 {
-}
-
-public sealed class DatabaseInfoRequestHandler : IRequestHandler<DatabaseInfoRequest, int>
-{
-    private readonly SQLiteAsyncConnection connection;
-
-    public DatabaseInfoRequestHandler(SQLiteAsyncConnection connection)
+    public class DatabaseInfoRequest : IRequest<int>
     {
-        this.connection = connection;
     }
 
-    public async Task<int> Handle(DatabaseInfoRequest request, CancellationToken cancellationToken)
+    public class DatabaseInfoRequestHandler : IRequestHandler<DatabaseInfoRequest, int>
     {
-        var sql = "SELECT ScriptName FROM Journal ORDER BY ScriptName DESC LIMIT 1";
+        private readonly SQLiteAsyncConnection connection;
 
-        var idString = (await connection.QueryAsync<Journal>(sql))
-            .Single()
-            .ScriptName.Split('-')[0];
+        public DatabaseInfoRequestHandler(SQLiteAsyncConnection connection)
+        {
+            this.connection = connection;
+        }
 
-        return int.TryParse(idString, out var id)
-            ? id
-            : 0;
-    }
+        public async Task<int> Handle(DatabaseInfoRequest request, CancellationToken cancellationToken)
+        {
+            var sql = "SELECT ScriptName FROM Journal ORDER BY ScriptName DESC LIMIT 1";
 
-    private sealed class Journal
-    {
-        public string ScriptName { get; set; } = string.Empty;
+            var idString = (await connection.QueryAsync<Journal>(sql).ConfigureAwait(false))
+                .Single()
+                .ScriptName.Split('-')[0];
+
+            if (int.TryParse(idString, out int id))
+            {
+                return id;
+            }
+
+            return 0;
+        }
+
+        private class Journal
+        {
+            public string ScriptName { get; set; } = string.Empty;
+        }
     }
 }

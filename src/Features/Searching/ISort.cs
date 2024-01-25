@@ -1,13 +1,17 @@
-﻿namespace Chroomsoft.Top2000.Features.Searching;
+﻿using System.Collections.Generic;
+using System.Linq;
 
-public static class SortBy
+namespace Chroomsoft.Top2000.Features.Searching
 {
-    private static readonly ISort defaultSort = new SortByTitle();
+    public static class SortBy
+    {
+        private static readonly ISort defaultSort = new SortByTitle();
 
-    public static ISort Default => defaultSort;
-}
+        public static ISort Default => defaultSort;
+    }
 
-public interface ISort
-{
-    IOrderedEnumerable<Track> Sort(IEnumerable<Track> tracks);
+    public interface ISort
+    {
+        IOrderedEnumerable<Track> Sort(IEnumerable<Track> tracks);
+    }
 }

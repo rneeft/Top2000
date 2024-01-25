@@ -1,10 +1,24 @@
-﻿using Chroomsoft.Top2000.Apps.NavigationShell;
+﻿using Chroomsoft.Top2000.Apps.Globalisation;
+using Chroomsoft.Top2000.Apps.NavigationShell;
 using Chroomsoft.Top2000.Apps.Themes;
+using Chroomsoft.Top2000.Data.ClientDatabase;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
+using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Globalization;
+using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace Chroomsoft.Top2000.Apps.XamarinForms
 {
     public partial class App : Application
     {
+        public static readonly IFormatProvider DateTimeFormatProvider = DateTimeFormatInfo.InvariantInfo;
+
+        public static readonly IFormatProvider NumberFormatProvider = NumberFormatInfo.InvariantInfo;
+
         private static IServiceProvider? serviceProvider;
 
         public App()
@@ -56,7 +70,7 @@ namespace Chroomsoft.Top2000.Apps.XamarinForms
             }
             catch
             {
-                // I don't want a crash here, just continue.
+                // I don't want a crash here, just continue. 
             }
         }
 

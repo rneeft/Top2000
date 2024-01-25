@@ -1,35 +1,39 @@
-﻿namespace Chroomsoft.Top2000.Data.StaticApiGenerator;
+﻿using System.Collections.Generic;
+using System.Linq;
 
-public interface ITransformSqlFiles
+namespace Chroomsoft.Top2000.Data.StaticApiGenerator
 {
-    IReadOnlyCollection<VersionFile> Transform();
-}
-
-public sealed class SqlFileTransformer : ITransformSqlFiles
-{
-    private readonly ITop2000AssemblyData top2000Data;
-
-    public SqlFileTransformer(ITop2000AssemblyData top2000Data)
+    public interface ITransformSqlFiles
     {
-        this.top2000Data = top2000Data;
+        IReadOnlyCollection<VersionFile> Transform();
     }
 
-    public IReadOnlyCollection<VersionFile> Transform()
+    public class SqlFileTransformer : ITransformSqlFiles
     {
-        var allVersions = top2000Data
-            .GetAllSqlFiles()
-            .Select(x => new VersionFile(x))
-            .ToList();
+        private readonly ITop2000AssemblyData top2000Data;
 
-        var allVersionsCopy = allVersions.ToList();
-
-        foreach (var version in allVersions)
+        public SqlFileTransformer(ITop2000AssemblyData top2000Data)
         {
-            allVersionsCopy.Remove(version);
-
-            version.AddRange(allVersionsCopy);
+            this.top2000Data = top2000Data;
         }
 
-        return allVersions;
+        public IReadOnlyCollection<VersionFile> Transform()
+        {
+            var allVersions = top2000Data
+                .GetAllSqlFiles()
+                .Select(x => new VersionFile(x))
+                .ToList();
+
+            var allVersionsCopy = allVersions.ToList();
+
+            foreach (var version in allVersions)
+            {
+                allVersionsCopy.Remove(version);
+
+                version.AddRange(allVersionsCopy);
+            }
+
+            return allVersions;
+        }
     }
 }

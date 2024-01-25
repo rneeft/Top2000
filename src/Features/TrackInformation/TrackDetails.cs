@@ -1,28 +1,44 @@
-﻿namespace Chroomsoft.Top2000.Features.TrackInformation;
+﻿using System.Collections.Immutable;
+using System.Linq;
 
-public sealed class TrackDetails : BaseTrack
+namespace Chroomsoft.Top2000.Features.TrackInformation
 {
-    public required int RecordedYear { get; init; }
+    public class TrackDetails
+    {
+        public TrackDetails(string title, string artist, int recordedYear, ImmutableSortedSet<ListingInformation> listings)
+        {
+            this.Title = title;
+            this.Artist = artist;
+            this.RecordedYear = recordedYear;
+            this.Listings = listings;
+        }
 
-    public required ImmutableSortedSet<ListingInformation> Listings { get; init; }
+        public string Title { get; }
 
-    public ListingInformation Highest => Listings
-        .Where(x => x.Position.HasValue)
-        .OrderBy(x => x.Position)
-        .ThenBy(x => x.Edition)
-        .First();
+        public string Artist { get; }
 
-    public ListingInformation Lowest => Listings
-        .Where(x => x.Position.HasValue)
-        .OrderBy(x => x.Position)
-        .ThenBy(x => x.Edition)
-        .Last();
+        public int RecordedYear { get; }
 
-    public ListingInformation First => Listings.Single(x => x.Status == ListingStatus.New);
+        public ImmutableSortedSet<ListingInformation> Listings { get; }
 
-    public ListingInformation Latest => Listings.First(x => x.Position.HasValue);
+        public ListingInformation Highest => Listings
+            .Where(x => x.Position.HasValue)
+            .OrderBy(x => x.Position)
+            .ThenBy(x => x.Edition)
+            .First();
 
-    public int Appearances => Listings.Count(x => x.Position.HasValue);
+        public ListingInformation Lowest => Listings
+            .Where(x => x.Position.HasValue)
+            .OrderBy(x => x.Position)
+            .ThenBy(x => x.Edition)
+            .Last();
 
-    public int AppearancesPossible => Listings.Count(x => x.Status != ListingStatus.NotAvailable);
+        public ListingInformation First => Listings.Single(x => x.Status == ListingStatus.New);
+
+        public ListingInformation Latest => Listings.First(x => x.Position.HasValue);
+
+        public int Appearances => Listings.Count(x => x.Position.HasValue);
+
+        public int AppearancesPossible => Listings.Count(x => x.Status != ListingStatus.NotAvailable);
+    }
 }
