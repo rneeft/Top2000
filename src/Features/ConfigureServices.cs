@@ -1,4 +1,5 @@
-﻿using Chroomsoft.Top2000.Features.Searching;
+﻿using Chroomsoft.Top2000.Features.AllListingsOfEdition;
+using Chroomsoft.Top2000.Features.Searching;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -10,6 +11,7 @@ namespace Chroomsoft.Top2000.Features
         {
             return services
                 .AddMediatR(typeof(ConfigureServices).Assembly)
+                .AddSingleton<TrackCountHolder>()
                 .AddSingleton<ISort, SortByTitle>()
                 .AddSingleton<ISort, SortByArtist>()
                 .AddSingleton<ISort, SortByRecordedYear>()

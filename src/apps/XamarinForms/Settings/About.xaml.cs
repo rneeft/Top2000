@@ -20,7 +20,7 @@ namespace Chroomsoft.Top2000.Apps.Settings
 
         async private void MailMe(object sender, EventArgs e)
         {
-            await Launcher.OpenAsync(new Uri("mailto:rick@chroomsoft.nl"));
+            await Launcher.OpenAsync(new Uri("mailto:rick.neeft@outlook.com"));
         }
     }
 }

@@ -156,18 +156,18 @@ testRunner.When("the track information feature is executed for TrackId 1267", ((
 #line 13
 testRunner.Then("the title is \"Hurt\" from \'Johnny Cash\' which is recorded in the year 2003", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-                TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
                             "Edition"});
-                table9.AddRow(new string[] {
+                table10.AddRow(new string[] {
                             "2002"});
-                table9.AddRow(new string[] {
+                table10.AddRow(new string[] {
                             "2001"});
-                table9.AddRow(new string[] {
+                table10.AddRow(new string[] {
                             "2000"});
-                table9.AddRow(new string[] {
+                table10.AddRow(new string[] {
                             "1999"});
 #line 14
-testRunner.And("the following years are listed as \'NotAvailable\'", ((string)(null)), table9, "And ");
+testRunner.And("the following years are listed as \'NotAvailable\'", ((string)(null)), table10, "And ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -211,22 +211,22 @@ testRunner.When("the track information feature is executed for TrackId 1267", ((
 #line 24
 testRunner.Then("the title is \"Hurt\" from \'Johnny Cash\' which is recorded in the year 2003", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-                TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
                             "Edition"});
-                table10.AddRow(new string[] {
+                table11.AddRow(new string[] {
                             "2003"});
-                table10.AddRow(new string[] {
+                table11.AddRow(new string[] {
                             "2004"});
-                table10.AddRow(new string[] {
+                table11.AddRow(new string[] {
                             "2005"});
-                table10.AddRow(new string[] {
+                table11.AddRow(new string[] {
                             "2006"});
-                table10.AddRow(new string[] {
+                table11.AddRow(new string[] {
                             "2007"});
-                table10.AddRow(new string[] {
+                table11.AddRow(new string[] {
                             "2008"});
 #line 25
-testRunner.And("the following years are listed as \'NotListed\'", ((string)(null)), table10, "And ");
+testRunner.And("the following years are listed as \'NotListed\'", ((string)(null)), table11, "And ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -358,29 +358,29 @@ testRunner.When("the track information feature is executed for TrackId 1664", ((
 #line 47
 testRunner.Then("the title is \"Killer Queen\" from \'Queen\' which is recorded in the year 1974", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-                TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
                             "Edition",
                             "Offset"});
-                table11.AddRow(new string[] {
+                table12.AddRow(new string[] {
                             "2000",
                             "33"});
-                table11.AddRow(new string[] {
+                table12.AddRow(new string[] {
                             "2002",
                             "19"});
-                table11.AddRow(new string[] {
+                table12.AddRow(new string[] {
                             "2008",
                             "262"});
-                table11.AddRow(new string[] {
+                table12.AddRow(new string[] {
                             "2011",
                             "85"});
-                table11.AddRow(new string[] {
+                table12.AddRow(new string[] {
                             "2017",
                             "9"});
-                table11.AddRow(new string[] {
+                table12.AddRow(new string[] {
                             "2018",
                             "222"});
 #line 48
-testRunner.And("the following years are listed as \'Increased\'", ((string)(null)), table11, "And ");
+testRunner.And("the following years are listed as \'Increased\'", ((string)(null)), table12, "And ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -423,59 +423,59 @@ testRunner.When("the track information feature is executed for TrackId 1664", ((
 #line 59
 testRunner.Then("the title is \"Killer Queen\" from \'Queen\' which is recorded in the year 1974", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-                TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
                             "Edition",
                             "Offset"});
-                table12.AddRow(new string[] {
+                table13.AddRow(new string[] {
                             "2001",
                             "27"});
-                table12.AddRow(new string[] {
+                table13.AddRow(new string[] {
                             "2003",
                             "1"});
-                table12.AddRow(new string[] {
+                table13.AddRow(new string[] {
                             "2004",
                             "30"});
-                table12.AddRow(new string[] {
+                table13.AddRow(new string[] {
                             "2005",
                             "45"});
-                table12.AddRow(new string[] {
+                table13.AddRow(new string[] {
                             "2006",
                             "27"});
-                table12.AddRow(new string[] {
+                table13.AddRow(new string[] {
                             "2007",
                             "255"});
-                table12.AddRow(new string[] {
+                table13.AddRow(new string[] {
                             "2009",
                             "7"});
-                table12.AddRow(new string[] {
+                table13.AddRow(new string[] {
                             "2010",
                             "76"});
-                table12.AddRow(new string[] {
+                table13.AddRow(new string[] {
                             "2012",
                             "13"});
-                table12.AddRow(new string[] {
+                table13.AddRow(new string[] {
                             "2013",
                             "27"});
-                table12.AddRow(new string[] {
+                table13.AddRow(new string[] {
                             "2014",
                             "18"});
-                table12.AddRow(new string[] {
+                table13.AddRow(new string[] {
                             "2015",
                             "10"});
-                table12.AddRow(new string[] {
+                table13.AddRow(new string[] {
                             "2016",
                             "3"});
-                table12.AddRow(new string[] {
+                table13.AddRow(new string[] {
                             "2019",
                             "18"});
-                table12.AddRow(new string[] {
+                table13.AddRow(new string[] {
                             "2020",
                             "25"});
-                table12.AddRow(new string[] {
+                table13.AddRow(new string[] {
                             "2020",
                             "38"});
 #line 60
-testRunner.And("the following years are listed as \'Decreased\'", ((string)(null)), table12, "And ");
+testRunner.And("the following years are listed as \'Decreased\'", ((string)(null)), table13, "And ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -519,17 +519,17 @@ testRunner.When("the track information feature is executed for TrackId 2218", ((
 testRunner.Then("the title is \"Nothing Else Matters\" from \'Metallica\' which is recorded in the yea" +
                         "r 1992", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-                TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
                             "Edition",
                             "Offset"});
-                table13.AddRow(new string[] {
+                table14.AddRow(new string[] {
                             "2017",
                             "0"});
-                table13.AddRow(new string[] {
+                table14.AddRow(new string[] {
                             "2012",
                             "0"});
 #line 82
-testRunner.And("the following years are listed as \'Unchanged\'", ((string)(null)), table13, "And ");
+testRunner.And("the following years are listed as \'Unchanged\'", ((string)(null)), table14, "And ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -573,10 +573,10 @@ testRunner.When("the track information feature is executed for TrackId 3966", ((
 testRunner.Then("the title is \"Hello\" from \'Adele\' which is recorded in the year 2015", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
 #line 90
-testRunner.And("it could have been on the Top2000 for 8 times", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("it could have been on the Top2000 for 9 times", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 91
-testRunner.And("is it listed for 8 times", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("is it listed for 9 times", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -702,7 +702,7 @@ testRunner.When("the track information feature is executed for TrackId 1496", ((
 testRunner.Then("the title is \"Imagine\" from \'John Lennon\' which is recorded in the year 1971", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
 #line 106
-testRunner.And("the Lastest position is number 52 in 2022", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("the Lastest position is number 33 in 2023", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();

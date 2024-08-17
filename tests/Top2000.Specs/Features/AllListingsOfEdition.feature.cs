@@ -70,14 +70,14 @@ namespace Chroomsoft.Top2000.Specs.Features
             testRunner.CollectScenarioErrors();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("In 1998 the Top2000 did not exist", Description="Background: the system won\'t throw an exception when the year since found. It is " +
-            "the responsibilty of the caller to make sure the year exist. ", SourceLine=2)]
+        [TechTalk.SpecRun.ScenarioAttribute("In 1998 the Top2000 did not exist", Description="Background: the system won\'t throw an exception when the year since found. \r\nIt i" +
+            "s the responsibilty of the caller to make sure the year exist. ", SourceLine=2)]
         public virtual void In1998TheTop2000DidNotExist()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("In 1998 the Top2000 did not exist", "Background: the system won\'t throw an exception when the year since found. It is " +
-                    "the responsibilty of the caller to make sure the year exist. ", tagsOfScenario, argumentsOfScenario);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("In 1998 the Top2000 did not exist", "Background: the system won\'t throw an exception when the year since found. \r\nIt i" +
+                    "s the responsibilty of the caller to make sure the year exist. ", tagsOfScenario, argumentsOfScenario);
 #line 3
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -98,13 +98,13 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 5
+#line 6
 testRunner.Given("All data scripts", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 6
+#line 7
 testRunner.When("the AllListingOfEdition feature is executed with year 1998", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 7
+#line 8
 testRunner.Then("an empty set is returned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }

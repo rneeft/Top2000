@@ -10,6 +10,8 @@ namespace Chroomsoft.Top2000.Features.AllListingsOfEdition
 
         public int? Delta { get; set; }
 
+        public bool IsRecurring { get; set; }
+
         public DateTime LocalPlayDateAndTime => DateTime.SpecifyKind(PlayUtcDateAndTime, DateTimeKind.Utc).ToLocalTime();
 
         public DateTime PlayUtcDateAndTime { get; set; }

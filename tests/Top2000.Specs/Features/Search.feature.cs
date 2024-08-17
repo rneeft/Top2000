@@ -102,28 +102,28 @@ testRunner.Given("All data scripts", ((string)(null)), ((TechTalk.SpecFlow.Table
 #line 5
 testRunner.When("searching for Piano", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-                TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
                             "Id",
                             "Title",
                             "Artist",
                             "Recorded Year"});
-                table6.AddRow(new string[] {
+                table7.AddRow(new string[] {
                             "2134",
                             "My old piano",
                             "Diana Ross",
                             "1980"});
-                table6.AddRow(new string[] {
+                table7.AddRow(new string[] {
                             "2358",
                             "Piano Man",
                             "Billy Joel",
                             "1974"});
-                table6.AddRow(new string[] {
+                table7.AddRow(new string[] {
                             "3558",
                             "Worn Down Piano",
                             "Mark & Clark Band",
                             "1977"});
 #line 6
-testRunner.Then("the following tracks are found:", ((string)(null)), table6, "Then ");
+testRunner.Then("the following tracks are found:", ((string)(null)), table7, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -161,18 +161,18 @@ testRunner.Given("All data scripts", ((string)(null)), ((TechTalk.SpecFlow.Table
 #line 14
 testRunner.When("searching for Soleil", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-                TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
                             "Id",
                             "Title",
                             "Artist",
                             "Recorded Year"});
-                table7.AddRow(new string[] {
+                table8.AddRow(new string[] {
                             "119",
                             "Alegria",
                             "Cirque du Soleil",
                             "1997"});
 #line 15
-testRunner.Then("the following tracks are found:", ((string)(null)), table7, "Then ");
+testRunner.Then("the following tracks are found:", ((string)(null)), table8, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -210,18 +210,18 @@ testRunner.Given("All data scripts", ((string)(null)), ((TechTalk.SpecFlow.Table
 #line 21
 testRunner.When("searching for 1954", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-                TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
                             "Id",
                             "Title",
                             "Artist",
                             "Recorded Year"});
-                table8.AddRow(new string[] {
+                table9.AddRow(new string[] {
                             "3468",
                             "White Christmas",
                             "Bing Crosby",
                             "1954"});
 #line 22
-testRunner.Then("the following tracks are found:", ((string)(null)), table8, "Then ");
+testRunner.Then("the following tracks are found:", ((string)(null)), table9, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
