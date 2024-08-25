@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.Configuration;
-using System.Threading.Tasks;
 
 namespace Chroomsoft.Top2000.Data.StaticApiGenerator
 {
@@ -16,10 +15,10 @@ namespace Chroomsoft.Top2000.Data.StaticApiGenerator
 
         public async Task RunAsync()
         {
-            var location = configuration.GetSection("PublishOnly:Location").Value;
-            var branch = configuration.GetSection("Shields:BranchName").Value;
-            var version = configuration.GetSection("Shields:Version").Value;
-            var buildNumber = configuration.GetSection("Shields:BuildNumber").Value;
+            var location = configuration.GetSection("PublishOnly:Location").Value ?? throw new InvalidOperationException("Unable to find 'PublishOnly:Location' setting");
+            var branch = configuration.GetSection("Shields:BranchName").Value ?? throw new InvalidOperationException("Unable to find 'Shields:BranchName' setting");
+            var version = configuration.GetSection("Shields:Version").Value ?? throw new InvalidOperationException("Unable to find 'Shields:Version' setting");
+            var buildNumber = configuration.GetSection("Shields:BuildNumber").Value ?? throw new InvalidOperationException("Unable to find 'Shields:BuildNumber' setting");
 
             await Task.WhenAll
             (

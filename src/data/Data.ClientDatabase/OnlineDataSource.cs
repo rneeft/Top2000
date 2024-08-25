@@ -1,9 +1,5 @@
 ﻿using Newtonsoft.Json;
-using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Linq;
-using System.Net.Http;
-using System.Threading.Tasks;
 
 namespace Chroomsoft.Top2000.Data.ClientDatabase
 {
@@ -19,7 +15,7 @@ namespace Chroomsoft.Top2000.Data.ClientDatabase
         public async Task<ImmutableSortedSet<string>> ExecutableScriptsAsync(ImmutableSortedSet<string> journals)
         {
             if (journals.IsEmpty)
-                return ImmutableSortedSet<string>.Empty;
+                return [];
 
             var latestVersion = journals
                 .Last()
@@ -28,10 +24,10 @@ namespace Chroomsoft.Top2000.Data.ClientDatabase
             var content = await TryGetAsyncForUpgrades(latestVersion).ConfigureAwait(false);
 
             if (content is null)
-                return ImmutableSortedSet<string>.Empty;
+                return [];
 
             return JsonConvert.DeserializeObject<IEnumerable<string>>(content)
-                .ToImmutableSortedSet();
+                ?.ToImmutableSortedSet() ?? [];
         }
 
         public async Task<SqlScript> ScriptContentsAsync(string scriptName)

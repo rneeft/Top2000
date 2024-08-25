@@ -43,7 +43,7 @@ namespace Chroomsoft.Top2000.Features.Searching
                 {
                     var sql = "SELECT Id, Title, Artist, RecordedYear, Listing.Position AS Position " +
                         "FROM Track " +
-                        "LEFT JOIN Listing ON Track.Id = Listing.TrackId AND Listing.Edition = 2021 " +
+                        "LEFT JOIN Listing ON Track.Id = Listing.TrackId AND Listing.Edition = 2023 " +
                         "WHERE RecordedYear = ?" +
                         "LIMIT 100";
 
@@ -53,7 +53,7 @@ namespace Chroomsoft.Top2000.Features.Searching
                 {
                     var sql = "SELECT Id, Title, Artist, RecordedYear, Listing.Position AS Position " +
                         "FROM Track " +
-                        "LEFT JOIN Listing ON Track.Id = Listing.TrackId AND Listing.Edition = 2021 " +
+                        "LEFT JOIN Listing ON Track.Id = Listing.TrackId AND Listing.Edition = 2023 " +
                         "WHERE (Title LIKE ?) OR (Artist LIKE ?)" +
                         "LIMIT 100";
 

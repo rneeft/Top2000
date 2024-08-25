@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using System.Threading.Tasks;
 
 namespace Chroomsoft.Top2000.Data.StaticApiGenerator
 {
@@ -34,7 +33,7 @@ namespace Chroomsoft.Top2000.Data.StaticApiGenerator
             }
 
             using ServiceProvider serviceProvider = services.BuildServiceProvider();
-            var application = serviceProvider.GetService<IRunApplication>();
+            var application = serviceProvider.GetRequiredService<IRunApplication>();
             await application.RunAsync().ConfigureAwait(false);
         }
     }

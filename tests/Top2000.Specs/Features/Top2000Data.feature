@@ -18,3 +18,8 @@ Scenario: The playtime of each track is either the same to the last track or inc
 Given all data scripts
 When the client database is created
 Then for each track in the listing table the PlayDateAndTime is the same to the previous track or has incremented by one hour
+
+Scenario: Edition 2023 has 2500 tracks
+Given All data scripts
+When the client database is created
+Then the listing table of edition 2023 has 2500 tracks
